@@ -51,10 +51,16 @@ export function ColumnPickerPopover({
   if (!anchorEl) return null;
 
   const rect = anchorEl.getBoundingClientRect();
+  const maxHeight = Math.min(window.innerHeight * 0.7, 500);
+  const left = Math.min(Math.max(8, rect.right - 320), window.innerWidth - 320 - 8);
+  const spaceBelow = window.innerHeight - rect.bottom - 8;
+  const spaceAbove = rect.top - 8;
+  const top = spaceBelow >= maxHeight || spaceBelow >= spaceAbove ? rect.bottom + 6 : rect.top - maxHeight - 6;
   const style: CSSProperties = {
     position: 'fixed',
-    top: rect.bottom + 6,
-    left: Math.max(8, rect.right - 320),
+    top: Math.max(8, top),
+    left: Math.max(8, left),
+    maxHeight,
     zIndex: 50,
   };
 

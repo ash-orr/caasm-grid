@@ -506,12 +506,36 @@ export function AssetsTable() {
   const [saveViewName, setSaveViewName] = useState('');
   const [toast, setToast] = useState<string | null>(null);
   const [addMenuPosition, setAddMenuPosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
+  const [seeMorePosition, setSeeMorePosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
   const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0, sites: 0 });
   const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100, sites: 100 });
   const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [], sites: [] });
   const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '', sites: '' });
 
   const viewSettingsButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  function clampPopoverPosition(
+    anchorRect: DOMRect,
+    popoverWidth: number,
+    popoverHeight: number,
+    margin: number,
+    gap: number,
+  ) {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const spaceBelow = viewportHeight - anchorRect.bottom - margin;
+    const spaceAbove = anchorRect.top - margin;
+    const preferBelow = spaceBelow >= popoverHeight || spaceBelow >= spaceAbove;
+
+    let left = anchorRect.left + (anchorRect.width - popoverWidth) / 2;
+    left = Math.min(Math.max(margin, left), viewportWidth - popoverWidth - margin);
+
+    let top = preferBelow ? anchorRect.bottom + gap : anchorRect.top - popoverHeight - gap;
+    if (top < margin) top = margin;
+    if (top + popoverHeight > viewportHeight - margin) top = Math.max(margin, viewportHeight - popoverHeight - margin);
+
+    return { left, top };
+  }
 
   const [deviceColumnOrder, setDeviceColumnOrder] = useState<string[]>([
     'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'createdTime', 'coverageGaps',
@@ -555,13 +579,48 @@ export function AssetsTable() {
   }, [toast]);
 
   useEffect(() => {
+    if (!addMenuOpen && !seeMoreOpenFor && !columnPickerOpen) return;
+
+    const closeMenus = () => {
+      setAddMenuOpen(false);
+      setSeeMoreOpenFor(null);
+      setColumnPickerOpen(false);
+    };
+
+    const handleResize = () => {
+      if (addMenuOpen && addFilterButtonRef.current) {
+        const rect = addFilterButtonRef.current.getBoundingClientRect();
+        const width = 300;
+        const height = Math.min(window.innerHeight * 0.7, 440);
+        const next = clampPopoverPosition(rect, width, height, 8, 6);
+        setAddMenuPosition(next);
+      }
+
+      if (seeMoreOpenFor && seeMoreTriggerRef.current) {
+        const rect = seeMoreTriggerRef.current.getBoundingClientRect();
+        const width = 580;
+        const height = Math.min(window.innerHeight * 0.7, 440);
+        const next = clampPopoverPosition(rect, width, height, 8, 6);
+        setSeeMorePosition(next);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', closeMenus, { passive: true, capture: true });
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', closeMenus, { capture: true });
+    };
+  }, [addMenuOpen, columnPickerOpen, seeMoreOpenFor]);
+
+  useEffect(() => {
     if (!addMenuOpen || !addFilterButtonRef.current) return;
 
     const rect = addFilterButtonRef.current.getBoundingClientRect();
-    setAddMenuPosition({
-      left: Math.max(8, rect.left),
-      top: rect.bottom + 6,
-    });
+    const width = 300;
+    const height = Math.min(window.innerHeight * 0.7, 440);
+    setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6));
   }, [addMenuOpen]);
 
   const accountRows = useMemo(() => computeAccountRows(), []);
@@ -846,6 +905,8 @@ export function AssetsTable() {
 
   function openSeeMore(sectionId: string, trigger: HTMLButtonElement) {
     seeMoreTriggerRef.current = trigger;
+    const rect = trigger.getBoundingClientRect();
+    setSeeMorePosition(clampPopoverPosition(rect, 580, Math.min(window.innerHeight * 0.7, 440), 8, 6));
     setSeeMoreOpenFor(sectionId);
     setSeeMoreQuery('');
     setSeeMoreDraftValues(getChecklistValues(sectionId));
@@ -2380,7 +2441,7 @@ export function AssetsTable() {
             className={styles.menu}
             role="dialog"
             style={{
-              position: 'absolute',
+              position: 'fixed',
               left: addMenuPosition.left,
               top: addMenuPosition.top,
               width: 300,
@@ -2453,9 +2514,9 @@ export function AssetsTable() {
             className={styles.popup}
             role="dialog"
             style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
+              position: 'fixed',
+              left: seeMorePosition.left,
+              top: seeMorePosition.top,
             }}
           >
             <h2 className={styles.popupTitle}>
