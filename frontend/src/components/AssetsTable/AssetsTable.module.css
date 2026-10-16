@@ -370,6 +370,8 @@
   position: fixed;
   inset: 0;
   z-index: 30;
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 
 .menu {

@@ -74,7 +74,8 @@ test.describe('popover scrolling regressions', () => {
   });
 
   test('see more popover stays in viewport and blocks page scrolling', async ({ page }) => {
-    await page.getByRole('button', { name: 'See more' }).first().click();
+    await page.locator('summary').filter({ hasText: 'Location' }).click();
+    await page.getByRole('button', { name: 'See more' }).click();
     const menu = page.locator('[aria-label="See more options"]');
     await expect(menu).toBeVisible();
 
