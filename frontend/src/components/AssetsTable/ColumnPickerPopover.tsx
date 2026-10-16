@@ -14,6 +14,7 @@ interface Props {
   hidden: string[];
   onToggle: (columnId: string, visible: boolean) => void;
   onMove: (columnId: string, direction: -1 | 1) => void;
+  onReorder: (columnId: string, targetColumnId: string) => void;
   onReset: () => void;
   onClose: () => void;
 }
@@ -25,6 +26,7 @@ export function ColumnPickerPopover({
   hidden,
   onToggle,
   onMove,
+  onReorder,
   onReset,
   onClose,
 }: Props) {
@@ -72,13 +74,48 @@ export function ColumnPickerPopover({
           <button className={styles.linkBtn} onClick={onReset} type="button">Reset to default</button>
         </div>
 
+        <div aria-live="polite" aria-atomic="true" className={styles.columnLiveRegion}>
+          {orderedColumns.map((column) => column.label).join(', ')}
+        </div>
+
         <div className={styles.columnList}>
           {orderedColumns.map((column, index) => {
             const isVisible = !hidden.includes(column.id);
             const isFixed = Boolean(column.fixed);
 
             return (
-              <div className={`${styles.columnRow} ${isFixed ? styles.columnRowFixed : ''}`} key={column.id}>
+              <div
+                className={`${styles.columnRow} ${isFixed ? styles.columnRowFixed : ''}`}
+                draggable={!isFixed}
+                key={column.id}
+                onDragOver={(event) => {
+                  if (isFixed) return;
+                  event.preventDefault();
+                }}
+                onDrop={(event) => {
+                  if (isFixed) return;
+                  event.preventDefault();
+                  const draggedId = event.dataTransfer.getData('text/column-id');
+                  if (!draggedId || draggedId === column.id) return;
+                  onReorder(draggedId, column.id);
+                }}
+              >
+                <div className={styles.columnHandleWrap}>
+                  <button
+                    aria-label={`Drag ${column.label}`}
+                    className={styles.columnHandle}
+                    draggable={!isFixed}
+                    onDragStart={(event) => {
+                      if (isFixed) return;
+                      event.dataTransfer.effectAllowed = 'move';
+                      event.dataTransfer.setData('text/column-id', column.id);
+                    }}
+                    type="button"
+                  >
+                    ⋮⋮
+                  </button>
+                </div>
+
                 <label className={styles.optionRow}>
                   <input
                     checked={isVisible}
@@ -90,6 +127,7 @@ export function ColumnPickerPopover({
                 </label>
                 <div className={styles.columnMoveGroup}>
                   <button
+                    aria-label={`Move ${column.label} up`}
                     className={styles.iconBtn}
                     disabled={isFixed || index <= 0}
                     onClick={() => onMove(column.id, -1)}
@@ -98,6 +136,7 @@ export function ColumnPickerPopover({
                     ↑
                   </button>
                   <button
+                    aria-label={`Move ${column.label} down`}
                     className={styles.iconBtn}
                     disabled={isFixed || index >= orderedColumns.length - 1}
                     onClick={() => onMove(column.id, 1)}

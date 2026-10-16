@@ -465,6 +465,41 @@
   background: var(--acc-s);
 }
 
+.columnHandleWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnHandle {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--ink);
+  cursor: grab;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnHandle:active {
+  cursor: grabbing;
+}
+
+.columnLiveRegion {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .columnMoveGroup {
   display: flex;
   gap: 4px;

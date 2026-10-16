@@ -25,6 +25,7 @@ import {
 import { nextSort, sortRowsBy } from './sort';
 import { selectAllMatchingRows } from './selection';
 import { ColumnPickerPopover, type ColumnPickerItem } from './ColumnPickerPopover';
+import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
 import styles from './AssetsTable.module.css';
@@ -1395,15 +1396,30 @@ export function AssetsTable() {
 
   function moveColumn(columnId: string, direction: -1 | 1) {
     const setOrder = isDevices ? setDeviceColumnOrder : setAccountColumnOrder;
+    const fixedFirstColumnId = isDevices ? 'name' : 'name';
     setOrder((prev) => {
       const from = prev.indexOf(columnId);
       if (from < 0) return prev;
-      const to = from + direction;
-      if (to < 0 || to >= prev.length) return prev;
-      const next = [...prev];
-      const [column] = next.splice(from, 1);
-      next.splice(to, 0, column);
-      return next;
+      if (fixedFirstColumnId && from === 0) return prev;
+
+      const nextIndex = Math.max(
+        fixedFirstColumnId ? 1 : 0,
+        Math.min(from + direction, prev.length - 1)
+      );
+
+      return moveColumnById(prev, columnId, nextIndex, fixedFirstColumnId);
+    });
+  }
+
+  function reorderColumn(columnId: string, targetColumnId: string) {
+    const setOrder = isDevices ? setDeviceColumnOrder : setAccountColumnOrder;
+    const fixedFirstColumnId = isDevices ? 'name' : 'name';
+    setOrder((prev) => {
+      const from = prev.indexOf(columnId);
+      const target = prev.indexOf(targetColumnId);
+      if (from < 0 || target < 0) return prev;
+      if (fixedFirstColumnId && (from === 0 || target === 0)) return prev;
+      return moveColumnById(prev, columnId, target, fixedFirstColumnId);
     });
   }
 
@@ -2218,6 +2234,7 @@ export function AssetsTable() {
           hidden={activeHidden}
           onClose={() => setColumnPickerOpen(false)}
           onMove={moveColumn}
+          onReorder={reorderColumn}
           onReset={resetColumnsToDefault}
           onToggle={setColumnVisibility}
           order={activeOrder}
