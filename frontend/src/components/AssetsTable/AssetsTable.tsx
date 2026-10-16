@@ -520,6 +520,7 @@ export function AssetsTable() {
     popoverHeight: number,
     margin: number,
     gap: number,
+    alignLeft = false,
   ) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
@@ -527,7 +528,7 @@ export function AssetsTable() {
     const spaceAbove = anchorRect.top - margin;
     const preferBelow = spaceBelow >= popoverHeight || spaceBelow >= spaceAbove;
 
-    let left = anchorRect.left + (anchorRect.width - popoverWidth) / 2;
+    let left = alignLeft ? anchorRect.left : anchorRect.left + (anchorRect.width - popoverWidth) / 2;
     left = Math.min(Math.max(margin, left), viewportWidth - popoverWidth - margin);
 
     let top = preferBelow ? anchorRect.bottom + gap : anchorRect.top - popoverHeight - gap;
@@ -592,7 +593,7 @@ export function AssetsTable() {
         const rect = addFilterButtonRef.current.getBoundingClientRect();
         const width = 300;
         const height = Math.min(window.innerHeight * 0.7, 440);
-        const next = clampPopoverPosition(rect, width, height, 8, 6);
+        const next = clampPopoverPosition(rect, width, height, 8, 6, true);
         setAddMenuPosition(next);
       }
 
@@ -620,7 +621,7 @@ export function AssetsTable() {
     const rect = addFilterButtonRef.current.getBoundingClientRect();
     const width = 300;
     const height = Math.min(window.innerHeight * 0.7, 440);
-    setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6));
+    setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6, true));
   }, [addMenuOpen]);
 
   const accountRows = useMemo(() => computeAccountRows(), []);
