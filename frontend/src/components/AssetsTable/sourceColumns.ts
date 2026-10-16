@@ -1,22 +1,16 @@
 export const DEVICE_SOURCE_COLUMN_NAMES = [
   'CrowdStrike',
-  'SentinelOne',
   'Intune',
-  'Jamf',
-  'SOTI',
-  'Absolute Secure Endpoint',
-  'Portnox AgentP',
-  'EntraID',
-  'Active Directory',
   'Okta',
   'Google Workspace',
+  'Active Directory',
+  'Portnox AgentP',
 ] as const;
 
 export const ACCOUNT_SOURCE_COLUMN_NAMES = [
-  'Active Directory',
-  'EntraID',
   'Okta',
   'Google Workspace',
+  'Active Directory',
 ] as const;
 
 const SOURCE_COLUMN_SHORT_LABELS: Record<string, string> = {
