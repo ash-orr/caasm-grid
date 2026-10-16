@@ -27,3 +27,34 @@ export function selectAllMatchingRows(
 
   return Array.from(selectionSet).sort((left, right) => left - right);
 }
+
+export function getSelectionBannerState(args: {
+  selectedIds: number[];
+  pageIds: number[];
+  totalMatchingIds: number[];
+}):
+  | { type: 'pageSelected'; pageCount: number; totalCount: number }
+  | { type: 'allSelected'; totalCount: number }
+  | null {
+  const selectedSet = new Set(args.selectedIds);
+  const totalMatchingSet = new Set(args.totalMatchingIds);
+  const pageSelected = args.pageIds.length > 0 && args.pageIds.every((id) => selectedSet.has(id));
+  const allMatchingSelected = totalMatchingSet.size > 0 && args.totalMatchingIds.every((id) => selectedSet.has(id));
+
+  if (allMatchingSelected) {
+    return {
+      type: 'allSelected',
+      totalCount: args.totalMatchingIds.length,
+    };
+  }
+
+  if (pageSelected && args.totalMatchingIds.length > args.pageIds.length) {
+    return {
+      type: 'pageSelected',
+      pageCount: args.pageIds.length,
+      totalCount: args.totalMatchingIds.length,
+    };
+  }
+
+  return null;
+}
