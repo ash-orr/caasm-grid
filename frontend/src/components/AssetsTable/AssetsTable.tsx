@@ -68,7 +68,7 @@ type DetailViewState =
 
 const savedViewStore = new LocalStorageSavedViewStore();
 
-const DEVICE_CAASM_HIDDEN_COLUMNS = ['type', 'os', 'location', 'group', 'accountType', 'riskScore', 'status', 'lastConnected'];
+const DEVICE_CAASM_HIDDEN_COLUMNS = ['type', 'os', 'location', 'group', 'accountType', 'riskScore', 'status', 'lastConnected', 'createdTime'];
 const ACCOUNT_CAASM_HIDDEN_COLUMNS = ['accountType', 'group', 'blocked', 'lastLogin'];
 
 const DEFAULT_SORT_BY_TAB: Record<TabKey, SavedViewSort> = {
@@ -332,6 +332,8 @@ function deviceSortValue(row: DeviceRecord, columnId: string): string | number |
       return row.status;
     case 'lastConnected':
       return Date.parse(row.lastConnectedAt);
+    case 'createdTime':
+      return Date.parse(row.createdAt);
     case 'coverageGaps':
       return row.coverageGaps.length;
     case 'authRepo':
@@ -512,7 +514,7 @@ export function AssetsTable() {
   const viewSettingsButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const [deviceColumnOrder, setDeviceColumnOrder] = useState<string[]>([
-    'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'coverageGaps',
+    'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'createdTime', 'coverageGaps',
     ...buildSourceColumns('device').map((column) => column.id),
     'authRepo', 'nasSite', 'macVendor', 'manufacturer', 'model', 'applications', 'patches', 'processes', 'services',
     'peripherals', 'browser', 'browserExtensions', 'agentpVersion', 'riskViolations', 'nasIp', 'agentpLastReported',
@@ -1211,6 +1213,7 @@ export function AssetsTable() {
       { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => `${row.riskScore} (${riskBand(row.riskScore)})`, exportValue: (row) => `${row.riskScore}` },
       { id: 'status', label: 'Status', defaultVisible: true, render: (row) => row.status, exportValue: (row) => row.status },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
+      { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt },
       { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },

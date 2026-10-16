@@ -34,6 +34,24 @@ export function getSourceColumnFullName(sourceName: string): string {
   return sourceName;
 }
 
+export function getDefaultVisibleDeviceColumnIds(): string[] {
+  return [
+    'name',
+    'type',
+    'os',
+    'location',
+    'account',
+    'accountType',
+    'group',
+    'riskScore',
+    'status',
+    'lastConnected',
+    'createdTime',
+    'coverageGaps',
+    ...DEVICE_SOURCE_COLUMN_NAMES.map((sourceName) => `source:${sourceName}`),
+  ];
+}
+
 export function buildSourceColumns(entity: 'device' | 'account'): Array<{ id: string; label: string }> {
   const sourceNames = entity === 'device' ? DEVICE_SOURCE_COLUMN_NAMES : ACCOUNT_SOURCE_COLUMN_NAMES;
 

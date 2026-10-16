@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildSourceColumns, getSourceColumnLabel } from './sourceColumns';
+import { getDefaultVisibleDeviceColumnIds, getSourceColumnLabel } from './sourceColumns';
 
 describe('source column helpers', () => {
   it('uses short labels for source headers', () => {
@@ -9,13 +9,11 @@ describe('source column helpers', () => {
     expect(getSourceColumnLabel('Absolute Secure Endpoint')).toBe('ASE');
   });
 
-  it('builds device and account source columns with the expected sources', () => {
-    const deviceColumns = buildSourceColumns('device');
-    const accountColumns = buildSourceColumns('account');
+  it('keeps Created time visible by default for device tables', () => {
+    const visibleColumns = getDefaultVisibleDeviceColumnIds();
 
-    expect(deviceColumns.some((column) => column.id === 'source:CrowdStrike')).toBe(true);
-    expect(deviceColumns.some((column) => column.id === 'source:Active Directory')).toBe(true);
-    expect(accountColumns.every((column) => ['source:Active Directory', 'source:EntraID', 'source:Okta', 'source:Google Workspace'].includes(column.id))).toBe(true);
-    expect(accountColumns.some((column) => column.id === 'source:CrowdStrike')).toBe(false);
+    expect(visibleColumns).toContain('createdTime');
+    expect(visibleColumns.indexOf('lastConnected')).toBeLessThan(visibleColumns.indexOf('createdTime'));
+    expect(visibleColumns.indexOf('createdTime')).toBeLessThan(visibleColumns.indexOf('coverageGaps'));
   });
 });
