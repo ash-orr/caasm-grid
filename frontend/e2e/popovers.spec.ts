@@ -12,22 +12,51 @@ async function assertPopoverInsideViewport(page: Parameters<typeof test>[0]['pag
   expect(box!.y + box!.height).toBeLessThanOrEqual(viewport!.height);
 }
 
+async function assertScrollInsideMenuKeepsItOpen(page: Parameters<typeof test>[0]['page'], locator: ReturnType<Parameters<typeof test>[0]['page']['locator']>) {
+  const before = await locator.evaluate((element) => ({
+    visible: !!element,
+    scrollTop: element.scrollTop,
+    scrollHeight: element.scrollHeight,
+    clientHeight: element.clientHeight,
+  }));
+
+  if (before.scrollHeight <= before.clientHeight) {
+    return;
+  }
+
+  await locator.evaluate((element) => {
+    element.scrollTop = element.scrollHeight;
+  });
+
+  await expect(locator).toBeVisible();
+  await expect(locator.evaluate((element) => element.scrollTop)).resolves.toBeGreaterThan(before.scrollTop);
+}
+
+async function assertPageScrollKeepsMenuAttached(page: Parameters<typeof test>[0]['page'], locator: ReturnType<Parameters<typeof test>[0]['page']['locator']>) {
+  const before = await locator.evaluate((element) => ({
+    x: element.getBoundingClientRect().x,
+    y: element.getBoundingClientRect().y,
+  }));
+
+  await page.evaluate(() => window.scrollTo({ top: 160, behavior: 'instant' }));
+  await expect(locator).toBeVisible();
+
+  const after = await locator.evaluate((element) => ({
+    x: element.getBoundingClientRect().x,
+    y: element.getBoundingClientRect().y,
+  }));
+
+  expect(Math.abs(after.x - before.x)).toBeLessThanOrEqual(2);
+  expect(after.y).toBeGreaterThanOrEqual(0);
+}
+
 async function assertWheelDoesNotScrollPage(page: Parameters<typeof test>[0]['page'], locator: ReturnType<Parameters<typeof test>[0]['page']['locator']>) {
   const beforePageY = await page.evaluate(() => window.scrollY);
   const box = await locator.boundingBox();
   expect(box).not.toBeNull();
 
-  const scrollState = await locator.evaluate((element) => ({
-    scrollHeight: element.scrollHeight,
-    clientHeight: element.clientHeight,
-  }));
-  if (scrollState.scrollHeight <= scrollState.clientHeight) {
-    return;
-  }
-
   const mouseX = box!.x + box!.width / 2;
   const mouseY = box!.y + box!.height / 2;
-
   await page.mouse.move(mouseX, mouseY);
   await page.mouse.wheel(0, 120);
 
@@ -63,6 +92,8 @@ test.describe('popover scrolling regressions', () => {
     expect(Number(style.zIndex)).toBeGreaterThan(0);
 
     await assertPopoverInsideViewport(page, menu);
+    await assertScrollInsideMenuKeepsItOpen(page, menu);
+    await assertPageScrollKeepsMenuAttached(page, menu);
     await assertWheelDoesNotScrollPage(page, menu);
 
     await page.evaluate(() => window.scrollTo({ top: 1200, behavior: 'instant' }));
@@ -76,6 +107,8 @@ test.describe('popover scrolling regressions', () => {
     await expect(menu).toBeVisible();
 
     await assertPopoverInsideViewport(page, menu);
+    await assertScrollInsideMenuKeepsItOpen(page, menu);
+    await assertPageScrollKeepsMenuAttached(page, menu);
     await assertWheelDoesNotScrollPage(page, menu);
   });
 
@@ -85,6 +118,8 @@ test.describe('popover scrolling regressions', () => {
     await expect(menu).toBeVisible();
 
     await assertPopoverInsideViewport(page, menu);
+    await assertScrollInsideMenuKeepsItOpen(page, menu);
+    await assertPageScrollKeepsMenuAttached(page, menu);
     await assertWheelDoesNotScrollPage(page, menu);
   });
 
@@ -94,6 +129,8 @@ test.describe('popover scrolling regressions', () => {
     await expect(menu).toBeVisible();
 
     await assertPopoverInsideViewport(page, menu);
+    await assertScrollInsideMenuKeepsItOpen(page, menu);
+    await assertPageScrollKeepsMenuAttached(page, menu);
     await assertWheelDoesNotScrollPage(page, menu);
   });
 
@@ -105,6 +142,8 @@ test.describe('popover scrolling regressions', () => {
     await expect(picker).toBeVisible();
 
     await assertPopoverInsideViewport(page, picker);
+    await assertScrollInsideMenuKeepsItOpen(page, picker);
+    await assertPageScrollKeepsMenuAttached(page, picker);
     await assertWheelDoesNotScrollPage(page, picker);
   });
 });

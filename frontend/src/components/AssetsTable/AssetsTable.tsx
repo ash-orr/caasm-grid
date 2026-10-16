@@ -495,9 +495,11 @@ export function AssetsTable() {
   const [onThisDeviceOpen, setOnThisDeviceOpen] = useState(false);
 
   const addFilterButtonRef = useRef<HTMLButtonElement | null>(null);
+  const addMenuRef = useRef<HTMLDivElement | null>(null);
   const addMenuSearchRef = useRef<HTMLInputElement | null>(null);
 
   const seeMoreTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const seeMoreMenuRef = useRef<HTMLDivElement | null>(null);
   const popupSearchRef = useRef<HTMLInputElement | null>(null);
   const [columnPickerOpen, setColumnPickerOpen] = useState(false);
   const [columnPickerAnchorEl, setColumnPickerAnchorEl] = useState<HTMLElement | null>(null);
@@ -512,7 +514,17 @@ export function AssetsTable() {
   const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [], sites: [] });
   const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '', sites: '' });
 
+  const tableShellRef = useRef<HTMLDivElement | null>(null);
   const viewSettingsButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  function isRectVisible(rect: DOMRect | null) {
+    if (!rect) return false;
+    return rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth;
+  }
+
+  function shouldIgnoreScrollTarget(target: EventTarget | null, ref: HTMLElement | null) {
+    return !!(ref && target instanceof Node && ref.contains(target));
+  }
 
   function clampPopoverPosition(
     anchorRect: DOMRect,
@@ -582,15 +594,15 @@ export function AssetsTable() {
   useEffect(() => {
     if (!addMenuOpen && !seeMoreOpenFor && !columnPickerOpen) return;
 
-    const closeMenus = () => {
-      setAddMenuOpen(false);
-      setSeeMoreOpenFor(null);
-      setColumnPickerOpen(false);
-    };
+    const tableShell = tableShellRef.current;
 
     const handleResize = () => {
       if (addMenuOpen && addFilterButtonRef.current) {
         const rect = addFilterButtonRef.current.getBoundingClientRect();
+        if (!isRectVisible(rect)) {
+          setAddMenuOpen(false);
+          return;
+        }
         const width = 300;
         const height = Math.min(window.innerHeight * 0.7, 440);
         const next = clampPopoverPosition(rect, width, height, 8, 6, true);
@@ -599,21 +611,63 @@ export function AssetsTable() {
 
       if (seeMoreOpenFor && seeMoreTriggerRef.current) {
         const rect = seeMoreTriggerRef.current.getBoundingClientRect();
+        if (!isRectVisible(rect)) {
+          setSeeMoreOpenFor(null);
+          return;
+        }
         const width = 580;
         const height = Math.min(window.innerHeight * 0.7, 440);
         const next = clampPopoverPosition(rect, width, height, 8, 6);
         setSeeMorePosition(next);
       }
+
+      if (columnPickerOpen && columnPickerAnchorEl) {
+        const rect = columnPickerAnchorEl.getBoundingClientRect();
+        if (!isRectVisible(rect)) {
+          setColumnPickerOpen(false);
+        }
+      }
+    };
+
+    const handleScroll = (event: Event) => {
+      const target = event.target;
+
+      if (shouldIgnoreScrollTarget(target, addMenuRef.current)) return;
+      if (shouldIgnoreScrollTarget(target, seeMoreMenuRef.current)) return;
+
+      if (addMenuOpen && addFilterButtonRef.current) {
+        const rect = addFilterButtonRef.current.getBoundingClientRect();
+        if (!isRectVisible(rect)) {
+          setAddMenuOpen(false);
+          return;
+        }
+        const width = 300;
+        const height = Math.min(window.innerHeight * 0.7, 440);
+        setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6, true));
+      }
+
+      if (seeMoreOpenFor && seeMoreTriggerRef.current) {
+        const rect = seeMoreTriggerRef.current.getBoundingClientRect();
+        if (!isRectVisible(rect)) {
+          setSeeMoreOpenFor(null);
+          return;
+        }
+        const width = 580;
+        const height = Math.min(window.innerHeight * 0.7, 440);
+        setSeeMorePosition(clampPopoverPosition(rect, width, height, 8, 6));
+      }
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', closeMenus, { passive: true, capture: true });
+    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+    tableShell?.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', closeMenus, { capture: true });
+      window.removeEventListener('scroll', handleScroll, { capture: true });
+      tableShell?.removeEventListener('scroll', handleScroll, { capture: true });
     };
-  }, [addMenuOpen, columnPickerOpen, seeMoreOpenFor]);
+  }, [addMenuOpen, columnPickerAnchorEl, columnPickerOpen, seeMoreOpenFor]);
 
   useEffect(() => {
     if (!addMenuOpen || !addFilterButtonRef.current) return;
@@ -2236,7 +2290,7 @@ export function AssetsTable() {
           {addedSectionIds.map((id) => renderSection(id))}
         </div>
 
-        <div className={styles.tableShell}>
+        <div className={styles.tableShell} ref={tableShellRef}>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -2440,6 +2494,7 @@ export function AssetsTable() {
           <div
             aria-label="Add filter menu"
             className={styles.menu}
+            ref={addMenuRef}
             role="dialog"
             style={{
               position: 'fixed',
