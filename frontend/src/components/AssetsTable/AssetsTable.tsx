@@ -29,7 +29,7 @@ import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
 import styles from './AssetsTable.module.css';
 
-type TabKey = 'devices' | 'accounts';
+type TabKey = 'devices' | 'accounts' | 'sites';
 
 type Option = {
   value: string;
@@ -70,11 +70,13 @@ const ACCOUNT_CAASM_HIDDEN_COLUMNS = ['accountType', 'group', 'blocked', 'lastLo
 const DEFAULT_SORT_BY_TAB: Record<TabKey, SavedViewSort> = {
   devices: { columnId: 'name', direction: 'asc' },
   accounts: { columnId: 'name', direction: 'asc' },
+  sites: { columnId: 'name', direction: 'asc' },
 };
 
 const CAASM_SORT_BY_TAB: Record<TabKey, SavedViewSort> = {
   devices: { columnId: 'coverageGaps', direction: 'desc' },
   accounts: { columnId: 'coverageGaps', direction: 'desc' },
+  sites: { columnId: 'name', direction: 'asc' },
 };
 
 const PAGE_SIZE_OPTIONS: Array<{ value: number; label: string }> = [
@@ -459,10 +461,12 @@ export function AssetsTable() {
   const [savedViewsByTab, setSavedViewsByTab] = useState<Record<TabKey, SavedView[]>>(() => ({
     devices: savedViewStore.list('devices'),
     accounts: savedViewStore.list('accounts'),
+    sites: [],
   }));
   const [activeViewByTab, setActiveViewByTab] = useState<Record<TabKey, ActiveViewKey>>({
     devices: 'default',
     accounts: 'default',
+    sites: 'default',
   });
   const [sortByTab, setSortByTab] = useState<Record<TabKey, SavedViewSort>>(DEFAULT_SORT_BY_TAB);
 
@@ -491,10 +495,10 @@ export function AssetsTable() {
   const [removeViewDialogOpen, setRemoveViewDialogOpen] = useState(false);
   const [saveViewName, setSaveViewName] = useState('');
   const [toast, setToast] = useState<string | null>(null);
-  const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0 });
-  const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100 });
-  const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [] });
-  const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '' });
+  const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0, sites: 0 });
+  const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100, sites: 100 });
+  const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [], sites: [] });
+  const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '', sites: '' });
 
   const viewSettingsButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -551,6 +555,8 @@ export function AssetsTable() {
   );
 
   const isDevices = tab === 'devices';
+  const isAccounts = tab === 'accounts';
+  const isSites = tab === 'sites';
   const activeDeviceFilters = deviceFilters;
   const activeAccountFilters = accountFilters;
 
@@ -624,6 +630,16 @@ export function AssetsTable() {
   const addedSectionIds = isDevices ? addedDeviceSections : addedAccountSections;
 
   const defaultSectionIds = isDevices ? DEVICE_DEFAULT_SECTION_IDS : ACCOUNT_DEFAULT_SECTION_IDS;
+
+  const safeSetDeviceFilters = useCallback((updater: React.SetStateAction<DeviceFilterState>) => {
+    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
+    setDeviceFilters(updater);
+  }, [tab]);
+
+  const safeSetAccountFilters = useCallback((updater: React.SetStateAction<AccountFilterState>) => {
+    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
+    setAccountFilters(updater);
+  }, [tab]);
 
   const chips = useMemo(() => {
     const result: Chip[] = [];
@@ -745,21 +761,13 @@ export function AssetsTable() {
     isDevices,
     activeDeviceFilters,
     activeAccountFilters,
+    safeSetDeviceFilters,
+    safeSetAccountFilters,
   ]);
 
   const visibleChips = expandedChipList ? chips : chips.slice(0, 5);
 
   const hiddenChipCount = chips.length - visibleChips.length;
-
-  const safeSetDeviceFilters = useCallback((updater: React.SetStateAction<DeviceFilterState>) => {
-    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
-    setDeviceFilters(updater);
-  }, [tab]);
-
-  const safeSetAccountFilters = useCallback((updater: React.SetStateAction<AccountFilterState>) => {
-    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
-    setAccountFilters(updater);
-  }, [tab]);
 
   const addMenuItems = useMemo(() => {
     const definitions = isDevices ? addableDeviceDefinitions : addableAccountDefinitions;
@@ -1291,9 +1299,9 @@ export function AssetsTable() {
     };
   }
 
-  const currentSnapshot = buildSnapshot(tab);
+  const currentSnapshot = isSites ? null : buildSnapshot(tab);
 
-  const activeViewSavedAndUnchanged = activeSavedView
+  const activeViewSavedAndUnchanged = !isSites && activeSavedView && currentSnapshot
     ? isSavedViewUnchanged(activeSavedView, currentSnapshot)
     : false;
 
@@ -1530,6 +1538,7 @@ export function AssetsTable() {
   }
 
   function handleSaveView(action: SaveViewAction) {
+    if (tab === 'sites') return;
     if (!saveViewName.trim()) return;
 
     const entity: SavedViewEntity = tab;
@@ -1566,6 +1575,7 @@ export function AssetsTable() {
   }
 
   function handleRemoveViewConfirmed() {
+    if (tab === 'sites') return;
     if (!activeSavedView) return;
 
     const entity: SavedViewEntity = tab;
@@ -1839,14 +1849,39 @@ export function AssetsTable() {
     return renderDetailPage();
   }
 
+  if (isSites) {
+    return (
+      <div>
+        <div className={styles.tabs}>
+          <button className={styles.tab} onClick={() => switchTab('devices')} type="button">
+            Devices
+          </button>
+          <button className={styles.tab} onClick={() => switchTab('accounts')} type="button">
+            Accounts
+          </button>
+          <button className={`${styles.tab} ${styles.tabActive}`} onClick={() => switchTab('sites')} type="button">
+            Sites
+          </button>
+        </div>
+
+        <div className={styles.placeholderPanel}>
+          <p className={styles.placeholderText}>NAS Sites table would go here</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className={styles.tabs}>
         <button className={`${styles.tab} ${isDevices ? styles.tabActive : ''}`} onClick={() => switchTab('devices')} type="button">
           Devices
         </button>
-        <button className={`${styles.tab} ${!isDevices ? styles.tabActive : ''}`} onClick={() => switchTab('accounts')} type="button">
+        <button className={`${styles.tab} ${isAccounts ? styles.tabActive : ''}`} onClick={() => switchTab('accounts')} type="button">
           Accounts
+        </button>
+        <button className={`${styles.tab} ${isSites ? styles.tabActive : ''}`} onClick={() => switchTab('sites')} type="button">
+          Sites
         </button>
       </div>
 

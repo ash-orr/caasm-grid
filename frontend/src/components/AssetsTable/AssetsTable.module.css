@@ -249,6 +249,19 @@
   line-height: 1;
 }
 
+.placeholderPanel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.placeholderText {
+  margin: 0;
+  color: var(--mute);
+}
+
 .tableShell {
   flex: 1;
   min-width: 0;
