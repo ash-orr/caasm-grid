@@ -1,13 +1,10 @@
-import { StatusPill } from './components/StatusPill';
+import { AssetsTable } from './components/AssetsTable';
 
 export default function App() {
   return (
-    <div style={{ padding: 24, display: 'flex', gap: 12 }}>
-      <StatusPill status="Reporting" />
-      <StatusPill status="Stale" />
-      <StatusPill status="Pending" />
-      <StatusPill status="Not present" />
-      <StatusPill status="N/A" />
+    <div style={{ padding: 24 }}>
+      <h1 style={{ margin: '0 0 16px' }}>Assets</h1>
+      <AssetsTable />
     </div>
   );
 }
