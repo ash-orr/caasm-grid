@@ -29,6 +29,8 @@ import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
 import { getSelectionBannerState } from './selection';
+import { buildSourceColumns } from './sourceColumns';
+import { StatusPill } from '../StatusPill';
 import styles from './AssetsTable.module.css';
 
 type TabKey = 'devices' | 'accounts' | 'sites';
@@ -501,6 +503,7 @@ export function AssetsTable() {
   const [removeViewDialogOpen, setRemoveViewDialogOpen] = useState(false);
   const [saveViewName, setSaveViewName] = useState('');
   const [toast, setToast] = useState<string | null>(null);
+  const [addMenuPosition, setAddMenuPosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
   const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0, sites: 0 });
   const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100, sites: 100 });
   const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [], sites: [] });
@@ -510,11 +513,14 @@ export function AssetsTable() {
 
   const [deviceColumnOrder, setDeviceColumnOrder] = useState<string[]>([
     'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'coverageGaps',
+    ...buildSourceColumns('device').map((column) => column.id),
     'authRepo', 'nasSite', 'macVendor', 'manufacturer', 'model', 'applications', 'patches', 'processes', 'services',
     'peripherals', 'browser', 'browserExtensions', 'agentpVersion', 'riskViolations', 'nasIp', 'agentpLastReported',
   ]);
   const [accountColumnOrder, setAccountColumnOrder] = useState<string[]>([
-    'name', 'accountType', 'group', 'deviceCount', 'blocked', 'lastLogin', 'coverageGaps', 'authRepo', 'nasSite', 'location',
+    'name', 'accountType', 'group', 'deviceCount', 'blocked', 'lastLogin', 'coverageGaps',
+    ...buildSourceColumns('account').map((column) => column.id),
+    'authRepo', 'nasSite', 'location',
   ]);
 
   const [hiddenDeviceColumns, setHiddenDeviceColumns] = useState<string[]>([
@@ -545,6 +551,16 @@ export function AssetsTable() {
     const timeoutId = window.setTimeout(() => setToast(null), 2200);
     return () => window.clearTimeout(timeoutId);
   }, [toast]);
+
+  useEffect(() => {
+    if (!addMenuOpen || !addFilterButtonRef.current) return;
+
+    const rect = addFilterButtonRef.current.getBoundingClientRect();
+    setAddMenuPosition({
+      left: Math.max(8, rect.left),
+      top: rect.bottom + 6,
+    });
+  }, [addMenuOpen]);
 
   const accountRows = useMemo(() => computeAccountRows(), []);
   const deviceRowsForTable = useMemo(() => expandDeviceRows(devices, DEVICE_TARGET_ROW_COUNT), []);
@@ -1172,48 +1188,76 @@ export function AssetsTable() {
 
   const filterCount = chips.length;
 
-  const deviceColumns = useMemo<TableColumn<DeviceRecord>[]>(() => [
-    { id: 'name', label: 'Device name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
-    { id: 'type', label: 'Type', defaultVisible: true, render: (row) => row.type, exportValue: (row) => row.type },
-    { id: 'os', label: 'OS', defaultVisible: true, render: (row) => row.os, exportValue: (row) => row.os },
-    { id: 'location', label: 'Location', defaultVisible: true, render: (row) => row.location, exportValue: (row) => row.location },
-    { id: 'account', label: 'Account', defaultVisible: true, render: (row) => row.account, exportValue: (row) => row.account },
-    { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
-    { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
-    { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => `${row.riskScore} (${riskBand(row.riskScore)})`, exportValue: (row) => `${row.riskScore}` },
-    { id: 'status', label: 'Status', defaultVisible: true, render: (row) => row.status, exportValue: (row) => row.status },
-    { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
-    { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
-    { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
-    { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
-    { id: 'macVendor', label: 'MAC vendor', defaultVisible: false, render: (row) => row.macVendor, exportValue: (row) => row.macVendor },
-    { id: 'manufacturer', label: 'Device manufacturer', defaultVisible: false, render: (row) => row.manufacturer, exportValue: (row) => row.manufacturer },
-    { id: 'model', label: 'Device model', defaultVisible: false, render: (row) => row.model, exportValue: (row) => row.model },
-    { id: 'applications', label: 'Applications', defaultVisible: false, render: (row) => renderListValues(row.applications), exportValue: (row) => row.applications.length > 0 ? row.applications.join(', ') : '—' },
-    { id: 'patches', label: 'Patches', defaultVisible: false, render: (row) => renderListValues(row.patches), exportValue: (row) => row.patches.length > 0 ? row.patches.join(', ') : '—' },
-    { id: 'processes', label: 'Processes', defaultVisible: false, render: (row) => renderListValues(row.processes), exportValue: (row) => row.processes.length > 0 ? row.processes.join(', ') : '—' },
-    { id: 'services', label: 'Services', defaultVisible: false, render: (row) => renderListValues(row.services), exportValue: (row) => row.services.length > 0 ? row.services.join(', ') : '—' },
-    { id: 'peripherals', label: 'Peripherals', defaultVisible: false, render: (row) => renderListValues(row.peripherals), exportValue: (row) => row.peripherals.length > 0 ? row.peripherals.join(', ') : '—' },
-    { id: 'browser', label: 'Browser', defaultVisible: false, render: (row) => renderListValues(row.browser), exportValue: (row) => row.browser.length > 0 ? row.browser.join(', ') : '—' },
-    { id: 'browserExtensions', label: 'Browser extensions', defaultVisible: false, render: (row) => renderListValues(row.browserExtensions), exportValue: (row) => row.browserExtensions.length > 0 ? row.browserExtensions.join(', ') : '—' },
-    { id: 'agentpVersion', label: 'AgentP version', defaultVisible: false, render: (row) => row.agentpVersion, exportValue: (row) => row.agentpVersion },
-    { id: 'riskViolations', label: 'Risk score violations', defaultVisible: false, render: (row) => renderListValues(row.riskViolations), exportValue: (row) => row.riskViolations.length > 0 ? row.riskViolations.join(', ') : '—' },
-    { id: 'nasIp', label: 'NAS IP', defaultVisible: false, render: (row) => row.nasIp, exportValue: (row) => row.nasIp },
-    { id: 'agentpLastReported', label: 'AgentP last reported', defaultVisible: false, render: (row) => formatRelativeTime(row.agentpLastReported), exportValue: (row) => row.agentpLastReported },
-  ], []);
+  const deviceColumns = useMemo<TableColumn<DeviceRecord>[]>(() => {
+    const sourceColumns = buildSourceColumns('device').map(({ id, label }) => ({
+      id,
+      label,
+      defaultVisible: true,
+      render: (row: DeviceRecord) => {
+        const status = row.sourceCoverage[id.slice('source:'.length) as SourceName]?.status ?? 'N/A';
+        return <StatusPill kind="device" status={status} />;
+      },
+      exportValue: (row: DeviceRecord) => row.sourceCoverage[id.slice('source:'.length) as SourceName]?.status ?? 'N/A',
+    }));
 
-  const accountColumns = useMemo<TableColumn<AccountFilterRow>[]>(() => [
-    { id: 'name', label: 'Account name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
-    { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
-    { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
-    { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
-    { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? 'Blocked' : 'Not blocked'), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
-    { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
-    { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
-    { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
-    { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
-    { id: 'location', label: 'Location', defaultVisible: false, render: (row) => row.location, exportValue: (row) => row.location },
-  ], []);
+    return [
+      { id: 'name', label: 'Device name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
+      { id: 'type', label: 'Type', defaultVisible: true, render: (row) => row.type, exportValue: (row) => row.type },
+      { id: 'os', label: 'OS', defaultVisible: true, render: (row) => row.os, exportValue: (row) => row.os },
+      { id: 'location', label: 'Location', defaultVisible: true, render: (row) => row.location, exportValue: (row) => row.location },
+      { id: 'account', label: 'Account', defaultVisible: true, render: (row) => row.account, exportValue: (row) => row.account },
+      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
+      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
+      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => `${row.riskScore} (${riskBand(row.riskScore)})`, exportValue: (row) => `${row.riskScore}` },
+      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => row.status, exportValue: (row) => row.status },
+      { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
+      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
+      ...sourceColumns,
+      { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
+      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
+      { id: 'macVendor', label: 'MAC vendor', defaultVisible: false, render: (row) => row.macVendor, exportValue: (row) => row.macVendor },
+      { id: 'manufacturer', label: 'Device manufacturer', defaultVisible: false, render: (row) => row.manufacturer, exportValue: (row) => row.manufacturer },
+      { id: 'model', label: 'Device model', defaultVisible: false, render: (row) => row.model, exportValue: (row) => row.model },
+      { id: 'applications', label: 'Applications', defaultVisible: false, render: (row) => renderListValues(row.applications), exportValue: (row) => row.applications.length > 0 ? row.applications.join(', ') : '—' },
+      { id: 'patches', label: 'Patches', defaultVisible: false, render: (row) => renderListValues(row.patches), exportValue: (row) => row.patches.length > 0 ? row.patches.join(', ') : '—' },
+      { id: 'processes', label: 'Processes', defaultVisible: false, render: (row) => renderListValues(row.processes), exportValue: (row) => row.processes.length > 0 ? row.processes.join(', ') : '—' },
+      { id: 'services', label: 'Services', defaultVisible: false, render: (row) => renderListValues(row.services), exportValue: (row) => row.services.length > 0 ? row.services.join(', ') : '—' },
+      { id: 'peripherals', label: 'Peripherals', defaultVisible: false, render: (row) => renderListValues(row.peripherals), exportValue: (row) => row.peripherals.length > 0 ? row.peripherals.join(', ') : '—' },
+      { id: 'browser', label: 'Browser', defaultVisible: false, render: (row) => renderListValues(row.browser), exportValue: (row) => row.browser.length > 0 ? row.browser.join(', ') : '—' },
+      { id: 'browserExtensions', label: 'Browser extensions', defaultVisible: false, render: (row) => renderListValues(row.browserExtensions), exportValue: (row) => row.browserExtensions.length > 0 ? row.browserExtensions.join(', ') : '—' },
+      { id: 'agentpVersion', label: 'AgentP version', defaultVisible: false, render: (row) => row.agentpVersion, exportValue: (row) => row.agentpVersion },
+      { id: 'riskViolations', label: 'Risk score violations', defaultVisible: false, render: (row) => renderListValues(row.riskViolations), exportValue: (row) => row.riskViolations.length > 0 ? row.riskViolations.join(', ') : '—' },
+      { id: 'nasIp', label: 'NAS IP', defaultVisible: false, render: (row) => row.nasIp, exportValue: (row) => row.nasIp },
+      { id: 'agentpLastReported', label: 'AgentP last reported', defaultVisible: false, render: (row) => formatRelativeTime(row.agentpLastReported), exportValue: (row) => row.agentpLastReported },
+    ];
+  }, []);
+
+  const accountColumns = useMemo<TableColumn<AccountFilterRow>[]>(() => {
+    const sourceColumns = buildSourceColumns('account').map(({ id, label }) => ({
+      id,
+      label,
+      defaultVisible: true,
+      render: (row: AccountFilterRow) => {
+        const status = row.sourceCoverage[id.slice('source:'.length) as SourceName]?.status ?? 'N/A';
+        return <StatusPill kind="account" status={status} />;
+      },
+      exportValue: (row: AccountFilterRow) => row.sourceCoverage[id.slice('source:'.length) as SourceName]?.status ?? 'N/A',
+    }));
+
+    return [
+      { id: 'name', label: 'Account name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
+      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
+      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
+      { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
+      { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? 'Blocked' : 'Not blocked'), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
+      { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
+      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
+      ...sourceColumns,
+      { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
+      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
+      { id: 'location', label: 'Location', defaultVisible: false, render: (row) => row.location, exportValue: (row) => row.location },
+    ];
+  }, []);
 
   const rows = isDevices ? filteredDeviceRows : filteredAccountRows;
   const activeSort = isDevices ? sortByTab.devices : sortByTab.accounts;
@@ -1522,11 +1566,6 @@ export function AssetsTable() {
   function runSelectionAction(action: string) {
     const selectedCount = selectedRowIds.length;
 
-    if (action === 'Add') {
-      setToast(`Action: ${action}`);
-      return;
-    }
-
     if (selectedCount < 1) {
       setToast(`Select at least 1 ${tab === 'devices' ? 'device' : 'account'}.`);
       return;
@@ -1547,7 +1586,6 @@ export function AssetsTable() {
     }
 
     return [
-      { label: 'Add', visible: true, danger: false },
       { label: 'Edit', visible: count === 1, danger: false },
       { label: 'Change group', visible: count === 1, danger: false },
       { label: 'Block', visible: count >= 1, danger: false },
@@ -2086,7 +2124,7 @@ export function AssetsTable() {
           </div>
 
           <button
-            className={styles.btn}
+            className={`${styles.btn} ${styles.addFilterButton}`}
             onClick={() => {
               setAddMenuOpen((prev) => !prev);
               setAddMenuQuery('');
@@ -2340,8 +2378,8 @@ export function AssetsTable() {
             role="dialog"
             style={{
               position: 'absolute',
-              left: Math.max(8, addFilterButtonRef.current ? addFilterButtonRef.current.getBoundingClientRect().left : 0),
-              top: addFilterButtonRef.current ? addFilterButtonRef.current.getBoundingClientRect().bottom + 6 : 0,
+              left: addMenuPosition.left,
+              top: addMenuPosition.top,
               width: 300,
             }}
           >
