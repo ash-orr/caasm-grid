@@ -50,6 +50,11 @@
   cursor: pointer;
 }
 
+.addFilterButton {
+  width: 100%;
+  margin: 0 0 10px;
+}
+
 .btn:hover {
   border-color: var(--acc);
 }
