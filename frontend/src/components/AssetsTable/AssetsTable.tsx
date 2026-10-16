@@ -28,6 +28,7 @@ import { ColumnPickerPopover, type ColumnPickerItem } from './ColumnPickerPopove
 import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
+import { getSelectionBannerState } from './selection';
 import styles from './AssetsTable.module.css';
 
 type TabKey = 'devices' | 'accounts' | 'sites';
@@ -1259,7 +1260,11 @@ export function AssetsTable() {
   const pagedRows = sortedRows.slice(startIndex, endIndex);
   const pageIds = pagedRows.map((row) => row.id);
   const allPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedRowIds.includes(id));
-  const showSelectAllBanner = allPageSelected && totalRows > pageIds.length;
+  const selectionBannerState = getSelectionBannerState({
+    selectedIds: selectedRowIds,
+    pageIds,
+    totalMatchingIds: sortedRows.map((row) => row.id),
+  });
 
   const activeView = activeViewByTab[tab];
   const activeSavedView = savedViewsByTab[tab].find((savedView) => savedView.id === activeView) ?? null;
@@ -2045,17 +2050,31 @@ export function AssetsTable() {
         </div>
       ) : null}
 
-      {showSelectAllBanner ? (
+      {selectionBannerState ? (
         <div className={styles.selectionBanner}>
-          <span>
-            Select all {totalRows.toLocaleString()} {isDevices ? 'devices' : 'accounts'}
-          </span>
-          <button className={styles.btn} onClick={selectAllMatching} type="button">
-            Select all {totalRows.toLocaleString()}
-          </button>
-          <button className={styles.linkBtn} onClick={() => clearSelectionForTab()} type="button">
-            Clear selection
-          </button>
+          {selectionBannerState.type === 'pageSelected' ? (
+            <>
+              <span>
+                All {selectionBannerState.pageCount.toLocaleString()} {isDevices ? 'devices' : 'accounts'} on this page are selected.
+              </span>
+              <button
+                className={styles.linkBtn}
+                onClick={selectAllMatching}
+                type="button"
+              >
+                Select all {selectionBannerState.totalCount.toLocaleString()}
+              </button>
+            </>
+          ) : (
+            <>
+              <span>
+                All {selectionBannerState.totalCount.toLocaleString()} {isDevices ? 'devices' : 'accounts'} are selected.
+              </span>
+              <button className={styles.linkBtn} onClick={() => clearSelectionForTab()} type="button">
+                Clear selection
+              </button>
+            </>
+          )}
         </div>
       ) : null}
 
@@ -2300,7 +2319,7 @@ export function AssetsTable() {
 
       {addMenuOpen ? (
         <div
-          className={styles.overlay}
+          className={styles.popoverAnchor}
           onClick={(event) => {
             if (event.target === event.currentTarget) {
               setAddMenuOpen(false);
@@ -2315,7 +2334,17 @@ export function AssetsTable() {
           }}
           role="presentation"
         >
-          <div className={styles.menu} role="dialog" aria-label="Add filter menu">
+          <div
+            aria-label="Add filter menu"
+            className={styles.menu}
+            role="dialog"
+            style={{
+              position: 'absolute',
+              left: Math.max(8, addFilterButtonRef.current ? addFilterButtonRef.current.getBoundingClientRect().left : 0),
+              top: addFilterButtonRef.current ? addFilterButtonRef.current.getBoundingClientRect().bottom + 6 : 0,
+              width: 300,
+            }}
+          >
             <input
               className={styles.addMenuSearch}
               onChange={(event) => setAddMenuQuery(event.target.value)}
@@ -2365,7 +2394,7 @@ export function AssetsTable() {
 
       {seeMoreOpenFor ? (
         <div
-          className={styles.overlay}
+          className={styles.popoverAnchor}
           onClick={(event) => {
             if (event.target === event.currentTarget) {
               closeSeeMore();
@@ -2378,7 +2407,16 @@ export function AssetsTable() {
           }}
           role="presentation"
         >
-          <div className={styles.popup} role="dialog" aria-label="See more options">
+          <div
+            aria-label="See more options"
+            className={styles.popup}
+            role="dialog"
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+            }}
+          >
             <h2 className={styles.popupTitle}>
               {findSectionLabel(isDevices ? 'devices' : 'accounts', seeMoreOpenFor)} ({seeMoreDraftValues.length} selected)
             </h2>
