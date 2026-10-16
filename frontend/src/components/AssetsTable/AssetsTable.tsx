@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { accounts, devices, type AccountRecord, type DeviceRecord, type RiskViolation, type SourceName } from '../../mocks/devices';
@@ -23,6 +23,7 @@ import {
   type SavedViewSort,
 } from '../../views/savedViews';
 import { nextSort, sortRowsBy } from './sort';
+import { selectAllMatchingRows } from './selection';
 import { ColumnPickerPopover, type ColumnPickerItem } from './ColumnPickerPopover';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
@@ -636,7 +637,7 @@ export function AssetsTable() {
           id: String(id),
           text: `${label}: ${values.join(', ')}`,
           remove: () => {
-            setDeviceFilters((prev) => ({ ...prev, [id]: [] }));
+            safeSetDeviceFilters((prev) => ({ ...prev, [id]: [] }));
           },
         });
       };
@@ -665,7 +666,7 @@ export function AssetsTable() {
           id: 'agentpVersionOlderThan',
           text: `AgentP version: older than ${activeDeviceFilters.agentpVersionOlderThan}`,
           remove: () => {
-            setDeviceFilters((prev) => ({ ...prev, agentpVersionOlderThan: null }));
+            safeSetDeviceFilters((prev) => ({ ...prev, agentpVersionOlderThan: null }));
           },
         });
       }
@@ -677,7 +678,7 @@ export function AssetsTable() {
           id: `sourceCoverage-${index}`,
           text: `${condition.source} is ${condition.status}`,
           remove: () => {
-            setDeviceFilters((prev) => ({
+            safeSetDeviceFilters((prev) => ({
               ...prev,
               sourceCoverage: (prev.sourceCoverage ?? []).filter((_, idx) => idx !== index),
             }));
@@ -693,7 +694,7 @@ export function AssetsTable() {
           id: `onThisDevice-${index}`,
           text: `${categoryLabel}: ${condition.value}`,
           remove: () => {
-            setDeviceFilters((prev) => ({
+            safeSetDeviceFilters((prev) => ({
               ...prev,
               onThisDevice: (prev.onThisDevice ?? []).filter((_, idx) => idx !== index),
             }));
@@ -709,7 +710,7 @@ export function AssetsTable() {
           id: String(id),
           text: `${label}: ${values.join(', ')}`,
           remove: () => {
-            setAccountFilters((prev) => ({ ...prev, [id]: [] }));
+            safeSetAccountFilters((prev) => ({ ...prev, [id]: [] }));
           },
         });
       };
@@ -730,7 +731,7 @@ export function AssetsTable() {
           id: `sourceCoverage-${index}`,
           text: `${condition.source} is ${condition.status}`,
           remove: () => {
-            setAccountFilters((prev) => ({
+            safeSetAccountFilters((prev) => ({
               ...prev,
               sourceCoverage: (prev.sourceCoverage ?? []).filter((_, idx) => idx !== index),
             }));
@@ -749,6 +750,16 @@ export function AssetsTable() {
   const visibleChips = expandedChipList ? chips : chips.slice(0, 5);
 
   const hiddenChipCount = chips.length - visibleChips.length;
+
+  const safeSetDeviceFilters = useCallback((updater: React.SetStateAction<DeviceFilterState>) => {
+    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
+    setDeviceFilters(updater);
+  }, [tab]);
+
+  const safeSetAccountFilters = useCallback((updater: React.SetStateAction<AccountFilterState>) => {
+    setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
+    setAccountFilters(updater);
+  }, [tab]);
 
   const addMenuItems = useMemo(() => {
     const definitions = isDevices ? addableDeviceDefinitions : addableAccountDefinitions;
@@ -769,11 +780,11 @@ export function AssetsTable() {
 
   function setChecklistValues(id: string, values: string[]) {
     if (isDevices) {
-      setDeviceFilters((prev) => ({ ...prev, [id]: values }));
+      safeSetDeviceFilters((prev) => ({ ...prev, [id]: values }));
       return;
     }
 
-    setAccountFilters((prev) => ({ ...prev, [id]: values }));
+    safeSetAccountFilters((prev) => ({ ...prev, [id]: values }));
   }
 
   function getChecklistValues(id: string): string[] {
@@ -830,11 +841,11 @@ export function AssetsTable() {
 
   function clearAllFilters() {
     if (isDevices) {
-      setDeviceFilters(defaultDeviceFilters());
+      safeSetDeviceFilters(defaultDeviceFilters());
       return;
     }
 
-    setAccountFilters(defaultAccountFilters());
+    safeSetAccountFilters(defaultAccountFilters());
   }
 
   function renderChecklistSection(sectionId: string) {
@@ -903,13 +914,13 @@ export function AssetsTable() {
                 onChange={(event) => {
                   const source = event.target.value || null;
                   if (isDevices) {
-                    setDeviceFilters((prev) => {
+                    safeSetDeviceFilters((prev) => {
                       const next = [...(prev.sourceCoverage ?? [])];
                       next[index] = { ...next[index], source: source as SourceName | null };
                       return { ...prev, sourceCoverage: next };
                     });
                   } else {
-                    setAccountFilters((prev) => {
+                    safeSetAccountFilters((prev) => {
                       const next = [...(prev.sourceCoverage ?? [])];
                       next[index] = { ...next[index], source: source as SourceName | null };
                       return { ...prev, sourceCoverage: next };
@@ -931,13 +942,13 @@ export function AssetsTable() {
                   onChange={(event) => {
                     const status = (event.target.value || null) as SourceCoverageConditionStatus | null;
                     if (isDevices) {
-                      setDeviceFilters((prev) => {
+                      safeSetDeviceFilters((prev) => {
                         const next = [...(prev.sourceCoverage ?? [])];
                         next[index] = { ...next[index], status };
                         return { ...prev, sourceCoverage: next };
                       });
                     } else {
-                      setAccountFilters((prev) => {
+                      safeSetAccountFilters((prev) => {
                         const next = [...(prev.sourceCoverage ?? [])];
                         next[index] = { ...next[index], status };
                         return { ...prev, sourceCoverage: next };
@@ -956,12 +967,12 @@ export function AssetsTable() {
                   className={styles.removeCondition}
                   onClick={() => {
                     if (isDevices) {
-                      setDeviceFilters((prev) => ({
+                      safeSetDeviceFilters((prev) => ({
                         ...prev,
                         sourceCoverage: (prev.sourceCoverage ?? []).filter((_, idx) => idx !== index),
                       }));
                     } else {
-                      setAccountFilters((prev) => ({
+                      safeSetAccountFilters((prev) => ({
                         ...prev,
                         sourceCoverage: (prev.sourceCoverage ?? []).filter((_, idx) => idx !== index),
                       }));
@@ -978,12 +989,12 @@ export function AssetsTable() {
             className={`${styles.linkBtn} ${styles.smallLink}`}
             onClick={() => {
               if (isDevices) {
-                setDeviceFilters((prev) => ({
+                safeSetDeviceFilters((prev) => ({
                   ...prev,
                   sourceCoverage: [...(prev.sourceCoverage ?? []), { source: null, status: null }],
                 }));
               } else {
-                setAccountFilters((prev) => ({
+                safeSetAccountFilters((prev) => ({
                   ...prev,
                   sourceCoverage: [...(prev.sourceCoverage ?? []), { source: null, status: null }],
                 }));
@@ -1017,7 +1028,7 @@ export function AssetsTable() {
                 className={styles.select}
                 onChange={(event) => {
                   const category = (event.target.value || null) as OnThisDeviceCategory | null;
-                  setDeviceFilters((prev) => {
+                  safeSetDeviceFilters((prev) => {
                     const next = [...(prev.onThisDevice ?? [])];
                     next[index] = { category, value: null };
                     return { ...prev, onThisDevice: next };
@@ -1038,7 +1049,7 @@ export function AssetsTable() {
                   disabled={!row.category}
                   onChange={(event) => {
                     const value = event.target.value || null;
-                    setDeviceFilters((prev) => {
+                    safeSetDeviceFilters((prev) => {
                       const next = [...(prev.onThisDevice ?? [])];
                       next[index] = { ...next[index], value };
                       return { ...prev, onThisDevice: next };
@@ -1055,7 +1066,7 @@ export function AssetsTable() {
                   aria-label="Remove condition"
                   className={styles.removeCondition}
                   onClick={() => {
-                    setDeviceFilters((prev) => ({
+                    safeSetDeviceFilters((prev) => ({
                       ...prev,
                       onThisDevice: (prev.onThisDevice ?? []).filter((_, idx) => idx !== index),
                     }));
@@ -1071,7 +1082,7 @@ export function AssetsTable() {
           <button
             className={`${styles.linkBtn} ${styles.smallLink}`}
             onClick={() => {
-              setDeviceFilters((prev) => ({
+              safeSetDeviceFilters((prev) => ({
                 ...prev,
                 onThisDevice: [...(prev.onThisDevice ?? []), { category: null, value: null }],
               }));
@@ -1124,7 +1135,7 @@ export function AssetsTable() {
             className={styles.select}
             onChange={(event) => {
               const value = event.target.value || null;
-              setDeviceFilters((prev) => ({ ...prev, agentpVersionOlderThan: value }));
+              safeSetDeviceFilters((prev) => ({ ...prev, agentpVersionOlderThan: value }));
             }}
             value={activeDeviceFilters.agentpVersionOlderThan ?? ''}
           >
@@ -1235,6 +1246,7 @@ export function AssetsTable() {
   const pagedRows = sortedRows.slice(startIndex, endIndex);
   const pageIds = pagedRows.map((row) => row.id);
   const allPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedRowIds.includes(id));
+  const showSelectAllBanner = allPageSelected && totalRows > pageIds.length;
 
   const activeView = activeViewByTab[tab];
   const activeSavedView = savedViewsByTab[tab].find((savedView) => savedView.id === activeView) ?? null;
@@ -1287,7 +1299,7 @@ export function AssetsTable() {
 
   function applySnapshot(entity: SavedViewEntity, snapshot: SavedViewSnapshot) {
     if (entity === 'devices') {
-      setDeviceFilters(snapshot.filters as DeviceFilterState);
+      safeSetDeviceFilters(snapshot.filters as DeviceFilterState);
       setAddedDeviceSections([...snapshot.addedSections]);
       setDeviceColumnOrder([...snapshot.columns.order]);
       setHiddenDeviceColumns([...snapshot.columns.hidden]);
@@ -1297,7 +1309,7 @@ export function AssetsTable() {
       return;
     }
 
-    setAccountFilters(snapshot.filters as AccountFilterState);
+    safeSetAccountFilters(snapshot.filters as AccountFilterState);
     setAddedAccountSections([...snapshot.addedSections]);
     setAccountColumnOrder([...snapshot.columns.order]);
     setHiddenAccountColumns([...snapshot.columns.hidden]);
@@ -1311,7 +1323,7 @@ export function AssetsTable() {
     const hidden = baseView === 'caasm' ? getCaasmHiddenColumns(entity) : getDefaultHiddenColumns(entity);
 
     if (entity === 'devices') {
-      setDeviceFilters(defaultDeviceFilters());
+      safeSetDeviceFilters(defaultDeviceFilters());
       setAddedDeviceSections([]);
       setDeviceColumnOrder(order);
       setHiddenDeviceColumns(hidden);
@@ -1324,7 +1336,7 @@ export function AssetsTable() {
       return;
     }
 
-    setAccountFilters(defaultAccountFilters());
+    safeSetAccountFilters(defaultAccountFilters());
     setAddedAccountSections([]);
     setAccountColumnOrder(order);
     setHiddenAccountColumns(hidden);
@@ -1413,6 +1425,17 @@ export function AssetsTable() {
       }
       return { ...prev, [tab]: Array.from(currentSet) };
     });
+  }
+
+  function clearSelectionForTab(nextTab: TabKey = tab) {
+    setSelectedRowIdsByTab((prev) => ({ ...prev, [nextTab]: [] }));
+  }
+
+  function selectAllMatching() {
+    setSelectedRowIdsByTab((prev) => ({
+      ...prev,
+      [tab]: selectAllMatchingRows(prev[tab], pageIds, sortedRows.map((row) => row.id)),
+    }));
   }
 
   function setPageSize(nextSize: number) {
@@ -1577,6 +1600,7 @@ export function AssetsTable() {
     setExpandedChipList(false);
     setColumnPickerOpen(false);
     setDetailView(null);
+    clearSelectionForTab(nextTab);
 
     setTab(nextTab);
   }
@@ -1843,7 +1867,7 @@ export function AssetsTable() {
             const value = event.target.value;
             setSearchByTab((prev) => ({ ...prev, [tab]: value }));
             setPageByTab((prev) => ({ ...prev, [tab]: 0 }));
-            setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
+            clearSelectionForTab();
           }}
           placeholder={isDevices ? 'Search devices, accounts, OS, location' : 'Search accounts or groups'}
           type="search"
@@ -1951,6 +1975,20 @@ export function AssetsTable() {
             </button>
           ) : null}
           <button className={styles.linkBtn} onClick={clearAllFilters} type="button">Clear all</button>
+        </div>
+      ) : null}
+
+      {showSelectAllBanner ? (
+        <div className={styles.selectionBanner}>
+          <span>
+            Select all {totalRows.toLocaleString()} {isDevices ? 'devices' : 'accounts'}
+          </span>
+          <button className={styles.btn} onClick={selectAllMatching} type="button">
+            Select all {totalRows.toLocaleString()}
+          </button>
+          <button className={styles.linkBtn} onClick={() => clearSelectionForTab()} type="button">
+            Clear selection
+          </button>
         </div>
       ) : null}
 

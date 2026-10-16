@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { compareSortValues, nextSort, sortRowsBy } from '../src/components/AssetsTable/sort.js';
+import {
+  selectAllMatchingRows,
+  shouldKeepSelectionOnChange,
+  shouldResetSelectionOnChange,
+} from '../src/components/AssetsTable/selection.js';
 
 describe('sort state cycle', () => {
   it('toggles asc/desc on same column and resets to asc on new column', () => {
@@ -16,11 +21,31 @@ describe('sort state cycle', () => {
 });
 
 describe('source-status ordering', () => {
-  it('sorts source statuses as Reporting, Stale, Pending, Not present, Not applicable', () => {
-    const values = ['Not present', 'Reporting', 'Pending', 'Stale', 'Not applicable'];
+  it('sorts source statuses as Reporting, Stale, Pending, Not present, Not applicable, with N/A treated as Not applicable', () => {
+    const values = ['Not present', 'Reporting', 'Pending', 'Stale', 'N/A', 'Not applicable'];
     const sorted = values.slice().sort(compareSortValues);
 
-    expect(sorted).toEqual(['Reporting', 'Stale', 'Pending', 'Not present', 'Not applicable']);
+    expect(sorted).toEqual(['Reporting', 'Stale', 'Pending', 'Not present', 'Not applicable', 'N/A']);
+  });
+});
+
+describe('selection rules', () => {
+  it('keeps selection for sort, page, and rows-per-page changes', () => {
+    expect(shouldKeepSelectionOnChange('sort')).toBe(true);
+    expect(shouldKeepSelectionOnChange('page')).toBe(true);
+    expect(shouldKeepSelectionOnChange('rowsPerPage')).toBe(true);
+  });
+
+  it('resets selection for filter, search, and tab changes', () => {
+    expect(shouldResetSelectionOnChange('filter')).toBe(true);
+    expect(shouldResetSelectionOnChange('search')).toBe(true);
+    expect(shouldResetSelectionOnChange('tab')).toBe(true);
+  });
+
+  it('selects all filtered rows when the banner action runs', () => {
+    const selected = selectAllMatchingRows([2, 4], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]);
+
+    expect(selected).toEqual([1, 2, 3, 4, 5]);
   });
 });
 
