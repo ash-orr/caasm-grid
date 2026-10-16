@@ -708,6 +708,29 @@
   font-weight: 600;
 }
 
+.tooltipTrigger {
+  display: inline-flex;
+}
+
+.tooltipContent {
+  z-index: 100;
+  max-width: min(32ch, 260px);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.tooltipArrow {
+  fill: var(--panel);
+}
+
 .detailWarnIcon {
   color: var(--warn);
   font-size: 12px;

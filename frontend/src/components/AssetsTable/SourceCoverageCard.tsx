@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Tooltip } from './Tooltip';
 import styles from './AssetsTable.module.css';
 import { formatSourceSyncAge, getSourceCoverageVisibility, type SourceCoverageRow } from './sourceCoverage';
 
@@ -38,9 +39,11 @@ function SourceNameCell({ value }: { value: string }) {
   }, [value]);
 
   return (
-    <span className={styles.sourceNameValue} ref={ref} title={truncated ? value : undefined}>
-      {value}
-    </span>
+    <Tooltip content={truncated ? value : undefined}>
+      <span className={styles.sourceNameValue} ref={ref}>
+        {value}
+      </span>
+    </Tooltip>
   );
 }
 

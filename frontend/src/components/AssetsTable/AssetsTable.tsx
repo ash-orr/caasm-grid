@@ -208,6 +208,8 @@ function expandAccountRows(seedRows: AccountFilterRow[], targetCount: number): A
   return rows;
 }
 
+import { Tooltip } from './Tooltip';
+
 function renderListValues(values: string[]): ReactNode {
   if (values.length === 0) return '—';
   if (values.length <= 2) return values.join(', ');
@@ -219,7 +221,9 @@ function renderListValues(values: string[]): ReactNode {
   return (
     <>
       {preview}{' '}
-      <span className={styles.moreValues} title={title}>+{remaining}</span>
+      <Tooltip content={title}>
+        <span className={styles.moreValues}>+{remaining}</span>
+      </Tooltip>
     </>
   );
 }
@@ -1725,7 +1729,9 @@ export function AssetsTable() {
                   >
                     {tabName}
                     {tabName === 'Source data' && conflictCount > 0 ? (
-                      <span className={styles.detailWarnIcon} title={`${conflictCount} field(s) differ across sources`}>⚠</span>
+                      <Tooltip content={`${conflictCount} field(s) differ across sources`}>
+                        <span className={styles.detailWarnIcon}>⚠</span>
+                      </Tooltip>
                     ) : null}
                   </button>
                 ))}
@@ -1817,7 +1823,9 @@ export function AssetsTable() {
                 >
                   {tabName}
                   {tabName === 'Source data' && conflictCount > 0 ? (
-                    <span className={styles.detailWarnIcon} title={`${conflictCount} field(s) differ across sources`}>⚠</span>
+                    <Tooltip content={`${conflictCount} field(s) differ across sources`}>
+                      <span className={styles.detailWarnIcon}>⚠</span>
+                    </Tooltip>
                   ) : null}
                 </button>
               ))}
@@ -1938,36 +1946,44 @@ export function AssetsTable() {
               <DropdownMenu.Item className={styles.dropdownItem} onSelect={() => setSaveViewDialogOpen(true)}>
                 Save view
               </DropdownMenu.Item>
-              <DropdownMenu.Item
-                aria-disabled={!activeViewSavedAndUnchanged}
-                className={`${styles.dropdownItem} ${!activeViewSavedAndUnchanged ? styles.dropdownItemDisabled : ''}`}
-                onSelect={(event) => {
-                  if (!activeViewSavedAndUnchanged) {
-                    event.preventDefault();
-                    return;
-                  }
-
-                  void handleShareLink();
-                }}
-                title={!activeViewSavedAndUnchanged ? 'This view must be saved before you can share a link' : undefined}
+              <Tooltip
+                content={!activeViewSavedAndUnchanged ? 'This view must be saved before you can share a link' : undefined}
+                disabled={activeViewSavedAndUnchanged}
               >
-                Share link
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                aria-disabled={!activeViewSavedAndUnchanged}
-                className={`${styles.dropdownItem} ${!activeViewSavedAndUnchanged ? styles.dropdownItemDisabled : ''}`}
-                onSelect={(event) => {
-                  if (!activeViewSavedAndUnchanged) {
-                    event.preventDefault();
-                    return;
-                  }
+                <DropdownMenu.Item
+                  aria-disabled={!activeViewSavedAndUnchanged}
+                  className={`${styles.dropdownItem} ${!activeViewSavedAndUnchanged ? styles.dropdownItemDisabled : ''}`}
+                  onSelect={(event) => {
+                    if (!activeViewSavedAndUnchanged) {
+                      event.preventDefault();
+                      return;
+                    }
 
-                  setRemoveViewDialogOpen(true);
-                }}
-                title={!activeViewSavedAndUnchanged ? 'This view cannot be removed' : undefined}
+                    void handleShareLink();
+                  }}
+                >
+                  Share link
+                </DropdownMenu.Item>
+              </Tooltip>
+              <Tooltip
+                content={!activeViewSavedAndUnchanged ? 'This view cannot be removed' : undefined}
+                disabled={activeViewSavedAndUnchanged}
               >
-                Remove view
-              </DropdownMenu.Item>
+                <DropdownMenu.Item
+                  aria-disabled={!activeViewSavedAndUnchanged}
+                  className={`${styles.dropdownItem} ${!activeViewSavedAndUnchanged ? styles.dropdownItemDisabled : ''}`}
+                  onSelect={(event) => {
+                    if (!activeViewSavedAndUnchanged) {
+                      event.preventDefault();
+                      return;
+                    }
+
+                    setRemoveViewDialogOpen(true);
+                  }}
+                >
+                  Remove view
+                </DropdownMenu.Item>
+              </Tooltip>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
