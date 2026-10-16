@@ -1,0 +1,64 @@
+:root {
+  --bg: #eef1f4;
+  --panel: #ffffff;
+  --ink: #14212b;
+  --mute: #5d6b78;
+  --line: #dce2e8;
+  --acc: #0b6e8a;
+  --acc-s: #e2f1f5;
+  --ok: #1f8a5b;
+  --ok-s: #e3f4ec;
+  --warn: #b7791f;
+  --warn-s: #fbf1dc;
+  --bad: #c0392b;
+  --bad-s: #fbe9e6;
+  --side: #14212b;
+  --sidetx: #c7d2dc;
+  --font: 'Public Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* Dark mode: follows the computer's setting unless the page forces light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e151b;
+    --panel: #16202a;
+    --ink: #e6edf3;
+    --mute: #8d9ba8;
+    --line: #263341;
+    --acc: #4fb8d4;
+    --acc-s: #16323c;
+    --ok: #47c18c;
+    --ok-s: #15332a;
+    --warn: #e0a94a;
+    --warn-s: #3a2e14;
+    --bad: #ef6b5b;
+    --bad-s: #3a1d1a;
+    --side: #0a1015;
+    --sidetx: #8d9ba8;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e151b;
+  --panel: #16202a;
+  --ink: #e6edf3;
+  --mute: #8d9ba8;
+  --line: #263341;
+  --acc: #4fb8d4;
+  --acc-s: #16323c;
+  --ok: #47c18c;
+  --ok-s: #15332a;
+  --warn: #e0a94a;
+  --warn-s: #3a2e14;
+  --bad: #ef6b5b;
+  --bad-s: #3a1d1a;
+  --side: #0a1015;
+  --sidetx: #8d9ba8;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.45 var(--font);
+}
