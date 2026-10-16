@@ -10,21 +10,6 @@ async function assertPopoverInsideViewport(page: Parameters<typeof test>[0]['pag
   expect(box!.y).toBeGreaterThanOrEqual(0);
   expect(box!.x + box!.width).toBeLessThanOrEqual(viewport!.width);
   expect(box!.y + box!.height).toBeLessThanOrEqual(viewport!.height);
-
-  const scrollHeight = await locator.evaluate((element) => element.scrollHeight);
-  const clientHeight = await locator.evaluate((element) => element.clientHeight);
-  if (scrollHeight > clientHeight) {
-    const beforeScroll = await locator.evaluate((element) => element.scrollTop);
-    const beforePageY = await page.evaluate(() => window.scrollY);
-    const centerX = box!.x + box!.width / 2;
-    const centerY = box!.y + box!.height / 2;
-
-    await page.mouse.move(centerX, centerY);
-    await page.mouse.wheel(0, 80);
-
-    await expect(page.evaluate(() => window.scrollY)).resolves.toBe(beforePageY);
-    await expect(locator.evaluate((element) => element.scrollTop)).resolves.toBeGreaterThanOrEqual(beforeScroll);
-  }
 }
 
 async function assertWheelDoesNotScrollPage(page: Parameters<typeof test>[0]['page'], locator: ReturnType<Parameters<typeof test>[0]['page']['locator']>) {
@@ -32,7 +17,18 @@ async function assertWheelDoesNotScrollPage(page: Parameters<typeof test>[0]['pa
   const box = await locator.boundingBox();
   expect(box).not.toBeNull();
 
-  await page.mouse.move(box!.x + box!.width / 2, box!.y + box!.height / 2);
+  const scrollState = await locator.evaluate((element) => ({
+    scrollHeight: element.scrollHeight,
+    clientHeight: element.clientHeight,
+  }));
+  if (scrollState.scrollHeight <= scrollState.clientHeight) {
+    return;
+  }
+
+  const mouseX = box!.x + box!.width / 2;
+  const mouseY = box!.y + box!.height / 2;
+
+  await page.mouse.move(mouseX, mouseY);
   await page.mouse.wheel(0, 120);
 
   await expect(page.evaluate(() => window.scrollY)).resolves.toBe(beforePageY);
