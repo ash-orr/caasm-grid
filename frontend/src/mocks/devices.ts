@@ -1,3 +1,5 @@
+import { getSourceStatus } from '../components/AssetsTable/sourceStatus.js';
+
 export type DeviceStatus = 'Blocked' | 'Archived' | 'No issues';
 
 export type SourceStatus = 'Reporting' | 'Stale' | 'Pending' | 'Not present' | 'N/A';
@@ -124,15 +126,26 @@ const ACCOUNT_SOURCE_DEFAULTS: Partial<Record<SourceName, SourceStatus>> = {
 
 function makeSourceCoverage(
   overrides: Partial<Record<SourceName, SourceStatus>>,
-  defaults: Partial<Record<SourceName, SourceStatus>> = {}
+  defaults: Partial<Record<SourceName, SourceStatus>> = {},
+  createdAt?: string
 ): SourceCoverage {
   const coverage = {} as SourceCoverage;
 
   for (const source of SOURCE_ORDER) {
-    const status = overrides[source] ?? defaults[source] ?? 'N/A';
+    const declaredStatus = overrides[source] ?? defaults[source] ?? 'N/A';
+    const declaredCoverage = declaredStatus === 'N/A' ? null : declaredStatus === 'Not present' ? false : true;
+    const lastSeenAt = declaredStatus === 'Pending' ? null : SOURCE_LAST_SYNC[source];
+    const status = getSourceStatus({
+      source,
+      coverage: declaredCoverage,
+      createdAt,
+      lastSeenAt,
+      nowMs: Date.now(),
+    });
+
     coverage[source] = {
       status,
-      lastSyncAt: status === 'Pending' ? null : SOURCE_LAST_SYNC[source],
+      lastSyncAt: lastSeenAt,
     };
   }
 
@@ -1123,7 +1136,7 @@ const deviceSeeds: DeviceSeed[] = [
 ];
 
 export const devices: DeviceRecord[] = deviceSeeds.map((seed) => {
-  const sourceCoverage = makeSourceCoverage(seed.sourceOverrides);
+  const sourceCoverage = makeSourceCoverage(seed.sourceOverrides, {}, seed.createdAt);
 
   return {
     ...seed,
