@@ -1,5 +1,11 @@
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { accounts, devices } from '../src/mocks/generated/prototype-data.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PROTOTYPE_HTML_PATH = path.resolve(__dirname, '..', '..', 'design', 'prototype', 'caasm-console.html');
 
 describe('generated prototype data', () => {
   it('has the expected seeded counts', () => {

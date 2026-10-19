@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { accounts, devices } from '../src/mocks/devices.js';
+import { accounts, devices } from '../src/mocks/generated/prototype-data.js';
 
 describe('mock data contract', () => {
   it('keeps lastConnectedAt and agentpLastReported separate fields', () => {

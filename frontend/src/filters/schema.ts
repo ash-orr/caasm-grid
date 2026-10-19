@@ -1,4 +1,4 @@
-import type { DeviceRecord, RiskViolation, SourceName, SourceStatus } from '../mocks/devices.js';
+import type { DeviceRecord, RiskViolation, SourceName, SourceStatus } from '../mocks/generated/prototype-data.js';
 
 export type FilterEntity = 'devices' | 'accounts';
 

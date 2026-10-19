@@ -1,4 +1,4 @@
-import type { SourceStatus } from '../../mocks/devices.js';
+import type { SourceStatus } from '../../mocks/generated/prototype-data.js';
 
 export interface SourceCoverageRow {
   source: string;

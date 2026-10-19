@@ -1,4 +1,4 @@
-import type { AccountRecord, DeviceRecord, SourceStatus } from '../mocks/devices.js';
+import type { AccountRecord, DeviceRecord, SourceStatus } from '../mocks/generated/prototype-data.js';
 import type {
   AccountFilterState,
   AgentpReportedBucket,

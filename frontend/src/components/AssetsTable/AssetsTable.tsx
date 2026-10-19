@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { accounts, devices, type AccountRecord, type DeviceRecord, type RiskViolation, type SourceName } from '../../mocks/devices';
+import { accounts, devices, type AccountRecord, type DeviceRecord, type RiskViolation, type SourceName } from '../../mocks/generated/prototype-data';
 import { applyAccountFilters, applyDeviceFilters, compareVersionsNumeric, type AccountFilterRow } from '../../filters/engine';
 import {
   FILTER_SCHEMA,

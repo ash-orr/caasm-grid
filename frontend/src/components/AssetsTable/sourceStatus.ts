@@ -1,4 +1,4 @@
-import type { SourceName, SourceStatus } from '../../mocks/devices.js';
+import type { SourceName, SourceStatus } from '../../mocks/generated/prototype-data.js';
 
 export type SourceStatusInput = {
   source: SourceName;

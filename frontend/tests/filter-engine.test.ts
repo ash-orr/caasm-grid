@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { accounts, devices, type DeviceRecord } from '../src/mocks/devices.js';
+import { accounts, devices, type DeviceRecord } from '../src/mocks/generated/prototype-data.js';
 import {
   applyAccountFilters,
   applyDeviceFilters,
@@ -44,24 +44,32 @@ describe('device filter engine', () => {
   });
 
   it('uses any-of semantics within one checklist filter', () => {
-    const rows = [devices[0], devices[1], devices[2]];
+    const rows = [
+      deviceWith({ id: 100, type: 'Laptop', authRepo: 'Okta' }),
+      deviceWith({ id: 101, type: 'Desktop', authRepo: 'EntraID' }),
+      deviceWith({ id: 102, type: 'Mobile', authRepo: 'Google Workspace' }),
+    ];
     const state: DeviceFilterState = { deviceType: ['Laptop', 'Desktop'] };
 
     const filtered = applyDeviceFilters(rows, state, now);
 
-    expect(filtered.map((row) => row.id)).toEqual([devices[0].id, devices[1].id]);
+    expect(filtered.map((row) => row.id)).toEqual([100, 101]);
   });
 
   it('uses AND semantics between different filters', () => {
-    const rows = [devices[0], devices[1], devices[2]];
+    const rows = [
+      deviceWith({ id: 110, type: 'Laptop', authRepo: 'Okta' }),
+      deviceWith({ id: 111, type: 'Desktop', authRepo: 'EntraID' }),
+      deviceWith({ id: 112, type: 'Mobile', authRepo: 'Okta' }),
+    ];
     const state: DeviceFilterState = {
       deviceType: ['Laptop', 'Desktop'],
-      authRepo: ['EntraID'],
+      authRepo: ['Okta'],
     };
 
     const filtered = applyDeviceFilters(rows, state, now);
 
-    expect(filtered.map((row) => row.id)).toEqual([devices[0].id]);
+    expect(filtered.map((row) => row.id)).toEqual([110]);
   });
 
   it('matches NAS IP by exact value only', () => {
