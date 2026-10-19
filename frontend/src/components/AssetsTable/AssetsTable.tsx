@@ -2363,8 +2363,8 @@ export function AssetsTable() {
             </tbody>
           </table>
 
-          <div className={styles.tableFooter}>
-            <div className={styles.footerCount}>
+          <div className={`${styles.tableFooter} tableFooter`}>
+            <div className={`${styles.footerCount} footerCount`}>
               {totalRows.toLocaleString()} rows
               {selectedRowIds.length > 0 ? ` • ${selectedRowIds.length.toLocaleString()} selected` : ''}
             </div>
