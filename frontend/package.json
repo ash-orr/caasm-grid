@@ -9,7 +9,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:mocks": "node --experimental-strip-types scripts/generate-mocks.ts"
   },
   "dependencies": {
     "@fontsource-variable/public-sans": "^5.3.0",
