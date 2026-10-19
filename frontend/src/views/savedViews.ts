@@ -15,6 +15,7 @@ export interface SavedViewColumns {
 export interface SavedViewSnapshot {
   filters: unknown;
   addedSections: string[];
+  hiddenSections: string[];
   columns: SavedViewColumns;
   sort: SavedViewSort;
 }
@@ -92,9 +93,20 @@ export function isSavedViewUnchanged(savedView: SavedView, current: SavedViewSna
   const left: SavedViewSnapshot = {
     filters: savedView.filters,
     addedSections: savedView.addedSections,
+    hiddenSections: savedView.hiddenSections ?? [],
     columns: savedView.columns,
     sort: savedView.sort,
   };
+
+  const right: SavedViewSnapshot = {
+    filters: current.filters,
+    addedSections: current.addedSections,
+    hiddenSections: current.hiddenSections ?? [],
+    columns: current.columns,
+    sort: current.sort,
+  };
+
+  return stableStringify(left) === stableStringify(right);
 
   return stableStringify(left) === stableStringify(current);
 }

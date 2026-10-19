@@ -467,6 +467,8 @@ export function AssetsTable() {
 
   const [addedDeviceSections, setAddedDeviceSections] = useState<string[]>([]);
   const [addedAccountSections, setAddedAccountSections] = useState<string[]>([]);
+  const [hiddenDeviceSections, setHiddenDeviceSections] = useState<string[]>([]);
+  const [hiddenAccountSections, setHiddenAccountSections] = useState<string[]>([]);
 
   const [savedViewsByTab, setSavedViewsByTab] = useState<Record<TabKey, SavedView[]>>(() => ({
     devices: savedViewStore.list('devices'),
@@ -484,6 +486,7 @@ export function AssetsTable() {
 
   const [addMenuOpen, setAddMenuOpen] = useState(false);
   const [addMenuQuery, setAddMenuQuery] = useState('');
+  const [manageFiltersDraft, setManageFiltersDraft] = useState<string[]>([]);
 
   const [seeMoreOpenFor, setSeeMoreOpenFor] = useState<string | null>(null);
   const [seeMoreQuery, setSeeMoreQuery] = useState('');
@@ -768,6 +771,58 @@ export function AssetsTable() {
   const addedSectionIds = isDevices ? addedDeviceSections : addedAccountSections;
 
   const defaultSectionIds = isDevices ? DEVICE_DEFAULT_SECTION_IDS : ACCOUNT_DEFAULT_SECTION_IDS;
+  const hiddenSectionIds = isDevices ? hiddenDeviceSections : hiddenAccountSections;
+  const visibleSectionIds = [...defaultSectionIds, ...addedSectionIds].filter((id) => !hiddenSectionIds.includes(id));
+
+  function getAllManageableSectionIds(entity: SavedViewEntity): string[] {
+    const definitions = FILTER_SCHEMA.filter((item) => item.entities.includes(entity));
+    return Array.from(new Set(definitions.map((item) => item.id)));
+  }
+
+  function clearFilterSectionValues(id: string) {
+    if (isDevices) {
+      safeSetDeviceFilters((prev) => {
+        const next: DeviceFilterState = { ...prev };
+        if ('deviceType' in next && id === 'deviceType') next.deviceType = [];
+        if ('os' in next && id === 'os') next.os = [];
+        if ('location' in next && id === 'location') next.location = [];
+        if ('accountType' in next && id === 'accountType') next.accountType = [];
+        if ('group' in next && id === 'group') next.group = [];
+        if ('riskScore' in next && id === 'riskScore') next.riskScore = [];
+        if ('status' in next && id === 'status') next.status = [];
+        if ('lastConnected' in next && id === 'lastConnected') next.lastConnected = [];
+        if ('sourceCoverage' in next && id === 'sourceCoverage') next.sourceCoverage = [];
+        if ('manufacturer' in next && id === 'manufacturer') next.manufacturer = [];
+        if ('model' in next && id === 'model') next.model = [];
+        if ('createdTime' in next && id === 'createdTime') next.createdTime = [];
+        if ('authRepo' in next && id === 'authRepo') next.authRepo = [];
+        if ('nasSite' in next && id === 'nasSite') next.nasSite = [];
+        if ('macVendor' in next && id === 'macVendor') next.macVendor = [];
+        if ('nasIp' in next && id === 'nasIp') next.nasIp = [];
+        if ('agentpLastReported' in next && id === 'agentpLastReported') next.agentpLastReported = [];
+        if ('riskViolation' in next && id === 'riskViolation') next.riskViolation = [];
+        if ('onThisDevice' in next && id === 'onThisDevice') next.onThisDevice = [];
+        if ('agentpVersion' in next && id === 'agentpVersion') next.agentpVersion = [];
+        if ('agentpVersionOlderThan' in next && id === 'agentpVersion') next.agentpVersionOlderThan = null;
+        return next;
+      });
+      return;
+    }
+
+    safeSetAccountFilters((prev) => {
+      const next: AccountFilterState = { ...prev };
+      if ('accountType' in next && id === 'accountType') next.accountType = [];
+      if ('group' in next && id === 'group') next.group = [];
+      if ('blocked' in next && id === 'blocked') next.blocked = [];
+      if ('devices' in next && id === 'devices') next.devices = [];
+      if ('lastLogin' in next && id === 'lastLogin') next.lastLogin = [];
+      if ('sourceCoverage' in next && id === 'sourceCoverage') next.sourceCoverage = [];
+      if ('location' in next && id === 'location') next.location = [];
+      if ('authRepo' in next && id === 'authRepo') next.authRepo = [];
+      if ('nasSite' in next && id === 'nasSite') next.nasSite = [];
+      return next;
+    });
+  }
 
   const safeSetDeviceFilters = useCallback((updater: React.SetStateAction<DeviceFilterState>) => {
     setSelectedRowIdsByTab((prev) => ({ ...prev, [tab]: [] }));
@@ -1306,6 +1361,40 @@ export function AssetsTable() {
 
   const filterCount = chips.length;
 
+  function openManageFilters() {
+    const all = getAllManageableSectionIds(tab);
+    const selection = all.filter((id) => !hiddenSectionIds.includes(id));
+    setManageFiltersDraft(selection);
+    setAddMenuQuery('');
+    setAddMenuOpen(true);
+  }
+
+  function applyManageFilters() {
+    const all = getAllManageableSectionIds(tab);
+    const nextVisible = new Set(manageFiltersDraft);
+
+    const hiddenNext = all.filter((id) => !nextVisible.has(id));
+    const addableNext = [...addedSectionIds].filter((id) => nextVisible.has(id) && !defaultSectionIds.includes(id));
+
+    if (isDevices) {
+      setHiddenDeviceSections(hiddenNext);
+      setAddedDeviceSections(addableNext);
+    } else {
+      setHiddenAccountSections(hiddenNext);
+      setAddedAccountSections(addableNext);
+    }
+
+    all.forEach((id) => {
+      if (!nextVisible.has(id)) {
+        clearFilterSectionValues(id);
+      }
+    });
+
+    setAddMenuOpen(false);
+    setManageFiltersDraft([]);
+    setAddMenuQuery('');
+  }
+
   const deviceColumns = useMemo<TableColumn<DeviceRecord>[]>(() => {
     const sourceColumns = buildSourceColumns('device').map(({ id, label }) => ({
       id,
@@ -1457,6 +1546,7 @@ export function AssetsTable() {
   function buildSnapshot(entity: SavedViewEntity): SavedViewSnapshot {
     const currentFilters = entity === 'devices' ? deviceFilters : accountFilters;
     const currentAddedSections = entity === 'devices' ? addedDeviceSections : addedAccountSections;
+    const currentHiddenSections = entity === 'devices' ? hiddenDeviceSections : hiddenAccountSections;
     const currentOrder = entity === 'devices' ? deviceColumnOrder : accountColumnOrder;
     const currentHidden = entity === 'devices' ? hiddenDeviceColumns : hiddenAccountColumns;
     const currentSort = entity === 'devices' ? sortByTab.devices : sortByTab.accounts;
@@ -1464,6 +1554,7 @@ export function AssetsTable() {
     return {
       filters: cloneJson(currentFilters),
       addedSections: [...currentAddedSections],
+      hiddenSections: [...currentHiddenSections],
       columns: {
         hidden: [...currentHidden],
         order: [...currentOrder],
@@ -1482,6 +1573,7 @@ export function AssetsTable() {
     if (entity === 'devices') {
       safeSetDeviceFilters(snapshot.filters as DeviceFilterState);
       setAddedDeviceSections([...snapshot.addedSections]);
+      setHiddenDeviceSections(snapshot.hiddenSections ?? []);
       setDeviceColumnOrder([...snapshot.columns.order]);
       setHiddenDeviceColumns([...snapshot.columns.hidden]);
       setSortByTab((prev) => ({ ...prev, devices: snapshot.sort }));
@@ -1492,6 +1584,7 @@ export function AssetsTable() {
 
     safeSetAccountFilters(snapshot.filters as AccountFilterState);
     setAddedAccountSections([...snapshot.addedSections]);
+    setHiddenAccountSections(snapshot.hiddenSections ?? []);
     setAccountColumnOrder([...snapshot.columns.order]);
     setHiddenAccountColumns([...snapshot.columns.hidden]);
     setSortByTab((prev) => ({ ...prev, accounts: snapshot.sort }));
@@ -1506,6 +1599,7 @@ export function AssetsTable() {
     if (entity === 'devices') {
       safeSetDeviceFilters(defaultDeviceFilters());
       setAddedDeviceSections([]);
+      setHiddenDeviceSections([]);
       setDeviceColumnOrder(order);
       setHiddenDeviceColumns(hidden);
       setSortByTab((prev) => ({
@@ -1519,6 +1613,7 @@ export function AssetsTable() {
 
     safeSetAccountFilters(defaultAccountFilters());
     setAddedAccountSections([]);
+    setHiddenAccountSections([]);
     setAccountColumnOrder(order);
     setHiddenAccountColumns(hidden);
     setSortByTab((prev) => ({
@@ -2244,14 +2339,11 @@ export function AssetsTable() {
 
           <button
             className={`${styles.btn} ${styles.addFilterButton}`}
-            onClick={() => {
-              setAddMenuOpen((prev) => !prev);
-              setAddMenuQuery('');
-            }}
+            onClick={openManageFilters}
             ref={addFilterButtonRef}
             type="button"
           >
-            + Add filter
+            Manage filters
           </button>
 
           <details className={styles.section} open>
@@ -2286,8 +2378,7 @@ export function AssetsTable() {
             </div>
           </details>
 
-          {defaultSectionIds.map((id) => renderSection(id))}
-          {addedSectionIds.map((id) => renderSection(id))}
+          {visibleSectionIds.map((id) => renderSection(id))}
         </div>
 
         <div className={styles.tableShell} ref={tableShellRef}>
@@ -2522,28 +2613,31 @@ export function AssetsTable() {
               <div key={groupEntry.group ?? 'none'}>
                 <div className={styles.menuGroup}>{groupEntry.group}</div>
                 {groupEntry.items.map((item) => {
-                  const selected = addedSectionIds.includes(item.id);
-                  const disabled = selected;
+                  const selected = manageFiltersDraft.includes(item.id);
 
                   return (
-                    <button
-                      className={styles.menuItem}
-                      disabled={disabled}
-                      key={item.id}
-                      onClick={() => {
-                        addSection(item.id);
-                        setAddMenuOpen(false);
-                        setTimeout(() => addFilterButtonRef.current?.focus(), 0);
-                      }}
-                      type="button"
-                    >
-                      <span className={styles.menuCheck}>{selected ? '✓' : ''}</span>
+                    <label className={styles.optionRow} key={item.id}>
+                      <input
+                        checked={selected}
+                        onChange={() => {
+                          setManageFiltersDraft((prev) => {
+                            const exists = prev.includes(item.id);
+                            return exists ? prev.filter((id) => id !== item.id) : [...prev, item.id];
+                          });
+                        }}
+                        type="checkbox"
+                      />
                       {item.label}
-                    </button>
+                    </label>
                   );
                 })}
               </div>
             ))}
+
+            <div className={styles.popupActions}>
+              <button className={styles.btn} onClick={() => setAddMenuOpen(false)} type="button">Cancel</button>
+              <button className={styles.btn} onClick={applyManageFilters} type="button">Apply</button>
+            </div>
 
             {sectionsForMenu.length === 0 ? <div className={styles.menuGroup}>No filters match.</div> : null}
           </div>

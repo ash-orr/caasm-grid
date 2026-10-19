@@ -25,6 +25,7 @@ function makeSnapshot(overrides?: Partial<SavedViewSnapshot>): SavedViewSnapshot
       sourceCoverage: [{ source: 'CrowdStrike', status: 'Present' }],
     },
     addedSections: ['authRepo', 'nasSite'],
+    hiddenSections: ['createdTime'],
     columns: {
       hidden: ['nasIp'],
       order: ['name', 'status', 'nasIp'],
@@ -79,6 +80,21 @@ describe('saved view unchanged detection', () => {
 
     expect(isSavedViewUnchanged(saved, changed)).toBe(false);
     expect(isSavedViewUnchanged(saved, makeSnapshot())).toBe(true);
+  });
+
+  it('treats hidden default sections as part of the saved view snapshot', () => {
+    const storage = new MemoryStorage();
+    const store = new LocalStorageSavedViewStore(storage);
+
+    const saved = store.create({
+      name: 'Hidden sections',
+      entity: 'devices',
+      baseView: 'default',
+      ...makeSnapshot(),
+    });
+
+    expect(isSavedViewUnchanged(saved, makeSnapshot())).toBe(true);
+    expect(isSavedViewUnchanged(saved, makeSnapshot({ hiddenSections: ['createdTime', 'status'] }))).toBe(false);
   });
 });
 
