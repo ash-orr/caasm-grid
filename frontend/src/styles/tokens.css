@@ -15,7 +15,7 @@
   --bad-s: #fbe9e6;
   --side: #14212b;
   --sidetx: #c7d2dc;
-  --font: 'Public Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 /* Dark mode: follows the computer's setting unless the page forces light */
@@ -64,4 +64,24 @@ body {
   background: var(--bg);
   color: var(--ink);
   font: 14px/1.45 var(--font);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1 {
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 0 0 2px;
+}
+
+h2 {
+  font-size: 15px;
+  line-height: 1.35;
+  margin: 0 0 12px;
 }

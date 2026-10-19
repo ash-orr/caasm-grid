@@ -18,7 +18,7 @@ This repository contains the CAASM UI prototype and frontend implementation for 
 ## Key implementation notes
 - The Manage filters dialog replaces the old Add filter popover.
 - Hidden default sections are view state, not permanent filter state.
-- Hidden default sections must be restored by saved views and included in unchanged detection.
+- Hidden defaults must be restored by saved views and included in unchanged detection.
 - Newly checked sections should open and appear after existing visible sections when applied.
 - Unchecked sections should be hidden and their values cleared when applied.
 - Search in the dialog filters the list of sections while preserving count semantics.
