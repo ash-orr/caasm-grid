@@ -1,5 +1,7 @@
 # Behavior Spec
 
+Screenshots for read-only reference capture: `design/screenshots/`.
+
 Supplemental design changes: see `design/CHANGES-SINCE-SPEC.md` for later overrides and implementation notes. Where the two files disagree, the changes file wins.
 
 The rulebook (behavior spec)
