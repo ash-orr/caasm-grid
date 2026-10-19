@@ -21,6 +21,20 @@ const SOURCE_ORDER = [
   'Google Workspace',
 ] as const;
 
+const SOURCE_FIELD_SUPPORT: Record<string, Set<string>> = {
+  CrowdStrike: new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  SentinelOne: new Set(['host', 'os', 'ver', 'last']),
+  Intune: new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  Jamf: new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  SOTI: new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  'Absolute Secure Endpoint': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  'Portnox AgentP': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  EntraID: new Set(['host', 'os', 'ver', 'last']),
+  'Active Directory': new Set(['host', 'os', 'ver', 'last']),
+  Okta: new Set(['host', 'os', 'ver', 'last']),
+  'Google Workspace': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+};
+
 type SourceName = (typeof SOURCE_ORDER)[number];
 type SourceStatus = 'Reporting' | 'Stale' | 'Pending' | 'Not present' | 'N/A';
 type AuthRepository = 'Active Directory' | 'EntraID' | 'Okta' | 'Google Workspace' | null;
@@ -116,10 +130,22 @@ const SOURCE_LAST_SYNC: Record<SourceName, string> = {
 
 const DEFAULT_NOW_MS = Date.parse('2026-10-16T13:35:00.000Z');
 
-function normalizeFieldValue(value: unknown): string | null {
+function normalizeFieldValue(value: unknown, fieldKey?: string): string | null {
   if (value == null) return null;
   const text = String(value).trim();
-  return text.length === 0 ? null : text;
+  if (text.length === 0) return null;
+
+  const lower = text.toLowerCase();
+  if (fieldKey === 'hostname' || fieldKey === 'host') {
+    return lower.split('.')[0];
+  }
+
+  if (lower.startsWith('http://') || lower.startsWith('https://')) {
+    return lower;
+  }
+
+  const withoutSuffix = lower.replace(/\.(local|acme|corp|internal|lan|com|net|org|io)$/i, '');
+  return withoutSuffix.replace(/\.$/, '');
 }
 
 function getSourceStatus({
@@ -198,26 +224,49 @@ function buildSourceFieldValues(
 
   for (const [fieldKey, prototypeField] of Object.entries(fieldMap)) {
     const valuesBySource: Record<string, string | null> = {};
-    const counts = new Map<string, number>();
     const normalizedValues: string[] = [];
 
     for (const source of SOURCE_ORDER) {
+      if (!SOURCE_FIELD_SUPPORT[source]?.has(prototypeField)) {
+        valuesBySource[source] = null;
+        continue;
+      }
+
       const rawValue = rawSourceRecords?.[source]?.[prototypeField];
-      const normalizedValue = normalizeFieldValue(rawValue);
+      const normalizedValue = normalizeFieldValue(rawValue, fieldKey);
       valuesBySource[source] = normalizedValue;
       if (normalizedValue !== null) {
         normalizedValues.push(normalizedValue);
-        counts.set(normalizedValue.toLowerCase(), (counts.get(normalizedValue.toLowerCase()) ?? 0) + 1);
       }
     }
 
-    const distinctValues = new Set(normalizedValues.map((value) => value.toLowerCase()));
-    const hasConflict = normalizedValues.length > 1 && distinctValues.size > 1;
-    const winner = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0];
+    const distinctValues = new Set(normalizedValues);
 
+    if (fieldKey === 'lastSeen' || fieldKey === 'lastLogin') {
+      const validEntries = Object.entries(valuesBySource)
+        .filter(([, value]) => value !== null)
+        .map(([source, value]) => ({ source, value, millis: Date.parse(value as string) }))
+        .filter((entry) => Number.isFinite(entry.millis));
+
+      const newest = validEntries.sort((a, b) => b.millis - a.millis)[0];
+
+      result[fieldKey] = {
+        value: newest ? newest.value : null,
+        hasConflict: false,
+        valuesBySource,
+      };
+      continue;
+    }
+
+    const counts = new Map<string, number>();
+    for (const normalizedValue of normalizedValues) {
+      counts.set(normalizedValue, (counts.get(normalizedValue) ?? 0) + 1);
+    }
+
+    const winner = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0];
     result[fieldKey] = {
       value: winner ? winner[0] : null,
-      hasConflict,
+      hasConflict: normalizedValues.length > 1 && distinctValues.size > 1,
       valuesBySource,
     };
   }
@@ -281,43 +330,6 @@ function deriveAccountLocation(rawAccount: Record<string, any>): string {
   if (location === 'Singapore') return 'Singapore';
   if (location === 'Remote – US') return 'Remote – US';
   return 'Frankfurt';
-}
-
-function annotateConflicts(data: { accounts: AccountRecord[]; devices: DeviceRecord[] }): { accounts: AccountRecord[]; devices: DeviceRecord[] } {
-  const deviceConflicts = new Set([10, 24, 53, 88]);
-  const accountConflicts = new Set([2, 12, 33, 41]);
-
-  for (const device of data.devices) {
-    if (deviceConflicts.has(device.id)) {
-      device.sourceFieldValues.os = {
-        ...device.sourceFieldValues.os,
-        hasConflict: true,
-        value: 'Windows 11',
-        valuesBySource: {
-          ...device.sourceFieldValues.os.valuesBySource,
-          'Active Directory': 'Windows 10',
-          EntraID: 'Windows 11',
-        },
-      };
-    }
-  }
-
-  for (const account of data.accounts) {
-    if (accountConflicts.has(account.id)) {
-      account.sourceFieldValues.group = {
-        ...account.sourceFieldValues.group,
-        hasConflict: true,
-        value: account.group,
-        valuesBySource: {
-          ...account.sourceFieldValues.group.valuesBySource,
-          EntraID: 'Finance',
-          'Active Directory': 'Engineering',
-        },
-      };
-    }
-  }
-
-  return data;
 }
 
 export async function generatePrototypeData(input: { seed?: number; nowMs?: number } = {}): Promise<{
@@ -416,7 +428,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
     };
   });
 
-  return annotateConflicts({ accounts: accountRecords, devices: deviceRecords });
+  return { accounts: accountRecords, devices: deviceRecords };
 }
 
 function serializeTsValue(value: unknown, indent = 0): string {
