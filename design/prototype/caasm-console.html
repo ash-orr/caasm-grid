@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,8 +6,8 @@
 <style>
 :root{--bg:#eef1f4;--panel:#fff;--ink:#14212b;--mute:#5d6b78;--line:#dce2e8;--acc:#0b6e8a;--acc-s:#e2f1f5;--ok:#1f8a5b;--warn:#b7791f;--bad:#c0392b;--bad-s:#fbe9e6;--warn-s:#fbf1dc;--ok-s:#e3f4ec;--side:#14212b;--sidetx:#c7d2dc;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e151b;--panel:#16202a;--ink:#e6edf3;--mute:#8d9ba8;--line:#263341;--acc:#1d4954;--acc-s:#16323c;--ok:#47c18c;--warn:#e0a94a;--bad:#ef6b5b;--bad-s:#3a1d1a;--warn-s:#3a2e14;--ok-s:#15332a;--side:#0a1015;--sidetx:#8d9ba8}}
-:root[data-theme="dark"]{--bg:#0e151b;--panel:#16202a;--ink:#e6edf3;--mute:#8d9ba8;--line:#263341;--acc:#1d4954;--acc-s:#16323c;--ok:#47c18c;--warn:#e0a94a;--bad:#ef6b5b;--bad-s:#3a1d1a;--warn-s:#3a2e14;--ok-s:#15332a;--side:#0a1015;--sidetx:#8d9ba8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e151b;--panel:#16202a;--ink:#e6edf3;--mute:#8d9ba8;--line:#263341;--acc:#4fb8d4;--acc-s:#16323c;--ok:#47c18c;--warn:#e0a94a;--bad:#ef6b5b;--bad-s:#3a1d1a;--warn-s:#3a2e14;--ok-s:#15332a;--side:#0a1015;--sidetx:#8d9ba8}}
+:root[data-theme="dark"]{--bg:#0e151b;--panel:#16202a;--ink:#e6edf3;--mute:#8d9ba8;--line:#263341;--acc:#4fb8d4;--acc-s:#16323c;--ok:#47c18c;--warn:#e0a94a;--bad:#ef6b5b;--bad-s:#3a1d1a;--warn-s:#3a2e14;--ok-s:#15332a;--side:#0a1015;--sidetx:#8d9ba8}
 html,body{margin:0;height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
 body{background:var(--bg);color:var(--ink);font:14px/1.45 'Public Sans',system-ui,-apple-system,Segoe UI,sans-serif;display:flex;flex-direction:column}
 *{box-sizing:border-box}
@@ -18,7 +17,7 @@ nav{background:var(--side);color:var(--sidetx);padding:0 26px;height:52px;displa
 .brand i{display:inline-block;width:10px;height:10px;border:2px solid #4fb8d4;border-radius:50%;margin-right:8px}
 nav button{background:none;border:0;text-align:left;padding:7px 14px;border-radius:6px;cursor:pointer;color:inherit}
 nav button:hover{background:rgba(255,255,255,.07)}
-nav button.on{background:#1d4954;color:#fff;font-weight:600}
+nav button.on{background:#4fb8d4;color:#06222b;font-weight:600}
 .sync{margin-left:16px;font-size:12px;line-height:1.3;text-align:right;color:var(--sidetx)}
 main{flex:1;min-width:0;min-height:0;overflow:auto;padding:22px 26px 40px}
 h1{font-size:22px;margin:0 0 2px}h2{font-size:15px;margin:0 0 12px}
@@ -34,8 +33,6 @@ h1{font-size:22px;margin:0 0 2px}h2{font-size:15px;margin:0 0 12px}
 .tbl-kpis{margin-bottom:12px}
 .crumb{margin-bottom:14px;color:var(--mute)}.crumb b{color:var(--ink)}
 .lk{background:none;border:0;padding:0;cursor:pointer;color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lk{color:#4fb8d4}}
-:root[data-theme="dark"] .lk{color:#4fb8d4}
 .dv{display:flex;gap:16px;align-items:flex-start}.rail{width:320px;flex:none}.rail .card{margin-top:12px}.rail .kv{grid-template-columns:105px 1fr}.dv .main{flex:1;min-width:0}
 .vl{margin:0;padding-left:16px}.sec{margin:0 0 20px}.sec h2{margin-top:4px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}.seg button{border:0;background:var(--panel);padding:6px 14px;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
@@ -101,18 +98,16 @@ select.ps{padding:5px 30px 5px 10px;border:1px solid var(--line)}
 .chk input[type=checkbox],.chk input[type=radio],.md .fmg .chk input{margin:0!important;padding:0!important;flex:none;width:15px!important;height:15px}
 .filters .lk{font-size:12.5px}
 .filters .chk,.md .chk{display:flex;gap:7px;align-items:center}
-#amenu{position:fixed;z-index:27;display:none;width:300px;max-height:70vh;overflow:auto;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
-#amenu input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);margin-bottom:4px}
-#amenu .ag{font-size:11.5px;font-weight:600;color:var(--mute);padding:8px 6px 3px}
-#amenu .mi{display:flex;flex-direction:column;width:100%;text-align:left;background:none;border:0;padding:6px 8px 6px 26px;border-radius:6px;cursor:pointer;position:relative}
-#amenu .mi:hover{background:var(--acc-s)}#amenu .mi .amk{position:absolute;left:9px;color:var(--acc);font-weight:700}#amenu .mi small{color:var(--mute);font-size:11.5px}#amenu .mi.on{cursor:default;color:var(--mute)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.pri{background:#1D4954;border-color:#1D4954;color:#fff}:root:not([data-theme="light"]) .lk,:root:not([data-theme="light"]) #clr{color:#4fb8d4}}
+:root[data-theme="dark"] .btn.pri{background:#1D4954;border-color:#1D4954;color:#fff}:root[data-theme="dark"] .lk,:root[data-theme="dark"] #clr{color:#4fb8d4}
+#mf-g{margin:10px 0 0;max-height:52vh;overflow:auto}#mf-g .ag{font-size:11.5px;font-weight:600;color:var(--mute);padding:10px 0 4px}#mf-g .chk{padding:4px 0}
 #cmenu{position:fixed;z-index:26;display:none;min-width:200px;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2)}#cmenu .mi{display:block;width:100%;text-align:left;background:none;border:0;padding:8px 10px;border-radius:6px;cursor:pointer}#cmenu .mi:hover:not(.dis){background:var(--acc-s)}#cmenu .mi.dis{opacity:.45;cursor:not-allowed}#cmenu .mi.dng{color:var(--bad)}
 </style></head><body>
 <nav><div class="brand"><i></i>Portnox</div>
 <button id="n-assets" class="on">Assets</button><button id="n-caasm">CAASM</button>
 <button id="n-set" style="margin-left:auto">Settings</button></nav>
 <main id="m"></main>
-<aside id="dr" aria-label="Details"></aside><div class="toast" id="t"></div><div id="dlgc"></div><div id="smenu"></div><div id="amenu"></div><div id="cmenu"></div><div id="fmod"></div><div id="tip" role="tooltip"></div><div id="colpop" class="card"></div>
+<aside id="dr" aria-label="Details"></aside><div class="toast" id="t"></div><div id="dlgc"></div><div id="smenu"></div><div id="cmenu"></div><div id="fmod"></div><div id="tip" role="tooltip"></div><div id="colpop" class="card"></div>
 <script>
 // ---------- data ----------
 let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647,pick=a=>a[Math.floor(r()*a.length)];
@@ -201,7 +196,7 @@ cols=[['name','Account name',a=>`<b>${a.name}</b>`],['type','Account type',a=>a.
 ['blocked','Blocked',a=>a.blocked?`<span class="pill p-bad" data-tip="blk|${a.id}">Blocked</span>`:'<span class="pill p-lt">Not blocked</span>'],['lastLogin','Last login',a=>a.lastLogin===0?'Today':a.lastLogin+'d ago'],['gaps','Coverage gaps',a=>gapTxt(a.gaps)],...accSrcCols(),...accNewCols()]}
 $('tbl')._all=cols;cols=fullOrder().map(k=>cols.find(x=>x[0]===k)).filter(x=>x[0]==='name'||!st.cc[st.tab].hidden.includes(x[0]));
 const PS=st.ps[st.tab]||Math.max(rows.length,1),pages=Math.max(1,Math.ceil(rows.length/PS));f.pg=Math.min(f.pg,pages-1);const vis=rows.slice(f.pg*PS,f.pg*PS+PS);
-const fl=dv?`${ms('Device type','type',(Object.keys(TYPES)).map(x=>[x,x]),f.type)}
+const fl0=dv?`${ms('Device type','type',(Object.keys(TYPES)).map(x=>[x,x]),f.type)}
 ${ms('OS','os',([...new Set(devices.map(d=>d.os))].sort()).map(x=>[x,x]),f.os)}
 ${ms('Location','loc',(LOCS).map(x=>[x,x]),f.loc)}
 ${ms('Account type','acctType',(['LDAP','Cloud','MAC']).map(x=>[x,x]),f.acctType)}
@@ -212,7 +207,7 @@ ${srcf(live())}`
 ${ms('Group','group',(GROUPS).map(x=>[x,x]),f.group)}
 
 ${ms('Blocked','blk',[['Blocked','Blocked'],['Not blocked','Not blocked']],f.blk)}${ms('Devices','dcount',dcB.map(b=>[b[0],b[1]]),f.dcount)}${ms('Last login','llogin',llB.map(b=>[b[0],b[1]]),f.llogin)}${srcf(['Active Directory','EntraID','Okta','Google Workspace'])}`;
-const ox=optSecs(),nf=chipList().length;
+const fl=hideSecs(fl0),ox=optSecs(),nf=chipList().length;
 if(st.selAll&&st.selSig!==fsig()){st.selAll=false;st.sel.clear()}
 const isSel=id=>st.selAll||st.sel.has(id),ns=st.selAll?rows.length:st.sel.size,allPg=!!vis.length&&vis.every(x=>isSel(x.id));
 const banner=st.selAll?`<div class="selbar">All <b>${rows.length}</b> ${st.tab} are selected. <button class="lk" data-selclr="1">Clear selection</button></div>`:(allPg&&rows.length>vis.length?`<div class="selbar">All <b>${vis.length}</b> ${st.tab} on this page are selected. <button class="lk" data-selall="1">Select all <b>${rows.length}</b> ${st.tab}</button></div>`:'');
@@ -223,7 +218,7 @@ const kp=`<div class="kpis tbl-kpis">${WW.map(w=>`<div role="button" tabindex="0
 $('tbl').innerHTML=`${st.cards[st.tab]?kp:''}<div class="toolbar"><button class="btn" id="tf">${st.showF?'Hide':'Show'} filters${nf?` <span class="cnt">${nf}</span>`:''}</button><input type="search" id="q" placeholder="${dv?'Search devices, accounts, OS, location':'Search accounts or groups'}" value="${esc(f.q)}" aria-label="Search">
 ${acts}<span style="flex:1"></span>
 <button class="btn" id="custbtn" aria-haspopup="menu">View settings</button><button class="btn pri" id="sharebtn" aria-haspopup="menu">Export</button></div>
-${chipsHtml()}${banner}<div class="layout"><div class="card filters ${st.showF?'':'hide'}"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><b>Filters</b><a href="#" id="clr" style="color:var(--acc)">Clear</a></div>${addBtn()}${savedf()}${fl}${ox}</div>
+${chipsHtml()}${banner}<div class="layout"><div class="card filters ${st.showF?'':'hide'}"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><b>Filters</b><a href="#" id="clr" style="color:var(--acc)">Clear</a></div>${savedf()}${fl}${ox}${mfBtn()}</div>
 <div class="card tw"><table><thead><tr><th><input type="checkbox" id="all" aria-label="Select page"${allPg?' checked':''}></th>${cols.map(c=>`<th data-s="${c[0]}"${c[3]?` data-tip="sn|${c[3]}"`:''}>${c[1]}${f.sort===c[0]?(f.dir>0?' ▲':' ▼'):''}</th>`).join('')}</tr></thead>
 <tbody>${vis.map(x=>`<tr data-id="${x.id}" class="${isSel(x.id)?'sel':''}"><td><input type="checkbox" data-c="${x.id}"${isSel(x.id)?' checked':''} aria-label="Select row"></td>${cols.map(c=>`<td>${c[2](x)}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${cols.length+1}" style="text-align:center;padding:30px;color:var(--mute)">No ${st.tab} match these filters. Clear filters to see all.</td></tr>`}</tbody></table>
 <div class="foot"><span>${rows.length} ${st.tab}${ns?' · '+ns+' selected':''}</span><span style="display:inline-flex;gap:14px;align-items:center"><label style="display:inline-flex;gap:6px;align-items:center;margin:0;font-weight:400">Rows per page <select data-ps="1" aria-label="Rows per page" class="ps">${[100,200,500,0].map(n=>`<option value="${n}"${(st.ps[st.tab]||0)===n?' selected':''}>${n||'Show all'}</option>`).join('')}</select></label><span><button class="btn" id="pv" ${f.pg?'':'disabled'}>Prev</button> Page ${f.pg+1} of ${pages} <button class="btn" id="nx" ${f.pg<pages-1?'':'disabled'}>Next</button></span></span></div></div></div>`;
@@ -372,18 +367,18 @@ accounts:[
 {k:'repo',l:'Authentication repository',g:1,o:()=>AUTHR.map(x=>[x,x])},
 {k:'site',l:'NAS site',g:1,o:()=>SITE_N.map(x=>[x,x])}]};
 // Added filters reset on each visit unless the user saves a view.
-st.added={devices:[],accounts:[]};st.av={};st.vs=null;st.views={devices:[],accounts:[]};try{const j=JSON.parse(localStorage.getItem('caasm_views'));['devices','accounts'].forEach(t=>{if(j&&Array.isArray(j[t]))st.views[t]=j[t].filter(v=>v&&v.id&&v.name&&v.f)})}catch(e){}
-st.am=false;st.amq='';st.chipAll=false;
+st.added={devices:[],accounts:[]};st.hid={devices:[],accounts:[]};st.av={};st.vs=null;st.views={devices:[],accounts:[]};try{const j=JSON.parse(localStorage.getItem('caasm_views'));['devices','accounts'].forEach(t=>{if(j&&Array.isArray(j[t]))st.views[t]=j[t].filter(v=>v&&v.id&&v.name&&v.f)})}catch(e){}
+st.mf=null;st.mfq='';st.chipAll=false;
 // Saved views are per user (localStorage is a stand-in for a per-user store on the backend)
 const persistViews=()=>{try{localStorage.setItem('caasm_views',JSON.stringify(st.views))}catch(e){}};
 const clone=o=>JSON.parse(JSON.stringify(o));
-function resetTo(tb,cv){setView(tb,cv);const f=curF();Object.keys(f).forEach(k=>delete f[k]);Object.assign(f,tb==='devices'?DEVF():ACCF(),cv?{sort:'gaps',dir:-1}:tb==='devices'?{sort:'score',dir:-1}:{sort:'name',dir:1});st.cc[tb]={order:null,hidden:[...(cv?CX[tb]:NEWC[tb])]};st.added[tb]=[];st.sel.clear();st.selAll=false}
-function applyV(id){const tb=st.tab;if(id==='default'||id==='caasm')resetTo(tb,id==='caasm');else{const v=st.views[tb].find(x=>x.id===id);if(!v)return;setView(tb,v.cv);const f=curF();Object.keys(f).forEach(k=>delete f[k]);Object.assign(f,tb==='devices'?DEVF():ACCF(),clone(v.f),{pg:0});st.cc[tb]=clone(v.cc);st.added[tb]=v.added.filter(k=>OPT[tb].some(o=>o.k===k));st.av[tb]=id;st.sel.clear();st.selAll=false}render()}
-const snap=()=>{const f=clone(curF());f.pg=0;return{cv:!!st.cvT[st.tab],f,added:[...st.added[st.tab]],cc:clone(st.cc[st.tab])}};
+function resetTo(tb,cv){setView(tb,cv);const f=curF();Object.keys(f).forEach(k=>delete f[k]);Object.assign(f,tb==='devices'?DEVF():ACCF(),cv?{sort:'gaps',dir:-1}:tb==='devices'?{sort:'score',dir:-1}:{sort:'name',dir:1});st.cc[tb]={order:null,hidden:[...(cv?CX[tb]:NEWC[tb])]};st.added[tb]=[];st.hid[tb]=[];st.sel.clear();st.selAll=false}
+function applyV(id){const tb=st.tab;if(id==='default'||id==='caasm')resetTo(tb,id==='caasm');else{const v=st.views[tb].find(x=>x.id===id);if(!v)return;setView(tb,v.cv);const f=curF();Object.keys(f).forEach(k=>delete f[k]);Object.assign(f,tb==='devices'?DEVF():ACCF(),clone(v.f),{pg:0});st.cc[tb]=clone(v.cc);st.added[tb]=v.added.filter(k=>OPT[tb].some(o=>o.k===k));st.hid[tb]=(v.hid||[]).filter(k=>DEFS[tb].some(d=>d[0]===k));st.av[tb]=id;st.sel.clear();st.selAll=false}render()}
+const snap=()=>{const f=clone(curF());f.pg=0;return{cv:!!st.cvT[st.tab],f,added:[...st.added[st.tab]],hid:[...st.hid[st.tab]],cc:clone(st.cc[st.tab])}};
 function vsave(mode){const tb=st.tab,L=st.views[tb],name=st.vs.name.trim();let v=mode==='upd'?L.find(x=>x.id===st.av[tb]):L.find(x=>x.name.toLowerCase()===name.toLowerCase());if(!v&&!name)return;const isNew=!v;if(isNew){v={id:'v'+Date.now()+Math.floor(Math.random()*1e3),name};L.push(v)}Object.assign(v,snap());st.av[tb]=v.id;persistViews();st.vs=null;drawVs();toast((isNew?'View saved: ':'View updated: ')+v.name);table()}
 function drawVs(){const el=$('fmod');if(!st.vs){el.innerHTML='';return}const cur=st.views[st.tab].find(v=>v.id===st.av[st.tab]);el.innerHTML=`<div class='ov'><div class='md' role='dialog' aria-modal='true'><h2>Save view</h2><p class='sub' style='margin:0'>Saves your filters, added filters, columns and sort order. Saved views are shared with everyone in your organization.</p><label for='vname'>View name</label><input id='vname' type='text' autocomplete='off' value="${esc(st.vs.name)}"><div class='act'><button class='btn' data-vsx='1'>Cancel</button>${cur?`<button class='btn' data-vok='upd'>Update “${esc(cur.name)}”</button>`:''}<button class='btn pri' data-vok='new'${st.vs.name.trim()?'':' disabled'}>Save${cur?' as new':''}</button></div></div></div>`;const i=$('vname');if(i)i.focus()}
 const sj=o=>JSON.stringify(o,(k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v),curV=()=>st.views[st.tab].find(v=>v.id===st.av[st.tab]);
-function canRemove(){const v=curV();if(!v)return false;const n=snap(),m=Object.assign({},st.tab==='devices'?DEVF():ACCF(),clone(v.f),{pg:0});return v.cv===n.cv&&sj(n.f)===sj(m)&&sj(n.added)===sj(v.added)&&sj(n.cc)===sj(v.cc)}
+function canRemove(){const v=curV();if(!v)return false;const n=snap(),m=Object.assign({},st.tab==='devices'?DEVF():ACCF(),clone(v.f),{pg:0});return v.cv===n.cv&&sj(n.f)===sj(m)&&sj(n.added)===sj(v.added)&&sj(n.hid||[])===sj(v.hid||[])&&sj(n.cc)===sj(v.cc)}
 function drawCm(){const el=$('cmenu'),b=st.cm==='share'?$('sharebtn'):$('custbtn');if(!st.cm||!b){el.style.display='none';return}
 const it=(a,l,ok,tip,cl)=>`<button class='mi ${cl||''}${ok?'':' dis'}' data-cm='${a}'${ok?'':` aria-disabled='true' data-tip='sn|${tip}'`}>${l}</button>`;
 el.innerHTML=st.cm==='share'?it('csv','Export (CSV)',1)+it('pdf','Export (PDF)',1):it('cols','Show/hide columns',1)+it('save','Save view',1)+it('link','Share link',canRemove(),'This view must be saved before you can share a link')+it('rm','Remove view',canRemove(),'This view cannot be removed','dng');
@@ -391,15 +386,19 @@ el.style.display='block';const r=b.getBoundingClientRect(),w=el.offsetWidth,h=el
 function drawVr(){const el=$('fmod');if(!st.vr){el.innerHTML='';return}const v=st.views[st.tab].find(x=>x.id===st.vr);if(!v){el.innerHTML='';return}el.innerHTML=`<div class='ov'><div class='md' role='dialog' aria-modal='true'><h2>Remove “${esc(v.name)}”?</h2><p>This removes the view for everyone in your organization, not just you. This can’t be undone.</p><div class='act'><button class='btn' data-vrx='1'>Cancel</button><button class='btn pri' style='background:var(--bad);border-color:var(--bad)' data-vrok='1'>Remove view</button></div></div></div>`}
 st.cm=false;st.vr=null;st.ps={devices:100,accounts:100};
 const activeV=()=>{const a=st.av[st.tab];return a&&st.views[st.tab].some(v=>v.id===a)?a:st.cv?'caasm':'default'};
-const addBtn=()=>`<button class="btn" id="addf" style="width:100%;margin:0 0 10px">+ Add filter</button>`;
+const mfBtn=()=>`<button class="btn" id="mgf" style="width:100%;margin:12px 0 0">Manage filters</button>`;
 const wrapSec=(h,x)=>{const i=h.lastIndexOf('</div></details>');return h.slice(0,i)+x+h.slice(i)};
 function otdSec(){const f=st.dev,fk='devices:otd',n=f.otd.filter(r=>r.k&&r.v).length;return `<details class="fg" data-fk="${fk}"${f.otd.length||st.fo.has(fk)?' open':''}><summary>On this device${n?` <span class="cnt">${n}</span>`:''}</summary><div class="fo" style="max-height:none">${f.otd.map((r,i)=>`<div class="rr"><select data-os="${i}|k" aria-label="Category"><option value="">Category</option>${OTDC.map(([k,l])=>`<option value="${k}"${r.k===k?' selected':''}>${l}</option>`).join('')}</select><div style="display:flex;gap:4px;align-items:center"><select data-os="${i}|v" aria-label="Value"${r.k?'':' disabled'}><option value="">Value</option>${(r.k?V2[r.k]:[]).map(x=>`<option${r.v===x?' selected':''}>${esc(x)}</option>`).join('')}</select><button class="lk" data-orx="${i}" aria-label="Remove condition">✕</button></div></div>`).join('')}<button class="lk" data-oadd="1">+ Add condition</button></div></details>`}
 function agvSec(){const f=st.dev;let h=ms('AgentP version','agv',AGV().map(x=>[x,x]),f.agv);if(f.agvOld)h=h.replace('<details class="fg"','<details class="fg" open');return wrapSec(h,`<div style="font-weight:600;font-size:12.5px;margin-top:8px">Older than</div><select data-agold="1" aria-label="Older than"><option value="">Any version</option>${AGV().map(x=>`<option${f.agvOld===x?' selected':''}>${x}</option>`).join('')}</select>`)}
 function optSec(o){const f=curF();mn(f);if(o.t==='otd')return otdSec();if(o.t==='agv')return agvSec();return ms(o.l,o.k,o.o(),f[o.k])}
 const optSecs=()=>{mn(curF());return(st.added[st.tab]||[]).map(k=>OPT[st.tab].find(o=>o.k===k)).filter(Boolean).map(optSec).join('')};
-function addF(k){const A=st.added[st.tab];if(A.includes(k))return;A.push(k);st.fo.add(st.tab+':'+k);table();drawAm()}
-function amList(){const tb=st.tab,q=(st.amq||'').toLowerCase(),A=st.added[tb],L=OPT[tb].filter(o=>!q||(o.l+' '+OG[o.g]).toLowerCase().includes(q));if(!L.length)return '<div style="padding:8px;color:var(--mute)">No filters match.</div>';return OG.map((g,gi)=>{const it=L.filter(o=>o.g===gi);return it.length?`<div class="ag">${g}</div>`+it.map(o=>`<button class="mi${A.includes(o.k)?' on':''}" data-am="${o.k}" aria-pressed="${A.includes(o.k)}"><span class="amk">${A.includes(o.k)?'✓':''}</span>${o.l}${o.d?`<small>${o.d}</small>`:''}</button>`).join(''):''}).join('')}
-function drawAm(){const el=$('amenu'),b=$('addf');if(!st.am||!b){el.style.display='none';return}el.innerHTML=`<input type="search" id="amsq" placeholder="Search filters" value="${esc(st.amq||'')}" aria-label="Search filters"><div id="aml">${amList()}</div>`;el.style.display='block';const r=b.getBoundingClientRect(),h=el.offsetHeight;let y=r.bottom+4;if(y+h>innerHeight-8)y=Math.max(8,innerHeight-h-8);el.style.left=Math.max(8,Math.min(r.left,innerWidth-el.offsetWidth-8))+'px';el.style.top=y+'px';const i=$('amsq');if(i)i.focus()}
+const DEFS={devices:[['type','Device type'],['os','OS'],['loc','Location'],['acctType','Account type'],['group','Group'],['risk','Risk score'],['status','Status'],['conn','Last connected'],['rules','Source coverage']],accounts:[['type','Account type'],['group','Group'],['blk','Blocked'],['dcount','Devices'],['llogin','Last login'],['rules','Source coverage']]};
+function hideSecs(h){const H=st.hid[st.tab].map(k=>'data-fk="'+st.tab+':'+k+'"');return H.length?h.split('<details').filter((c,i)=>i===0||!H.some(x=>c.includes(x))).join('<details'):h}
+const shownKeys=()=>DEFS[st.tab].map(d=>d[0]).filter(k=>!st.hid[st.tab].includes(k)).concat(st.added[st.tab]);
+function mfList(){const tb=st.tab,q=(st.mfq||'').toLowerCase(),G=[['Default filters',DEFS[tb].map(d=>({k:d[0],l:d[1]}))]].concat(OG.map((g,gi)=>[g,OPT[tb].filter(o=>o.g===gi).map(o=>({k:o.k,l:o.l}))])),out=G.map(([g,it])=>{it=it.filter(o=>!q||(o.l+' '+g).toLowerCase().includes(q));return it.length?`<div class="ag">${g}</div>`+it.map(o=>`<label class="chk"><input type="checkbox" data-mfc="${o.k}"${st.mf.includes(o.k)?' checked':''}> ${o.l}</label>`).join(''):''}).join('');return out||'<p class="sub" style="margin:8px 0">No filters match.</p>'}
+const mfTitle=()=>'Manage filters ('+st.mf.length+' shown)';
+function drawMf(){const el=$('fmod');if(!st.mf){el.innerHTML='';return}el.innerHTML=`<div class='ov'><div class='md' role='dialog' aria-modal='true' aria-labelledby='mfh' style='width:min(460px,100%)'><h2 id='mfh'>${mfTitle()}</h2><p class='sub' style='margin:4px 0 0'>Choose which filters appear in the panel. Unchecking a filter clears its selection.</p><input type='search' id='mfs' placeholder='Search filters' aria-label='Search filters' value="${esc(st.mfq||'')}" style='margin-top:10px'><div id='mf-g'>${mfList()}</div><div class='act'><button class='btn' data-mfx='1'>Cancel</button><button class='btn pri' data-mfa='1'>Apply</button></div></div></div>`;const i=$('mfs');if(i)i.focus()}
+function applyMf(){const tb=st.tab,f=curF();mn(f);const old=st.added[tb],keep=old.filter(k=>st.mf.includes(k)),add=OPT[tb].map(o=>o.k).filter(k=>st.mf.includes(k)&&!old.includes(k));old.filter(k=>!st.mf.includes(k)).forEach(k=>{const o=OPT[tb].find(x=>x.k===k);if(o.t==='otd')f.otd=[];else if(o.t==='agv'){f.agv=[];f.agvOld=''}else f[k]=[];st.fo.delete(tb+':'+k)});const hid=DEFS[tb].map(d=>d[0]).filter(k=>!st.mf.includes(k));hid.forEach(k=>{if(k==='rules')f.rules=[];else f[k]=[]});add.forEach(k=>st.fo.add(tb+':'+k));st.added[tb]=keep.concat(add);st.hid[tb]=hid;f.pg=0;st.mf=null;drawMf();table()}
 function newChange(e){const ds=e.target.dataset||{},f=curF();if(ds.ps!==undefined){st.ps[st.tab]=+e.target.value;f.pg=0;table();return true}if(ds.os!==undefined){const[i,k]=ds.os.split('|');mn(f);const r=f.otd[+i];r[k]=e.target.value;if(k==='k')r.v='';f.pg=0;table();return true}if(ds.agold!==undefined){mn(f);f.agvOld=e.target.value;f.pg=0;table();return true}return false}
 function chipList(){const f=curF();mn(f);const out=[],L={'Present':'present','Not present':'not present'},PN={high:'High-risk devices',gaps:st.tab==='devices'?'Devices with coverage gaps':'Accounts with coverage gaps',quar:'Stale devices',blocked:'Blocked accounts'};
 if(!st.cards[st.tab]&&f.preset&&PN[f.preset])out.push([PN[f.preset],'data-px="1"']);
@@ -421,7 +420,7 @@ const o=fullOrder(),lab=k=>k.startsWith('src:')?'CAASM - '+k.slice(4):$('tbl')._
 el.innerHTML=`<div style='display:flex;justify-content:space-between;align-items:center'><b>Columns</b><button class='lk' data-colreset='1'>Reset to default</button></div><p class='sub' style='margin:4px 0 0;font-size:12px'>Show, hide and reorder. Drag a row or use the arrows.</p><ul>${o.map((k,i)=>k==='name'?`<li class='cr fixed' data-col='name' data-fixed='1'><span class='gh'></span><label style='cursor:default'><input type='checkbox' checked disabled> ${lab(k)}</label><span style='font-size:12px'>Fixed</span></li>`:`<li class='cr' draggable='true' data-col='${k}'><span class='gh'>⋮⋮</span><label><input type='checkbox' data-ch='${k}' ${hid.includes(k)?'':'checked'}> ${lab(k)}</label><span class='ar'><button class='btn' data-mv='${k}|-1' ${i<2?'disabled':''} aria-label='Move up'>↑</button><button class='btn' data-mv='${k}|1' ${i===o.length-1?'disabled':''} aria-label='Move down'>↓</button></span></li>`).join('')}</ul>`;
 el.style.display='block';const r=$('custbtn').getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight;let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,innerHeight-h-8);el.style.left=Math.max(8,Math.min(r.right-w,innerWidth-w-8))+'px';el.style.top=y+'px'}
 // ---------- render / events ----------
-function render(){st.am=false;$('amenu').style.display='none';st.cm=false;$('cmenu').style.display='none';st.menu=null;$('smenu').style.display='none';st.fm=null;$('fmod').innerHTML='';$('tip').style.display='none';st.colOpen=false;$('colpop').style.display='none';$('n-set').className=st.page==='settings'?'on':'';$('n-assets').className=st.page==='assets'?'on':'';$('n-caasm').className=st.page==='caasm'?'on':'';$('dr').classList.remove('open');
+function render(){st.mf=null;st.cm=false;$('cmenu').style.display='none';st.menu=null;$('smenu').style.display='none';st.fm=null;$('fmod').innerHTML='';$('tip').style.display='none';st.colOpen=false;$('colpop').style.display='none';$('n-set').className=st.page==='settings'?'on':'';$('n-assets').className=st.page==='assets'?'on':'';$('n-caasm').className=st.page==='caasm'?'on':'';$('dr').classList.remove('open');
 const m=$('m');if(st.view){m.innerHTML=detail();fitSrc();return}if(st.page==='settings'){m.innerHTML=sourcesPage();return}if(st.page==='caasm'){m.innerHTML=caasm();return}
 m.innerHTML=assets();if(st.tab==='sites')$('tbl').innerHTML='<div class="card" style="padding:48px 16px;text-align:center;color:var(--mute)">NAS Sites table would go here</div>';else table()}
 $('n-assets').onclick=()=>{st.page='assets';st.view=null;render()};$('n-caasm').onclick=()=>{st.page='caasm';st.view=null;render()};$('n-set').onclick=()=>{st.page='settings';st.view=null;render()};
@@ -431,7 +430,7 @@ const bk=t.closest('[data-back]');if(bk){st.view=null;setView(bk.dataset.back);s
 const sal=t.closest('[data-srcall]');if(sal){st.srcAll=!st.srcAll;$('srcc').innerHTML=st.view.kind==='device'?srcCard(devices[st.view.id]):srcCardA(accounts[st.view.id]);fitSrc();return}
 const mb=t.closest('[data-menu]');if(mb){const was=st.menu===mb.dataset.menu;st.menu=was?null:mb.dataset.menu;drawMenu(mb);return}
 if(st.menu){st.menu=null;$('smenu').style.display='none'}
-if(t.classList&&t.classList.contains('ov')){if(t.closest('#fmod')){st.fm=null;drawFm()}else{st.dlg=null;drawDlg()}return}
+if(t.classList&&t.classList.contains('ov')){if(t.closest('#fmod')){st.fm=null;st.mf=null;drawFm()}else{st.dlg=null;drawDlg()}return}
 const dd=t.closest('[data-d]');if(dd){dlgAct(dd.dataset.d);return}
 const sa=t.closest('[data-sa]');if(sa){const[k,id]=sa.dataset.sa.split('|');if(k==='sync')sync(id);else openDlg(k,id);return}
 const tg=t.closest('[data-tg]');if(tg){const y=tg.dataset.tg;st.stype=st.stype.includes(y)?st.stype.filter(z=>z!==y):[...st.stype,y];render();return}
@@ -442,9 +441,9 @@ const gr=t.closest('[data-grp]');if(gr){st.sel.clear();st.view=null;st.page='ass
 const cv=t.closest('[data-cov]');if(cv){const[k,s]=cv.dataset.cov.split('|');st.sel.clear();st.view=null;st.page='assets';setView(k,true);if(k==='devices')Object.assign(st.dev,DEVF(),{rules:[{s:s,st:'Not present'}],pg:0});else Object.assign(st.acc,ACCF(),{rules:[{s:s,st:'Not present'}],pg:0});render();return}
 const sv=t.closest('[data-sv]');if(sv){st.sview=sv.dataset.sv;render();return}
 const vt=t.closest('[data-vt]');if(vt){st.vtab=vt.dataset.vt;render();return}
-if(st.am&&!t.closest('#amenu')&&!t.closest('#addf')){st.am=false;drawAm()}
-if(t.closest('#addf')){st.am=!st.am;st.amq='';drawAm();return}
-const amb=t.closest('[data-am]');if(amb){addF(amb.dataset.am);return}
+if(t.closest('#mgf')){st.mf=shownKeys();st.mfq='';drawMf();return}
+if(t.closest('[data-mfx]')){st.mf=null;drawMf();return}
+if(t.closest('[data-mfa]')){applyMf();return}
 const vwb=t.closest('[data-vw]');if(vwb){applyV(vwb.dataset.vw);return}
 if(st.cm&&!t.closest('#cmenu')&&!t.closest('#custbtn')&&!t.closest('#sharebtn')){st.cm=false;drawCm()}
 if(t.closest('#custbtn')||t.closest('#sharebtn')){const w=t.closest('#sharebtn')?'share':'cust';st.cm=st.cm===w?false:w;st.colOpen=false;drawCols();drawCm();return}
@@ -473,6 +472,7 @@ const rx=t.closest('[data-rx]');if(rx){const ff=st.tab==='devices'?st.dev:st.acc
 const gx=t.closest('[data-gapx]');if(gx){const ff=st.tab==='devices'?st.dev:st.acc;ff.gap=[];ff.pg=0;table();return}
 const fm=t.closest('[data-fm]');if(fm){st.fm=fm.dataset.fm;const[tb0,k0]=st.fm.split(':'),f0=tb0==='devices'?st.dev:st.acc;mn(f0);st.fmd=[...(f0[k0]||[])];st.fmq='';drawFm();return}
 if(t.closest('[data-fmx]')){st.fm=null;drawFm();return}
+if(t.dataset.mfc!==undefined){const v=t.dataset.mfc;st.mf=t.checked?[...st.mf,v]:st.mf.filter(x=>x!==v);$('mfh').textContent=mfTitle();return}
 if(t.dataset.mfd!==undefined){const v=t.dataset.mfd;st.fmd=t.checked?[...st.fmd,v]:st.fmd.filter(x=>x!==v);$('fmh').textContent=fmTitle();return}
 if(t.closest('[data-fma]')){const[tb,k]=st.fm.split(':'),ff=tb==='devices'?st.dev:st.acc;mn(ff);ff[k]=[...st.fmd];ff.pg=0;st.fm=null;drawFm();table();return}
 const mvb=t.closest('[data-mv]');if(mvb){const[k,d]=mvb.dataset.mv.split('|');mv(k,+d);return}
@@ -492,7 +492,7 @@ else if(t.dataset.mf){const[k,v]=t.dataset.mf.split('|');mn(f);f[k]=t.checked?[.
 else if(t.dataset.gap){const g=t.dataset.gap;f.gap=t.checked?[...f.gap,g]:f.gap.filter(x=>x!==g);f.pg=0;table()}
 else if(t.dataset.priv!==undefined){f.priv=t.checked;f.pg=0;table()}});
 document.addEventListener('change',e=>{if(newChange(e))return;if(e.target.dataset&&e.target.dataset.rs){const f=st.tab==='devices'?st.dev:st.acc,[i,k]=e.target.dataset.rs.split('|');mn(f);f.rules[+i][k]=e.target.value;f.pg=0;table();return}const k=e.target.dataset.f;if(k){const f=st.tab==='devices'?st.dev:st.acc;f[k]=e.target.value;f.pg=0;table()}});
-document.addEventListener('input',e=>{if(e.target.id==='fms'){st.fmq=e.target.value;$('fmg').innerHTML=fmList();return}if(e.target.id==='vname'){st.vs.name=e.target.value;const b=document.querySelector('[data-vok=new]');if(b)b.disabled=!e.target.value.trim();return}if(e.target.id==='amsq'){st.amq=e.target.value;$('aml').innerHTML=amList();return}if(e.target.dataset&&e.target.dataset.tf){const f=st.tab==='devices'?st.dev:st.acc,id=e.target.dataset.tf,pos=e.target.selectionStart;f[id]=e.target.value;f.pg=0;table();const n=document.querySelector('[data-tf="'+id+'"]');n.focus();n.setSelectionRange(pos,pos);return}if(e.target.id==='sq'){st.sq=e.target.value;$('sl').innerHTML=sourcesList();return}if(e.target.id==='q'){const f=st.tab==='devices'?st.dev:st.acc;f.q=e.target.value;f.pg=0;const p=e.target.selectionStart;table();const q=$('q');q.focus();q.setSelectionRange(p,p)}});
+document.addEventListener('input',e=>{if(e.target.id==='fms'){st.fmq=e.target.value;$('fmg').innerHTML=fmList();return}if(e.target.id==='vname'){st.vs.name=e.target.value;const b=document.querySelector('[data-vok=new]');if(b)b.disabled=!e.target.value.trim();return}if(e.target.id==='mfs'){st.mfq=e.target.value;$('mf-g').innerHTML=mfList();return}if(e.target.dataset&&e.target.dataset.tf){const f=st.tab==='devices'?st.dev:st.acc,id=e.target.dataset.tf,pos=e.target.selectionStart;f[id]=e.target.value;f.pg=0;table();const n=document.querySelector('[data-tf="'+id+'"]');n.focus();n.setSelectionRange(pos,pos);return}if(e.target.id==='sq'){st.sq=e.target.value;$('sl').innerHTML=sourcesList();return}if(e.target.id==='q'){const f=st.tab==='devices'?st.dev:st.acc;f.q=e.target.value;f.pg=0;const p=e.target.selectionStart;table();const q=$('q');q.focus();q.setSelectionRange(p,p)}});
 document.addEventListener('mouseover',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(!el)return;const tp=$('tip');tp.innerHTML=tipHtml(el.dataset.tip);tp.style.display='block';const r=el.getBoundingClientRect(),w=tp.offsetWidth,h=tp.offsetHeight;let y=r.bottom+6;if(y+h>innerHeight-8)y=r.top-h-6;tp.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+'px';tp.style.top=Math.max(8,y)+'px'});
 document.addEventListener('mouseout',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el&&!el.contains(e.relatedTarget))$('tip').style.display='none'});
 document.addEventListener('scroll',()=>{$('tip').style.display='none'},true);
@@ -500,8 +500,6 @@ document.addEventListener('dragstart',e=>{const li=e.target.closest&&e.target.cl
 document.addEventListener('dragover',e=>{const li=e.target.closest&&e.target.closest('[data-col]');if(st._drag&&li&&!li.dataset.fixed)e.preventDefault()});
 document.addEventListener('drop',e=>{const li=e.target.closest&&e.target.closest('[data-col]');if(st._drag&&li&&!li.dataset.fixed&&li.dataset.col!==st._drag){e.preventDefault();const o=fullOrder().filter(k=>k!==st._drag);o.splice(o.indexOf(li.dataset.col),0,st._drag);setOrder(o)}st._drag=null});
 document.addEventListener('toggle',e=>{const k=e.target.dataset&&e.target.dataset.fk;if(k)e.target.open?st.fo.add(k):st.fo.delete(k)},true);
-document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&(e.target.dataset.p!==undefined||e.target.classList.contains('cfrow'))){e.preventDefault();e.target.click()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(st.mf||st.fm)){st.mf=null;st.fm=null;drawFm();return}if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&(e.target.dataset.p!==undefined||e.target.classList.contains('cfrow'))){e.preventDefault();e.target.click()}});
 refresh();render();
 </script></body></html>
-
-</body></html>
