@@ -7,3 +7,5 @@ design/screenshots/port/
 
 frontend/test-results/
 frontend/playwright-report/
+node_modules
+node_modules/
