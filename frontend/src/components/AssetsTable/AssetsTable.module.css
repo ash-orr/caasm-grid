@@ -173,8 +173,7 @@
 }
 
 .select,
-.popupSearch,
-.addMenuSearch {
+.popupSearch {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -191,8 +190,7 @@
   background-position: right 30px center;
 }
 
-.popupSearch,
-.addMenuSearch {
+.popupSearch {
   padding: 6px 8px;
 }
 

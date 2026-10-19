@@ -69,37 +69,6 @@ test.describe('popover scrolling regressions', () => {
     await page.goto('/');
   });
 
-  test('add filter popover stays in viewport and blocks page scrolling', async ({ page }) => {
-    await page.getByRole('button', { name: '+ Add filter' }).click();
-    const menu = page.locator('[aria-label="Add filter menu"]');
-    await expect(menu).toBeVisible();
-
-    const style = await menu.evaluate((element) => {
-      const comp = getComputedStyle(element);
-      return {
-        position: comp.position,
-        width: Number.parseFloat(comp.width),
-        overflowY: comp.overflowY,
-        overscrollBehavior: comp.overscrollBehavior,
-        zIndex: comp.zIndex,
-      };
-    });
-
-    expect(style.position).toBe('fixed');
-    expect(style.width).toBe(300);
-    expect(style.overflowY).toBe('auto');
-    expect(style.overscrollBehavior).toBe('contain');
-    expect(Number(style.zIndex)).toBeGreaterThan(0);
-
-    await assertPopoverInsideViewport(page, menu);
-    await assertScrollInsideMenuKeepsItOpen(page, menu);
-    await assertPageScrollKeepsMenuAttached(page, menu);
-    await assertWheelDoesNotScrollPage(page, menu);
-
-    await page.evaluate(() => window.scrollTo({ top: 1200, behavior: 'instant' }));
-    await expect(menu).toBeHidden();
-  });
-
   test('see more popover stays in viewport and blocks page scrolling', async ({ page }) => {
     await page.locator('summary').filter({ hasText: 'Location' }).click();
     await page.getByRole('button', { name: 'See more' }).click();

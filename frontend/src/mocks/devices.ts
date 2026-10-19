@@ -34,9 +34,10 @@ export function ensurePrototypeData(): { accounts: AccountRecord[]; devices: Dev
   return { accounts, devices };
 }
 
-export function createPrototypeData(_input: { seed?: number; nowMs?: number } = {}): {
+export function createPrototypeData(input: { seed?: number; nowMs?: number } = {}): {
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 } {
+  void input;
   return { accounts, devices };
 }

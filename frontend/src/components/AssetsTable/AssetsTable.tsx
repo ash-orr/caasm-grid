@@ -8,7 +8,6 @@ import {
   type AccountFilterState,
   type DeviceFilterState,
   type FilterEntity,
-  type FilterGroup,
   type OnThisDeviceCategory,
   type SourceCoverageConditionStatus,
 } from '../../filters/schema';
@@ -25,6 +24,7 @@ import {
 import { nextSort, sortRowsBy } from './sort';
 import { selectAllMatchingRows } from './selection';
 import { ColumnPickerPopover, type ColumnPickerItem } from './ColumnPickerPopover';
+import { ManageFiltersDialog } from './ManageFiltersDialog';
 import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
@@ -179,8 +179,6 @@ const ACCOUNT_LAST_LOGIN_OPTIONS: Option[] = [
   { value: 'days8to30', label: '8 to 30 days ago' },
   { value: 'over30d', label: 'Over 30 days ago' },
 ];
-
-const GROUP_ORDER: FilterGroup[] = ['General', 'Network (NAC)', 'Risk (NAC)', 'On this device (NAC)'];
 
 function expandDeviceRows(seedRows: DeviceRecord[], targetCount: number): DeviceRecord[] {
   if (seedRows.length >= targetCount) return seedRows;
@@ -484,9 +482,7 @@ export function AssetsTable() {
 
   const [expandedChipList, setExpandedChipList] = useState(false);
 
-  const [addMenuOpen, setAddMenuOpen] = useState(false);
-  const [addMenuQuery, setAddMenuQuery] = useState('');
-  const [manageFiltersDraft, setManageFiltersDraft] = useState<string[]>([]);
+  const [manageFiltersOpen, setManageFiltersOpen] = useState(false);
 
   const [seeMoreOpenFor, setSeeMoreOpenFor] = useState<string | null>(null);
   const [seeMoreQuery, setSeeMoreQuery] = useState('');
@@ -497,9 +493,7 @@ export function AssetsTable() {
 
   const [onThisDeviceOpen, setOnThisDeviceOpen] = useState(false);
 
-  const addFilterButtonRef = useRef<HTMLButtonElement | null>(null);
-  const addMenuRef = useRef<HTMLDivElement | null>(null);
-  const addMenuSearchRef = useRef<HTMLInputElement | null>(null);
+  const manageFiltersButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const seeMoreTriggerRef = useRef<HTMLButtonElement | null>(null);
   const seeMoreMenuRef = useRef<HTMLDivElement | null>(null);
@@ -510,7 +504,6 @@ export function AssetsTable() {
   const [removeViewDialogOpen, setRemoveViewDialogOpen] = useState(false);
   const [saveViewName, setSaveViewName] = useState('');
   const [toast, setToast] = useState<string | null>(null);
-  const [addMenuPosition, setAddMenuPosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
   const [seeMorePosition, setSeeMorePosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
   const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0, sites: 0 });
   const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100, sites: 100 });
@@ -572,14 +565,6 @@ export function AssetsTable() {
   const [hiddenAccountColumns, setHiddenAccountColumns] = useState<string[]>(['authRepo', 'nasSite', 'location']);
 
   useEffect(() => {
-    if (addMenuOpen) {
-      setTimeout(() => {
-        addMenuSearchRef.current?.focus();
-      }, 0);
-    }
-  }, [addMenuOpen]);
-
-  useEffect(() => {
     if (seeMoreOpenFor) {
       setTimeout(() => {
         popupSearchRef.current?.focus();
@@ -595,23 +580,11 @@ export function AssetsTable() {
   }, [toast]);
 
   useEffect(() => {
-    if (!addMenuOpen && !seeMoreOpenFor && !columnPickerOpen) return;
+    if (!seeMoreOpenFor && !columnPickerOpen) return;
 
     const tableShell = tableShellRef.current;
 
     const handleResize = () => {
-      if (addMenuOpen && addFilterButtonRef.current) {
-        const rect = addFilterButtonRef.current.getBoundingClientRect();
-        if (!isRectVisible(rect)) {
-          setAddMenuOpen(false);
-          return;
-        }
-        const width = 300;
-        const height = Math.min(window.innerHeight * 0.7, 440);
-        const next = clampPopoverPosition(rect, width, height, 8, 6, true);
-        setAddMenuPosition(next);
-      }
-
       if (seeMoreOpenFor && seeMoreTriggerRef.current) {
         const rect = seeMoreTriggerRef.current.getBoundingClientRect();
         if (!isRectVisible(rect)) {
@@ -635,19 +608,7 @@ export function AssetsTable() {
     const handleScroll = (event: Event) => {
       const target = event.target;
 
-      if (shouldIgnoreScrollTarget(target, addMenuRef.current)) return;
       if (shouldIgnoreScrollTarget(target, seeMoreMenuRef.current)) return;
-
-      if (addMenuOpen && addFilterButtonRef.current) {
-        const rect = addFilterButtonRef.current.getBoundingClientRect();
-        if (!isRectVisible(rect)) {
-          setAddMenuOpen(false);
-          return;
-        }
-        const width = 300;
-        const height = Math.min(window.innerHeight * 0.7, 440);
-        setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6, true));
-      }
 
       if (seeMoreOpenFor && seeMoreTriggerRef.current) {
         const rect = seeMoreTriggerRef.current.getBoundingClientRect();
@@ -670,16 +631,7 @@ export function AssetsTable() {
       window.removeEventListener('scroll', handleScroll, { capture: true });
       tableShell?.removeEventListener('scroll', handleScroll, { capture: true });
     };
-  }, [addMenuOpen, columnPickerAnchorEl, columnPickerOpen, seeMoreOpenFor]);
-
-  useEffect(() => {
-    if (!addMenuOpen || !addFilterButtonRef.current) return;
-
-    const rect = addFilterButtonRef.current.getBoundingClientRect();
-    const width = 300;
-    const height = Math.min(window.innerHeight * 0.7, 440);
-    setAddMenuPosition(clampPopoverPosition(rect, width, height, 8, 6, true));
-  }, [addMenuOpen]);
+  }, [columnPickerAnchorEl, columnPickerOpen, seeMoreOpenFor]);
 
   const accountRows = useMemo(() => computeAccountRows(), []);
   const deviceRowsForTable = useMemo(() => expandDeviceRows(devices, DEVICE_TARGET_ROW_COUNT), []);
@@ -700,19 +652,6 @@ export function AssetsTable() {
   const isSites = tab === 'sites';
   const activeDeviceFilters = deviceFilters;
   const activeAccountFilters = accountFilters;
-
-  const allDeviceDefinitions = useMemo(
-    () => FILTER_SCHEMA.filter((item) => item.entities.includes('devices')),
-    []
-  );
-
-  const allAccountDefinitions = useMemo(
-    () => FILTER_SCHEMA.filter((item) => item.entities.includes('accounts')),
-    []
-  );
-
-  const addableDeviceDefinitions = allDeviceDefinitions.filter((item) => item.placement === 'addable');
-  const addableAccountDefinitions = allAccountDefinitions.filter((item) => item.placement === 'addable');
 
   const deviceOptions = useMemo(() => {
     const byId = new Map<string, Option[]>();
@@ -962,22 +901,6 @@ export function AssetsTable() {
 
   const hiddenChipCount = chips.length - visibleChips.length;
 
-  const addMenuItems = useMemo(() => {
-    const definitions = isDevices ? addableDeviceDefinitions : addableAccountDefinitions;
-    const lowered = addMenuQuery.trim().toLowerCase();
-
-    return definitions.filter((item) => {
-      if (!lowered) return true;
-      return item.label.toLowerCase().includes(lowered) || (item.group ?? '').toLowerCase().includes(lowered);
-    });
-  }, [isDevices, addMenuQuery, addableDeviceDefinitions, addableAccountDefinitions]);
-
-  const sectionsForMenu = useMemo(() => {
-    return GROUP_ORDER.map((group) => ({
-      group,
-      items: addMenuItems.filter((item) => item.group === group),
-    })).filter((entry) => entry.items.length > 0);
-  }, [addMenuItems]);
 
   function setChecklistValues(id: string, values: string[]) {
     if (isDevices) {
@@ -1029,17 +952,6 @@ export function AssetsTable() {
     setTimeout(() => {
       seeMoreTriggerRef.current?.focus();
     }, 0);
-  }
-
-  function addSection(id: string) {
-    if (isDevices) {
-      if (addedDeviceSections.includes(id)) return;
-      setAddedDeviceSections((prev) => [...prev, id]);
-      return;
-    }
-
-    if (addedAccountSections.includes(id)) return;
-    setAddedAccountSections((prev) => [...prev, id]);
   }
 
   function clearAllFilters() {
@@ -1362,19 +1274,20 @@ export function AssetsTable() {
   const filterCount = chips.length;
 
   function openManageFilters() {
-    const all = getAllManageableSectionIds(tab);
-    const selection = all.filter((id) => !hiddenSectionIds.includes(id));
-    setManageFiltersDraft(selection);
-    setAddMenuQuery('');
-    setAddMenuOpen(true);
+    setManageFiltersOpen(true);
   }
 
-  function applyManageFilters() {
-    const all = getAllManageableSectionIds(tab);
-    const nextVisible = new Set(manageFiltersDraft);
-
+  function applyManageFilters(nextIds: string[]) {
+    const entity = isDevices ? 'devices' : 'accounts';
+    const all = getAllManageableSectionIds(entity);
+    const nextVisible = new Set(nextIds);
     const hiddenNext = all.filter((id) => !nextVisible.has(id));
-    const addableNext = [...addedSectionIds].filter((id) => nextVisible.has(id) && !defaultSectionIds.includes(id));
+    const defaultSet = new Set<string>(defaultSectionIds as readonly string[]);
+    const currentAdded = new Set(addedSectionIds);
+    const addableNext = [
+      ...addedSectionIds.filter((id) => nextVisible.has(id) && !defaultSet.has(id)),
+      ...all.filter((id) => !defaultSet.has(id) && nextVisible.has(id) && !currentAdded.has(id)),
+    ];
 
     if (isDevices) {
       setHiddenDeviceSections(hiddenNext);
@@ -1389,10 +1302,6 @@ export function AssetsTable() {
         clearFilterSectionValues(id);
       }
     });
-
-    setAddMenuOpen(false);
-    setManageFiltersDraft([]);
-    setAddMenuQuery('');
   }
 
   const deviceColumns = useMemo<TableColumn<DeviceRecord>[]>(() => {
@@ -2340,7 +2249,7 @@ export function AssetsTable() {
           <button
             className={`${styles.btn} ${styles.addFilterButton}`}
             onClick={openManageFilters}
-            ref={addFilterButtonRef}
+            ref={manageFiltersButtonRef}
             type="button"
           >
             Manage filters
@@ -2565,84 +2474,15 @@ export function AssetsTable() {
 
       {toast ? <div className={styles.toast}>{toast}</div> : null}
 
-      {addMenuOpen ? (
-        <div
-          className={styles.popoverAnchor}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) {
-              setAddMenuOpen(false);
-              setTimeout(() => addFilterButtonRef.current?.focus(), 0);
-            }
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'Escape') {
-              setAddMenuOpen(false);
-              setTimeout(() => addFilterButtonRef.current?.focus(), 0);
-            }
-          }}
-          role="presentation"
-        >
-          <div
-            aria-label="Add filter menu"
-            className={styles.menu}
-            ref={addMenuRef}
-            role="dialog"
-            style={{
-              position: 'fixed',
-              left: addMenuPosition.left,
-              top: addMenuPosition.top,
-              width: 300,
-            }}
-          >
-            <input
-              className={styles.addMenuSearch}
-              onChange={(event) => setAddMenuQuery(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Escape') {
-                  event.stopPropagation();
-                  setAddMenuOpen(false);
-                  setTimeout(() => addFilterButtonRef.current?.focus(), 0);
-                }
-              }}
-              placeholder="Search filters"
-              ref={addMenuSearchRef}
-              value={addMenuQuery}
-            />
-
-            {sectionsForMenu.map((groupEntry) => (
-              <div key={groupEntry.group ?? 'none'}>
-                <div className={styles.menuGroup}>{groupEntry.group}</div>
-                {groupEntry.items.map((item) => {
-                  const selected = manageFiltersDraft.includes(item.id);
-
-                  return (
-                    <label className={styles.optionRow} key={item.id}>
-                      <input
-                        checked={selected}
-                        onChange={() => {
-                          setManageFiltersDraft((prev) => {
-                            const exists = prev.includes(item.id);
-                            return exists ? prev.filter((id) => id !== item.id) : [...prev, item.id];
-                          });
-                        }}
-                        type="checkbox"
-                      />
-                      {item.label}
-                    </label>
-                  );
-                })}
-              </div>
-            ))}
-
-            <div className={styles.popupActions}>
-              <button className={styles.btn} onClick={() => setAddMenuOpen(false)} type="button">Cancel</button>
-              <button className={styles.btn} onClick={applyManageFilters} type="button">Apply</button>
-            </div>
-
-            {sectionsForMenu.length === 0 ? <div className={styles.menuGroup}>No filters match.</div> : null}
-          </div>
-        </div>
-      ) : null}
+      <ManageFiltersDialog
+        allIds={getAllManageableSectionIds(tab)}
+        entity={isDevices ? 'devices' : 'accounts'}
+        onApply={applyManageFilters}
+        onOpenChange={setManageFiltersOpen}
+        open={manageFiltersOpen}
+        triggerRef={manageFiltersButtonRef}
+        visibleIds={[...defaultSectionIds, ...addedSectionIds].filter((id) => !hiddenSectionIds.includes(id))}
+      />
 
       {seeMoreOpenFor ? (
         <div

@@ -32761,19 +32761,20 @@ export const devices: DeviceRecord[] = [
   },
 ];
 
-export function generatePrototypeData(_input: { seed?: number; nowMs?: number } = {}): Promise<{
+export function generatePrototypeData(input: { seed?: number; nowMs?: number } = {}): Promise<{
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
+  void input;
   return Promise.resolve({
     accounts,
     devices,
   });
 }
 
-export function createPrototypeData(_input: { seed?: number; nowMs?: number } = {}): Promise<{
+export function createPrototypeData(input: { seed?: number; nowMs?: number } = {}): Promise<{
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
-  return generatePrototypeData(_input);
+  return generatePrototypeData(input);
 }
