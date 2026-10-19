@@ -1,0 +1,340 @@
+| element | property | prototype | port | OK/MISMATCH |
+| --- | --- | --- | --- | --- |
+| Devices / Accounts tab buttons | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Devices / Accounts tab buttons | fontSize | 14px | 14px | OK |
+| Devices / Accounts tab buttons | fontWeight | 600 | 600 | OK |
+| Devices / Accounts tab buttons | lineHeight | 20.3px | 20.3px | OK |
+| Devices / Accounts tab buttons | letterSpacing | normal | normal | OK |
+| Devices / Accounts tab buttons | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| Devices / Accounts tab buttons | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
+| Devices / Accounts tab buttons | paddingTop | 8px | 8px | OK |
+| Devices / Accounts tab buttons | paddingRight | 0px | 0px | OK |
+| Devices / Accounts tab buttons | paddingBottom | 8px | 8px | OK |
+| Devices / Accounts tab buttons | paddingLeft | 0px | 0px | OK |
+| Devices / Accounts tab buttons | borderRadius | 0px | 0px | OK |
+| Devices / Accounts tab buttons | renderedHeight | 38.3px | 38.3px | OK |
+| toolbar search input | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| toolbar search input | fontSize | 14px | 14px | OK |
+| toolbar search input | fontWeight | 400 | 400 | OK |
+| toolbar search input | lineHeight | 20.3px | 20.3px | OK |
+| toolbar search input | letterSpacing | normal | normal | OK |
+| toolbar search input | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| toolbar search input | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| toolbar search input | paddingTop | 7px | 7px | OK |
+| toolbar search input | paddingRight | 10px | 10px | OK |
+| toolbar search input | paddingBottom | 7px | 7px | OK |
+| toolbar search input | paddingLeft | 10px | 10px | OK |
+| toolbar search input | borderRadius | 6px | 6px | OK |
+| toolbar search input | renderedHeight | 36.3px | 36.3px | OK |
+| toolbar button Views | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| toolbar button Views | fontSize | 14px | NOT FOUND | MISMATCH |
+| toolbar button Views | fontWeight | 400 | NOT FOUND | MISMATCH |
+| toolbar button Views | lineHeight | 20.3px | NOT FOUND | MISMATCH |
+| toolbar button Views | letterSpacing | normal | NOT FOUND | MISMATCH |
+| toolbar button Views | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| toolbar button Views | backgroundColor | rgb(255, 255, 255) | NOT FOUND | MISMATCH |
+| toolbar button Views | paddingTop | 7px | NOT FOUND | MISMATCH |
+| toolbar button Views | paddingRight | 12px | NOT FOUND | MISMATCH |
+| toolbar button Views | paddingBottom | 7px | NOT FOUND | MISMATCH |
+| toolbar button Views | paddingLeft | 12px | NOT FOUND | MISMATCH |
+| toolbar button Views | borderRadius | 6px | NOT FOUND | MISMATCH |
+| toolbar button Views | renderedHeight | 36.3px | NOT FOUND | MISMATCH |
+| toolbar button Export | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| toolbar button Export | fontSize | 14px | 14px | OK |
+| toolbar button Export | fontWeight | 400 | 400 | OK |
+| toolbar button Export | lineHeight | 20.3px | 20.3px | OK |
+| toolbar button Export | letterSpacing | normal | normal | OK |
+| toolbar button Export | color | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| toolbar button Export | backgroundColor | rgb(11, 110, 138) | rgb(11, 110, 138) | OK |
+| toolbar button Export | paddingTop | 7px | 7px | OK |
+| toolbar button Export | paddingRight | 12px | 12px | OK |
+| toolbar button Export | paddingBottom | 7px | 7px | OK |
+| toolbar button Export | paddingLeft | 12px | 12px | OK |
+| toolbar button Export | borderRadius | 6px | 6px | OK |
+| toolbar button Export | renderedHeight | 36.3px | 36.3px | OK |
+| toolbar button Filters | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| toolbar button Filters | fontSize | 14px | NOT FOUND | MISMATCH |
+| toolbar button Filters | fontWeight | 400 | NOT FOUND | MISMATCH |
+| toolbar button Filters | lineHeight | 20.3px | NOT FOUND | MISMATCH |
+| toolbar button Filters | letterSpacing | normal | NOT FOUND | MISMATCH |
+| toolbar button Filters | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| toolbar button Filters | backgroundColor | rgb(226, 241, 245) | NOT FOUND | MISMATCH |
+| toolbar button Filters | paddingTop | 7px | NOT FOUND | MISMATCH |
+| toolbar button Filters | paddingRight | 12px | NOT FOUND | MISMATCH |
+| toolbar button Filters | paddingBottom | 7px | NOT FOUND | MISMATCH |
+| toolbar button Filters | paddingLeft | 12px | NOT FOUND | MISMATCH |
+| toolbar button Filters | borderRadius | 6px | NOT FOUND | MISMATCH |
+| toolbar button Filters | renderedHeight | 32px | NOT FOUND | MISMATCH |
+| toolbar button Columns | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| toolbar button Columns | fontSize | 14px | NOT FOUND | MISMATCH |
+| toolbar button Columns | fontWeight | 400 | NOT FOUND | MISMATCH |
+| toolbar button Columns | lineHeight | 20.3px | NOT FOUND | MISMATCH |
+| toolbar button Columns | letterSpacing | normal | NOT FOUND | MISMATCH |
+| toolbar button Columns | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| toolbar button Columns | backgroundColor | rgb(255, 255, 255) | NOT FOUND | MISMATCH |
+| toolbar button Columns | paddingTop | 7px | NOT FOUND | MISMATCH |
+| toolbar button Columns | paddingRight | 12px | NOT FOUND | MISMATCH |
+| toolbar button Columns | paddingBottom | 7px | NOT FOUND | MISMATCH |
+| toolbar button Columns | paddingLeft | 12px | NOT FOUND | MISMATCH |
+| toolbar button Columns | borderRadius | 6px | NOT FOUND | MISMATCH |
+| toolbar button Columns | renderedHeight | 32px | NOT FOUND | MISMATCH |
+| table header cell "Device name" | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| table header cell "Device name" | fontSize | 12px | 12px | OK |
+| table header cell "Device name" | fontWeight | 600 | 600 | OK |
+| table header cell "Device name" | lineHeight | 17.4px | 17.4px | OK |
+| table header cell "Device name" | letterSpacing | normal | normal | OK |
+| table header cell "Device name" | color | rgb(93, 107, 120) | rgb(93, 107, 120) | OK |
+| table header cell "Device name" | backgroundColor | rgb(255, 255, 255) | rgba(0, 0, 0, 0) | MISMATCH |
+| table header cell "Device name" | paddingTop | 9px | 9px | OK |
+| table header cell "Device name" | paddingRight | 12px | 12px | OK |
+| table header cell "Device name" | paddingBottom | 9px | 9px | OK |
+| table header cell "Device name" | paddingLeft | 12px | 12px | OK |
+| table header cell "Device name" | borderRadius | 0px | 0px | OK |
+| table header cell "Device name" | renderedHeight | 39.9px | 38.9px | MISMATCH |
+| plain table body cell | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| plain table body cell | fontSize | 14px | 14px | OK |
+| plain table body cell | fontWeight | 400 | 400 | OK |
+| plain table body cell | lineHeight | 20.3px | 20.3px | OK |
+| plain table body cell | letterSpacing | normal | normal | OK |
+| plain table body cell | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| plain table body cell | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
+| plain table body cell | paddingTop | 9px | 9px | OK |
+| plain table body cell | paddingRight | 12px | 12px | OK |
+| plain table body cell | paddingBottom | 9px | 9px | OK |
+| plain table body cell | paddingLeft | 12px | 12px | OK |
+| plain table body cell | borderRadius | 0px | 0px | OK |
+| plain table body cell | renderedHeight | 40.4px | 40.3px | OK |
+| bold device-name cell | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| bold device-name cell | fontSize | 14px | NOT FOUND | MISMATCH |
+| bold device-name cell | fontWeight | 700 | NOT FOUND | MISMATCH |
+| bold device-name cell | lineHeight | 20.3px | NOT FOUND | MISMATCH |
+| bold device-name cell | letterSpacing | normal | NOT FOUND | MISMATCH |
+| bold device-name cell | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| bold device-name cell | backgroundColor | rgba(0, 0, 0, 0) | NOT FOUND | MISMATCH |
+| bold device-name cell | paddingTop | 0px | NOT FOUND | MISMATCH |
+| bold device-name cell | paddingRight | 0px | NOT FOUND | MISMATCH |
+| bold device-name cell | paddingBottom | 0px | NOT FOUND | MISMATCH |
+| bold device-name cell | paddingLeft | 0px | NOT FOUND | MISMATCH |
+| bold device-name cell | borderRadius | 0px | NOT FOUND | MISMATCH |
+| bold device-name cell | renderedHeight | 16px | NOT FOUND | MISMATCH |
+| Blocked status pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| Blocked status pill | fontSize | 12px | NOT FOUND | MISMATCH |
+| Blocked status pill | fontWeight | 500 | NOT FOUND | MISMATCH |
+| Blocked status pill | lineHeight | 17.4px | NOT FOUND | MISMATCH |
+| Blocked status pill | letterSpacing | normal | NOT FOUND | MISMATCH |
+| Blocked status pill | color | rgb(192, 57, 43) | NOT FOUND | MISMATCH |
+| Blocked status pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | MISMATCH |
+| Blocked status pill | paddingTop | 1px | NOT FOUND | MISMATCH |
+| Blocked status pill | paddingRight | 8px | NOT FOUND | MISMATCH |
+| Blocked status pill | paddingBottom | 1px | NOT FOUND | MISMATCH |
+| Blocked status pill | paddingLeft | 8px | NOT FOUND | MISMATCH |
+| Blocked status pill | borderRadius | 10px | NOT FOUND | MISMATCH |
+| Blocked status pill | renderedHeight | 19.4px | NOT FOUND | MISMATCH |
+| risk-score pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| risk-score pill | fontSize | 12px | NOT FOUND | MISMATCH |
+| risk-score pill | fontWeight | 500 | NOT FOUND | MISMATCH |
+| risk-score pill | lineHeight | 17.4px | NOT FOUND | MISMATCH |
+| risk-score pill | letterSpacing | normal | NOT FOUND | MISMATCH |
+| risk-score pill | color | rgb(192, 57, 43) | NOT FOUND | MISMATCH |
+| risk-score pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | MISMATCH |
+| risk-score pill | paddingTop | 1px | NOT FOUND | MISMATCH |
+| risk-score pill | paddingRight | 8px | NOT FOUND | MISMATCH |
+| risk-score pill | paddingBottom | 1px | NOT FOUND | MISMATCH |
+| risk-score pill | paddingLeft | 8px | NOT FOUND | MISMATCH |
+| risk-score pill | borderRadius | 10px | NOT FOUND | MISMATCH |
+| risk-score pill | renderedHeight | 19.4px | NOT FOUND | MISMATCH |
+| Exposure gaps cell text | fontFamily | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | fontSize | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | fontWeight | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | lineHeight | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | letterSpacing | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | color | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | backgroundColor | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | paddingTop | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | paddingRight | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | paddingBottom | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | paddingLeft | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | borderRadius | NOT FOUND | NOT FOUND | OK |
+| Exposure gaps cell text | renderedHeight | NOT FOUND | NOT FOUND | OK |
+| Filters panel heading "Filters" | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | fontSize | 14px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | fontWeight | 700 | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | lineHeight | 20.3px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | letterSpacing | normal | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | backgroundColor | rgba(0, 0, 0, 0) | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | paddingTop | 0px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | paddingRight | 0px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | paddingBottom | 0px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | paddingLeft | 0px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | borderRadius | 0px | NOT FOUND | MISMATCH |
+| Filters panel heading "Filters" | renderedHeight | 20.3px | NOT FOUND | MISMATCH |
+| Clear link | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Clear link | fontSize | 14px | 12.5px | MISMATCH |
+| Clear link | fontWeight | 400 | 400 | OK |
+| Clear link | lineHeight | 20.3px | 18.125px | MISMATCH |
+| Clear link | letterSpacing | normal | normal | OK |
+| Clear link | color | rgb(11, 110, 138) | rgb(11, 110, 138) | OK |
+| Clear link | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
+| Clear link | paddingTop | 0px | 1px | MISMATCH |
+| Clear link | paddingRight | 0px | 6px | MISMATCH |
+| Clear link | paddingBottom | 0px | 1px | MISMATCH |
+| Clear link | paddingLeft | 0px | 6px | MISMATCH |
+| Clear link | borderRadius | 0px | 0px | OK |
+| Clear link | renderedHeight | 20.3px | 20.3px | OK |
+| filter section summary "Saved views" | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| filter section summary "Saved views" | fontSize | 12.5px | 12.5px | OK |
+| filter section summary "Saved views" | fontWeight | 600 | 600 | OK |
+| filter section summary "Saved views" | lineHeight | 18.125px | 18.125px | OK |
+| filter section summary "Saved views" | letterSpacing | normal | normal | OK |
+| filter section summary "Saved views" | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| filter section summary "Saved views" | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
+| filter section summary "Saved views" | paddingTop | 5px | 5px | OK |
+| filter section summary "Saved views" | paddingRight | 0px | 0px | OK |
+| filter section summary "Saved views" | paddingBottom | 5px | 5px | OK |
+| filter section summary "Saved views" | paddingLeft | 0px | 0px | OK |
+| filter section summary "Saved views" | borderRadius | 0px | 0px | OK |
+| filter section summary "Saved views" | renderedHeight | 28.1px | 28.1px | OK |
+| radio option label | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| radio option label | fontSize | 12.5px | NOT FOUND | MISMATCH |
+| radio option label | fontWeight | 400 | NOT FOUND | MISMATCH |
+| radio option label | lineHeight | 18.125px | NOT FOUND | MISMATCH |
+| radio option label | letterSpacing | normal | NOT FOUND | MISMATCH |
+| radio option label | color | rgb(20, 33, 43) | NOT FOUND | MISMATCH |
+| radio option label | backgroundColor | rgba(0, 0, 0, 0) | NOT FOUND | MISMATCH |
+| radio option label | paddingTop | 0px | NOT FOUND | MISMATCH |
+| radio option label | paddingRight | 0px | NOT FOUND | MISMATCH |
+| radio option label | paddingBottom | 0px | NOT FOUND | MISMATCH |
+| radio option label | paddingLeft | 0px | NOT FOUND | MISMATCH |
+| radio option label | borderRadius | 0px | NOT FOUND | MISMATCH |
+| radio option label | renderedHeight | 18.1px | NOT FOUND | MISMATCH |
+| Manage filters button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Manage filters button | fontSize | 14px | 14px | OK |
+| Manage filters button | fontWeight | 400 | 400 | OK |
+| Manage filters button | lineHeight | 20.3px | 20.3px | OK |
+| Manage filters button | letterSpacing | normal | normal | OK |
+| Manage filters button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| Manage filters button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Manage filters button | paddingTop | 7px | 7px | OK |
+| Manage filters button | paddingRight | 12px | 12px | OK |
+| Manage filters button | paddingBottom | 7px | 7px | OK |
+| Manage filters button | paddingLeft | 12px | 12px | OK |
+| Manage filters button | borderRadius | 6px | 6px | OK |
+| Manage filters button | renderedHeight | 36.3px | 36.3px | OK |
+| Manage filters dialog title | fontFamily | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | fontSize | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | fontWeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | lineHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | letterSpacing | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | color | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | backgroundColor | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | paddingTop | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | paddingRight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | paddingBottom | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | paddingLeft | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | borderRadius | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog title | renderedHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | fontFamily | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | fontSize | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | fontWeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | lineHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | letterSpacing | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | color | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | backgroundColor | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | paddingTop | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | paddingRight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | paddingBottom | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | paddingLeft | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | borderRadius | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog group heading | renderedHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | fontFamily | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | fontSize | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | fontWeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | lineHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | letterSpacing | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | color | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | backgroundColor | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | paddingTop | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | paddingRight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | paddingBottom | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | paddingLeft | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | borderRadius | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog option label | renderedHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | fontFamily | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | fontSize | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | fontWeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | lineHeight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | letterSpacing | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | color | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | backgroundColor | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | paddingTop | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | paddingRight | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | paddingBottom | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | paddingLeft | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | borderRadius | NOT FOUND | NOT FOUND | OK |
+| Manage filters dialog footer buttons | renderedHeight | NOT FOUND | NOT FOUND | OK |
+| pagination footer "N devices" text | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | fontSize | 12.5px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | fontWeight | 400 | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | lineHeight | 18.125px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | letterSpacing | normal | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | color | rgb(93, 107, 120) | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | backgroundColor | rgba(0, 0, 0, 0) | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | paddingTop | 0px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | paddingRight | 0px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | paddingBottom | 0px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | paddingLeft | 0px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | borderRadius | 0px | NOT FOUND | MISMATCH |
+| pagination footer "N devices" text | renderedHeight | 18.1px | NOT FOUND | MISMATCH |
+| Rows per page label | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Rows per page label | fontSize | 12.5px | 12.5px | OK |
+| Rows per page label | fontWeight | 400 | 400 | OK |
+| Rows per page label | lineHeight | 18.125px | 18.125px | OK |
+| Rows per page label | letterSpacing | normal | normal | OK |
+| Rows per page label | color | rgb(93, 107, 120) | rgb(93, 107, 120) | OK |
+| Rows per page label | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
+| Rows per page label | paddingTop | 0px | 0px | OK |
+| Rows per page label | paddingRight | 0px | 0px | OK |
+| Rows per page label | paddingBottom | 0px | 0px | OK |
+| Rows per page label | paddingLeft | 0px | 0px | OK |
+| Rows per page label | borderRadius | 0px | 0px | OK |
+| Rows per page label | renderedHeight | 30.1px | 36.3px | MISMATCH |
+| rows-per-page select | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | MISMATCH |
+| rows-per-page select | fontSize | 12.5px | NOT FOUND | MISMATCH |
+| rows-per-page select | fontWeight | 400 | NOT FOUND | MISMATCH |
+| rows-per-page select | lineHeight | 18.125px | NOT FOUND | MISMATCH |
+| rows-per-page select | letterSpacing | normal | NOT FOUND | MISMATCH |
+| rows-per-page select | color | rgb(93, 107, 120) | NOT FOUND | MISMATCH |
+| rows-per-page select | backgroundColor | rgb(255, 255, 255) | NOT FOUND | MISMATCH |
+| rows-per-page select | paddingTop | 5px | NOT FOUND | MISMATCH |
+| rows-per-page select | paddingRight | 30px | NOT FOUND | MISMATCH |
+| rows-per-page select | paddingBottom | 5px | NOT FOUND | MISMATCH |
+| rows-per-page select | paddingLeft | 10px | NOT FOUND | MISMATCH |
+| rows-per-page select | borderRadius | 6px | NOT FOUND | MISMATCH |
+| rows-per-page select | renderedHeight | 30.1px | NOT FOUND | MISMATCH |
+| Prev button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Prev button | fontSize | 12.5px | 14px | MISMATCH |
+| Prev button | fontWeight | 400 | 400 | OK |
+| Prev button | lineHeight | 18.125px | 20.3px | MISMATCH |
+| Prev button | letterSpacing | normal | normal | OK |
+| Prev button | color | rgb(93, 107, 120) | rgb(20, 33, 43) | MISMATCH |
+| Prev button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Prev button | paddingTop | 7px | 7px | OK |
+| Prev button | paddingRight | 12px | 12px | OK |
+| Prev button | paddingBottom | 7px | 7px | OK |
+| Prev button | paddingLeft | 12px | 12px | OK |
+| Prev button | borderRadius | 6px | 6px | OK |
+| Prev button | renderedHeight | 34.1px | 36.3px | MISMATCH |
+| Next button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Next button | fontSize | 12.5px | 14px | MISMATCH |
+| Next button | fontWeight | 400 | 400 | OK |
+| Next button | lineHeight | 18.125px | 20.3px | MISMATCH |
+| Next button | letterSpacing | normal | normal | OK |
+| Next button | color | rgb(93, 107, 120) | rgb(20, 33, 43) | MISMATCH |
+| Next button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Next button | paddingTop | 7px | 7px | OK |
+| Next button | paddingRight | 12px | 12px | OK |
+| Next button | paddingBottom | 7px | 7px | OK |
+| Next button | paddingLeft | 12px | 12px | OK |
+| Next button | borderRadius | 6px | 6px | OK |
+| Next button | renderedHeight | 34.1px | 36.3px | MISMATCH |
