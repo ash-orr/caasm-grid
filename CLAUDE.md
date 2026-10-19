@@ -8,11 +8,17 @@ This repository contains the CAASM UI prototype and frontend implementation for 
 - Prefer targeted, minimal edits over broad rewrites.
 - When implementing behavior from the prototype or spec, follow the user-visible semantics over the implementation details.
 - Keep tests focused on real behavior and update them when UI logic changes.
+- Do the work first. Report only at the end, in the exact format the prompt asks for.
+- Never answer with a summary of earlier work. If a prompt has numbered items, do each one.
+- The prototype (design/prototype/caasm-console.html) is the reference. Read the repo state with git before claiming anything is done.
+- One commit per item. Run vitest, playwright, typecheck, lint and build before each commit.
+- Never push, force, reset or rewrite history without being asked.
+- If you cannot do something, say what blocked you in one line. Do not report it as done.
 
 ## Key implementation notes
 - The Manage filters dialog replaces the old Add filter popover.
 - Hidden default sections are view state, not permanent filter state.
-- Hidden defaults must be restored by saved views and included in unchanged detection.
+- Hidden default sections must be restored by saved views and included in unchanged detection.
 - Newly checked sections should open and appear after existing visible sections when applied.
 - Unchecked sections should be hidden and their values cleared when applied.
 - Search in the dialog filters the list of sections while preserving count semantics.
