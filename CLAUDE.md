@@ -1,39 +1,10 @@
-# CAASM UI
+# Working rules
 
-## Project brief
-This repository contains the CAASM UI prototype and frontend implementation for the assets table and related filtering/saved-view behaviors.
-
-## Working rules
-- Preserve any in-progress work already present in the repo before making feature changes.
-- Prefer targeted, minimal edits over broad rewrites.
-- When implementing behavior from the prototype or spec, follow the user-visible semantics over the implementation details.
-- Keep tests focused on real behavior and update them when UI logic changes.
 - Do the work first. Report only at the end, in the exact format the prompt asks for.
 - Never answer with a summary of earlier work. If a prompt has numbered items, do each one.
-- The prototype (design/prototype/caasm-console.html) is the reference. Read the repo state with git before claiming anything is done.
-- One commit per item. Run vitest, playwright, typecheck, lint and build before each commit.
-- Never push, force, reset or rewrite history without being asked.
-- If you cannot do something, say what blocked you in one line. Do not report it as done.
-
-## Key implementation notes
-- The Manage filters dialog replaces the old Add filter popover.
-- Hidden default sections are view state, not permanent filter state.
-- Hidden defaults must be restored by saved views and included in unchanged detection.
-- Newly checked sections should open and appear after existing visible sections when applied.
-- Unchecked sections should be hidden and their values cleared when applied.
-- Search in the dialog filters the list of sections while preserving count semantics.
-- Escape and Cancel should discard staged changes without mutating current state.
-
-## Important files
-- `design/CHANGES-SINCE-SPEC.md`
-- `design/prototype/caasm-console.html`
-- `frontend/src/components/AssetsTable/AssetsTable.tsx`
-- `frontend/src/components/AssetsTable/ManageFiltersDialog.tsx`
-- `frontend/tests/manage-filters.test.tsx`
-- `frontend/e2e/manage-filters.spec.ts`
-
-## Validation
-Before claiming completion, run the relevant verification commands for the changed behavior, including the targeted test suite and the broader repo checks if requested.
-
-## Final requirement
-When the task is fully complete and the repo is ready for handoff, provide only the exact final artifact requested by the user, without extra commentary or explanation.
+- The prototype (design/prototype/caasm-console.html) is the reference for behavior, placement, text and states. Styling should match closely using the design tokens.
+- Check the repo with git before claiming anything is done (git status, git log, git grep). Do not report something as done if the files are not there.
+- One commit per item, with an honest message. Run vitest, playwright, typecheck, lint and build before each commit.
+- Never push, force, reset or rewrite history unless asked.
+- If something blocks you, say what blocked you in one line. Do not report it as done.
+- Where design/CHANGES-SINCE-SPEC.md and design/BEHAVIOR.md disagree, CHANGES-SINCE-SPEC.md wins.
