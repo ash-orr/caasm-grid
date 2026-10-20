@@ -126,7 +126,7 @@ Disabled menu items use the app's own tooltip so the hint shows on hover.
 
 ### Pagination
 - Footer left: row count and selection count. Footer right: **Rows per page** dropdown, then Prev, "Page X of Y", Next.
-- Options: **100 (default), 200, 500, Show all**. Show all puts every row on one page.
+- Options: **50 (default), 100, 200, 500, Show all**. Show all puts every row on one page.
 - Changing the size returns to page 1 and keeps the selection. Devices and Accounts remember their own size while the page is open.
 
 ---
