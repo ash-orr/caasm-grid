@@ -400,7 +400,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       accountType: device.acctType as DeviceRecord['accountType'],
       group: device.group,
       riskScore: device.score,
-      status: device.nac === 'Blocked' ? 'Blocked' : 'No issues',
+      status: device.archived ? 'Archived' : device.blocked ? 'Blocked' : 'No issues',
       lastConnectedAt: new Date(nowMs - ((device.id * 17) % 29) * 60 * 60 * 1000).toISOString(),
       createdAt: new Date(nowMs - ((device.id * 11) % 320) * 24 * 60 * 60 * 1000).toISOString(),
       coverageGaps: device.gaps ?? SOURCE_ORDER.filter((source) => sourceCoverage[source].status === 'Not present'),
