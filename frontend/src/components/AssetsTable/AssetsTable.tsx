@@ -31,7 +31,9 @@ import type { SourceCoverageRow } from './sourceCoverage';
 import { getSelectionBannerState } from './selection';
 import { buildSourceColumns } from './sourceColumns';
 import { StatusPill } from '../StatusPill';
+import statusPillStyles from '../StatusPill/StatusPill.module.css';
 import styles from './AssetsTable.module.css';
+import { renderRiskScorePill, renderStatusCell } from './cellRenderers';
 
 type TabKey = 'devices' | 'accounts' | 'sites';
 
@@ -84,6 +86,7 @@ const CAASM_SORT_BY_TAB: Record<TabKey, SavedViewSort> = {
 };
 
 const PAGE_SIZE_OPTIONS: Array<{ value: number; label: string }> = [
+  { value: 50, label: '50' },
   { value: 100, label: '100' },
   { value: 200, label: '200' },
   { value: 500, label: '500' },
@@ -271,12 +274,6 @@ function computeAccountRows(): AccountFilterRow[] {
       lastLoginDays,
     };
   });
-}
-
-function riskBand(score: number): 'Access' | 'Alert' | 'Blocked' {
-  if (score >= 70) return 'Blocked';
-  if (score >= 40) return 'Alert';
-  return 'Access';
 }
 
 function formatRelativeTime(isoDate: string): string {
@@ -506,7 +503,7 @@ export function AssetsTable() {
   const [toast, setToast] = useState<string | null>(null);
   const [seeMorePosition, setSeeMorePosition] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
   const [pageByTab, setPageByTab] = useState<Record<TabKey, number>>({ devices: 0, accounts: 0, sites: 0 });
-  const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 100, accounts: 100, sites: 100 });
+  const [pageSizeByTab, setPageSizeByTab] = useState<Record<TabKey, number>>({ devices: 50, accounts: 50, sites: 50 });
   const [selectedRowIdsByTab, setSelectedRowIdsByTab] = useState<Record<TabKey, number[]>>({ devices: [], accounts: [], sites: [] });
   const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '', sites: '' });
 
@@ -1324,8 +1321,8 @@ export function AssetsTable() {
       { id: 'account', label: 'Account', defaultVisible: true, render: (row) => row.account, exportValue: (row) => row.account },
       { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
       { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
-      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => `${row.riskScore} (${riskBand(row.riskScore)})`, exportValue: (row) => `${row.riskScore}` },
-      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => row.status, exportValue: (row) => row.status },
+      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore), exportValue: (row) => `${row.riskScore}` },
+      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
       { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt },
       { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
@@ -1366,7 +1363,7 @@ export function AssetsTable() {
       { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
       { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
       { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
-      { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? 'Blocked' : 'Not blocked'), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
+      { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? <span className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span> : <span className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
       { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
       { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
       ...sourceColumns,
