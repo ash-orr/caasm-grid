@@ -149,7 +149,7 @@ export function ManageFiltersDialog({
         <div className={styles.popupActions}>
           <button className={styles.btn} onClick={() => onOpenChange(false)} type="button">Cancel</button>
           <button
-            className={styles.btnPrimary}
+            className={`${styles.btn} ${styles.btnPrimary}`}
             onClick={() => {
               onApply(draft);
               onOpenChange(false);

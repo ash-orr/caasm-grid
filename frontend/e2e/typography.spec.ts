@@ -68,5 +68,21 @@ test.describe('Typography parity', () => {
     const groupHeading = page.getByRole('dialog').getByText('Default filters', { exact: true }).first();
     await expect(groupHeading).toHaveCSS('font-size', '11.5px');
     await expect(groupHeading).toHaveCSS('font-weight', '600');
+
+    const cancelButton = page.getByRole('button', { name: 'Cancel' }).first();
+    await expect(cancelButton).toHaveCSS('padding-top', '7px');
+    await expect(cancelButton).toHaveCSS('padding-right', '12px');
+    await expect(cancelButton).toHaveCSS('padding-bottom', '7px');
+    await expect(cancelButton).toHaveCSS('padding-left', '12px');
+    await expect(cancelButton).toHaveCSS('border-radius', '6px');
+
+    const applyButton = page.getByRole('button', { name: 'Apply' }).first();
+    await expect(applyButton).toHaveCSS('padding-top', '7px');
+    await expect(applyButton).toHaveCSS('padding-right', '12px');
+    await expect(applyButton).toHaveCSS('padding-bottom', '7px');
+    await expect(applyButton).toHaveCSS('padding-left', '12px');
+    await expect(applyButton).toHaveCSS('border-radius', '6px');
+    await expect(applyButton).toHaveCSS('background-color', 'rgb(11, 110, 138)');
+    await expect(applyButton).toHaveCSS('color', 'rgb(255, 255, 255)');
   });
 });
