@@ -32,8 +32,8 @@ test.describe('Typography parity', () => {
     await expect(clearButton).toHaveCSS('padding-right', '0px');
     await expect(clearButton).toHaveCSS('padding-bottom', '0px');
     await expect(clearButton).toHaveCSS('padding-left', '0px');
-    await expect(clearButton).toHaveCSS('font-size', '12.5px');
-    await expect(clearButton).toHaveCSS('line-height', '18.1252px');
+    await expect(clearButton).toHaveCSS('font-size', '14px');
+    await expect(clearButton).toHaveCSS('line-height', '20.3px');
 
     await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('font-size', '12.5px');
     await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('line-height', '18.125px');
@@ -41,14 +41,31 @@ test.describe('Typography parity', () => {
     const prevButton = page.getByRole('button', { name: 'Prev' }).first();
     await expect(prevButton).toHaveCSS('font-size', '12.5px');
     await expect(prevButton).toHaveCSS('line-height', '18.125px');
+    await expect(prevButton).toHaveCSS('color', 'rgb(93, 107, 120)');
+
+    const rowsPerPageLabel = page.locator('label').filter({ hasText: /Rows per page/ }).first();
+    const rowsPerPageLabelHeight = parseFloat(await rowsPerPageLabel.evaluate((element) => getComputedStyle(element).height));
+    expect(rowsPerPageLabelHeight).toBeCloseTo(30.1, 0);
+
+    const rowsPerPageSelect = page.locator('label').filter({ hasText: /Rows per page/ }).locator('select').first();
+    await expect(rowsPerPageSelect).toHaveCSS('color', 'rgb(93, 107, 120)');
+    await expect(rowsPerPageSelect).toHaveCSS('padding-top', '5px');
+    await expect(rowsPerPageSelect).toHaveCSS('padding-right', '30px');
+    await expect(rowsPerPageSelect).toHaveCSS('padding-bottom', '5px');
+    await expect(rowsPerPageSelect).toHaveCSS('padding-left', '10px');
+    const rowsPerPageSelectHeight = parseFloat(await rowsPerPageSelect.evaluate((element) => getComputedStyle(element).height));
+    expect(rowsPerPageSelectHeight).toBeCloseTo(30.1, 0);
 
     await page.getByRole('button', { name: 'Manage filters' }).click();
-    const dialogTitle = page.getByRole('heading', { name: /Manage filters/ }).first();
+    const dialogTitle = page.getByRole('dialog').locator('h2').first();
     await expect(dialogTitle).toHaveCSS('font-size', '17px');
     await expect(dialogTitle).toHaveCSS('line-height', '24.7px');
 
-    const optionLabel = page.getByText('Status', { exact: true }).first();
+    const optionLabel = page.getByRole('dialog').getByText('Status', { exact: true }).first();
     await expect(optionLabel).toHaveCSS('font-size', '12.5px');
     await expect(optionLabel).toHaveCSS('line-height', '18.125px');
+
+    const blockedLabel = page.getByText('Blocked', { exact: true }).first();
+    await expect(blockedLabel).toHaveCSS('font-size', '12.5px');
   });
 });
