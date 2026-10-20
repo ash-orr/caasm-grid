@@ -33,8 +33,12 @@ const elements = [
   { name: 'table header cell "Device name"', prototypeSelectors: ['th:has-text("Device name")'], portSelectors: ['th:has-text("Device name")', 'thead th:has-text("Device name")'] },
   { name: 'plain table body cell', prototypeSelectors: ['tbody tr td:nth-child(3)'], portSelectors: ['tbody tr td:nth-child(3)'] },
   { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
-  { name: 'Blocked status pill', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['label:has-text("Blocked")', 'span:has-text("Blocked")', 'span[class*="pill"]:has-text("Blocked")'] },
-  { name: 'risk-score pill', prototypeSelectors: ['span.score'], portSelectors: ['span:has-text("70")', '[class*="riskBadge"]', 'span.score'] },
+  { name: 'Blocked status pill', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['span[class*="pill"][class*="bad"]:has-text("Blocked")', 'span[class*="pill"]:has-text("Blocked")', 'td:has-text("Blocked") span[class*="pill"]', 'span:has-text("Blocked")'] },
+  { name: 'risk-score pill', prototypeSelectors: ['span.score'], portSelectors: ['span[aria-label*="Access"], span[aria-label*="Alert"], span[aria-label*="Blocked"]', 'span[class*="pill"][aria-label*="Access"], span[class*="pill"][aria-label*="Alert"], span[class*="pill"][aria-label*="Blocked"]', 'span[aria-label*="Access"], span[aria-label*="Alert"], span[aria-label*="Blocked"]'] },
+  { name: 'Filters icon button', prototypeSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]'], portSelectors: ['button[aria-label*="filters"]', 'button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', '[aria-label*="filters"]'] },
+  { name: 'Columns icon button', prototypeSelectors: ['button[aria-label="Show/hide columns"]'], portSelectors: ['button[aria-label="Show/hide columns"]'] },
+  { name: 'Views button', prototypeSelectors: ['button:has-text("Views")'], portSelectors: ['button:has-text("Views")'] },
+  { name: 'Export button', prototypeSelectors: ['button:has-text("Export")'], portSelectors: ['button:has-text("Export")'] },
   { name: 'Exposure gaps cell text', prototypeSelectors: ['tbody tr:first-child td:last-child'], portSelectors: ['tbody tr:first-child td:last-child', 'td:has-text("Coverage gaps")', 'td:has-text("Exposure gaps")'] },
   { name: 'Filters panel heading "Filters"', prototypeSelectors: ['div.filters b'], portSelectors: ['span.headerLabel:has-text("Filters")', 'div.headerRow span:has-text("Filters")', 'div:has-text("Filters") span'] },
   { name: 'Clear link', prototypeSelectors: ['a#clr'], portSelectors: ['button:has-text("Clear")', 'a:has-text("Clear")', 'text=Clear'] },
@@ -122,12 +126,6 @@ function statusForComparison(
   prototypeValue: string | null | undefined,
   portValue: string | null | undefined,
 ): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' | 'PENDING (table port)' {
-  const pendingElements = new Set(['Blocked status pill', 'risk-score pill']);
-
-  if (pendingElements.has(elementName) && (portValue === 'NOT FOUND' || portValue === 'ERROR:' || prototypeValue === 'NOT FOUND' || prototypeValue === 'ERROR:')) {
-    return 'PENDING (table port)';
-  }
-
   if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
   if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
   if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';

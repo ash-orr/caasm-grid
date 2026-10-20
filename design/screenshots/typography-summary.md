@@ -65,32 +65,84 @@
 | bold device-name cell | paddingLeft | 0px | 0px | OK |
 | bold device-name cell | borderRadius | 0px | 0px | OK |
 | bold device-name cell | renderedHeight | 16px | 17px | MISMATCH |
-| Blocked status pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | PENDING (table port) |
-| Blocked status pill | fontSize | 12px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | fontWeight | 500 | NOT FOUND | PENDING (table port) |
-| Blocked status pill | lineHeight | 17.4px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | letterSpacing | normal | NOT FOUND | PENDING (table port) |
-| Blocked status pill | color | rgb(192, 57, 43) | NOT FOUND | PENDING (table port) |
-| Blocked status pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | PENDING (table port) |
-| Blocked status pill | paddingTop | 1px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | paddingRight | 8px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | paddingBottom | 1px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | paddingLeft | 8px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | borderRadius | 10px | NOT FOUND | PENDING (table port) |
-| Blocked status pill | renderedHeight | 19.4px | NOT FOUND | PENDING (table port) |
-| risk-score pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | PENDING (table port) |
-| risk-score pill | fontSize | 12px | NOT FOUND | PENDING (table port) |
-| risk-score pill | fontWeight | 500 | NOT FOUND | PENDING (table port) |
-| risk-score pill | lineHeight | 17.4px | NOT FOUND | PENDING (table port) |
-| risk-score pill | letterSpacing | normal | NOT FOUND | PENDING (table port) |
-| risk-score pill | color | rgb(192, 57, 43) | NOT FOUND | PENDING (table port) |
-| risk-score pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | PENDING (table port) |
-| risk-score pill | paddingTop | 1px | NOT FOUND | PENDING (table port) |
-| risk-score pill | paddingRight | 8px | NOT FOUND | PENDING (table port) |
-| risk-score pill | paddingBottom | 1px | NOT FOUND | PENDING (table port) |
-| risk-score pill | paddingLeft | 8px | NOT FOUND | PENDING (table port) |
-| risk-score pill | borderRadius | 10px | NOT FOUND | PENDING (table port) |
-| risk-score pill | renderedHeight | 19.4px | NOT FOUND | PENDING (table port) |
+| Blocked status pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | fontSize | 12px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | fontWeight | 500 | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | lineHeight | 17.4px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | letterSpacing | normal | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | color | rgb(192, 57, 43) | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | paddingTop | 1px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | paddingRight | 8px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | paddingBottom | 1px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | paddingLeft | 8px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | borderRadius | 10px | NOT FOUND | PORT NOT FOUND |
+| Blocked status pill | renderedHeight | 19.4px | NOT FOUND | PORT NOT FOUND |
+| risk-score pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| risk-score pill | fontSize | 12px | 12px | OK |
+| risk-score pill | fontWeight | 500 | 500 | OK |
+| risk-score pill | lineHeight | 17.4px | 17.4px | OK |
+| risk-score pill | letterSpacing | normal | normal | OK |
+| risk-score pill | color | rgb(192, 57, 43) | rgb(183, 121, 31) | MISMATCH |
+| risk-score pill | backgroundColor | rgb(251, 233, 230) | rgb(251, 241, 220) | MISMATCH |
+| risk-score pill | paddingTop | 1px | 1px | OK |
+| risk-score pill | paddingRight | 8px | 8px | OK |
+| risk-score pill | paddingBottom | 1px | 1px | OK |
+| risk-score pill | paddingLeft | 8px | 8px | OK |
+| risk-score pill | borderRadius | 10px | 10px | OK |
+| risk-score pill | renderedHeight | 19.4px | 19.4px | OK |
+| Filters icon button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Filters icon button | fontSize | 14px | 14px | OK |
+| Filters icon button | fontWeight | 400 | 400 | OK |
+| Filters icon button | lineHeight | 20.3px | 20.3px | OK |
+| Filters icon button | letterSpacing | normal | normal | OK |
+| Filters icon button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| Filters icon button | backgroundColor | rgb(226, 241, 245) | rgb(226, 241, 245) | OK |
+| Filters icon button | paddingTop | 7px | 0px | MISMATCH |
+| Filters icon button | paddingRight | 12px | 0px | MISMATCH |
+| Filters icon button | paddingBottom | 7px | 0px | MISMATCH |
+| Filters icon button | paddingLeft | 12px | 0px | MISMATCH |
+| Filters icon button | borderRadius | 6px | 6px | OK |
+| Filters icon button | renderedHeight | 32px | 30px | MISMATCH |
+| Columns icon button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Columns icon button | fontSize | 14px | 14px | OK |
+| Columns icon button | fontWeight | 400 | 400 | OK |
+| Columns icon button | lineHeight | 20.3px | 20.3px | OK |
+| Columns icon button | letterSpacing | normal | normal | OK |
+| Columns icon button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| Columns icon button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Columns icon button | paddingTop | 7px | 0px | MISMATCH |
+| Columns icon button | paddingRight | 12px | 0px | MISMATCH |
+| Columns icon button | paddingBottom | 7px | 0px | MISMATCH |
+| Columns icon button | paddingLeft | 12px | 0px | MISMATCH |
+| Columns icon button | borderRadius | 6px | 6px | OK |
+| Columns icon button | renderedHeight | 32px | 30px | MISMATCH |
+| Views button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Views button | fontSize | 14px | 14px | OK |
+| Views button | fontWeight | 400 | 400 | OK |
+| Views button | lineHeight | 20.3px | 20.3px | OK |
+| Views button | letterSpacing | normal | normal | OK |
+| Views button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
+| Views button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Views button | paddingTop | 7px | 7px | OK |
+| Views button | paddingRight | 12px | 12px | OK |
+| Views button | paddingBottom | 7px | 7px | OK |
+| Views button | paddingLeft | 12px | 12px | OK |
+| Views button | borderRadius | 6px | 6px | OK |
+| Views button | renderedHeight | 36.3px | 36.3px | OK |
+| Export button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Export button | fontSize | 14px | 14px | OK |
+| Export button | fontWeight | 400 | 400 | OK |
+| Export button | lineHeight | 20.3px | 20.3px | OK |
+| Export button | letterSpacing | normal | normal | OK |
+| Export button | color | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
+| Export button | backgroundColor | rgb(11, 110, 138) | rgb(11, 110, 138) | OK |
+| Export button | paddingTop | 7px | 7px | OK |
+| Export button | paddingRight | 12px | 12px | OK |
+| Export button | paddingBottom | 7px | 7px | OK |
+| Export button | paddingLeft | 12px | 12px | OK |
+| Export button | borderRadius | 6px | 6px | OK |
+| Export button | renderedHeight | 36.3px | 36.3px | OK |
 | Exposure gaps cell text | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | Exposure gaps cell text | fontSize | 14px | 14px | OK |
 | Exposure gaps cell text | fontWeight | 400 | 400 | OK |
