@@ -50,6 +50,11 @@
   cursor: pointer;
 }
 
+.btnActive {
+  background: var(--acc-s);
+  border-color: var(--acc);
+}
+
 .addFilterButton {
   width: 100%;
   margin: 0 0 10px;
@@ -126,8 +131,8 @@
   padding: 0;
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-size: 14px;
-  line-height: 20.3px;
+  font-size: 12.5px;
+  line-height: 18.12525px;
 }
 
 .section {
@@ -164,8 +169,8 @@
   gap: 7px;
   font-weight: 400;
   margin: 3px 0;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 12.5px;
+  line-height: 18.125px;
 }
 
 .optionRow input[type='checkbox'],
@@ -305,6 +310,9 @@
   color: var(--mute);
   font-weight: 600;
   background: var(--panel);
+  padding: 9px 12px;
+  height: 39.9px;
+  box-sizing: border-box;
 }
 
 .headSortBtn {
@@ -363,10 +371,18 @@
   gap: 6px;
   color: var(--mute);
   font-size: 12.5px;
+  line-height: 18.125px;
 }
 
 .footerLabel .select {
   min-width: 94px;
+  font-size: 12.5px;
+  line-height: 18.125px;
+}
+
+.footerActions .btn {
+  font-size: 12.5px;
+  line-height: 18.125px;
 }
 
 .footerPage {
@@ -580,6 +596,7 @@
 .popupTitle {
   margin: 0;
   font-size: 17px;
+  line-height: 24.7px;
 }
 
 .popupGrid {
@@ -658,7 +675,8 @@
 
 .dialogTitle {
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 24.7px;
 }
 
 .dialogNote {

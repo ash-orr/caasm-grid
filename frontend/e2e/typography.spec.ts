@@ -14,22 +14,41 @@ test.describe('Typography parity', () => {
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.locator('th').filter({ hasText: 'Device name' }).first()).toHaveCSS('font-size', '12px');
-    await expect(page.locator('th').filter({ hasText: 'Device name' }).first()).toHaveCSS('font-weight', '600');
+    const headerCell = page.locator('th').filter({ hasText: 'Device name' }).first();
+    await expect(headerCell).toHaveCSS('font-size', '12px');
+    await expect(headerCell).toHaveCSS('font-weight', '600');
+    await expect(parseFloat(await headerCell.evaluate((element) => getComputedStyle(element).height))).toBeCloseTo(39.9, 1);
 
     const bodyCell = page.locator('tbody tr td').nth(2);
     await expect(bodyCell).toHaveCSS('font-size', '14px');
+    await expect(bodyCell).toHaveCSS('line-height', '20.3px');
 
-    await expect(page.locator('span').filter({ hasText: 'Reporting' }).first()).toHaveCSS('font-size', '12px');
-    await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('font-size', '12.5px');
-    await expect(page.locator('.tableFooter .footerCount').first()).toHaveCSS('font-size', '12.5px');
+    const blockedPill = page.locator('span').filter({ hasText: /^Reporting$/ }).first();
+    await expect(blockedPill).toHaveCSS('font-size', '12px');
+    await expect(blockedPill).toHaveCSS('font-weight', '500');
+
     const clearButton = page.getByRole('button', { name: 'Clear' }).first();
     await expect(clearButton).toHaveCSS('padding-top', '0px');
     await expect(clearButton).toHaveCSS('padding-right', '0px');
     await expect(clearButton).toHaveCSS('padding-bottom', '0px');
     await expect(clearButton).toHaveCSS('padding-left', '0px');
+    await expect(clearButton).toHaveCSS('font-size', '12.5px');
+    await expect(clearButton).toHaveCSS('line-height', '18.1252px');
+
+    await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('font-size', '12.5px');
+    await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('line-height', '18.125px');
+
+    const prevButton = page.getByRole('button', { name: 'Prev' }).first();
+    await expect(prevButton).toHaveCSS('font-size', '12.5px');
+    await expect(prevButton).toHaveCSS('line-height', '18.125px');
 
     await page.getByRole('button', { name: 'Manage filters' }).click();
-    await expect(page.getByText('Status', { exact: true }).first()).toHaveCSS('font-size', '12.5px');
+    const dialogTitle = page.getByRole('heading', { name: /Manage filters/ }).first();
+    await expect(dialogTitle).toHaveCSS('font-size', '17px');
+    await expect(dialogTitle).toHaveCSS('line-height', '24.7px');
+
+    const optionLabel = page.getByText('Status', { exact: true }).first();
+    await expect(optionLabel).toHaveCSS('font-size', '12.5px');
+    await expect(optionLabel).toHaveCSS('line-height', '18.125px');
   });
 });

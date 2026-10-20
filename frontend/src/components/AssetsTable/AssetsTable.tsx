@@ -2077,7 +2077,7 @@ export function AssetsTable() {
 
       <div className={styles.toolbar}>
         <button
-          className={styles.btn}
+          className={`${styles.btn} ${showFilters ? styles.btnActive : ''}`}
           onClick={() => setShowFilters((prev) => !prev)}
           type="button"
         >

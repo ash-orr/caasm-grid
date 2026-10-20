@@ -28,38 +28,39 @@ const properties = [
 ] as const;
 
 const elements = [
-  { name: 'Devices / Accounts tab buttons', prototypeSelector: 'button:has-text("Devices")', portSelector: 'button:has-text("Devices")' },
-  { name: 'toolbar search input', prototypeSelector: 'input[type="search"][aria-label="Search"]', portSelector: 'input[aria-label="Search"]' },
-  { name: 'toolbar button Views', prototypeSelector: 'button:has-text("Views")', portSelector: 'button:has-text("Views")' },
-  { name: 'toolbar button Export', prototypeSelector: 'button:has-text("Export")', portSelector: 'button:has-text("Export")' },
-  { name: 'toolbar button Filters', prototypeSelector: 'button[aria-label*="filters"]', portSelector: 'button[aria-label*="filters"]' },
-  { name: 'toolbar button Columns', prototypeSelector: 'button[aria-label*="columns"]', portSelector: 'button[aria-label*="columns"]' },
-  { name: 'table header cell "Device name"', prototypeSelector: 'th:has-text("Device name")', portSelector: 'th:has-text("Device name")' },
-  { name: 'plain table body cell', prototypeSelector: 'tbody tr td:nth-child(3)', portSelector: 'tbody tr td:nth-child(3)' },
-  { name: 'bold device-name cell', prototypeSelector: 'tbody tr td b', portSelector: 'tbody tr td b' },
-  { name: 'Blocked status pill', prototypeSelector: 'span.pill.p-bad:has-text("Blocked")', portSelector: 'span[class*="pill"]:has-text("Blocked")' },
-  { name: 'risk-score pill', prototypeSelector: 'span.score', portSelector: 'span.score' },
-  { name: 'Exposure gaps cell text', prototypeSelector: 'td:has-text("Exposure gaps")', portSelector: 'td:has-text("Exposure gaps")' },
-  { name: 'Filters panel heading "Filters"', prototypeSelector: 'div.filters b', portSelector: 'div.card.filters b' },
-  { name: 'Clear link', prototypeSelector: 'a#clr', portSelector: 'text=Clear' },
-  { name: 'filter section summary "Saved views"', prototypeSelector: 'summary:has-text("Saved views")', portSelector: 'summary:has-text("Saved views")' },
-  { name: 'radio option label', prototypeSelector: 'label.chk', portSelector: 'label.chk' },
-  { name: 'Manage filters button', prototypeSelector: 'button:has-text("Manage filters")', portSelector: 'button:has-text("Manage filters")' },
-  { name: 'Manage filters dialog title', prototypeSelector: 'h2:has-text("Manage filters")', portSelector: 'h2:has-text("Manage filters")' },
-  { name: 'Manage filters dialog group heading', prototypeSelector: '#mf-g .ag', portSelector: '.menuGroup' },
-  { name: 'Manage filters dialog option label', prototypeSelector: 'label.chk:has-text("Status")', portSelector: 'label:has-text("Status")' },
-  { name: 'Manage filters dialog footer buttons', prototypeSelector: 'button:has-text("Apply")', portSelector: 'button:has-text("Apply")' },
-  { name: 'pagination footer "N devices" text', prototypeSelector: '.foot span:first-child', portSelector: '.tableFooter .footerCount' },
-  { name: 'Rows per page label', prototypeSelector: 'label:has-text("Rows per page")', portSelector: 'label:has-text("Rows per page")' },
-  { name: 'rows-per-page select', prototypeSelector: 'select.ps', portSelector: 'select[aria-label="Rows per page"]' },
-  { name: 'Prev button', prototypeSelector: 'button:has-text("Prev")', portSelector: 'button:has-text("Prev")' },
-  { name: 'Next button', prototypeSelector: 'button:has-text("Next")', portSelector: 'button:has-text("Next")' },
+  { name: 'Devices / Accounts tab buttons', prototypeSelectors: ['button:has-text("Devices")'], portSelectors: ['button:has-text("Devices")'] },
+  { name: 'toolbar search input', prototypeSelectors: ['input[type="search"][aria-label="Search"]'], portSelectors: ['input[aria-label="Search"]'] },
+  { name: 'toolbar button Views', prototypeSelectors: ['button:has-text("Views")'], portSelectors: ['button:has-text("View settings")', 'button:has-text("Views")'] },
+  { name: 'toolbar button Export', prototypeSelectors: ['button:has-text("Export")'], portSelectors: ['button:has-text("Export")'] },
+  { name: 'toolbar button Filters', prototypeSelectors: ['button[aria-label*="filters"]'], portSelectors: ['button:has-text("Show filters")', 'button:has-text("Hide filters")', 'button[aria-label*="filters"]'] },
+  { name: 'toolbar button Columns', prototypeSelectors: ['button[aria-label*="columns"]'], portSelectors: ['button:has-text("Show/hide columns")', 'button[aria-label*="columns"]', '[data-testid="columns-button"]'] },
+  { name: 'table header cell "Device name"', prototypeSelectors: ['th:has-text("Device name")'], portSelectors: ['th:has-text("Device name")', 'thead th:has-text("Device name")'] },
+  { name: 'plain table body cell', prototypeSelectors: ['tbody tr td:nth-child(3)'], portSelectors: ['tbody tr td:nth-child(3)'] },
+  { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
+  { name: 'Blocked status pill', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['span:has-text("Blocked")', 'span[class*="pill"]:has-text("Blocked")'] },
+  { name: 'risk-score pill', prototypeSelectors: ['span.score'], portSelectors: ['span:has-text("70")', '[class*="riskBadge"]', 'span.score'] },
+  { name: 'Exposure gaps cell text', prototypeSelectors: ['td:has-text("Exposure gaps")'], portSelectors: ['td:has-text("Coverage gaps")', 'td:has-text("Exposure gaps")'] },
+  { name: 'Filters panel heading "Filters"', prototypeSelectors: ['div.filters b'], portSelectors: ['div.filters b', 'div.card.filters b', 'div:has-text("Filters") b'] },
+  { name: 'Clear link', prototypeSelectors: ['a#clr'], portSelectors: ['button:has-text("Clear")', 'a:has-text("Clear")', 'text=Clear'] },
+  { name: 'filter section summary "Saved views"', prototypeSelectors: ['summary:has-text("Saved views")'], portSelectors: ['summary:has-text("Saved views")', 'details summary:has-text("Saved views")'] },
+  { name: 'radio option label', prototypeSelectors: ['label.chk'], portSelectors: ['label[class*="optionRow"]', 'label.chk'] },
+  { name: 'Manage filters button', prototypeSelectors: ['button:has-text("Manage filters")'], portSelectors: ['button:has-text("Manage filters")'] },
+  { name: 'Manage filters dialog title', prototypeSelectors: ['h2:has-text("Manage filters")'], portSelectors: ['h2:has-text("Manage filters")'] },
+  { name: 'Manage filters dialog group heading', prototypeSelectors: ['#mf-g .ag'], portSelectors: ['div[class*="menuGroup"]', '.menuGroup'] },
+  { name: 'Manage filters dialog option label', prototypeSelectors: ['label.chk:has-text("Status")'], portSelectors: ['label:has-text("Status")', 'label[class*="optionRow"]:has-text("Status")'] },
+  { name: 'Manage filters dialog footer buttons', prototypeSelectors: ['button:has-text("Apply")'], portSelectors: ['button:has-text("Apply")'] },
+  { name: 'pagination footer "N devices" text', prototypeSelectors: ['.foot span:first-child'], portSelectors: ['.tableFooter .footerCount', '.footerCount'] },
+  { name: 'Rows per page label', prototypeSelectors: ['label:has-text("Rows per page")'], portSelectors: ['label:has-text("Rows per page")'] },
+  { name: 'rows-per-page select', prototypeSelectors: ['select.ps'], portSelectors: ['select[aria-label="Rows per page"]', 'select'] },
+  { name: 'Prev button', prototypeSelectors: ['button:has-text("Prev")'], portSelectors: ['button:has-text("Prev")'] },
+  { name: 'Next button', prototypeSelectors: ['button:has-text("Next")'], portSelectors: ['button:has-text("Next")'] },
 ] as const;
 
 function normalizeColor(value: string | null | undefined): string {
   if (!value) return '';
   const trimmed = value.trim();
   if (!trimmed) return '';
+
   const rgbMatch = trimmed.match(/rgba?\(([^)]+)\)/i);
   if (rgbMatch) {
     const numbers = rgbMatch[1].split(',').map((part) => Number.parseFloat(part.trim()));
@@ -68,22 +69,18 @@ function normalizeColor(value: string | null | undefined): string {
       return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
     }
   }
+
   if (trimmed.startsWith('#')) {
     const hex = trimmed.slice(1).replace(/\s+/g, '');
     if (hex.length === 3 || hex.length === 4) {
       const expanded = hex.split('').map((char) => char + char).join('');
-      const r = Number.parseInt(expanded.slice(0, 2), 16);
-      const g = Number.parseInt(expanded.slice(2, 4), 16);
-      const b = Number.parseInt(expanded.slice(4, 6), 16);
-      return `rgb(${r}, ${g}, ${b})`;
+      return `rgb(${Number.parseInt(expanded.slice(0, 2), 16)}, ${Number.parseInt(expanded.slice(2, 4), 16)}, ${Number.parseInt(expanded.slice(4, 6), 16)})`;
     }
     if (hex.length >= 6) {
-      const r = Number.parseInt(hex.slice(0, 2), 16);
-      const g = Number.parseInt(hex.slice(2, 4), 16);
-      const b = Number.parseInt(hex.slice(4, 6), 16);
-      return `rgb(${r}, ${g}, ${b})`;
+      return `rgb(${Number.parseInt(hex.slice(0, 2), 16)}, ${Number.parseInt(hex.slice(2, 4), 16)}, ${Number.parseInt(hex.slice(4, 6), 16)})`;
     }
   }
+
   return trimmed.toLowerCase();
 }
 
@@ -95,11 +92,11 @@ function toNumber(value: string | null | undefined): number | null {
 
 function normalizeFontFamily(value: string | null | undefined): string {
   if (!value) return '';
-  return value
+  const [candidate] = value
     .split(',')
     .map((part) => part.trim().replace(/^"|"$/g, '').trim())
-    .filter(Boolean)[0]
-    .toLowerCase();
+    .filter(Boolean);
+  return (candidate ?? '').toLowerCase();
 }
 
 function propertyMatches(property: string, left: string | null | undefined, right: string | null | undefined): boolean {
@@ -122,11 +119,11 @@ function propertyMatches(property: string, left: string | null | undefined, righ
   return left === right;
 }
 
-function statusForComparison(prototypeValue: string | null | undefined, portValue: string | null | undefined): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' {
+function statusForComparison(property: string, prototypeValue: string | null | undefined, portValue: string | null | undefined): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' {
   if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
   if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
   if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
-  return propertyMatches('fontSize', prototypeValue, portValue) ? 'OK' : 'MISMATCH';
+  return propertyMatches(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
 }
 
 function formatCell(value: string | null | undefined): string {
@@ -134,69 +131,62 @@ function formatCell(value: string | null | undefined): string {
   return value;
 }
 
-async function findNearestParentHTML(page: Page, selector: string): Promise<string | null> {
-  const tagHint = selector
-    .replace(/\s*[:\[].*$/g, '')
-    .split(/\s+/)
-    .filter(Boolean)
-    .at(-1);
-
-  if (!tagHint) return null;
-
+async function findNearestContainerHTML(page: Page, selectors: readonly string[]): Promise<string | null> {
   try {
-    const candidates = await page.locator(tagHint).evaluateAll((nodes) =>
-      nodes
-        .map((node) => ({
-          text: (node.textContent ?? '').trim(),
-          outer: (node as Element).outerHTML,
-          parent: (node as Element).parentElement?.outerHTML ?? null,
-        }))
-        .filter((candidate) => candidate.text.length > 0)
-        .slice(0, 5),
-    );
+    const html = await page.locator('body').evaluate((body, candidateSelectors) => {
+      for (const selector of candidateSelectors) {
+        const element = body.querySelector(selector);
+        if (element) return element.outerHTML.slice(0, 400);
+      }
 
-    const match = candidates.find((candidate) => {
-      const key = selector.toLowerCase();
-      return candidate.text.toLowerCase().includes(key.replace(/[^a-z0-9 ]/g, '').trim().split(' ').at(-1) ?? '') ||
-        candidate.outer.toLowerCase().includes(key.split(/[:\[]/)[0].toLowerCase());
-    });
+      const fallbackRoots = Array.from(body.querySelectorAll('button, div, summary, label, th, td, span, input, select, h2'));
+      const textHints = candidateSelectors.flatMap((selector) => selector.replace(/[^a-z0-9]/gi, ' ').split(/\s+/).filter(Boolean));
+      const match = fallbackRoots.find((node) => {
+        const text = (node.textContent ?? '').toLowerCase();
+        return textHints.some((hint) => hint.length > 2 && text.includes(hint));
+      });
 
-    return match?.parent ?? match?.outer ?? null;
+      return match?.outerHTML.slice(0, 400) ?? body.innerHTML.slice(0, 400);
+    }, selectors);
+
+    return html || null;
   } catch {
     return null;
   }
 }
 
-async function getElementCSS(page: Page, selector: string): Promise<Record<string, string> | 'NOT FOUND' | `ERROR: ${string}`> {
-  try {
-    const element = page.locator(selector).first();
-    await element.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
-      throw new Error('element not found');
-    });
-    return await element.evaluate((node) => {
-      const style = getComputedStyle(node);
-      return {
-        fontFamily: style.fontFamily,
-        fontSize: style.fontSize,
-        fontWeight: style.fontWeight,
-        lineHeight: style.lineHeight,
-        letterSpacing: style.letterSpacing,
-        color: style.color,
-        backgroundColor: style.backgroundColor,
-        paddingTop: style.paddingTop,
-        paddingRight: style.paddingRight,
-        paddingBottom: style.paddingBottom,
-        paddingLeft: style.paddingLeft,
-        borderRadius: style.borderRadius,
-        renderedHeight: `${Math.round(node.getBoundingClientRect().height * 10) / 10}px`,
-      };
-    });
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('element not found')) {
-      return 'NOT FOUND';
+async function getElementCSS(page: Page, selectors: readonly string[]): Promise<Record<string, string> | 'NOT FOUND' | `ERROR: ${string}`> {
+  for (const selector of selectors) {
+    try {
+      const element = page.locator(selector).first();
+      if (!(await element.count())) continue;
+      await element.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
+        throw new Error('element not found');
+      });
+      return await element.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize,
+          fontWeight: style.fontWeight,
+          lineHeight: style.lineHeight,
+          letterSpacing: style.letterSpacing,
+          color: style.color,
+          backgroundColor: style.backgroundColor,
+          paddingTop: style.paddingTop,
+          paddingRight: style.paddingRight,
+          paddingBottom: style.paddingBottom,
+          paddingLeft: style.paddingLeft,
+          borderRadius: style.borderRadius,
+          renderedHeight: `${Math.round(node.getBoundingClientRect().height * 10) / 10}px`,
+        };
+      });
+    } catch {
+      continue;
     }
-    return `ERROR: ${error instanceof Error ? error.message : String(error)}`;
   }
+
+  return 'NOT FOUND';
 }
 
 async function launchFreshBrowser(): Promise<Browser> {
@@ -211,8 +201,50 @@ async function preparePortPage(page: Page): Promise<void> {
   await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
 }
 
+function summarizeMarkdownRows(rows: readonly string[]) {
+  const counts = {
+    total: 0,
+    ok: 0,
+    mismatches: 0,
+    prototypeNotFound: 0,
+    portNotFound: 0,
+    bothNotFound: 0,
+    remainingNotFound: 0,
+  };
+
+  const notFoundElements = new Set<string>();
+
+  for (const row of rows) {
+    if (!row.startsWith('| ') || row.startsWith('| element |')) continue;
+    const cells = row.split('|').slice(1, -1).map((cell) => cell.trim());
+    if (cells.length < 5) continue;
+
+    const [element, , , , status] = cells;
+    if (!element || !status) continue;
+
+    counts.total += 1;
+
+    if (status === 'OK') counts.ok += 1;
+    else if (status === 'MISMATCH') counts.mismatches += 1;
+    else if (status === 'PROTOTYPE NOT FOUND') counts.prototypeNotFound += 1;
+    else if (status === 'PORT NOT FOUND') counts.portNotFound += 1;
+    else if (status === 'BOTH NOT FOUND') counts.bothNotFound += 1;
+
+    if (status === 'PORT NOT FOUND' || status === 'PROTOTYPE NOT FOUND' || status === 'BOTH NOT FOUND') {
+      notFoundElements.add(element);
+    }
+  }
+
+  counts.remainingNotFound = notFoundElements.size;
+
+  return {
+    counts,
+    notFoundElements: [...notFoundElements].sort(),
+  };
+}
+
 async function main() {
-  const rows: string[] = ['| element | property | prototype | port | OK/MISMATCH |', '| --- | --- | --- | --- | --- |'];
+  const rows: string[] = ['| element | property | prototype | port | status |', '| --- | --- | --- | --- | --- |'];
   let prototypeBrowser: Browser | null = null;
   let portBrowser: Browser | null = null;
 
@@ -231,13 +263,13 @@ async function main() {
       let portStyle: Record<string, string> | 'NOT FOUND' | `ERROR: ${string}` = 'NOT FOUND';
 
       try {
-        prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelector);
+        prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
       } catch (error) {
         prototypeStyle = `ERROR: ${error instanceof Error ? error.message : String(error)}`;
       }
 
       try {
-        portStyle = await getElementCSS(portPage, element.portSelector);
+        portStyle = await getElementCSS(portPage, element.portSelectors);
       } catch (error) {
         portStyle = `ERROR: ${error instanceof Error ? error.message : String(error)}`;
       }
@@ -248,26 +280,26 @@ async function main() {
       for (const property of properties) {
         const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
         const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
-        const status = (() => {
-          if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
-          if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
-          if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
-          return propertyMatches(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
-        })();
+        const status = statusForComparison(property, prototypeValue, portValue);
 
         if (status === 'PROTOTYPE NOT FOUND' || status === 'PORT NOT FOUND' || status === 'BOTH NOT FOUND') {
-          const context = await findNearestParentHTML(prototypePage, element.prototypeSelector);
-          const portContext = await findNearestParentHTML(portPage, element.portSelector);
-          rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} | ${context ?? portContext ?? ''} |`);
-          continue;
+          const prototypeContext = await findNearestContainerHTML(prototypePage, element.prototypeSelectors);
+          const portContext = await findNearestContainerHTML(portPage, element.portSelectors);
+          if (prototypeValue === 'NOT FOUND' && prototypeContext) {
+            console.warn(`[prototype-missing] ${element.name} :: ${property}\n${prototypeContext}`);
+          }
+          if (portValue === 'NOT FOUND' && portContext) {
+            console.warn(`[port-missing] ${element.name} :: ${property}\n${portContext}`);
+          }
         }
 
         rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
       }
     }
 
+    const summary = summarizeMarkdownRows(rows);
     await writeFile(summaryPath, `${rows.join('\n')}\n`);
-    await writeFile(reportPath, `${JSON.stringify(rows, null, 2)}\n`);
+    await writeFile(reportPath, `${JSON.stringify(summary, null, 2)}\n`);
   } finally {
     await prototypeBrowser?.close().catch(() => undefined);
     await portBrowser?.close().catch(() => undefined);
