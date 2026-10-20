@@ -2171,18 +2171,20 @@ export function AssetsTable() {
       </div>
 
       <div className={styles.toolbar}>
-        <button
-          aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
-          aria-pressed={showFilters}
-          className={`${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
-          onClick={() => setShowFilters((prev) => !prev)}
-          type="button"
-        >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
-            <path d="M2 3h12l-4.5 5.5V13l-3 1.5V8.5z" />
-          </svg>
-          {filterCount > 0 ? <span className={styles.countBadgeFloat}>{filterCount}</span> : null}
-        </button>
+        <Tooltip content={showFilters ? 'Hide filters' : 'Show filters'}>
+          <button
+            aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
+            aria-pressed={showFilters}
+            className={`${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
+            onClick={() => setShowFilters((prev) => !prev)}
+            type="button"
+          >
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
+              <path d="M2 3h12l-4.5 5.5V13l-3 1.5V8.5z" />
+            </svg>
+            {filterCount > 0 ? <span className={styles.countBadgeFloat}>{filterCount}</span> : null}
+          </button>
+        </Tooltip>
 
         <input
           aria-label="Search"
@@ -2213,19 +2215,21 @@ export function AssetsTable() {
 
         <div className={styles.toolbarSpacer} />
 
-        <button
-          aria-label="Show/hide columns"
-          aria-pressed={columnPickerOpen}
-          className={`${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
-          onClick={openColumnPickerDirectly}
-          ref={columnsButtonRef}
-          type="button"
-        >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
-            <rect x="2" y="3" width="12" height="10" rx="1.5" />
-            <path d="M6.5 3v10M10.5 3v10" />
-          </svg>
-        </button>
+        <Tooltip content="Show/hide columns">
+          <button
+            aria-label="Show/hide columns"
+            aria-pressed={columnPickerOpen}
+            className={`${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
+            onClick={openColumnPickerDirectly}
+            ref={columnsButtonRef}
+            type="button"
+          >
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
+              <rect x="2" y="3" width="12" height="10" rx="1.5" />
+              <path d="M6.5 3v10M10.5 3v10" />
+            </svg>
+          </button>
+        </Tooltip>
 
         <DropdownMenu.Root onOpenChange={(open) => {
           if (open) setColumnPickerOpen(false);
