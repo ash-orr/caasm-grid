@@ -80,6 +80,8 @@ export function ColumnPickerPopover({
           <button className={styles.linkBtn} onClick={onReset} type="button">Reset to default</button>
         </div>
 
+        <p className={styles.columnPickerHelp}>Show, hide and reorder. Drag a row or use the arrows.</p>
+
         <div aria-live="polite" aria-atomic="true" className={styles.columnLiveRegion}>
           {orderedColumns.map((column) => column.label).join(', ')}
         </div>
@@ -131,6 +133,7 @@ export function ColumnPickerPopover({
                   />
                   {column.label}
                 </label>
+                {isFixed ? <span className={styles.fixedLabel}>Fixed</span> : null}
                 <div className={styles.columnMoveGroup}>
                   <button
                     aria-label={`Move ${column.label} up`}
