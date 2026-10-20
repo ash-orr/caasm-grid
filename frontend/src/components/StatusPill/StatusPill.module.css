@@ -1,5 +1,4 @@
-.pill,
-:global(.pill) {
+.pill {
   display: inline-block;
   padding: 1px 8px;
   border-radius: 10px;

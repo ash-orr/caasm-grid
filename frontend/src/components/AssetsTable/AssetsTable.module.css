@@ -123,6 +123,7 @@
   border: 0;
   color: var(--link);
   cursor: pointer;
+  padding: 0;
   text-decoration: underline;
   text-underline-offset: 2px;
   font-size: 14px;

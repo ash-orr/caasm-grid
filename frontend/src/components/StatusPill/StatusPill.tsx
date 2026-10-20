@@ -40,7 +40,7 @@ export function StatusPill({ status, kind = 'device', label }: StatusPillProps) 
     <Tooltip.Provider delayDuration={150}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <span className={`${styles.pill} pill ${TONE[status]}`}>{text}</span>
+          <span className={`${styles.pill} ${TONE[status]}`}>{text}</span>
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content className={styles.tip} sideOffset={6}>
