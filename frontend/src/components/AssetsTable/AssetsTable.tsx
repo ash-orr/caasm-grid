@@ -623,13 +623,13 @@ export function AssetsTable() {
   }
 
   const [deviceColumnOrder, setDeviceColumnOrder] = useState<string[]>([
-    'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'createdTime', 'coverageGaps',
+    'name', 'type', 'os', 'location', 'account', 'accountType', 'group', 'riskScore', 'status', 'lastConnected', 'createdTime', 'coverageGaps', 'sourceCoverage',
     ...buildSourceColumns('device').map((column) => column.id),
     'authRepo', 'nasSite', 'macVendor', 'manufacturer', 'model', 'applications', 'patches', 'processes', 'services',
     'peripherals', 'browser', 'browserExtensions', 'agentpVersion', 'riskViolations', 'nasIp', 'agentpLastReported',
   ]);
   const [accountColumnOrder, setAccountColumnOrder] = useState<string[]>([
-    'name', 'accountType', 'group', 'deviceCount', 'blocked', 'lastLogin', 'coverageGaps',
+    'name', 'accountType', 'group', 'deviceCount', 'blocked', 'lastLogin', 'coverageGaps', 'sourceCoverage',
     ...buildSourceColumns('account').map((column) => column.id),
     'authRepo', 'nasSite', 'location',
   ]);
@@ -1525,11 +1525,18 @@ export function AssetsTable() {
 
   function getDefaultHiddenColumns(entity: SavedViewEntity): string[] {
     const columns = entity === 'devices' ? deviceColumns : accountColumns;
-    return columns.filter((column) => !column.defaultVisible).map((column) => column.id);
+    const inheritedHidden = columns
+      .filter((column) => !column.defaultVisible && column.id !== 'sourceCoverage')
+      .map((column) => column.id);
+    const sourceHidden = buildSourceColumns(entity === 'devices' ? 'device' : 'account')
+      .map((column) => column.id);
+    return Array.from(new Set([...inheritedHidden, ...sourceHidden]));
   }
 
   function getCaasmHiddenColumns(entity: SavedViewEntity): string[] {
-    const defaults = getDefaultHiddenColumns(entity);
+    const defaults = (entity === 'devices' ? deviceColumns : accountColumns)
+      .filter((column) => !column.defaultVisible)
+      .map((column) => column.id);
     const extras = entity === 'devices' ? DEVICE_CAASM_HIDDEN_COLUMNS : ACCOUNT_CAASM_HIDDEN_COLUMNS;
     return Array.from(new Set([...defaults, ...extras]));
   }
