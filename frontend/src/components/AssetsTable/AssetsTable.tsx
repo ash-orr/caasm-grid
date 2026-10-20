@@ -1778,6 +1778,11 @@ export function AssetsTable() {
   function runSelectionAction(action: string) {
     const selectedCount = selectedRowIds.length;
 
+    if (action === 'Add') {
+      setToast(`Add ${tab === 'devices' ? 'device' : 'account'}`);
+      return;
+    }
+
     if (selectedCount < 1) {
       setToast(`Select at least 1 ${tab === 'devices' ? 'device' : 'account'}.`);
       return;
@@ -1798,6 +1803,7 @@ export function AssetsTable() {
     }
 
     return [
+      { label: 'Add', visible: true, danger: false },
       { label: 'Edit', visible: count === 1, danger: false },
       { label: 'Change group', visible: count === 1, danger: false },
       { label: 'Block', visible: count >= 1, danger: false },
@@ -2168,12 +2174,14 @@ export function AssetsTable() {
         <button
           aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
           aria-pressed={showFilters}
-          className={`${styles.btn} ${showFilters ? styles.btnActive : ''}`}
+          className={`${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
           onClick={() => setShowFilters((prev) => !prev)}
           type="button"
         >
-          {showFilters ? 'Hide filters' : 'Show filters'}
-          {filterCount > 0 ? <span className={styles.countBadge}>{filterCount}</span> : null}
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
+            <path d="M2 3h12l-4.5 5.5V13l-3 1.5V8.5z" />
+          </svg>
+          {filterCount > 0 ? <span className={styles.countBadgeFloat}>{filterCount}</span> : null}
         </button>
 
         <input
@@ -2208,12 +2216,15 @@ export function AssetsTable() {
         <button
           aria-label="Show/hide columns"
           aria-pressed={columnPickerOpen}
-          className={styles.btn}
+          className={`${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
           onClick={openColumnPickerDirectly}
           ref={columnsButtonRef}
           type="button"
         >
-          Show/hide columns
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
+            <rect x="2" y="3" width="12" height="10" rx="1.5" />
+            <path d="M6.5 3v10M10.5 3v10" />
+          </svg>
         </button>
 
         <DropdownMenu.Root onOpenChange={(open) => {
