@@ -11,6 +11,7 @@ export const ACCOUNT_SOURCE_COLUMN_NAMES = [
   'Okta',
   'Google Workspace',
   'Active Directory',
+  'EntraID',
 ] as const;
 
 const SOURCE_COLUMN_SHORT_LABELS: Record<string, string> = {
@@ -28,6 +29,18 @@ export function getSourceColumnFullName(sourceName: string): string {
   return sourceName;
 }
 
+export function formatCoverageGapText(gaps: string[]): string {
+  if (gaps.length === 0) return 'None';
+  if (gaps.length <= 2) return gaps.join(', ');
+  return `${gaps[0]}, ${gaps[1]} +${gaps.length - 2}`;
+}
+
+export function formatSourceCoverageText(sources: string[]): string {
+  const liveSources = sources.filter((source) => source && source !== '—');
+  if (!liveSources.length) return '—';
+  return liveSources.map((sourceName) => getSourceColumnLabel(sourceName)).join(', ');
+}
+
 export function getDefaultVisibleDeviceColumnIds(): string[] {
   return [
     'name',
@@ -42,7 +55,6 @@ export function getDefaultVisibleDeviceColumnIds(): string[] {
     'lastConnected',
     'createdTime',
     'coverageGaps',
-    ...DEVICE_SOURCE_COLUMN_NAMES.map((sourceName) => `source:${sourceName}`),
   ];
 }
 
