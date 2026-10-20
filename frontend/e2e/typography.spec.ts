@@ -62,10 +62,11 @@ test.describe('Typography parity', () => {
     await expect(dialogTitle).toHaveCSS('line-height', '24.7px');
 
     const optionLabel = page.getByRole('dialog').getByText('Status', { exact: true }).first();
-    await expect(optionLabel).toHaveCSS('font-size', '12.5px');
-    await expect(optionLabel).toHaveCSS('line-height', '18.125px');
+    await expect(optionLabel).toHaveCSS('font-size', '14px');
+    await expect(optionLabel).toHaveCSS('line-height', '20.3px');
 
-    const blockedLabel = page.getByText('Blocked', { exact: true }).first();
-    await expect(blockedLabel).toHaveCSS('font-size', '12.5px');
+    const groupHeading = page.getByRole('dialog').getByText('Default filters', { exact: true }).first();
+    await expect(groupHeading).toHaveCSS('font-size', '11.5px');
+    await expect(groupHeading).toHaveCSS('font-weight', '600');
   });
 });

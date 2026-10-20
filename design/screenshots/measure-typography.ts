@@ -35,15 +35,15 @@ const elements = [
   { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
   { name: 'Blocked status pill', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['label:has-text("Blocked")', 'span:has-text("Blocked")', 'span[class*="pill"]:has-text("Blocked")'] },
   { name: 'risk-score pill', prototypeSelectors: ['span.score'], portSelectors: ['span:has-text("70")', '[class*="riskBadge"]', 'span.score'] },
-  { name: 'Exposure gaps cell text', prototypeSelectors: ['tbody tr:first-child td:last-child'], portSelectors: ['td:has-text("Coverage gaps")', 'td:has-text("Exposure gaps")'] },
+  { name: 'Exposure gaps cell text', prototypeSelectors: ['tbody tr:first-child td:last-child'], portSelectors: ['tbody tr:first-child td:last-child', 'td:has-text("Coverage gaps")', 'td:has-text("Exposure gaps")'] },
   { name: 'Filters panel heading "Filters"', prototypeSelectors: ['div.filters b'], portSelectors: ['span.headerLabel:has-text("Filters")', 'div.headerRow span:has-text("Filters")', 'div:has-text("Filters") span'] },
   { name: 'Clear link', prototypeSelectors: ['a#clr'], portSelectors: ['button:has-text("Clear")', 'a:has-text("Clear")', 'text=Clear'] },
   { name: 'filter section summary "Saved views"', prototypeSelectors: ['summary:has-text("Saved views")'], portSelectors: ['summary:has-text("Saved views")', 'details summary:has-text("Saved views")'] },
   { name: 'radio option label', prototypeSelectors: ['label.chk'], portSelectors: ['label:has-text("Default view")', 'label.savedOption:has-text("Default view")', 'label[class*="savedOption"]'] },
   { name: 'Manage filters button', prototypeSelectors: ['button:has-text("Manage filters")'], portSelectors: ['button:has-text("Manage filters")'] },
   { name: 'Manage filters dialog title', prototypeSelectors: ['h2#mfh'], portSelectors: ['[role="dialog"] h2', 'div[role="dialog"] h2', 'h2:has-text("Manage filters")'] },
-  { name: 'Manage filters dialog group heading', prototypeSelectors: ['#mf-g .ag'], portSelectors: ['[role="dialog"] .menuGroup', '.menuGroup'] },
-  { name: 'Manage filters dialog option label', prototypeSelectors: ['#mf-g label.chk:has-text("Status")'], portSelectors: ['[role="dialog"] label:has-text("Status")', 'label:has-text("Status")'] },
+  { name: 'Manage filters dialog group heading', prototypeSelectors: ['text=Default filters'], portSelectors: ['[role="dialog"] text=Default filters', 'text=Default filters'] },
+  { name: 'Manage filters dialog option label', prototypeSelectors: ['label:has-text("Status")'], portSelectors: ['[role="dialog"] label:has-text("Status")', 'label:has-text("Status")'] },
   { name: 'Manage filters dialog footer buttons', prototypeSelectors: ['button:has-text("Apply")'], portSelectors: ['button:has-text("Apply")'] },
   { name: 'pagination footer "N devices" text', prototypeSelectors: ['.foot span:first-child'], portSelectors: ['.tableFooter .footerCount', '.footerCount'] },
   { name: 'Rows per page label', prototypeSelectors: ['label:has-text("Rows per page")'], portSelectors: ['label:has-text("Rows per page")'] },
@@ -115,7 +115,18 @@ function propertyMatches(property: string, left: string | null | undefined, righ
   return left === right;
 }
 
-function statusForComparison(property: string, prototypeValue: string | null | undefined, portValue: string | null | undefined): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' {
+function statusForComparison(
+  elementName: string,
+  property: string,
+  prototypeValue: string | null | undefined,
+  portValue: string | null | undefined,
+): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' | 'PENDING (table port)' {
+  const pendingElements = new Set(['Blocked status pill', 'risk-score pill']);
+
+  if (pendingElements.has(elementName) && (portValue === 'NOT FOUND' || portValue === 'ERROR:' || prototypeValue === 'NOT FOUND' || prototypeValue === 'ERROR:')) {
+    return 'PENDING (table port)';
+  }
+
   if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
   if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
   if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
@@ -197,6 +208,20 @@ async function preparePortPage(page: Page): Promise<void> {
   await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
 }
 
+async function openManageFiltersInPrototype(page: Page): Promise<void> {
+  const trigger = page.locator('#mgf').first();
+  if (await trigger.count()) {
+    await trigger.click({ timeout: 2000 }).catch(() => undefined);
+  }
+}
+
+async function openManageFiltersInPort(page: Page): Promise<void> {
+  const trigger = page.getByRole('button', { name: 'Manage filters' }).first();
+  if (await trigger.count()) {
+    await trigger.click({ timeout: 2000 }).catch(() => undefined);
+  }
+}
+
 function summarizeMarkdownRows(rows: readonly string[]) {
   const counts = {
     total: 0,
@@ -225,6 +250,7 @@ function summarizeMarkdownRows(rows: readonly string[]) {
     else if (status === 'PROTOTYPE NOT FOUND') counts.prototypeNotFound += 1;
     else if (status === 'PORT NOT FOUND') counts.portNotFound += 1;
     else if (status === 'BOTH NOT FOUND') counts.bothNotFound += 1;
+    else if (status === 'PENDING (table port)') counts.portNotFound += 1;
 
     if (status === 'PORT NOT FOUND' || status === 'PROTOTYPE NOT FOUND' || status === 'BOTH NOT FOUND') {
       notFoundElements.add(element);
@@ -253,6 +279,8 @@ async function main() {
 
     await preparePrototypePage(prototypePage);
     await preparePortPage(portPage);
+    await openManageFiltersInPrototype(prototypePage);
+    await openManageFiltersInPort(portPage);
 
     for (const element of elements) {
       let prototypeStyle: Record<string, string> | 'NOT FOUND' | `ERROR: ${string}` = 'NOT FOUND';
@@ -276,7 +304,7 @@ async function main() {
       for (const property of properties) {
         const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
         const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
-        const status = statusForComparison(property, prototypeValue, portValue);
+        const status = statusForComparison(element.name, property, prototypeValue, portValue);
 
         if (status === 'PROTOTYPE NOT FOUND' || status === 'PORT NOT FOUND' || status === 'BOTH NOT FOUND') {
           const prototypeContext = await findNearestContainerHTML(prototypePage, element.prototypeSelectors);

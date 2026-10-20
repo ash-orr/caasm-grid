@@ -125,7 +125,7 @@ export function ManageFiltersDialog({
                 {items.map((item) => {
                   const checked = draft.includes(item.id);
                   return (
-                    <label className={styles.optionRow} key={item.id}>
+                    <label className={`${styles.optionRow} ${styles.popupOptionRow}`} key={item.id}>
                       <input
                         checked={checked}
                         onChange={() => {
@@ -149,7 +149,7 @@ export function ManageFiltersDialog({
         <div className={styles.popupActions}>
           <button className={styles.btn} onClick={() => onOpenChange(false)} type="button">Cancel</button>
           <button
-            className={styles.btn}
+            className={styles.btnPrimary}
             onClick={() => {
               onApply(draft);
               onOpenChange(false);
