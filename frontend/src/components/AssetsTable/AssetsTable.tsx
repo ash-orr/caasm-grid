@@ -316,14 +316,33 @@ function renderCoverageGapCell(row: AccountRecord | DeviceRecord): ReactNode {
     return 'None';
   }
 
-  const text = formatCoverageGapText(gaps);
+  if (gaps.length <= 2) {
+    return (
+      <span style={{ color: 'var(--bad, #c0392b)' }}>
+        {gaps.join(', ')}
+      </span>
+    );
+  }
+
+  const names = gaps.slice(0, 2).join(', ');
+  const countText = `, +${gaps.length - 2}`;
 
   return (
-    <Tooltip content={gaps.join(', ')}>
-      <span style={{ color: 'var(--bad, #c0392b)', textDecoration: 'underline dotted', textUnderlineOffset: '2px', cursor: 'help' }}>
-        {text}
-      </span>
-    </Tooltip>
+    <span style={{ color: 'var(--bad, #c0392b)' }}>
+      {names}
+      <Tooltip content={gaps.join(', ')}>
+        <span
+          style={{
+            textDecoration: 'underline dotted',
+            textUnderlineOffset: '2px',
+            cursor: 'help',
+            color: 'var(--bad, #c0392b)',
+          }}
+        >
+          {countText}
+        </span>
+      </Tooltip>
+    </span>
   );
 }
 
@@ -1389,8 +1408,8 @@ export function AssetsTable() {
       { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
       { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt },
-      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
-      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: false, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
+      { id: 'coverageGaps', label: 'Exposure gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
+      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: true, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
       { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
@@ -1430,8 +1449,8 @@ export function AssetsTable() {
       { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
       { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? <span className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span> : <span className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
       { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
-      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
-      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: false, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
+      { id: 'coverageGaps', label: 'Exposure gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
+      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: true, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
       { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
@@ -2335,7 +2354,7 @@ export function AssetsTable() {
                   onChange={() => selectView(tab, 'caasm')}
                   type="radio"
                 />
-                CAASM View
+                Exposure Risk view
               </label>
               {savedViewsByTab[tab].map((savedView) => (
                 <label className={styles.savedOption} key={savedView.id}>

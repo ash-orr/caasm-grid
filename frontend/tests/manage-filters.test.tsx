@@ -148,7 +148,7 @@ describe('Manage filters dialog', () => {
     expect(screen.getByText('Device type')).toBeTruthy();
   });
 
-  it('7 Default view / CAASM View restore hidden defaults', () => {
+  it('7 Default view / Exposure Risk view restore hidden defaults', () => {
     const { container } = renderDialog({ visibleIds: ['deviceType', 'os'] });
     expect(container.textContent).toContain('Manage filters');
     expect((screen.getByLabelText('Device type') as HTMLInputElement).checked).toBe(true);

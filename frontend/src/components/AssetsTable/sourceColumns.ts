@@ -32,7 +32,7 @@ export function getSourceColumnFullName(sourceName: string): string {
 export function formatCoverageGapText(gaps: string[]): string {
   if (gaps.length === 0) return 'None';
   if (gaps.length <= 2) return gaps.join(', ');
-  return `${gaps[0]}, ${gaps[1]} +${gaps.length - 2}`;
+  return `${gaps[0]}, ${gaps[1]}, +${gaps.length - 2}`;
 }
 
 export function formatSourceCoverageText(sources: string[]): string {
@@ -55,6 +55,7 @@ export function getDefaultVisibleDeviceColumnIds(): string[] {
     'lastConnected',
     'createdTime',
     'coverageGaps',
+    'sourceCoverage',
   ];
 }
 

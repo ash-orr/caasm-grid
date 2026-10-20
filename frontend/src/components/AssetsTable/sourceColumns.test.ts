@@ -15,19 +15,19 @@ describe('source column helpers', () => {
     expect(getSourceColumnLabel('Absolute Secure Endpoint')).toBe('ASE');
   });
 
-  it('keeps Created time visible by default for device tables', () => {
+  it('keeps source coverage visible immediately after exposure gaps by default', () => {
     const visibleColumns = getDefaultVisibleDeviceColumnIds();
 
     expect(visibleColumns).toContain('createdTime');
-    expect(visibleColumns.indexOf('lastConnected')).toBeLessThan(visibleColumns.indexOf('createdTime'));
     expect(visibleColumns.indexOf('createdTime')).toBeLessThan(visibleColumns.indexOf('coverageGaps'));
+    expect(visibleColumns.indexOf('coverageGaps')).toBeLessThan(visibleColumns.indexOf('sourceCoverage'));
   });
 
-  it('formats coverage gaps like the prototype', () => {
+  it('formats exposure gaps like the prototype', () => {
     expect(formatCoverageGapText([])).toBe('None');
     expect(formatCoverageGapText(['CrowdStrike'])).toBe('CrowdStrike');
     expect(formatCoverageGapText(['CrowdStrike', 'Okta'])).toBe('CrowdStrike, Okta');
-    expect(formatCoverageGapText(['CrowdStrike', 'Okta', 'Google Workspace', 'Active Directory'])).toContain('+2');
+    expect(formatCoverageGapText(['CrowdStrike', 'Okta', 'Google Workspace', 'Active Directory'])).toContain(', +2');
   });
 
   it('formats source coverage as the short labels and the count takes precedence for sorting', () => {

@@ -1,4 +1,7 @@
+import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { StatusPill } from '../StatusPill';
 import { getSourceStatus } from './sourceStatus';
 
 describe('source status helper', () => {
@@ -48,5 +51,15 @@ describe('source status helper', () => {
       lastSeenAt: '2026-10-16T18:00:00.000Z',
       nowMs,
     })).toBe('Reporting');
+  });
+
+  it('renders the prototype status pill text and tooltip for N/A sources', () => {
+    render(React.createElement(StatusPill, { kind: 'account', status: 'N/A' }));
+
+    const pill = screen.getByText('Not applicable');
+    fireEvent.mouseEnter(pill);
+    fireEvent.focus(pill);
+
+    expect(screen.getByText('This source doesn’t cover this type of account.')).toBeTruthy();
   });
 });
