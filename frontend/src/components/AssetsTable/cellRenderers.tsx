@@ -16,5 +16,5 @@ export function renderRiskScorePill(score: number): ReactNode {
 
 export function renderStatusCell(status: DeviceRecord['status']): ReactNode {
   const tone = status === 'Blocked' ? statusPillStyles.bad : statusPillStyles.light;
-  return <span className={`${statusPillStyles.pill} ${tone}`}>{status}</span>;
+  return <span data-testid="status-pill" className={`${statusPillStyles.pill} ${tone}`}>{status}</span>;
 }
