@@ -587,7 +587,7 @@ export function AssetsTable() {
   const [searchByTab, setSearchByTab] = useState<Record<TabKey, string>>({ devices: '', accounts: '', sites: '' });
 
   const tableShellRef = useRef<HTMLDivElement | null>(null);
-  const viewSettingsButtonRef = useRef<HTMLButtonElement | null>(null);
+  const columnsButtonRef = useRef<HTMLButtonElement | null>(null);
 
   function isRectVisible(rect: DOMRect | null) {
     if (!rect) return false;
@@ -1806,10 +1806,10 @@ export function AssetsTable() {
     ].filter((item) => item.visible);
   }, [isDevices, selectedRowIds.length]);
 
-  function openColumnPickerFromViewSettings() {
-    if (!viewSettingsButtonRef.current) return;
-    setColumnPickerAnchorEl(viewSettingsButtonRef.current);
-    setColumnPickerOpen(true);
+  function openColumnPickerDirectly() {
+    if (!columnsButtonRef.current) return;
+    setColumnPickerAnchorEl(columnsButtonRef.current);
+    setColumnPickerOpen((prev) => !prev);
   }
 
   function handleSaveView(action: SaveViewAction) {
@@ -2166,6 +2166,8 @@ export function AssetsTable() {
 
       <div className={styles.toolbar}>
         <button
+          aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
+          aria-pressed={showFilters}
           className={`${styles.btn} ${showFilters ? styles.btnActive : ''}`}
           onClick={() => setShowFilters((prev) => !prev)}
           type="button"
@@ -2203,17 +2205,27 @@ export function AssetsTable() {
 
         <div className={styles.toolbarSpacer} />
 
-        <DropdownMenu.Root>
+        <button
+          aria-label="Show/hide columns"
+          aria-pressed={columnPickerOpen}
+          className={styles.btn}
+          onClick={openColumnPickerDirectly}
+          ref={columnsButtonRef}
+          type="button"
+        >
+          Show/hide columns
+        </button>
+
+        <DropdownMenu.Root onOpenChange={(open) => {
+          if (open) setColumnPickerOpen(false);
+        }}>
           <DropdownMenu.Trigger asChild>
-            <button className={styles.btn} ref={viewSettingsButtonRef} type="button">
-              View settings
+            <button className={styles.btn} type="button">
+              Views
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content align="end" className={styles.dropdownMenu} sideOffset={6}>
-              <DropdownMenu.Item className={styles.dropdownItem} onSelect={openColumnPickerFromViewSettings}>
-                Show/hide columns
-              </DropdownMenu.Item>
               <DropdownMenu.Item className={styles.dropdownItem} onSelect={() => setSaveViewDialogOpen(true)}>
                 Save view
               </DropdownMenu.Item>

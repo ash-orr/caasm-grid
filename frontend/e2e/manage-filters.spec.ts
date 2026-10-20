@@ -21,8 +21,7 @@ test.describe('Manage filters dialog', () => {
   });
 
   test('shows source status columns after opening Columns', async ({ page }) => {
-    await page.getByRole('button', { name: 'View settings' }).click();
-    await page.getByRole('menuitem', { name: 'Show/hide columns' }).click();
+    await page.getByRole('button', { name: 'Show/hide columns' }).click();
     await page.getByRole('checkbox', { name: 'CrowdStrike' }).check();
     await expect(page.getByRole('button', { name: 'CrowdStrike', exact: true }).first()).toBeVisible();
   });
@@ -92,8 +91,7 @@ test.describe('Manage filters dialog', () => {
     await expect(exposureView).toBeChecked();
     await expect(await getVisibleHeaders()).toEqual(exposureDeviceHeaders);
 
-    await page.getByRole('button', { name: 'View settings' }).click();
-    await page.getByRole('menuitem', { name: 'Show/hide columns' }).click();
+    await page.getByRole('button', { name: 'Show/hide columns' }).click();
     await page.getByRole('checkbox', { name: 'Type', exact: true }).uncheck();
     await page.keyboard.press('Escape');
     await expect(await getVisibleHeaders()).not.toContain('Type');
@@ -109,8 +107,7 @@ test.describe('Manage filters dialog', () => {
     await expect(exposureView).toBeChecked();
     await expect(await getVisibleHeaders()).toEqual(exposureAccountHeaders);
 
-    await page.getByRole('button', { name: 'View settings' }).click();
-    await page.getByRole('menuitem', { name: 'Show/hide columns' }).click();
+    await page.getByRole('button', { name: 'Show/hide columns' }).click();
     await page.getByRole('checkbox', { name: 'Account type', exact: true }).uncheck();
     await page.keyboard.press('Escape');
     await expect(await getVisibleHeaders()).not.toContain('Account type');

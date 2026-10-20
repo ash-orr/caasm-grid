@@ -81,8 +81,8 @@ test.describe('popover scrolling regressions', () => {
     await assertWheelDoesNotScrollPage(page, menu);
   });
 
-  test('view settings menu stays in viewport and blocks page scrolling', async ({ page }) => {
-    await page.getByRole('button', { name: 'View settings' }).click();
+  test('views menu stays in viewport and blocks page scrolling', async ({ page }) => {
+    await page.getByRole('button', { name: 'Views' }).click();
     const menu = page.getByRole('menu').first();
     await expect(menu).toBeVisible();
 
@@ -104,8 +104,7 @@ test.describe('popover scrolling regressions', () => {
   });
 
   test('column picker stays in viewport and blocks page scrolling', async ({ page }) => {
-    await page.getByRole('button', { name: 'View settings' }).click();
-    await page.getByText('Show/hide columns').click();
+    await page.getByRole('button', { name: 'Show/hide columns' }).click();
 
     const picker = page.locator('div[style*="position: fixed"]').filter({ hasText: 'Reset to default' }).first();
     await expect(picker).toBeVisible();
