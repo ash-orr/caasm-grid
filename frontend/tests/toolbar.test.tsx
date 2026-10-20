@@ -58,15 +58,27 @@ describe('table toolbar', () => {
     expect(screen.getAllByText('Fixed').length).toBeGreaterThan(0);
   });
 
-  it('shows the Add action in the Accounts toolbar exactly as the prototype does', async () => {
+  it('matches the Accounts visibility matrix from the prototype', async () => {
     render(<AssetsTable />);
 
     const accountsButtons = screen.getAllByRole('button', { name: 'Accounts' });
     await userEvent.click(accountsButtons[0]);
 
-    const addButton = screen.getByRole('button', { name: 'Add' });
-    expect(addButton).toBeTruthy();
+    const selectionCheckboxes = screen.getAllByRole('checkbox', { name: /select row/i });
+    expect(selectionCheckboxes.length).toBeGreaterThan(0);
+
+    expect(screen.getByRole('button', { name: 'Add' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Change group' })).toBeNull();
+
+    await userEvent.click(selectionCheckboxes[0]);
+    expect(screen.getByRole('button', { name: 'Add' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Edit' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Change group' })).toBeTruthy();
+
+    await userEvent.click(selectionCheckboxes[1]);
+    expect(screen.getByRole('button', { name: 'Add' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Change group' })).toBeNull();
   });
 });
