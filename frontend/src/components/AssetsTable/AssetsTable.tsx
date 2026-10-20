@@ -29,7 +29,12 @@ import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
 import type { SourceCoverageRow } from './sourceCoverage';
 import { getSelectionBannerState } from './selection';
-import { buildSourceColumns } from './sourceColumns';
+import {
+  buildSourceColumns,
+  formatCoverageGapText,
+  formatSourceCoverageText,
+  getSourceColumnLabel,
+} from './sourceColumns';
 import { StatusPill } from '../StatusPill';
 import statusPillStyles from '../StatusPill/StatusPill.module.css';
 import styles from './AssetsTable.module.css';
@@ -291,13 +296,64 @@ function formatCoverageGapsFromSourceCoverage(row: AccountRecord | DeviceRecord)
     .filter((entry) => entry[1].status === 'Not present')
     .map((entry) => entry[0]);
 
-  if (gaps.length === 0) return 'None';
-  if (gaps.length <= 2) return gaps.join(', ');
-  return `${gaps[0]}, ${gaps[1]} +${gaps.length - 2}`;
+  return formatCoverageGapText(gaps);
 }
 
 function countCoverageGaps(row: AccountRecord | DeviceRecord): number {
   return Object.values(row.sourceCoverage).filter((entry) => entry.status === 'Not present').length;
+}
+
+function countSourceCoverage(row: AccountRecord | DeviceRecord): number {
+  return Object.values(row.sourceCoverage).filter((entry) => entry.status !== 'N/A').length;
+}
+
+function renderCoverageGapCell(row: AccountRecord | DeviceRecord): ReactNode {
+  const gaps = Object.entries(row.sourceCoverage)
+    .filter((entry) => entry[1].status === 'Not present')
+    .map((entry) => entry[0]);
+
+  if (gaps.length === 0) {
+    return 'None';
+  }
+
+  const text = formatCoverageGapText(gaps);
+
+  return (
+    <Tooltip content={gaps.join(', ')}>
+      <span style={{ color: 'var(--bad, #c0392b)', textDecoration: 'underline dotted', textUnderlineOffset: '2px', cursor: 'help' }}>
+        {text}
+      </span>
+    </Tooltip>
+  );
+}
+
+function renderSourceCoverageCell(row: AccountRecord | DeviceRecord): ReactNode {
+  const sources = Object.entries(row.sourceCoverage)
+    .filter((entry) => entry[1].status !== 'N/A')
+    .map((entry) => entry[0]);
+
+  if (sources.length === 0) return '—';
+
+  const text = formatSourceCoverageText(sources);
+  return (
+    <Tooltip content={sources.map((sourceName) => getSourceColumnLabel(sourceName)).join(', ')}>
+      <span
+        style={{
+          maxWidth: '250px',
+          display: 'inline-block',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          verticalAlign: 'bottom',
+          textDecoration: 'underline dotted',
+          textUnderlineOffset: '2px',
+          cursor: 'help',
+        }}
+      >
+        {text}
+      </span>
+    </Tooltip>
+  );
 }
 
 function deviceSortValue(row: DeviceRecord, columnId: string): string | number | null {
@@ -331,6 +387,8 @@ function deviceSortValue(row: DeviceRecord, columnId: string): string | number |
       return Date.parse(row.createdAt);
     case 'coverageGaps':
       return row.coverageGaps.length;
+    case 'sourceCoverage':
+      return countSourceCoverage(row);
     case 'authRepo':
       return row.authRepo ?? null;
     case 'nasSite':
@@ -389,6 +447,8 @@ function accountSortValue(row: AccountFilterRow, columnId: string): string | num
       return row.lastLoginDays ?? null;
     case 'coverageGaps':
       return countCoverageGaps(row);
+    case 'sourceCoverage':
+      return countSourceCoverage(row);
     case 'authRepo':
       return row.authRepo ?? null;
     case 'nasSite':
@@ -558,8 +618,12 @@ export function AssetsTable() {
   const [hiddenDeviceColumns, setHiddenDeviceColumns] = useState<string[]>([
     'authRepo', 'nasSite', 'macVendor', 'manufacturer', 'model', 'applications', 'patches', 'processes',
     'services', 'peripherals', 'browser', 'browserExtensions', 'agentpVersion', 'riskViolations', 'nasIp', 'agentpLastReported',
+    ...buildSourceColumns('device').map((column) => column.id),
   ]);
-  const [hiddenAccountColumns, setHiddenAccountColumns] = useState<string[]>(['authRepo', 'nasSite', 'location']);
+  const [hiddenAccountColumns, setHiddenAccountColumns] = useState<string[]>([
+    'authRepo', 'nasSite', 'location',
+    ...buildSourceColumns('account').map((column) => column.id),
+  ]);
 
   useEffect(() => {
     if (seeMoreOpenFor) {
@@ -1325,7 +1389,8 @@ export function AssetsTable() {
       { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
       { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt },
-      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
+      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
+      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: false, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
       { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
@@ -1365,7 +1430,8 @@ export function AssetsTable() {
       { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
       { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? <span className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span> : <span className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
       { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
-      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => formatCoverageGapsFromSourceCoverage(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
+      { id: 'coverageGaps', label: 'Coverage gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
+      { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: false, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
       { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },

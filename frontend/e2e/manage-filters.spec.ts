@@ -19,4 +19,11 @@ test.describe('Manage filters dialog', () => {
     await expect(dialog).toBeHidden();
     await expect(trigger).toBeFocused();
   });
+
+  test('shows source status columns after opening Columns', async ({ page }) => {
+    await page.getByRole('button', { name: 'View settings' }).click();
+    await page.getByRole('menuitem', { name: 'Show/hide columns' }).click();
+    await page.getByRole('checkbox', { name: 'CrowdStrike' }).check();
+    await expect(page.getByRole('button', { name: 'CrowdStrike', exact: true }).first()).toBeVisible();
+  });
 });
