@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { AssetsTable } from '../src/components/AssetsTable/AssetsTable';
 
@@ -51,17 +52,17 @@ describe('table toolbar', () => {
     render(<AssetsTable />);
 
     const columnsButtons = screen.getAllByRole('button', { name: 'Show/hide columns' });
-    await columnsButtons[0].click();
+    await userEvent.click(columnsButtons[0]);
 
     expect(screen.getByText('Show, hide and reorder. Drag a row or use the arrows.')).toBeTruthy();
     expect(screen.getAllByText('Fixed').length).toBeGreaterThan(0);
   });
 
-  it('shows the Add action in the Accounts toolbar exactly as the prototype does', () => {
+  it('shows the Add action in the Accounts toolbar exactly as the prototype does', async () => {
     render(<AssetsTable />);
 
     const accountsButtons = screen.getAllByRole('button', { name: 'Accounts' });
-    accountsButtons[0].click();
+    await userEvent.click(accountsButtons[0]);
 
     const addButton = screen.getByRole('button', { name: 'Add' });
     expect(addButton).toBeTruthy();

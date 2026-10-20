@@ -114,4 +114,21 @@ test.describe('popover scrolling regressions', () => {
     await assertPageScrollKeepsMenuAttached(page, picker);
     await assertWheelDoesNotScrollPage(page, picker);
   });
+
+  test('toolbar icon buttons show Radix tooltips on hover and focus', async ({ page }) => {
+    await page.goto('/');
+
+    const filterButton = page.getByRole('button', { name: /hide filters/i }).first();
+    await expect(filterButton).toBeVisible();
+    await filterButton.hover();
+    await expect(page.getByText('Hide filters')).toBeVisible();
+    await filterButton.focus();
+    await expect(page.getByText('Hide filters')).toBeVisible();
+
+    const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
+    await columnsButton.hover();
+    await expect(page.getByText('Show/hide columns')).toBeVisible();
+    await columnsButton.focus();
+    await expect(page.getByText('Show/hide columns')).toBeVisible();
+  });
 });
