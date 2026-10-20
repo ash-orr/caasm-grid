@@ -119,7 +119,7 @@
 }
 
 .headerLabel {
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   font-size: 14px;
   line-height: 20.3px;
 }

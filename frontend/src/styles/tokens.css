@@ -16,6 +16,8 @@
   --side: #14212b;
   --sidetx: #c7d2dc;
   --font: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
 }
 
 /* Dark mode: follows the computer's setting unless the page forces light */
