@@ -131,4 +131,16 @@ test.describe('popover scrolling regressions', () => {
     await columnsButton.focus();
     await expect(page.getByText('Show/hide columns')).toBeVisible();
   });
+
+  test('devices and accounts include blocked and risk-state pills', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
+    await expect(page.locator('[aria-label$=" Blocked"]').first()).toBeVisible();
+    await expect(page.locator('[aria-label$=" Alert"]').first()).toBeVisible();
+    await expect(page.locator('[aria-label$=" Access"]').first()).toBeVisible();
+
+    await page.getByRole('button', { name: 'Accounts' }).click();
+    await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
+  });
 });
