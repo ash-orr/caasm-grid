@@ -37,7 +37,7 @@ const elements = [
   { name: 'table header cell "Device name"', prototypeSelector: 'th:has-text("Device name")', portSelector: 'th:has-text("Device name")' },
   { name: 'plain table body cell', prototypeSelector: 'tbody tr td:nth-child(3)', portSelector: 'tbody tr td:nth-child(3)' },
   { name: 'bold device-name cell', prototypeSelector: 'tbody tr td b', portSelector: 'tbody tr td b' },
-  { name: 'Blocked status pill', prototypeSelector: 'span.pill.p-bad:has-text("Blocked")', portSelector: 'span.pill:has-text("Blocked")' },
+  { name: 'Blocked status pill', prototypeSelector: 'span.pill.p-bad:has-text("Blocked")', portSelector: 'span[class*="pill"]:has-text("Blocked")' },
   { name: 'risk-score pill', prototypeSelector: 'span.score', portSelector: 'span.score' },
   { name: 'Exposure gaps cell text', prototypeSelector: 'td:has-text("Exposure gaps")', portSelector: 'td:has-text("Exposure gaps")' },
   { name: 'Filters panel heading "Filters"', prototypeSelector: 'div.filters b', portSelector: 'div.card.filters b' },
@@ -122,9 +122,49 @@ function propertyMatches(property: string, left: string | null | undefined, righ
   return left === right;
 }
 
+function statusForComparison(prototypeValue: string | null | undefined, portValue: string | null | undefined): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' {
+  if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
+  if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
+  if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
+  return propertyMatches('fontSize', prototypeValue, portValue) ? 'OK' : 'MISMATCH';
+}
+
 function formatCell(value: string | null | undefined): string {
   if (value === undefined || value === null) return 'NOT FOUND';
   return value;
+}
+
+async function findNearestParentHTML(page: Page, selector: string): Promise<string | null> {
+  const tagHint = selector
+    .replace(/\s*[:\[].*$/g, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .at(-1);
+
+  if (!tagHint) return null;
+
+  try {
+    const candidates = await page.locator(tagHint).evaluateAll((nodes) =>
+      nodes
+        .map((node) => ({
+          text: (node.textContent ?? '').trim(),
+          outer: (node as Element).outerHTML,
+          parent: (node as Element).parentElement?.outerHTML ?? null,
+        }))
+        .filter((candidate) => candidate.text.length > 0)
+        .slice(0, 5),
+    );
+
+    const match = candidates.find((candidate) => {
+      const key = selector.toLowerCase();
+      return candidate.text.toLowerCase().includes(key.replace(/[^a-z0-9 ]/g, '').trim().split(' ').at(-1) ?? '') ||
+        candidate.outer.toLowerCase().includes(key.split(/[:\[]/)[0].toLowerCase());
+    });
+
+    return match?.parent ?? match?.outer ?? null;
+  } catch {
+    return null;
+  }
 }
 
 async function getElementCSS(page: Page, selector: string): Promise<Record<string, string> | 'NOT FOUND' | `ERROR: ${string}`> {
@@ -208,7 +248,20 @@ async function main() {
       for (const property of properties) {
         const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
         const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
-        const status = propertyMatches(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
+        const status = (() => {
+          if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
+          if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
+          if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
+          return propertyMatches(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
+        })();
+
+        if (status === 'PROTOTYPE NOT FOUND' || status === 'PORT NOT FOUND' || status === 'BOTH NOT FOUND') {
+          const context = await findNearestParentHTML(prototypePage, element.prototypeSelector);
+          const portContext = await findNearestParentHTML(portPage, element.portSelector);
+          rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} | ${context ?? portContext ?? ''} |`);
+          continue;
+        }
+
         rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
       }
     }

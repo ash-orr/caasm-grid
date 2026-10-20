@@ -20,9 +20,14 @@ test.describe('Typography parity', () => {
     const bodyCell = page.locator('tbody tr td').nth(2);
     await expect(bodyCell).toHaveCSS('font-size', '14px');
 
-    await expect(page.locator('.pill').first()).toHaveCSS('font-size', '12px');
+    await expect(page.locator('span').filter({ hasText: 'Reporting' }).first()).toHaveCSS('font-size', '12px');
     await expect(page.locator('summary').filter({ hasText: 'Saved views' }).first()).toHaveCSS('font-size', '12.5px');
     await expect(page.locator('.tableFooter .footerCount').first()).toHaveCSS('font-size', '12.5px');
+    const clearButton = page.getByRole('button', { name: 'Clear' }).first();
+    await expect(clearButton).toHaveCSS('padding-top', '0px');
+    await expect(clearButton).toHaveCSS('padding-right', '0px');
+    await expect(clearButton).toHaveCSS('padding-bottom', '0px');
+    await expect(clearButton).toHaveCSS('padding-left', '0px');
 
     await page.getByRole('button', { name: 'Manage filters' }).click();
     await expect(page.getByText('Status', { exact: true }).first()).toHaveCSS('font-size', '12.5px');
