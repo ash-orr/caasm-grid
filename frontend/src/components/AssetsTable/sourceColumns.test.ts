@@ -106,10 +106,48 @@ describe('source column helpers', () => {
     expect(state.visibleRows).toHaveLength(0);
   });
 
-  it('formats source sync ages with the prototype thresholds', () => {
-    expect(formatSourceSyncAge('Reporting', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBe('24h ago');
-    expect(formatSourceSyncAge('Reporting', '2026-10-16T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBe('2d ago');
-    expect(formatSourceSyncAge('Pending', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBeNull();
-    expect(formatSourceSyncAge('N/A', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBeNull();
+  it('uses the prototype time boundaries for reporting rows and hides time for no-time statuses', () => {
+    const now = Date.parse('2026-10-18T12:00:00.000Z');
+
+    expect(formatSourceSyncAge('Reporting', '2026-10-18T11:30:00.000Z', now)).toBe('<1h ago');
+    expect(formatSourceSyncAge('Reporting', '2026-10-18T11:00:00.000Z', now)).toBe('1h ago');
+    expect(formatSourceSyncAge('Reporting', '2026-10-16T13:00:00.000Z', now)).toBe('47h ago');
+    expect(formatSourceSyncAge('Reporting', '2026-10-16T12:00:00.000Z', now)).toBe('2d ago');
+    expect(formatSourceSyncAge('Pending', '2026-10-17T12:00:00.000Z', now)).toBeNull();
+    expect(formatSourceSyncAge('N/A', '2026-10-17T12:00:00.000Z', now)).toBeNull();
+    expect(formatSourceSyncAge('Not present', '2026-10-17T12:00:00.000Z', now)).toBeNull();
+  });
+
+  it('keeps the card collapsed when nothing is hidden and when only N/A rows are hidden', () => {
+    const reportingOnlyRows: SourceCoverageRow[] = [
+      { source: 'CrowdStrike', status: 'Reporting', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'Google Workspace', status: 'Reporting', lastSyncAt: '2026-10-17T11:00:00.000Z' },
+    ];
+
+    const allNotApplicableRows: SourceCoverageRow[] = [
+      { source: 'Active Directory', status: 'N/A', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'Google Workspace', status: 'N/A', lastSyncAt: '2026-10-17T11:00:00.000Z' },
+    ];
+
+    expect(getExposureGapCardState(reportingOnlyRows, false).summaryText).toBe('All sources reporting');
+    expect(getExposureGapCardState(reportingOnlyRows, false).showToggle).toBe(true);
+    expect(getExposureGapCardState(reportingOnlyRows, false).toggleLabel).toBe('See details');
+    expect(getExposureGapCardState(allNotApplicableRows, false).showToggle).toBe(false);
+    expect(getExposureGapCardState(allNotApplicableRows, false).toggleLabel).toBe('');
+  });
+
+  it('keeps the hidden-link text in the exact prototype format for reporting and not-applicable combinations', () => {
+    const rows: SourceCoverageRow[] = [
+      { source: 'CrowdStrike', status: 'Reporting', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'EntraID', status: 'Not present', lastSyncAt: null },
+      { source: 'Google Workspace', status: 'N/A', lastSyncAt: '2026-10-16T12:00:00.000Z' },
+      { source: 'Okta', status: 'Reporting', lastSyncAt: '2026-10-17T11:00:00.000Z' },
+      { source: 'Portnox AgentP', status: 'Pending', lastSyncAt: null },
+    ];
+
+    const state = getExposureGapCardState(rows, false);
+
+    expect(state.visibleRows.map((row) => row.source)).toEqual(['EntraID', 'Portnox AgentP']);
+    expect(state.toggleLabel).toBe('+2 Reporting, 1 Not applicable');
   });
 });

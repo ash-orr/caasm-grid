@@ -1935,7 +1935,7 @@ export function AssetsTable() {
       const linkedAccount = accountRows.find((account) => stripSyntheticSuffix(account.name) === accountName) ?? null;
       const detailTabs = ['Overview', 'Source data', 'On this device', 'Alerts', 'ZTNA access', 'Connection history'];
       const activeDetailTab = detailTabByKind.device;
-      const sourceRows = toSourceCoverageRows(deviceRecord, { omitNotApplicable: true });
+      const sourceRows = toSourceCoverageRows(deviceRecord);
       const conflictCount = estimateSourceConflictCount(sourceRows);
 
       return (
