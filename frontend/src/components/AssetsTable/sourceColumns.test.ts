@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { SourceCoverageRow } from './sourceCoverage';
 import {
   buildSourceColumns,
   formatCoverageGapText,
@@ -6,6 +7,11 @@ import {
   getDefaultVisibleDeviceColumnIds,
   getSourceColumnLabel,
 } from './sourceColumns';
+import {
+  formatSourceSyncAge,
+  getExposureGapCardState,
+  sortSourceCoverageRows,
+} from './sourceCoverage';
 
 describe('source column helpers', () => {
   it('uses short labels for source headers', () => {
@@ -52,5 +58,58 @@ describe('source column helpers', () => {
       'source:Active Directory',
       'source:EntraID',
     ]);
+  });
+
+  it('sorts the exposure-gap rows by the prototype status order and then source name', () => {
+    const rows: SourceCoverageRow[] = [
+      { source: 'Google Workspace', status: 'Reporting', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'Active Directory', status: 'Not present', lastSyncAt: null },
+      { source: 'Portnox AgentP', status: 'Stale', lastSyncAt: '2026-10-10T00:00:00.000Z' },
+      { source: 'CrowdStrike', status: 'Pending', lastSyncAt: null },
+      { source: 'Okta', status: 'N/A', lastSyncAt: '2026-10-15T00:00:00.000Z' },
+    ];
+
+    expect(sortSourceCoverageRows(rows).map((row) => row.source)).toEqual([
+      'Active Directory',
+      'Portnox AgentP',
+      'CrowdStrike',
+      'Google Workspace',
+      'Okta',
+    ]);
+  });
+
+  it('keeps only issue rows visible by default and shows the hidden counts in the toggle label', () => {
+    const rows: SourceCoverageRow[] = [
+      { source: 'CrowdStrike', status: 'Reporting', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'EntraID', status: 'Not present', lastSyncAt: null },
+      { source: 'Okta', status: 'Stale', lastSyncAt: '2026-10-10T00:00:00.000Z' },
+      { source: 'Google Workspace', status: 'N/A', lastSyncAt: '2026-10-15T00:00:00.000Z' },
+    ];
+
+    const state = getExposureGapCardState(rows, false);
+
+    expect(state.visibleRows.map((row) => row.source)).toEqual(['EntraID', 'Okta']);
+    expect(state.toggleLabel).toBe('+1 Reporting, 1 Not applicable');
+    expect(state.showToggle).toBe(true);
+  });
+
+  it('shows the all-sources-reporting state when there are no issues', () => {
+    const rows: SourceCoverageRow[] = [
+      { source: 'Google Workspace', status: 'Reporting', lastSyncAt: '2026-10-17T12:00:00.000Z' },
+      { source: 'Okta', status: 'Reporting', lastSyncAt: '2026-10-16T18:00:00.000Z' },
+    ];
+
+    const state = getExposureGapCardState(rows, false);
+
+    expect(state.summaryText).toBe('All sources reporting');
+    expect(state.toggleLabel).toBe('See details');
+    expect(state.visibleRows).toHaveLength(0);
+  });
+
+  it('formats source sync ages with the prototype thresholds', () => {
+    expect(formatSourceSyncAge('Reporting', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBe('24h ago');
+    expect(formatSourceSyncAge('Reporting', '2026-10-16T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBe('2d ago');
+    expect(formatSourceSyncAge('Pending', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBeNull();
+    expect(formatSourceSyncAge('N/A', '2026-10-17T12:00:00.000Z', Date.parse('2026-10-18T12:00:00.000Z'))).toBeNull();
   });
 });

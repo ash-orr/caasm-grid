@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Tooltip } from './Tooltip';
 import styles from './AssetsTable.module.css';
-import { formatSourceSyncAge, getSourceCoverageVisibility, type SourceCoverageRow } from './sourceCoverage';
+import { formatSourceSyncAge, getExposureGapCardState, type SourceCoverageRow } from './sourceCoverage';
 
 interface SourceCoverageCardProps {
   rows: SourceCoverageRow[];
@@ -50,21 +50,22 @@ function SourceNameCell({ value }: { value: string }) {
 export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
   const [expanded, setExpanded] = useState(false);
 
-  const visibility = useMemo(
-    () => getSourceCoverageVisibility(rows.length, expanded),
-    [rows.length, expanded]
+  const cardState = useMemo(
+    () => getExposureGapCardState(rows, expanded),
+    [rows, expanded]
   );
-
-  const visibleRows = rows.slice(0, visibility.visibleCount);
 
   return (
     <div className={styles.detailCard}>
-      <h3 className={styles.detailCardTitle}>Source coverage</h3>
+      <h3 className={styles.detailCardTitle}>Exposure gaps</h3>
+      {cardState.summaryText ? (
+        <div className={styles.detailMuted}>{cardState.summaryText}</div>
+      ) : null}
       {rows.length === 0 ? (
         <p className={styles.detailMuted}>No connected sources.</p>
       ) : (
         <dl className={styles.sourceCoverageList}>
-          {visibleRows.map((row) => {
+          {cardState.visibleRows.map((row) => {
             const age = formatSourceSyncAge(row.status, row.lastSyncAt);
 
             return (
@@ -84,9 +85,9 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
         </dl>
       )}
 
-      {visibility.showToggle ? (
+      {cardState.showToggle ? (
         <button className={styles.linkBtn} onClick={() => setExpanded((prev) => !prev)} type="button">
-          {visibility.toggleLabel}
+          {cardState.toggleLabel}
         </button>
       ) : null}
     </div>
