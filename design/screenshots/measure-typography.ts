@@ -126,7 +126,7 @@ const baseElements = [
   { name: 'table header cell "Device name"', prototypeSelectors: ['th:has-text("Device name")'], portSelectors: ['th:has-text("Device name")', 'thead th:has-text("Device name")'] },
   { name: 'plain table body cell', prototypeSelectors: ['tbody tr td:nth-child(3)'], portSelectors: ['tbody tr td:nth-child(3)'] },
   { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
-  { name: 'risk-score pill (red, 70+)', prototypeSelectors: ['span.score.p-bad'], portSelectors: ['tbody span[aria-label$=" Blocked"]:visible'] },
+  { name: 'risk-score pill (red, 70+)', prototypeSelectors: ['span.score.p-bad'], portSelectors: ['tbody span[aria-label$=" Blocked"]:visible', 'tbody [data-testid="risk-pill"][aria-label$=" Blocked"]:visible'] },
   { name: 'risk-score pill (amber, 40-69)', prototypeSelectors: ['span.score.p-warn'], portSelectors: ['tbody span[aria-label$=" Alert"]:visible'] },
   { name: 'risk-score pill (green, under 40)', prototypeSelectors: ['span.score.p-ok'], portSelectors: ['tbody span[aria-label$=" Access"]:visible'] },
   { name: 'Blocked status pill (devices)', prototypeSelectors: ['tbody span.pill.p-bad:text-is("Blocked")'], portSelectors: ['tbody [data-testid="status-pill"]:text-is("Blocked")'] },
@@ -385,13 +385,13 @@ async function launchFreshBrowser(): Promise<Browser> {
 
 async function preparePrototypePage(page: Page): Promise<void> {
   await page.goto(prototypeUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
-  await page.locator('select.ps').selectOption('0').catch(() => undefined);
+  await page.locator('label:has-text("Rows per page") select').selectOption('0').catch(() => undefined);
   await page.waitForTimeout(250);
 }
 
 async function preparePortPage(page: Page): Promise<void> {
   await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.locator('select[aria-label="Rows per page"]').selectOption('-1').catch(() => undefined);
+  await page.locator('label:has-text("Rows per page") select').selectOption('-1').catch(() => undefined);
   await page.waitForTimeout(250);
 }
 
@@ -411,11 +411,11 @@ function summarizeMarkdownRows(rows: readonly string[]) {
   const counts = { total: 0, ok: 0, mismatches: 0, notFound: 0 };
 
   for (const row of rows) {
-    if (!row.startsWith('| ') || row.startsWith('| element |')) continue;
+    if (!row.startsWith('| ') || row.startsWith('| element |') || row.startsWith('| --- |')) continue;
     const cells = row.split('|').slice(1, -1).map((cell) => cell.trim());
     if (cells.length < 5) continue;
     const [, , , , status] = cells;
-    if (!status) continue;
+    if (!status || status === '---') continue;
     counts.total += 1;
     if (status === 'OK') counts.ok += 1;
     else if (status === 'MISMATCH') counts.mismatches += 1;
@@ -471,14 +471,6 @@ async function main() {
     for (const element of baseElements) {
       const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
       const portStyle = await getElementCSS(portPage, element.portSelectors);
-      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
-        continue;
-      }
-
-      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
-        continue;
-      }
-
       const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
       const portValues = typeof portStyle === 'string' ? null : portStyle;
 
@@ -492,18 +484,10 @@ async function main() {
 
     await openManageFilters(prototypePage, 'prototype');
     await openManageFilters(portPage, 'port');
-if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
-        continue;
-      }
 
-      
     for (const element of dialogElements) {
       const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
       const portStyle = await getElementCSS(portPage, element.portSelectors);
-      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
-        continue;
-      }
-
       const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
       const portValues = typeof portStyle === 'string' ? null : portStyle;
 
@@ -525,30 +509,20 @@ if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
 
     const accountsBlocked = {
       name: 'Blocked status pill (accounts)',
-    if (prototypeAccountsStyle === 'NOT FOUND' || portAccountsStyle === 'NOT FOUND') {
-      console.log('[Blocked status pill (accounts)] debug-only missing selector omitted from summary');
-    } else {
-      const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
-      const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
+      prototypeSelectors: ['tbody span.pill.p-bad:text-is("Blocked")'],
+      portSelectors: ['tbody [data-testid="status-pill"]:text-is("Blocked")'],
+    } as const;
 
-      for (const property of properties) {
-        const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
-        const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
-        const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
-        rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
-      }
-    if (prototypeAccountsStyle === 'NOT FOUND' || portAccountsStyle === 'NOT FOUND') {
-      console.log('[Blocked status pill (accounts)] debug-only missing selector omitted from summary');
-    } else {
-      const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
-      const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
+    const prototypeAccountsStyle = await getElementCSS(prototypePage, accountsBlocked.prototypeSelectors, 'Blocked');
+    const portAccountsStyle = await getElementCSS(portPage, accountsBlocked.portSelectors, 'Blocked');
+    const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
+    const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
 
-      for (const property of properties) {
-        const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
-        const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
-        const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
-        rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
-      }
+    for (const property of properties) {
+      const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
+      const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
+      const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
+      rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
     }
 
     await switchTab(portPage, 'Devices');
