@@ -11,10 +11,18 @@ function riskBand(score: number): 'Access' | 'Alert' | 'Blocked' {
 export function renderRiskScorePill(score: number): ReactNode {
   const band = riskBand(score);
   const tone = band === 'Blocked' ? statusPillStyles.bad : band === 'Alert' ? statusPillStyles.warn : statusPillStyles.ok;
-  return <span aria-label={`${score} ${band}`} className={`${statusPillStyles.pill} ${tone}`}>{score}</span>;
+  return (
+    <span aria-label={`${score} ${band}`} data-testid="risk-pill" className={`${statusPillStyles.pill} ${tone}`}>
+      {score}
+    </span>
+  );
 }
 
 export function renderStatusCell(status: DeviceRecord['status']): ReactNode {
   const tone = status === 'Blocked' ? statusPillStyles.bad : statusPillStyles.light;
-  return <span data-testid="status-pill" className={`${statusPillStyles.pill} ${tone}`}>{status}</span>;
+  return (
+    <span aria-label={status} data-testid="status-pill" className={`${statusPillStyles.pill} ${tone}`}>
+      {status}
+    </span>
+  );
 }
