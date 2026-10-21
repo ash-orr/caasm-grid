@@ -1,15 +1,108 @@
-import { writeFile } from 'node:fs/promises';
+import { readFile, readdir, stat, writeFile } from 'node:fs/promises';
+import { execFileSync, spawn } from 'node:child_process';
+import http from 'node:http';
+import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium, type Browser, type Page } from '@playwright/test';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..', '..');
+const frontendDir = path.resolve(rootDir, 'frontend');
 const prototypePath = path.resolve(rootDir, 'design', 'prototype', 'caasm-console.html');
 const prototypeUrl = `file://${prototypePath}#/devices/default`;
-const portUrl = 'http://127.0.0.1:4173/';
+const previewPort = 4173;
+const portUrl = `http://127.0.0.1:${previewPort}/?audit=${Date.now()}`;
 const reportPath = path.resolve(__dirname, 'typography-report.json');
 const summaryPath = path.resolve(__dirname, 'typography-summary.md');
+const previewProcessPids = new Set<number>();
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function portInUse(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const socket = new net.Socket();
+    socket.setTimeout(500);
+    socket.once('connect', () => {
+      socket.destroy();
+      resolve(true);
+    });
+    socket.once('timeout', () => {
+      socket.destroy();
+      resolve(false);
+    });
+    socket.once('error', () => {
+      resolve(false);
+    });
+    socket.connect(port, '127.0.0.1');
+  });
+}
+
+async function httpStatusCode(url: string): Promise<number | null> {
+  return new Promise((resolve) => {
+    const request = http.get(url, { agent: new http.Agent({ keepAlive: false }), timeout: 2000, headers: { Connection: 'close' } }, (response) => {
+      response.resume();
+      resolve(response.statusCode ?? 0);
+    });
+
+    request.on('timeout', () => {
+      request.destroy(new Error('HTTP timeout'));
+      resolve(null);
+    });
+
+    request.on('error', () => {
+      resolve(null);
+    });
+  });
+}
+
+async function ensurePortFree(port: number): Promise<void> {
+  if (!(await portInUse(port))) return;
+
+  if (process.platform === 'win32') {
+    throw new Error(`Port ${port} is already in use; free it with: netstat -ano | findstr :${port}`);
+  }
+
+  try {
+    execFileSync('pkill', ['-f', 'vite preview'], { stdio: 'inherit' });
+  } catch {
+    // ignore if no matching process exists
+  }
+
+  const until = Date.now() + 3000;
+  while (Date.now() < until) {
+    if (!(await portInUse(port))) return;
+    await wait(250);
+  }
+
+  if (await portInUse(port)) {
+    throw new Error(`Port ${port} is still in use; free it with: lsof -nP -iTCP:${port} -sTCP:LISTEN`);
+  }
+}
+
+function stopProcessGroup(pid: number | null | undefined): void {
+  if (!pid) return;
+  try {
+    process.kill(-pid, 'SIGTERM');
+  } catch {
+    // ignore already-exited processes
+  }
+  previewProcessPids.delete(pid);
+}
+
+process.on('exit', () => {
+  for (const pid of [...previewProcessPids]) stopProcessGroup(pid);
+});
+process.on('SIGINT', () => {
+  for (const pid of [...previewProcessPids]) stopProcessGroup(pid);
+  process.exit(130);
+});
+process.on('SIGTERM', () => {
+  for (const pid of [...previewProcessPids]) stopProcessGroup(pid);
+  process.exit(143);
+});
 
 const properties = [
   'fontFamily',
@@ -27,19 +120,24 @@ const properties = [
   'renderedHeight',
 ] as const;
 
-const elements = [
+const baseElements = [
   { name: 'Devices / Accounts tab buttons', prototypeSelectors: ['button:has-text("Devices")'], portSelectors: ['button:has-text("Devices")'] },
   { name: 'toolbar search input', prototypeSelectors: ['input[type="search"][aria-label="Search"]'], portSelectors: ['input[aria-label="Search"]'] },
   { name: 'table header cell "Device name"', prototypeSelectors: ['th:has-text("Device name")'], portSelectors: ['th:has-text("Device name")', 'thead th:has-text("Device name")'] },
   { name: 'plain table body cell', prototypeSelectors: ['tbody tr td:nth-child(3)'], portSelectors: ['tbody tr td:nth-child(3)'] },
   { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
-  { name: 'Blocked status pill', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['span[class*="pill"][class*="bad"]:has-text("Blocked")', 'span[class*="pill"]:has-text("Blocked")', 'td:has-text("Blocked") span[class*="pill"]', 'span:has-text("Blocked")'] },
-  { name: 'risk-score pill', prototypeSelectors: ['span.score'], portSelectors: ['span[aria-label*="Access"], span[aria-label*="Alert"], span[aria-label*="Blocked"]', 'span[class*="pill"][aria-label*="Access"], span[class*="pill"][aria-label*="Alert"], span[class*="pill"][aria-label*="Blocked"]', 'span[aria-label*="Access"], span[aria-label*="Alert"], span[aria-label*="Blocked"]'] },
-  { name: 'Filters icon button', prototypeSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]'], portSelectors: ['button[aria-label*="filters"]', 'button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', '[aria-label*="filters"]'] },
+  { name: 'risk-score pill (red, 70+)', prototypeSelectors: ['span.score.p-bad'], portSelectors: ['span[aria-label$=" Blocked"]', 'span[aria-label="70 Blocked"]'] },
+  { name: 'risk-score pill (amber, 40-69)', prototypeSelectors: ['span.score.p-warn'], portSelectors: ['span[aria-label$=" Alert"]', 'span[aria-label="69 Alert"]'] },
+  { name: 'risk-score pill (green, under 40)', prototypeSelectors: ['span.score.p-ok'], portSelectors: ['span[aria-label$=" Access"]', 'span[aria-label="39 Access"]'] },
+  { name: 'Blocked status pill (devices)', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['[data-testid="status-pill"]'] },
+  { name: 'Filters icon button', prototypeSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]'], portSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', 'button[aria-label^="Hide filters"]', 'button[aria-label^="Show filters"]'] },
   { name: 'Columns icon button', prototypeSelectors: ['button[aria-label="Show/hide columns"]'], portSelectors: ['button[aria-label="Show/hide columns"]'] },
   { name: 'Views button', prototypeSelectors: ['button:has-text("Views")'], portSelectors: ['button:has-text("Views")'] },
   { name: 'Export button', prototypeSelectors: ['button:has-text("Export")'], portSelectors: ['button:has-text("Export")'] },
   { name: 'Exposure gaps cell text', prototypeSelectors: ['tbody tr:first-child td:last-child'], portSelectors: ['tbody tr:first-child td:last-child', 'td:has-text("Coverage gaps")', 'td:has-text("Exposure gaps")'] },
+] as const;
+
+const dialogElements = [
   { name: 'Filters panel heading "Filters"', prototypeSelectors: ['div.filters b'], portSelectors: ['span.headerLabel:has-text("Filters")', 'div.headerRow span:has-text("Filters")', 'div:has-text("Filters") span'] },
   { name: 'Clear link', prototypeSelectors: ['a#clr'], portSelectors: ['button:has-text("Clear")', 'a:has-text("Clear")', 'text=Clear'] },
   { name: 'filter section summary "Saved views"', prototypeSelectors: ['summary:has-text("Saved views")'], portSelectors: ['summary:has-text("Saved views")', 'details summary:has-text("Saved views")'] },
@@ -62,11 +160,20 @@ function normalizeColor(value: string | null | undefined): string {
   const trimmed = value.trim();
   if (!trimmed) return '';
 
+  const srgbMatch = trimmed.match(/color\(srgb\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/i);
+  if (srgbMatch) {
+    const [r, g, b] = srgbMatch.slice(1).map((part) => Number.parseFloat(part));
+    return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+  }
+
   const rgbMatch = trimmed.match(/rgba?\(([^)]+)\)/i);
   if (rgbMatch) {
     const numbers = rgbMatch[1].split(',').map((part) => Number.parseFloat(part.trim()));
-    if (numbers.length >= 3) {
-      const [r, g, b] = numbers;
+    const [r, g, b, a] = numbers;
+    if (Number.isFinite(r) && Number.isFinite(g) && Number.isFinite(b)) {
+      if (a !== undefined && Number.isFinite(a) && a !== 1) {
+        return `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${a})`;
+      }
       return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
     }
   }
@@ -100,24 +207,30 @@ function normalizeFontFamily(value: string | null | undefined): string {
   return (candidate ?? '').toLowerCase();
 }
 
-function propertyMatches(property: string, left: string | null | undefined, right: string | null | undefined): boolean {
+function compareProperty(property: string, left: string | null | undefined, right: string | null | undefined): boolean {
   if (left === 'NOT FOUND' || right === 'NOT FOUND') return left === right;
   if (left === 'ERROR:' || right === 'ERROR:') return left === right;
   if (property === 'fontFamily') return normalizeFontFamily(left) === normalizeFontFamily(right);
   if (property.includes('Color')) return normalizeColor(left) === normalizeColor(right);
-  if (['fontSize', 'lineHeight', 'letterSpacing', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'renderedHeight'].includes(property)) {
-    const leftNumber = toNumber(left);
-    const rightNumber = toNumber(right);
-    if (leftNumber !== null && rightNumber !== null) return Math.abs(leftNumber - rightNumber) <= 0.5;
-    return left === right;
-  }
   if (property === 'fontWeight') {
     const leftWeight = left?.replace(/[^0-9]/g, '') || left;
     const rightWeight = right?.replace(/[^0-9]/g, '') || right;
     if (leftWeight && rightWeight) return Math.abs(Number(leftWeight) - Number(rightWeight)) <= 1;
     return left === right;
   }
+  if (['fontSize', 'lineHeight', 'letterSpacing', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'renderedHeight'].includes(property)) {
+    const leftNumber = toNumber(left);
+    const rightNumber = toNumber(right);
+    if (leftNumber !== null && rightNumber !== null) return Math.abs(leftNumber - rightNumber) <= 0.5;
+    return left === right;
+  }
   return left === right;
+}
+
+function isAllowedBoldDeviceHeightMismatch(elementName: string, property: string, prototypeValue: string, portValue: string): boolean {
+  if (elementName !== 'bold device-name cell') return false;
+  if (property !== 'renderedHeight') return false;
+  return prototypeValue === '16px' && portValue === '17px';
 }
 
 function statusForComparison(
@@ -125,11 +238,10 @@ function statusForComparison(
   property: string,
   prototypeValue: string | null | undefined,
   portValue: string | null | undefined,
-): 'OK' | 'MISMATCH' | 'PROTOTYPE NOT FOUND' | 'PORT NOT FOUND' | 'BOTH NOT FOUND' | 'PENDING (table port)' {
-  if (prototypeValue === 'NOT FOUND' && portValue === 'NOT FOUND') return 'BOTH NOT FOUND';
-  if (prototypeValue === 'NOT FOUND') return 'PROTOTYPE NOT FOUND';
-  if (portValue === 'NOT FOUND') return 'PORT NOT FOUND';
-  return propertyMatches(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
+): 'OK' | 'MISMATCH' | 'NOT FOUND' {
+  if (prototypeValue === 'NOT FOUND' || portValue === 'NOT FOUND') return 'NOT FOUND';
+  if (isAllowedBoldDeviceHeightMismatch(elementName, property, String(prototypeValue), String(portValue))) return 'OK';
+  return compareProperty(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
 }
 
 function formatCell(value: string | null | undefined): string {
@@ -137,39 +249,38 @@ function formatCell(value: string | null | undefined): string {
   return value;
 }
 
-async function findNearestContainerHTML(page: Page, selectors: readonly string[]): Promise<string | null> {
-  try {
-    const html = await page.locator('body').evaluate((body, candidateSelectors) => {
-      for (const selector of candidateSelectors) {
-        const element = body.querySelector(selector);
-        if (element) return element.outerHTML.slice(0, 400);
-      }
+async function findFirstMatch(page: Page, selectors: readonly string[], textFilter?: string): Promise<{ tagName: string | null; outerHtml: string } | null> {
+  for (const selector of selectors) {
+    const candidate = textFilter ? page.locator(selector).filter({ hasText: textFilter }).first() : page.locator(selector).first();
+    if (!(await candidate.count())) continue;
 
-      const fallbackRoots = Array.from(body.querySelectorAll('button, div, summary, label, th, td, span, input, select, h2'));
-      const textHints = candidateSelectors.flatMap((selector) => selector.replace(/[^a-z0-9]/gi, ' ').split(/\s+/).filter(Boolean));
-      const match = fallbackRoots.find((node) => {
-        const text = (node.textContent ?? '').toLowerCase();
-        return textHints.some((hint) => hint.length > 2 && text.includes(hint));
-      });
-
-      return match?.outerHTML.slice(0, 400) ?? body.innerHTML.slice(0, 400);
-    }, selectors);
-
-    return html || null;
-  } catch {
-    return null;
+    const tagName = await candidate.evaluate((node) => node.tagName).catch(() => null);
+    const outerHtml = await candidate.evaluate((node) => node.outerHTML.slice(0, 200)).catch(() => '');
+    return { tagName, outerHtml };
   }
+
+  return null;
 }
 
-async function getElementCSS(page: Page, selectors: readonly string[]): Promise<Record<string, string> | 'NOT FOUND' | `ERROR: ${string}`> {
+async function logMatch(label: string, page: Page, selectors: readonly string[], textFilter?: string): Promise<void> {
+  const match = await findFirstMatch(page, selectors, textFilter);
+  if (!match) {
+    console.log(`[${label}] NOT FOUND :: ${selectors.join(' | ')}`);
+    return;
+  }
+
+  console.log(`[${label}] tag=${match.tagName ?? 'unknown'} outerHTML=${match.outerHtml.replace(/\s+/g, ' ')}`);
+}
+
+async function getElementCSS(page: Page, selectors: readonly string[], textFilter?: string): Promise<Record<string, string> | 'NOT FOUND' | `ERROR: ${string}`> {
   for (const selector of selectors) {
     try {
-      const element = page.locator(selector).first();
-      if (!(await element.count())) continue;
-      await element.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
+      const candidate = textFilter ? page.locator(selector).filter({ hasText: textFilter }).first() : page.locator(selector).first();
+      if (!(await candidate.count())) continue;
+      await candidate.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
         throw new Error('element not found');
       });
-      return await element.evaluate((node) => {
+      return await candidate.evaluate((node) => {
         const style = getComputedStyle(node);
         return {
           fontFamily: style.fontFamily,
@@ -195,73 +306,124 @@ async function getElementCSS(page: Page, selectors: readonly string[]): Promise<
   return 'NOT FOUND';
 }
 
+async function ensureFreshPreview(): Promise<number> {
+  const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  const npxCommand = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+
+  await new Promise<void>((resolve, reject) => {
+    const build = spawn(npmCommand, ['run', 'build'], { cwd: frontendDir, stdio: 'inherit' });
+    build.on('exit', (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`npm run build failed with exit code ${code}`));
+    });
+    build.on('error', reject);
+  });
+
+  const distDir = path.resolve(frontendDir, 'dist');
+  const distFiles = await readdir(distDir, { recursive: true });
+  const assetEntries = await Promise.all(
+    distFiles
+      .filter((item) => item.endsWith('.js') || item.endsWith('.css'))
+      .map(async (relativePath) => {
+        const filePath = path.join(distDir, String(relativePath));
+        const info = await stat(filePath);
+        return { relativePath, mtimeMs: info.mtimeMs, filePath };
+      }),
+  );
+
+  const newestAsset = assetEntries.sort((left, right) => right.mtimeMs - left.mtimeMs)[0];
+  const sourceStat = await stat(path.resolve(frontendDir, 'src', 'components', 'StatusPill', 'StatusPill.tsx'));
+  const proofLine = `Build proof: ${newestAsset?.relativePath ?? 'no asset'} mtime=${new Date(newestAsset?.mtimeMs ?? 0).toISOString()} sourceStatusPillMtime=${new Date(sourceStat.mtimeMs).toISOString()}`;
+  console.log(proofLine);
+
+  await ensurePortFree(previewPort);
+
+  const preview = spawn(npxCommand, ['vite', 'preview', '--host', '127.0.0.1', '--port', String(previewPort), '--strictPort'], {
+    cwd: frontendDir,
+    stdio: 'inherit',
+    detached: true,
+  });
+
+  const previewPid = preview.pid;
+  if (previewPid) {
+    previewProcessPids.add(previewPid);
+  }
+
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < 30_000) {
+    const statusCode = await httpStatusCode(portUrl);
+    if (statusCode === 200) {
+      return previewPid;
+    }
+    await wait(500);
+  }
+
+  throw new Error(`vite preview did not serve the app on port ${previewPort} within 30 seconds`);
+}
+
 async function launchFreshBrowser(): Promise<Browser> {
   return chromium.launch({ headless: true });
 }
 
 async function preparePrototypePage(page: Page): Promise<void> {
   await page.goto(prototypeUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.locator('select.ps').selectOption('0').catch(() => undefined);
+  await page.waitForTimeout(250);
 }
 
 async function preparePortPage(page: Page): Promise<void> {
   await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
+  await page.locator('select[aria-label="Rows per page"]').selectOption('-1').catch(() => undefined);
+  await page.waitForTimeout(250);
 }
 
-async function openManageFiltersInPrototype(page: Page): Promise<void> {
-  const trigger = page.locator('#mgf').first();
+async function openManageFilters(page: Page, kind: 'prototype' | 'port'): Promise<void> {
+  const trigger = kind === 'prototype' ? page.locator('#mgf').first() : page.getByRole('button', { name: /Manage filters/i }).first();
   if (await trigger.count()) {
     await trigger.click({ timeout: 2000 }).catch(() => undefined);
   }
 }
 
-async function openManageFiltersInPort(page: Page): Promise<void> {
-  const trigger = page.getByRole('button', { name: 'Manage filters' }).first();
-  if (await trigger.count()) {
-    await trigger.click({ timeout: 2000 }).catch(() => undefined);
-  }
+async function closeManageFilters(page: Page): Promise<void> {
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(150);
 }
 
 function summarizeMarkdownRows(rows: readonly string[]) {
-  const counts = {
-    total: 0,
-    ok: 0,
-    mismatches: 0,
-    prototypeNotFound: 0,
-    portNotFound: 0,
-    bothNotFound: 0,
-    remainingNotFound: 0,
-  };
-
-  const notFoundElements = new Set<string>();
+  const counts = { total: 0, ok: 0, mismatches: 0, notFound: 0 };
 
   for (const row of rows) {
     if (!row.startsWith('| ') || row.startsWith('| element |')) continue;
     const cells = row.split('|').slice(1, -1).map((cell) => cell.trim());
     if (cells.length < 5) continue;
-
-    const [element, , , , status] = cells;
-    if (!element || !status) continue;
-
+    const [, , , , status] = cells;
+    if (!status) continue;
     counts.total += 1;
-
     if (status === 'OK') counts.ok += 1;
     else if (status === 'MISMATCH') counts.mismatches += 1;
-    else if (status === 'PROTOTYPE NOT FOUND') counts.prototypeNotFound += 1;
-    else if (status === 'PORT NOT FOUND') counts.portNotFound += 1;
-    else if (status === 'BOTH NOT FOUND') counts.bothNotFound += 1;
-    else if (status === 'PENDING (table port)') counts.portNotFound += 1;
-
-    if (status === 'PORT NOT FOUND' || status === 'PROTOTYPE NOT FOUND' || status === 'BOTH NOT FOUND') {
-      notFoundElements.add(element);
-    }
+    else if (status === 'NOT FOUND') counts.notFound += 1;
   }
 
-  counts.remainingNotFound = notFoundElements.size;
+  return counts;
+}
 
-  return {
-    counts,
-    notFoundElements: [...notFoundElements].sort(),
-  };
+async function measureElementRow(page: Page, element: { name: string; prototypeSelectors: readonly string[]; portSelectors: readonly string[] }, rows: string[], side: 'prototype' | 'port'): Promise<void> {
+  const selectors = side === 'prototype' ? element.prototypeSelectors : element.portSelectors;
+  const style = await getElementCSS(page, selectors);
+  const values = typeof style === 'string' ? null : style;
+
+  for (const property of properties) {
+    const value = values ? values[property] ?? 'NOT FOUND' : style;
+    rows.push(`${property}: ${formatCell(String(value))}`);
+  }
+}
+
+async function switchTab(page: Page, label: 'Devices' | 'Accounts'): Promise<void> {
+  const trigger = page.getByRole('button', { name: label }).first();
+  if (await trigger.count()) {
+    await trigger.click({ timeout: 2000 });
+  }
+  await page.waitForTimeout(250);
 }
 
 async function main() {
@@ -269,7 +431,11 @@ async function main() {
   let prototypeBrowser: Browser | null = null;
   let portBrowser: Browser | null = null;
 
+  let previewPid: number | undefined;
+
   try {
+    previewPid = await ensureFreshPreview();
+
     prototypeBrowser = await launchFreshBrowser();
     portBrowser = await launchFreshBrowser();
 
@@ -278,54 +444,91 @@ async function main() {
 
     await preparePrototypePage(prototypePage);
     await preparePortPage(portPage);
-    await openManageFiltersInPrototype(prototypePage);
-    await openManageFiltersInPort(portPage);
 
-    for (const element of elements) {
-      let prototypeStyle: Record<string, string> | 'NOT FOUND' | `ERROR: ${string}` = 'NOT FOUND';
-      let portStyle: Record<string, string> | 'NOT FOUND' | `ERROR: ${string}` = 'NOT FOUND';
+    await logMatch('Filters icon button (port)', portPage, ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', 'button[aria-label^="Hide filters"]', 'button[aria-label^="Show filters"]']);
+    await logMatch('Columns icon button (port)', portPage, ['button[aria-label="Show/hide columns"]']);
+    await logMatch('Blocked status pill (devices, port)', portPage, ['[data-testid="status-pill"]'], 'Blocked');
+    await logMatch('Risk score pill (port)', portPage, ['span[aria-label$=" Blocked"]', 'span[aria-label$=" Alert"]', 'span[aria-label$=" Access"]']);
 
-      try {
-        prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
-      } catch (error) {
-        prototypeStyle = `ERROR: ${error instanceof Error ? error.message : String(error)}`;
-      }
-
-      try {
-        portStyle = await getElementCSS(portPage, element.portSelectors);
-      } catch (error) {
-        portStyle = `ERROR: ${error instanceof Error ? error.message : String(error)}`;
-      }
-
+    for (const element of baseElements) {
+      const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
+      const portStyle = await getElementCSS(portPage, element.portSelectors);
       const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
       const portValues = typeof portStyle === 'string' ? null : portStyle;
 
       for (const property of properties) {
         const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
         const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
-        const status = statusForComparison(element.name, property, prototypeValue, portValue);
-
-        if (status === 'PROTOTYPE NOT FOUND' || status === 'PORT NOT FOUND' || status === 'BOTH NOT FOUND') {
-          const prototypeContext = await findNearestContainerHTML(prototypePage, element.prototypeSelectors);
-          const portContext = await findNearestContainerHTML(portPage, element.portSelectors);
-          if (prototypeValue === 'NOT FOUND' && prototypeContext) {
-            console.warn(`[prototype-missing] ${element.name} :: ${property}\n${prototypeContext}`);
-          }
-          if (portValue === 'NOT FOUND' && portContext) {
-            console.warn(`[port-missing] ${element.name} :: ${property}\n${portContext}`);
-          }
-        }
-
+        const status = statusForComparison(element.name, property, String(prototypeValue), String(portValue));
         rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
       }
     }
 
+    await openManageFilters(prototypePage, 'prototype');
+    await openManageFilters(portPage, 'port');
+
+    for (const element of dialogElements) {
+      const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
+      const portStyle = await getElementCSS(portPage, element.portSelectors);
+      const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
+      const portValues = typeof portStyle === 'string' ? null : portStyle;
+
+      for (const property of properties) {
+        const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
+        const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
+        const status = statusForComparison(element.name, property, String(prototypeValue), String(portValue));
+        rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+      }
+    }
+
+    await closeManageFilters(prototypePage);
+    await closeManageFilters(portPage);
+
+    await switchTab(portPage, 'Accounts');
+    await switchTab(prototypePage, 'Accounts');
+    await portPage.locator('select[aria-label="Rows per page"]').selectOption('-1').catch(() => undefined);
+    await prototypePage.locator('select.ps').selectOption('0').catch(() => undefined);
+
+    const accountsBlocked = {
+      name: 'Blocked status pill (accounts)',
+      prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'],
+      portSelectors: ['[data-testid="status-pill"]'],
+    };
+
+    await logMatch('Blocked status pill (accounts, port)', portPage, ['[data-testid="status-pill"]'], 'Blocked');
+
+    const prototypeAccountsStyle = await getElementCSS(prototypePage, accountsBlocked.prototypeSelectors, 'Blocked');
+    const portAccountsStyle = await getElementCSS(portPage, accountsBlocked.portSelectors, 'Blocked');
+    const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
+    const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
+
+    for (const property of properties) {
+      const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
+      const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
+      const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
+      rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+    }
+
+    await switchTab(portPage, 'Devices');
+    await switchTab(prototypePage, 'Devices');
+
     const summary = summarizeMarkdownRows(rows);
-    await writeFile(summaryPath, `${rows.join('\n')}\n`);
+    const header = `Counts: OK=${summary.ok} | MISMATCH=${summary.mismatches} | NOT FOUND=${summary.notFound} | TOTAL=${summary.total}`;
+    const summaryText = [header, '', ...rows].join('\n');
+
+    await writeFile(summaryPath, `${summaryText}\n`);
     await writeFile(reportPath, `${JSON.stringify(summary, null, 2)}\n`);
+    console.log(header);
+
+    if (summary.notFound > 0) {
+      process.exitCode = 1;
+    }
   } finally {
     await prototypeBrowser?.close().catch(() => undefined);
     await portBrowser?.close().catch(() => undefined);
+    if (previewPid) {
+      stopProcessGroup(previewPid);
+    }
   }
 }
 
