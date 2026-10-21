@@ -130,6 +130,35 @@ const SOURCE_LAST_SYNC: Record<SourceName, string> = {
 };
 
 const DEFAULT_NOW_MS = Date.parse('2026-10-16T13:35:00.000Z');
+const IDENTITY_SOURCE_ORDER = ['Active Directory', 'EntraID', 'Okta', 'Google Workspace'] as const;
+const SEEDED_ACCOUNT_SOURCE_OVERRIDES: Record<string, Partial<Record<(typeof IDENTITY_SOURCE_ORDER)[number], SourceStatus>>> = {
+  'avery@acme.com': { 'Active Directory': 'Not present', EntraID: 'Reporting', Okta: 'Reporting' },
+  'blake@acme.com': { 'Active Directory': 'Reporting', Okta: 'Not present', 'Google Workspace': 'Reporting' },
+  'casey@acme.com': { 'Active Directory': 'Not present', EntraID: 'Reporting', Okta: 'Reporting' },
+  'harper@acme.com': { 'Active Directory': 'Reporting', EntraID: 'Reporting', Okta: 'Reporting', 'Google Workspace': 'Reporting' },
+  'jordan@acme.com': { 'Active Directory': 'Reporting', EntraID: 'Reporting', Okta: 'Reporting', 'Google Workspace': 'Reporting' },
+  'morgan@acme.com': { 'Active Directory': 'Reporting', EntraID: 'Reporting', Okta: 'Reporting', 'Google Workspace': 'Reporting' },
+  'noor@acme.com': { 'Active Directory': 'Reporting', EntraID: 'Reporting', Okta: 'Reporting', 'Google Workspace': 'Reporting' },
+  'quinn@acme.com': { 'Active Directory': 'Reporting', EntraID: 'Reporting', Okta: 'Reporting', 'Google Workspace': 'Reporting' },
+};
+
+function applySeededAccountSourceCoverage(accountRecords: AccountRecord[]): void {
+  for (const account of accountRecords) {
+    const overrides = SEEDED_ACCOUNT_SOURCE_OVERRIDES[account.name];
+    if (!overrides) continue;
+
+    const nextCoverage: SourceCoverage = { ...account.sourceCoverage };
+    for (const source of IDENTITY_SOURCE_ORDER) {
+      const status = overrides[source];
+      if (!status) continue;
+      nextCoverage[source] = {
+        ...nextCoverage[source],
+        status,
+      };
+    }
+    account.sourceCoverage = nextCoverage;
+  }
+}
 
 function normalizeFieldValue(value: unknown, fieldKey?: string): string | null {
   if (value == null) return null;
@@ -374,6 +403,8 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       sourceFieldValues,
     };
   });
+
+  applySeededAccountSourceCoverage(accountRecords);
 
   const accountLookup = new Map(accountRecords.map((account) => [account.name, account]));
 
