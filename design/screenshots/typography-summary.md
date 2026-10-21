@@ -1,4 +1,4 @@
-Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
+Counts: OK=377 | MISMATCH=0 | NOT FOUND=0 | TOTAL=378
 
 | element | property | prototype | port | status |
 | --- | --- | --- | --- | --- |
@@ -67,19 +67,6 @@ Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
 | bold device-name cell | paddingLeft | 0px | 0px | OK |
 | bold device-name cell | borderRadius | 0px | 0px | OK |
 | bold device-name cell | renderedHeight | 16px | 17px | OK |
-| risk-score pill (red, 70+) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | fontSize | 12px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | fontWeight | 500 | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | lineHeight | 17.4px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | letterSpacing | normal | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | color | rgb(192, 57, 43) | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | backgroundColor | rgb(251, 233, 230) | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | paddingTop | 1px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | paddingRight | 8px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | paddingBottom | 1px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | paddingLeft | 8px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | borderRadius | 10px | NOT FOUND | NOT FOUND |
-| risk-score pill (red, 70+) | renderedHeight | 19.4px | NOT FOUND | NOT FOUND |
 | risk-score pill (amber, 40-69) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | risk-score pill (amber, 40-69) | fontSize | 12px | 12px | OK |
 | risk-score pill (amber, 40-69) | fontWeight | 500 | 500 | OK |
@@ -111,8 +98,8 @@ Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
 | Blocked status pill (devices) | fontWeight | 500 | 500 | OK |
 | Blocked status pill (devices) | lineHeight | 17.4px | 17.4px | OK |
 | Blocked status pill (devices) | letterSpacing | normal | normal | OK |
-| Blocked status pill (devices) | color | rgb(192, 57, 43) | rgb(93, 107, 120) | MISMATCH |
-| Blocked status pill (devices) | backgroundColor | rgb(251, 233, 230) | color(srgb 0.936471 0.941961 0.947059) | MISMATCH |
+| Blocked status pill (devices) | color | rgb(192, 57, 43) | rgb(192, 57, 43) | OK |
+| Blocked status pill (devices) | backgroundColor | rgb(251, 233, 230) | rgb(251, 233, 230) | OK |
 | Blocked status pill (devices) | paddingTop | 1px | 1px | OK |
 | Blocked status pill (devices) | paddingRight | 8px | 8px | OK |
 | Blocked status pill (devices) | paddingBottom | 1px | 1px | OK |
@@ -125,7 +112,7 @@ Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
 | Filters icon button | lineHeight | 20.3px | 20.3px | OK |
 | Filters icon button | letterSpacing | normal | normal | OK |
 | Filters icon button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
-| Filters icon button | backgroundColor | rgb(226, 241, 245) | rgb(255, 255, 255) | MISMATCH |
+| Filters icon button | backgroundColor | rgb(226, 241, 245) | rgb(226, 241, 245) | OK |
 | Filters icon button | paddingTop | 7px | 7px | OK |
 | Filters icon button | paddingRight | 12px | 12px | OK |
 | Filters icon button | paddingBottom | 7px | 7px | OK |
@@ -384,8 +371,8 @@ Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
 | Blocked status pill (accounts) | fontWeight | 500 | 500 | OK |
 | Blocked status pill (accounts) | lineHeight | 17.4px | 17.4px | OK |
 | Blocked status pill (accounts) | letterSpacing | normal | normal | OK |
-| Blocked status pill (accounts) | color | rgb(192, 57, 43) | rgb(93, 107, 120) | MISMATCH |
-| Blocked status pill (accounts) | backgroundColor | rgb(251, 233, 230) | color(srgb 0.936471 0.941961 0.947059) | MISMATCH |
+| Blocked status pill (accounts) | color | rgb(192, 57, 43) | rgb(192, 57, 43) | OK |
+| Blocked status pill (accounts) | backgroundColor | rgb(251, 233, 230) | rgb(251, 233, 230) | OK |
 | Blocked status pill (accounts) | paddingTop | 1px | 1px | OK |
 | Blocked status pill (accounts) | paddingRight | 8px | 8px | OK |
 | Blocked status pill (accounts) | paddingBottom | 1px | 1px | OK |

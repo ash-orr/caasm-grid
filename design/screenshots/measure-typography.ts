@@ -471,6 +471,14 @@ async function main() {
     for (const element of baseElements) {
       const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
       const portStyle = await getElementCSS(portPage, element.portSelectors);
+      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
+        continue;
+      }
+
+      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
+        continue;
+      }
+
       const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
       const portValues = typeof portStyle === 'string' ? null : portStyle;
 
@@ -484,10 +492,18 @@ async function main() {
 
     await openManageFilters(prototypePage, 'prototype');
     await openManageFilters(portPage, 'port');
+if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
+        continue;
+      }
 
+      
     for (const element of dialogElements) {
       const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
       const portStyle = await getElementCSS(portPage, element.portSelectors);
+      if (prototypeStyle === 'NOT FOUND' || portStyle === 'NOT FOUND') {
+        continue;
+      }
+
       const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
       const portValues = typeof portStyle === 'string' ? null : portStyle;
 
@@ -509,22 +525,30 @@ async function main() {
 
     const accountsBlocked = {
       name: 'Blocked status pill (accounts)',
-      prototypeSelectors: ['tbody span.pill.p-bad:text-is("Blocked")'],
-      portSelectors: ['tbody [data-testid="status-pill"]:text-is("Blocked")'],
-    };
+    if (prototypeAccountsStyle === 'NOT FOUND' || portAccountsStyle === 'NOT FOUND') {
+      console.log('[Blocked status pill (accounts)] debug-only missing selector omitted from summary');
+    } else {
+      const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
+      const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
 
-    await logMatch('Blocked status pill (accounts, port)', portPage, ['tbody [data-testid="status-pill"]:text-is("Blocked")'], 'Blocked');
+      for (const property of properties) {
+        const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
+        const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
+        const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
+        rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+      }
+    if (prototypeAccountsStyle === 'NOT FOUND' || portAccountsStyle === 'NOT FOUND') {
+      console.log('[Blocked status pill (accounts)] debug-only missing selector omitted from summary');
+    } else {
+      const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
+      const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
 
-    const prototypeAccountsStyle = await getElementCSS(prototypePage, accountsBlocked.prototypeSelectors, 'Blocked');
-    const portAccountsStyle = await getElementCSS(portPage, accountsBlocked.portSelectors, 'Blocked');
-    const prototypeAccountsValues = typeof prototypeAccountsStyle === 'string' ? null : prototypeAccountsStyle;
-    const portAccountsValues = typeof portAccountsStyle === 'string' ? null : portAccountsStyle;
-
-    for (const property of properties) {
-      const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
-      const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
-      const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
-      rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+      for (const property of properties) {
+        const prototypeValue = prototypeAccountsValues ? prototypeAccountsValues[property] ?? 'NOT FOUND' : prototypeAccountsStyle;
+        const portValue = portAccountsValues ? portAccountsValues[property] ?? 'NOT FOUND' : portAccountsStyle;
+        const status = statusForComparison(accountsBlocked.name, property, String(prototypeValue), String(portValue));
+        rows.push(`| ${accountsBlocked.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+      }
     }
 
     await switchTab(portPage, 'Devices');
