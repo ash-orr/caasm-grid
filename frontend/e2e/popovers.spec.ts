@@ -63,6 +63,16 @@ async function assertWheelDoesNotScrollPage(page: Parameters<typeof test>[0]['pa
   await expect(page.evaluate(() => window.scrollY)).resolves.toBe(beforePageY);
 }
 
+async function getVisibleRiskScore(page: Parameters<typeof test>[0]['page'], band: 'Blocked' | 'Alert' | 'Access') {
+  const pill = page.locator(`tbody [data-testid="risk-pill"][aria-label$=" ${band}"]`).first();
+  await expect(pill).toBeVisible();
+
+  const label = await pill.getAttribute('aria-label');
+  const score = Number(label?.match(/^(\d+)/)?.[1]);
+  expect(Number.isFinite(score)).toBeTruthy();
+  return score;
+}
+
 test.describe('popover scrolling regressions', () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 600 });
@@ -143,10 +153,20 @@ test.describe('popover scrolling regressions', () => {
     await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
     await expect(columnsButton).toHaveCSS('border-color', 'rgb(220, 226, 232)');
 
+    await page.locator('label').filter({ hasText: 'Rows per page' }).locator('select').selectOption({ value: '-1' });
+
+    const blockedScore = await getVisibleRiskScore(page, 'Blocked');
+    expect(blockedScore).toBeGreaterThanOrEqual(70);
+
+    const alertScore = await getVisibleRiskScore(page, 'Alert');
+    expect(alertScore).toBeGreaterThanOrEqual(40);
+    expect(alertScore).toBeLessThan(70);
+
+    const accessScore = await getVisibleRiskScore(page, 'Access');
+    expect(accessScore).toBeGreaterThanOrEqual(0);
+    expect(accessScore).toBeLessThan(40);
+
     await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
-    await expect(page.locator('tbody span[aria-label$=" Blocked"]:visible').first()).toBeVisible();
-    await expect(page.locator('tbody span[aria-label$=" Alert"]:visible').first()).toBeVisible();
-    await expect(page.locator('tbody span[aria-label$=" Access"]:visible').first()).toBeVisible();
 
     await page.getByRole('button', { name: 'Accounts' }).click();
     await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
