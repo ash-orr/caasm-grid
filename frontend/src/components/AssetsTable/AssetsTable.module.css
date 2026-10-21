@@ -77,6 +77,14 @@
   border-color: var(--acc);
 }
 
+button[aria-pressed='true'].toolbarIconButton,
+button[aria-pressed='true'].toolbarIconButton:hover,
+button[aria-pressed='true'].toolbarIconButton:focus-visible,
+button[aria-pressed='true'].toolbarIconButton:focus {
+  background: var(--acc-s);
+  border-color: var(--acc);
+}
+
 .btn {
   padding: 7px 12px;
   border: 1px solid var(--line);

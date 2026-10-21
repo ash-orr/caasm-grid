@@ -135,10 +135,18 @@ test.describe('popover scrolling regressions', () => {
   test('devices and accounts include blocked and risk-state pills', async ({ page }) => {
     await page.goto('/');
 
+    const filterButton = page.getByRole('button', { name: /hide filters/i }).first();
+    await expect(filterButton).toHaveCSS('background-color', 'rgb(226, 241, 245)');
+    await expect(filterButton).toHaveCSS('border-color', 'rgb(11, 110, 138)');
+
+    const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
+    await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(columnsButton).toHaveCSS('border-color', 'rgb(220, 226, 232)');
+
     await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
-    await expect(page.locator('[aria-label$=" Blocked"]').first()).toBeVisible();
-    await expect(page.locator('[aria-label$=" Alert"]').first()).toBeVisible();
-    await expect(page.locator('[aria-label$=" Access"]').first()).toBeVisible();
+    await expect(page.locator('tbody span[aria-label$=" Blocked"]:visible').first()).toBeVisible();
+    await expect(page.locator('tbody span[aria-label$=" Alert"]:visible').first()).toBeVisible();
+    await expect(page.locator('tbody span[aria-label$=" Access"]:visible').first()).toBeVisible();
 
     await page.getByRole('button', { name: 'Accounts' }).click();
     await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
