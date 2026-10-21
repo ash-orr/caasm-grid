@@ -32765,6 +32765,7 @@ export function generatePrototypeData(_input: { seed?: number; nowMs?: number } 
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
+  void _input;
   return Promise.resolve({
     accounts,
     devices,
@@ -32775,5 +32776,6 @@ export function createPrototypeData(_input: { seed?: number; nowMs?: number } = 
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
+  void _input;
   return generatePrototypeData(_input);
 }

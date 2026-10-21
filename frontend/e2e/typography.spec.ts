@@ -23,7 +23,11 @@ test.describe('Typography parity', () => {
     await expect(bodyCell).toHaveCSS('font-size', '14px');
     await expect(bodyCell).toHaveCSS('line-height', '20.3px');
 
-    const blockedPill = page.locator('span').filter({ hasText: /^Reporting$/ }).first();
+    await page.getByRole('button', { name: 'Show/hide columns' }).click();
+    await page.getByRole('checkbox', { name: 'CrowdStrike' }).check();
+    await page.keyboard.press('Escape');
+
+    const blockedPill = page.locator('[data-testid="status-pill"][aria-label="Reporting"]').first();
     await expect(blockedPill).toHaveCSS('font-size', '12px');
     await expect(blockedPill).toHaveCSS('font-weight', '500');
 
