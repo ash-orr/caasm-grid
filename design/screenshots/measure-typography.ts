@@ -126,10 +126,10 @@ const baseElements = [
   { name: 'table header cell "Device name"', prototypeSelectors: ['th:has-text("Device name")'], portSelectors: ['th:has-text("Device name")', 'thead th:has-text("Device name")'] },
   { name: 'plain table body cell', prototypeSelectors: ['tbody tr td:nth-child(3)'], portSelectors: ['tbody tr td:nth-child(3)'] },
   { name: 'bold device-name cell', prototypeSelectors: ['tbody tr td b'], portSelectors: ['tbody tr td strong', 'tbody tr td b'] },
-  { name: 'risk-score pill (red, 70+)', prototypeSelectors: ['span.score.p-bad'], portSelectors: ['span[aria-label$=" Blocked"]', 'span[aria-label="70 Blocked"]'] },
-  { name: 'risk-score pill (amber, 40-69)', prototypeSelectors: ['span.score.p-warn'], portSelectors: ['span[aria-label$=" Alert"]', 'span[aria-label="69 Alert"]'] },
-  { name: 'risk-score pill (green, under 40)', prototypeSelectors: ['span.score.p-ok'], portSelectors: ['span[aria-label$=" Access"]', 'span[aria-label="39 Access"]'] },
-  { name: 'Blocked status pill (devices)', prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'], portSelectors: ['[data-testid="status-pill"]'] },
+  { name: 'risk-score pill (red, 70+)', prototypeSelectors: ['span.score.p-bad'], portSelectors: ['tbody span[aria-label$=" Blocked"]:visible'] },
+  { name: 'risk-score pill (amber, 40-69)', prototypeSelectors: ['span.score.p-warn'], portSelectors: ['tbody span[aria-label$=" Alert"]:visible'] },
+  { name: 'risk-score pill (green, under 40)', prototypeSelectors: ['span.score.p-ok'], portSelectors: ['tbody span[aria-label$=" Access"]:visible'] },
+  { name: 'Blocked status pill (devices)', prototypeSelectors: ['tbody span.pill.p-bad:text-is("Blocked")'], portSelectors: ['tbody [data-testid="status-pill"]:text-is("Blocked")'] },
   { name: 'Filters icon button', prototypeSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]'], portSelectors: ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', 'button[aria-label^="Hide filters"]', 'button[aria-label^="Show filters"]'] },
   { name: 'Columns icon button', prototypeSelectors: ['button[aria-label="Show/hide columns"]'], portSelectors: ['button[aria-label="Show/hide columns"]'] },
   { name: 'Views button', prototypeSelectors: ['button:has-text("Views")'], portSelectors: ['button:has-text("Views")'] },
@@ -262,10 +262,22 @@ async function findFirstMatch(page: Page, selectors: readonly string[], textFilt
   return null;
 }
 
+async function selectorDebugInfo(page: Page, selector: string): Promise<{ count: number; firstVisible: boolean }> {
+  const locator = page.locator(selector);
+  const count = await locator.count();
+  const firstVisible = count > 0 ? await locator.first().isVisible().catch(() => false) : false;
+  return { count, firstVisible };
+}
+
 async function logMatch(label: string, page: Page, selectors: readonly string[], textFilter?: string): Promise<void> {
   const match = await findFirstMatch(page, selectors, textFilter);
   if (!match) {
-    console.log(`[${label}] NOT FOUND :: ${selectors.join(' | ')}`);
+    const details = [] as string[];
+    for (const selector of selectors) {
+      const info = await selectorDebugInfo(page, selector);
+      details.push(`${selector}: count=${info.count}, firstVisible=${info.firstVisible}`);
+    }
+    console.log(`[${label}] NOT FOUND :: ${details.join(' | ')}`);
     return;
   }
 
@@ -303,6 +315,12 @@ async function getElementCSS(page: Page, selectors: readonly string[], textFilte
     }
   }
 
+  const details = [] as string[];
+  for (const selector of selectors) {
+    const info = await selectorDebugInfo(page, selector);
+    details.push(`${selector}: count=${info.count}, firstVisible=${info.firstVisible}`);
+  }
+  console.log(`[getElementCSS] NOT FOUND :: ${details.join(' | ')}`);
   return 'NOT FOUND';
 }
 
@@ -447,8 +465,8 @@ async function main() {
 
     await logMatch('Filters icon button (port)', portPage, ['button[aria-label="Hide filters"]', 'button[aria-label="Show filters"]', 'button[aria-label^="Hide filters"]', 'button[aria-label^="Show filters"]']);
     await logMatch('Columns icon button (port)', portPage, ['button[aria-label="Show/hide columns"]']);
-    await logMatch('Blocked status pill (devices, port)', portPage, ['[data-testid="status-pill"]'], 'Blocked');
-    await logMatch('Risk score pill (port)', portPage, ['span[aria-label$=" Blocked"]', 'span[aria-label$=" Alert"]', 'span[aria-label$=" Access"]']);
+    await logMatch('Blocked status pill (devices, port)', portPage, ['tbody [data-testid="status-pill"]:text-is("Blocked")'], 'Blocked');
+    await logMatch('Risk score pill (port)', portPage, ['tbody span[aria-label$=" Blocked"]:visible', 'tbody span[aria-label$=" Alert"]:visible', 'tbody span[aria-label$=" Access"]:visible']);
 
     for (const element of baseElements) {
       const prototypeStyle = await getElementCSS(prototypePage, element.prototypeSelectors);
@@ -491,11 +509,11 @@ async function main() {
 
     const accountsBlocked = {
       name: 'Blocked status pill (accounts)',
-      prototypeSelectors: ['span.pill.p-bad:has-text("Blocked")'],
-      portSelectors: ['[data-testid="status-pill"]'],
+      prototypeSelectors: ['tbody span.pill.p-bad:text-is("Blocked")'],
+      portSelectors: ['tbody [data-testid="status-pill"]:text-is("Blocked")'],
     };
 
-    await logMatch('Blocked status pill (accounts, port)', portPage, ['[data-testid="status-pill"]'], 'Blocked');
+    await logMatch('Blocked status pill (accounts, port)', portPage, ['tbody [data-testid="status-pill"]:text-is("Blocked")'], 'Blocked');
 
     const prototypeAccountsStyle = await getElementCSS(prototypePage, accountsBlocked.prototypeSelectors, 'Blocked');
     const portAccountsStyle = await getElementCSS(portPage, accountsBlocked.portSelectors, 'Blocked');
