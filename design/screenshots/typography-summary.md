@@ -1,4 +1,4 @@
-Counts: OK=377 | MISMATCH=0 | NOT FOUND=0 | TOTAL=378
+Counts: OK=390 | MISMATCH=0 | NOT FOUND=0 | TOTAL=390
 
 | element | property | prototype | port | status |
 | --- | --- | --- | --- | --- |
@@ -67,6 +67,19 @@ Counts: OK=377 | MISMATCH=0 | NOT FOUND=0 | TOTAL=378
 | bold device-name cell | paddingLeft | 0px | 0px | OK |
 | bold device-name cell | borderRadius | 0px | 0px | OK |
 | bold device-name cell | renderedHeight | 16px | 17px | OK |
+| risk-score pill (red, 70+) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| risk-score pill (red, 70+) | fontSize | 12px | 12px | OK |
+| risk-score pill (red, 70+) | fontWeight | 500 | 500 | OK |
+| risk-score pill (red, 70+) | lineHeight | 17.4px | 17.4px | OK |
+| risk-score pill (red, 70+) | letterSpacing | normal | normal | OK |
+| risk-score pill (red, 70+) | color | rgb(192, 57, 43) | rgb(192, 57, 43) | OK |
+| risk-score pill (red, 70+) | backgroundColor | rgb(251, 233, 230) | rgb(251, 233, 230) | OK |
+| risk-score pill (red, 70+) | paddingTop | 1px | 1px | OK |
+| risk-score pill (red, 70+) | paddingRight | 8px | 8px | OK |
+| risk-score pill (red, 70+) | paddingBottom | 1px | 1px | OK |
+| risk-score pill (red, 70+) | paddingLeft | 8px | 8px | OK |
+| risk-score pill (red, 70+) | borderRadius | 10px | 10px | OK |
+| risk-score pill (red, 70+) | renderedHeight | 19.4px | 19.4px | OK |
 | risk-score pill (amber, 40-69) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | risk-score pill (amber, 40-69) | fontSize | 12px | 12px | OK |
 | risk-score pill (amber, 40-69) | fontWeight | 500 | 500 | OK |
