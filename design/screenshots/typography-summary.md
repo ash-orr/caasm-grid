@@ -1,3 +1,5 @@
+Counts: OK=372 | MISMATCH=5 | NOT FOUND=13 | TOTAL=391
+
 | element | property | prototype | port | status |
 | --- | --- | --- | --- | --- |
 | Devices / Accounts tab buttons | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
@@ -64,46 +66,72 @@
 | bold device-name cell | paddingBottom | 0px | 0px | OK |
 | bold device-name cell | paddingLeft | 0px | 0px | OK |
 | bold device-name cell | borderRadius | 0px | 0px | OK |
-| bold device-name cell | renderedHeight | 16px | 17px | MISMATCH |
-| Blocked status pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | fontSize | 12px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | fontWeight | 500 | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | lineHeight | 17.4px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | letterSpacing | normal | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | color | rgb(192, 57, 43) | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | backgroundColor | rgb(251, 233, 230) | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | paddingTop | 1px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | paddingRight | 8px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | paddingBottom | 1px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | paddingLeft | 8px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | borderRadius | 10px | NOT FOUND | PORT NOT FOUND |
-| Blocked status pill | renderedHeight | 19.4px | NOT FOUND | PORT NOT FOUND |
-| risk-score pill | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
-| risk-score pill | fontSize | 12px | 12px | OK |
-| risk-score pill | fontWeight | 500 | 500 | OK |
-| risk-score pill | lineHeight | 17.4px | 17.4px | OK |
-| risk-score pill | letterSpacing | normal | normal | OK |
-| risk-score pill | color | rgb(192, 57, 43) | rgb(183, 121, 31) | MISMATCH |
-| risk-score pill | backgroundColor | rgb(251, 233, 230) | rgb(251, 241, 220) | MISMATCH |
-| risk-score pill | paddingTop | 1px | 1px | OK |
-| risk-score pill | paddingRight | 8px | 8px | OK |
-| risk-score pill | paddingBottom | 1px | 1px | OK |
-| risk-score pill | paddingLeft | 8px | 8px | OK |
-| risk-score pill | borderRadius | 10px | 10px | OK |
-| risk-score pill | renderedHeight | 19.4px | 19.4px | OK |
+| bold device-name cell | renderedHeight | 16px | 17px | OK |
+| risk-score pill (red, 70+) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | fontSize | 12px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | fontWeight | 500 | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | lineHeight | 17.4px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | letterSpacing | normal | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | color | rgb(192, 57, 43) | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | backgroundColor | rgb(251, 233, 230) | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | paddingTop | 1px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | paddingRight | 8px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | paddingBottom | 1px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | paddingLeft | 8px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | borderRadius | 10px | NOT FOUND | NOT FOUND |
+| risk-score pill (red, 70+) | renderedHeight | 19.4px | NOT FOUND | NOT FOUND |
+| risk-score pill (amber, 40-69) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| risk-score pill (amber, 40-69) | fontSize | 12px | 12px | OK |
+| risk-score pill (amber, 40-69) | fontWeight | 500 | 500 | OK |
+| risk-score pill (amber, 40-69) | lineHeight | 17.4px | 17.4px | OK |
+| risk-score pill (amber, 40-69) | letterSpacing | normal | normal | OK |
+| risk-score pill (amber, 40-69) | color | rgb(183, 121, 31) | rgb(183, 121, 31) | OK |
+| risk-score pill (amber, 40-69) | backgroundColor | rgb(251, 241, 220) | rgb(251, 241, 220) | OK |
+| risk-score pill (amber, 40-69) | paddingTop | 1px | 1px | OK |
+| risk-score pill (amber, 40-69) | paddingRight | 8px | 8px | OK |
+| risk-score pill (amber, 40-69) | paddingBottom | 1px | 1px | OK |
+| risk-score pill (amber, 40-69) | paddingLeft | 8px | 8px | OK |
+| risk-score pill (amber, 40-69) | borderRadius | 10px | 10px | OK |
+| risk-score pill (amber, 40-69) | renderedHeight | 19.4px | 19.4px | OK |
+| risk-score pill (green, under 40) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| risk-score pill (green, under 40) | fontSize | 12px | 12px | OK |
+| risk-score pill (green, under 40) | fontWeight | 500 | 500 | OK |
+| risk-score pill (green, under 40) | lineHeight | 17.4px | 17.4px | OK |
+| risk-score pill (green, under 40) | letterSpacing | normal | normal | OK |
+| risk-score pill (green, under 40) | color | rgb(31, 138, 91) | rgb(31, 138, 91) | OK |
+| risk-score pill (green, under 40) | backgroundColor | rgb(227, 244, 236) | rgb(227, 244, 236) | OK |
+| risk-score pill (green, under 40) | paddingTop | 1px | 1px | OK |
+| risk-score pill (green, under 40) | paddingRight | 8px | 8px | OK |
+| risk-score pill (green, under 40) | paddingBottom | 1px | 1px | OK |
+| risk-score pill (green, under 40) | paddingLeft | 8px | 8px | OK |
+| risk-score pill (green, under 40) | borderRadius | 10px | 10px | OK |
+| risk-score pill (green, under 40) | renderedHeight | 19.4px | 19.4px | OK |
+| Blocked status pill (devices) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Blocked status pill (devices) | fontSize | 12px | 12px | OK |
+| Blocked status pill (devices) | fontWeight | 500 | 500 | OK |
+| Blocked status pill (devices) | lineHeight | 17.4px | 17.4px | OK |
+| Blocked status pill (devices) | letterSpacing | normal | normal | OK |
+| Blocked status pill (devices) | color | rgb(192, 57, 43) | rgb(93, 107, 120) | MISMATCH |
+| Blocked status pill (devices) | backgroundColor | rgb(251, 233, 230) | color(srgb 0.936471 0.941961 0.947059) | MISMATCH |
+| Blocked status pill (devices) | paddingTop | 1px | 1px | OK |
+| Blocked status pill (devices) | paddingRight | 8px | 8px | OK |
+| Blocked status pill (devices) | paddingBottom | 1px | 1px | OK |
+| Blocked status pill (devices) | paddingLeft | 8px | 8px | OK |
+| Blocked status pill (devices) | borderRadius | 10px | 10px | OK |
+| Blocked status pill (devices) | renderedHeight | 19.4px | 19.4px | OK |
 | Filters icon button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | Filters icon button | fontSize | 14px | 14px | OK |
 | Filters icon button | fontWeight | 400 | 400 | OK |
 | Filters icon button | lineHeight | 20.3px | 20.3px | OK |
 | Filters icon button | letterSpacing | normal | normal | OK |
 | Filters icon button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
-| Filters icon button | backgroundColor | rgb(226, 241, 245) | rgb(226, 241, 245) | OK |
-| Filters icon button | paddingTop | 7px | 0px | MISMATCH |
-| Filters icon button | paddingRight | 12px | 0px | MISMATCH |
-| Filters icon button | paddingBottom | 7px | 0px | MISMATCH |
-| Filters icon button | paddingLeft | 12px | 0px | MISMATCH |
+| Filters icon button | backgroundColor | rgb(226, 241, 245) | rgb(255, 255, 255) | MISMATCH |
+| Filters icon button | paddingTop | 7px | 7px | OK |
+| Filters icon button | paddingRight | 12px | 12px | OK |
+| Filters icon button | paddingBottom | 7px | 7px | OK |
+| Filters icon button | paddingLeft | 12px | 12px | OK |
 | Filters icon button | borderRadius | 6px | 6px | OK |
-| Filters icon button | renderedHeight | 32px | 30px | MISMATCH |
+| Filters icon button | renderedHeight | 32px | 32px | OK |
 | Columns icon button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | Columns icon button | fontSize | 14px | 14px | OK |
 | Columns icon button | fontWeight | 400 | 400 | OK |
@@ -111,12 +139,12 @@
 | Columns icon button | letterSpacing | normal | normal | OK |
 | Columns icon button | color | rgb(20, 33, 43) | rgb(20, 33, 43) | OK |
 | Columns icon button | backgroundColor | rgb(255, 255, 255) | rgb(255, 255, 255) | OK |
-| Columns icon button | paddingTop | 7px | 0px | MISMATCH |
-| Columns icon button | paddingRight | 12px | 0px | MISMATCH |
-| Columns icon button | paddingBottom | 7px | 0px | MISMATCH |
-| Columns icon button | paddingLeft | 12px | 0px | MISMATCH |
+| Columns icon button | paddingTop | 7px | 7px | OK |
+| Columns icon button | paddingRight | 12px | 12px | OK |
+| Columns icon button | paddingBottom | 7px | 7px | OK |
+| Columns icon button | paddingLeft | 12px | 12px | OK |
 | Columns icon button | borderRadius | 6px | 6px | OK |
-| Columns icon button | renderedHeight | 32px | 30px | MISMATCH |
+| Columns icon button | renderedHeight | 32px | 32px | OK |
 | Views button | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
 | Views button | fontSize | 14px | 14px | OK |
 | Views button | fontWeight | 400 | 400 | OK |
@@ -351,3 +379,16 @@
 | Next button | paddingLeft | 12px | 12px | OK |
 | Next button | borderRadius | 6px | 6px | OK |
 | Next button | renderedHeight | 34.1px | 34.1px | OK |
+| Blocked status pill (accounts) | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
+| Blocked status pill (accounts) | fontSize | 12px | 12px | OK |
+| Blocked status pill (accounts) | fontWeight | 500 | 500 | OK |
+| Blocked status pill (accounts) | lineHeight | 17.4px | 17.4px | OK |
+| Blocked status pill (accounts) | letterSpacing | normal | normal | OK |
+| Blocked status pill (accounts) | color | rgb(192, 57, 43) | rgb(93, 107, 120) | MISMATCH |
+| Blocked status pill (accounts) | backgroundColor | rgb(251, 233, 230) | color(srgb 0.936471 0.941961 0.947059) | MISMATCH |
+| Blocked status pill (accounts) | paddingTop | 1px | 1px | OK |
+| Blocked status pill (accounts) | paddingRight | 8px | 8px | OK |
+| Blocked status pill (accounts) | paddingBottom | 1px | 1px | OK |
+| Blocked status pill (accounts) | paddingLeft | 8px | 8px | OK |
+| Blocked status pill (accounts) | borderRadius | 10px | 10px | OK |
+| Blocked status pill (accounts) | renderedHeight | 19.4px | 19.4px | OK |
