@@ -56,7 +56,7 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
   );
 
   return (
-    <div className={styles.detailCard}>
+    <div className={styles.detailCard} data-testid="source-coverage-card">
       <h3 className={styles.detailCardTitle}>Exposure gaps</h3>
       {cardState.summaryText ? (
         <div className={styles.detailMuted}>{cardState.summaryText}</div>
@@ -70,14 +70,14 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
 
             return (
               <div className={styles.sourceCoverageRow} key={row.source}>
-                <dt className={styles.sourceName}>
+                <dt className={styles.sourceName} data-testid="source-coverage-source">
                   <SourceNameCell value={row.source} />
                 </dt>
                 <dd className={styles.sourceValue}>
-                  <span className={`${styles.detailPill} ${statusClass(row.status)}`}>
+                  <span className={`${styles.detailPill} ${statusClass(row.status)}`} data-testid="source-coverage-pill">
                     {statusLabel(row.status)}
                   </span>
-                  {age ? <span className={styles.detailMuted}>{age}</span> : null}
+                  {age ? <span className={styles.detailMuted} data-testid="source-coverage-time">{age}</span> : null}
                 </dd>
               </div>
             );
@@ -86,7 +86,7 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
       )}
 
       {cardState.showToggle ? (
-        <button className={styles.linkBtn} onClick={() => setExpanded((prev) => !prev)} type="button">
+        <button className={styles.linkBtn} data-testid="source-coverage-toggle" onClick={() => setExpanded((prev) => !prev)} type="button">
           {cardState.toggleLabel}
         </button>
       ) : null}

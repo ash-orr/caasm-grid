@@ -168,8 +168,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   line-height: 20.3px;
 }
 
-.clearLink,
-.linkBtn {
+.clearLink {
   background: none;
   border: 0;
   color: var(--link);
@@ -179,6 +178,19 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   text-underline-offset: 2px;
   font-size: 14px;
   line-height: 20.3px;
+  font-weight: 400;
+}
+
+.linkBtn {
+  background: none;
+  border: 0;
+  color: var(--link);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: 13px;
+  line-height: 1.45;
   font-weight: 400;
 }
 
@@ -843,8 +855,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailCardTitle {
   margin: 0 0 12px;
   font-size: 15px;
-  line-height: 1.35;
-  font-weight: 600;
+  line-height: 1.45;
+  font-weight: var(--font-weight-bold);
 }
 
 .detailKv {
@@ -948,6 +960,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailMuted {
   color: var(--mute);
   margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .detailPill {
@@ -955,6 +969,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   padding: 1px 8px;
   border-radius: 10px;
   font-size: 12px;
+  line-height: 1.45;
   font-weight: 500;
 }
 
@@ -995,6 +1010,9 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .sourceName {
   color: var(--mute);
   min-width: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 400;
 }
 
 .sourceNameValue {
@@ -1002,6 +1020,9 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--mute);
 }
 
 .sourceValue {
@@ -1010,6 +1031,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .detailList {
