@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { accounts, devices, type AccountRecord, type DeviceRecord, type RiskViolation, type SourceName } from '../../mocks/generated/prototype-data';
@@ -39,6 +39,7 @@ import { StatusPill } from '../StatusPill';
 import statusPillStyles from '../StatusPill/StatusPill.module.css';
 import styles from './AssetsTable.module.css';
 import { renderRiskScorePill, renderStatusCell } from './cellRenderers';
+import { getSourceFieldAgreementRows } from './sourceAgreement';
 
 type TabKey = 'devices' | 'accounts' | 'sites';
 
@@ -566,6 +567,7 @@ export function AssetsTable() {
 
   const [sourceCoverageOpenDevice, setSourceCoverageOpenDevice] = useState(false);
   const [sourceCoverageOpenAccount, setSourceCoverageOpenAccount] = useState(false);
+  const [overviewExpandedFields, setOverviewExpandedFields] = useState<Record<string, boolean>>({});
 
   const [onThisDeviceOpen, setOnThisDeviceOpen] = useState(false);
 
@@ -1898,11 +1900,13 @@ export function AssetsTable() {
 
   function openDeviceDetail(record: DeviceRecord) {
     setDetailTabByKind((prev) => ({ ...prev, device: 'Overview' }));
+    setOverviewExpandedFields({});
     setDetailView({ kind: 'device', record });
   }
 
   function openAccountDetail(record: AccountFilterRow) {
     setDetailTabByKind((prev) => ({ ...prev, account: 'Overview' }));
+    setOverviewExpandedFields({});
     setDetailView({ kind: 'account', record });
   }
 
@@ -1923,6 +1927,123 @@ export function AssetsTable() {
           </div>
         ))}
       </div>
+    );
+  }
+
+  function renderOverviewAgreementTable(
+    record: DeviceRecord | AccountFilterRow,
+    kind: 'device' | 'account',
+    expandedFields: Record<string, boolean>,
+    setExpandedFields: Dispatch<SetStateAction<Record<string, boolean>>>
+  ) {
+    const agreementRows = getSourceFieldAgreementRows(record);
+    const conflictCount = agreementRows.filter((row) => row.hasConflict).length;
+    const isVisible = agreementRows.length > 0;
+    const showSummary = isVisible && (conflictCount > 0 || agreementRows.length > 0);
+
+    const staticRows: Array<{ label: string; value: string; fieldKey?: string }> = kind === 'device'
+      ? (() => {
+          const deviceRecord = record as DeviceRecord;
+
+          return [
+            { label: 'Hostname', value: deviceRecord.name, fieldKey: 'hostname' },
+            { label: 'Device type', value: deviceRecord.type },
+            { label: 'Vendor', value: deviceRecord.manufacturer, fieldKey: 'manufacturer' },
+            { label: 'Device model', value: deviceRecord.model, fieldKey: 'model' },
+            { label: 'OS', value: deviceRecord.os, fieldKey: 'os' },
+            { label: 'OS version', value: deviceRecord.sourceFieldValues.osVersion?.value ?? '—', fieldKey: 'osVersion' },
+            { label: 'Location', value: deviceRecord.location },
+            { label: 'AgentP last reported', value: formatRelativeTime(deviceRecord.agentpLastReported) },
+            { label: 'Last connected to network', value: formatRelativeTime(deviceRecord.lastConnectedAt) },
+          ];
+        })()
+      : (() => {
+          const accountRecord = record as AccountFilterRow;
+
+          return [
+            { label: 'Account name', value: accountRecord.name, fieldKey: 'name' },
+            { label: 'Account type', value: accountRecord.accountType, fieldKey: 'accountType' },
+            { label: 'Group', value: accountRecord.group, fieldKey: 'group' },
+            { label: 'Description', value: accountRecord.group ? '—' : '—' },
+            { label: 'Last login', value: accountRecord.lastLoginDays == null ? '—' : accountRecord.lastLoginDays === 0 ? 'Today' : `${accountRecord.lastLoginDays} days ago`, fieldKey: 'lastLogin' },
+          ];
+        })();
+
+    const overviewRows = staticRows.map((entry) => {
+      const agreement = agreementRows.find((row) => row.fieldKey === entry.fieldKey);
+      const matchingSources = agreement?.sources ?? [];
+      const sourceSummary = agreement
+        ? `${agreement.hasConflict ? 'Conflict' : `Agree · ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
+        : '';
+
+      const sourceText = agreement
+        ? matchingSources.map(({ source, value }) => `${source}  "${agreement.fieldKey}": "${value ?? '—'}"`).join(' \n ')
+        : '';
+
+      return {
+        ...entry,
+        hasConflict: agreement?.hasConflict ?? false,
+        agreementText: sourceSummary,
+        sourceText,
+      };
+    });
+
+    const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
+    const summaryLabel = conflictCount > 0 ? `${conflictCount} field(s) differ across sources` : 'All sources agree';
+
+    return (
+      <section className={styles.detailSection}>
+        {lastSeen ? (
+          <div className={styles.detailOverviewLead}>
+            Last seen by sources: {lastSeen.value} · Most recent: {lastSeen.sources[0]?.source ?? '—'}
+          </div>
+        ) : null}
+        {showSummary ? (
+          <div className={styles.detailOverviewSummary}>
+            <span className={conflictCount > 0 ? styles.detailPillWarn : styles.detailPillOk}>
+              {summaryLabel}
+            </span>
+          </div>
+        ) : null}
+        <div className={styles.detailAgreementTable}>
+          <div className={styles.detailAgreementHeader}>
+            <span>Field</span>
+            <span>Value</span>
+            <span>Sources</span>
+          </div>
+          {overviewRows.map((row) => (
+            <div className={styles.detailAgreementRow} key={row.label}>
+              <span className={styles.detailAgreementField}>{row.label}</span>
+              <span className={styles.detailAgreementValue}>{row.value}</span>
+              <span className={styles.detailAgreementSources}>
+                {row.agreementText ? (
+                  <>
+                    <span className={row.hasConflict ? styles.detailPillWarn : styles.detailPillOk}>{row.agreementText}</span>
+                    {row.hasConflict && row.sourceText ? (
+                      <button
+                        className={styles.linkBtn}
+                        onClick={() => setExpandedFields((prev) => ({ ...prev, [row.label]: !prev[row.label] }))}
+                        type="button"
+                      >
+                        {expandedFields[row.label] ? 'Hide raw values' : 'View raw values'}
+                      </button>
+                    ) : null}
+                    {row.hasConflict && expandedFields[row.label] ? (
+                      <span className={styles.detailRawValues}>
+                        {row.sourceText.split(' \n ').map((entry) => (
+                          <span className={`${styles.detailRawValue} ${styles.detailRawValueDiff}`} key={entry}>{entry}</span>
+                        ))}
+                      </span>
+                    ) : null}
+                  </>
+                ) : (
+                  <span className={styles.detailMuted}>—</span>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
     );
   }
 
@@ -2005,7 +2126,7 @@ export function AssetsTable() {
                     type="button"
                   >
                     {tabName}
-                    {tabName === 'Source data' && conflictCount > 0 ? (
+                    {(tabName === 'Overview' || tabName === 'Source data') && conflictCount > 0 ? (
                       <Tooltip content={`${conflictCount} field(s) differ across sources`}>
                         <span className={styles.detailWarnIcon}>⚠</span>
                       </Tooltip>
@@ -2014,20 +2135,7 @@ export function AssetsTable() {
                 ))}
               </div>
 
-              {activeDetailTab === 'Overview' ? (
-                <section className={styles.detailSection}>
-                  <h3 className={styles.detailSectionTitle}>Device information</h3>
-                  <div className={styles.detailRows}>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>Device type</span><span>{deviceRecord.type}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>Vendor</span><span>{deviceRecord.manufacturer}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>Device model</span><span>{deviceRecord.model}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>OS</span><span>{deviceRecord.os}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>Location</span><span>{deviceRecord.location}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>AgentP last reported</span><span>{formatRelativeTime(deviceRecord.agentpLastReported)}</span></div>
-                    <div className={styles.detailRow}><span className={styles.detailRowLabel}>Last connected to network</span><span>{formatRelativeTime(deviceRecord.lastConnectedAt)}</span></div>
-                  </div>
-                </section>
-              ) : null}
+              {activeDetailTab === 'Overview' ? renderOverviewAgreementTable(deviceRecord, 'device', overviewExpandedFields, setOverviewExpandedFields) : null}
 
               {activeDetailTab === 'Source data' ? renderSourceDataContent(sourceRows) : null}
 
@@ -2108,18 +2216,7 @@ export function AssetsTable() {
               ))}
             </div>
 
-            {activeDetailTab === 'Overview' ? (
-              <section className={styles.detailSection}>
-                <h3 className={styles.detailSectionTitle}>Account details</h3>
-                <div className={styles.detailRows}>
-                  <div className={styles.detailRow}><span className={styles.detailRowLabel}>Account type</span><span>{accountRecord.accountType}</span></div>
-                  <div className={styles.detailRow}><span className={styles.detailRowLabel}>Group</span><span>{accountRecord.group}</span></div>
-                  <div className={styles.detailRow}><span className={styles.detailRowLabel}>Location</span><span>{accountRecord.location}</span></div>
-                  <div className={styles.detailRow}><span className={styles.detailRowLabel}>Authentication repository</span><span>{accountRecord.authRepo ?? '—'}</span></div>
-                  <div className={styles.detailRow}><span className={styles.detailRowLabel}>NAS site</span><span>{accountRecord.nasSite}</span></div>
-                </div>
-              </section>
-            ) : null}
+            {activeDetailTab === 'Overview' ? renderOverviewAgreementTable(accountRecord, 'account', overviewExpandedFields, setOverviewExpandedFields) : null}
 
             {activeDetailTab === 'Source data' ? renderSourceDataContent(sourceRows) : null}
 

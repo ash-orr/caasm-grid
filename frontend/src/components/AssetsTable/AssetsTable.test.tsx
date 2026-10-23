@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { accounts, devices } from '../../mocks/generated/prototype-data';
 import { AssetsTable } from './AssetsTable';
 import { renderRiskScorePill, renderStatusCell } from './cellRenderers';
+import { getSourceFieldAgreementRows } from './sourceAgreement';
 
 describe('AssetsTable cell renderers', () => {
   it('renders a compact risk score pill without the band label text', () => {
@@ -24,5 +26,19 @@ describe('AssetsTable', () => {
   it('renders the table shell', () => {
     render(<AssetsTable />);
     expect(screen.getByText('Rows per page')).toBeTruthy();
+  });
+
+  it('builds source-agreement rows for the Overview tab', () => {
+    const deviceRows = getSourceFieldAgreementRows(devices[7]);
+    const conflictRow = deviceRows.find((row) => row.fieldKey === 'osVersion');
+
+    expect(conflictRow?.hasConflict).toBe(true);
+    expect(conflictRow?.label).toBe('OS version');
+
+    const accountRows = getSourceFieldAgreementRows(accounts[1]);
+    const loginRow = accountRows.find((row) => row.fieldKey === 'lastLogin');
+
+    expect(loginRow?.sourceCount).toBeGreaterThan(0);
+    expect(loginRow?.label).toBe('Last login');
   });
 });

@@ -933,9 +933,95 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   margin: 0;
 }
 
+.detailOverviewSummary {
+  margin-bottom: 12px;
+}
+
+.detailOverviewLead {
+  color: var(--mute);
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0 0 12px;
+}
+
 .detailSectionTitle {
   margin: 0 0 12px;
   font-size: 15px;
+}
+
+.detailAgreementTable {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line);
+}
+
+.detailAgreementHeader,
+.detailAgreementRow {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.detailAgreementHeader {
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.detailAgreementField,
+.detailAgreementValue,
+.detailAgreementSources {
+  min-width: 0;
+}
+
+.detailAgreementField {
+  color: var(--mute);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.detailAgreementValue {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.detailAgreementSources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.detailRawValues {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.detailRawValue {
+  display: block;
+  white-space: pre-wrap;
+  padding: 0;
+  background: transparent;
+}
+
+.detailRawValueDiff {
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+  border-left: 2px solid var(--warn);
+  padding-left: 4px;
 }
 
 .detailRows {
