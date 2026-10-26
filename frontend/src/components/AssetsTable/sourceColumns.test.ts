@@ -1,4 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { beforeAll, describe, expect, it } from 'vitest';
 import type { SourceCoverageRow } from './sourceCoverage';
 import {
   buildSourceColumns,
@@ -12,6 +15,63 @@ import {
   getExposureGapCardState,
   sortSourceCoverageRows,
 } from './sourceCoverage';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PROTOTYPE_HTML_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'design', 'prototype', 'caasm-console.html');
+
+const LIVE_PROTOTYPE_SOURCES = [
+  'CrowdStrike',
+  'SentinelOne',
+  'Intune',
+  'Jamf',
+  'SOTI',
+  'Absolute Secure Endpoint',
+  'Portnox AgentP',
+  'EntraID',
+  'Active Directory',
+  'Okta',
+  'Google Workspace',
+] as const;
+
+const PROTOTYPE_SHORT_LABELS: Record<string, string> = {
+  'Absolute Secure Endpoint': 'ASE',
+  'Portnox AgentP': 'Portnox',
+  'Active Directory': 'AD',
+  'Google Workspace': 'Google',
+};
+
+let prototypeRecords: Array<{ srcs?: string[]; name?: string }> = [];
+let prototypeSourceText: (sources: string[]) => string = () => '—';
+
+beforeAll(async () => {
+  const html = await fs.readFile(PROTOTYPE_HTML_PATH, 'utf8');
+  const match = html.match(/\/\/ ---------- data ----------([\s\S]*?)\/\/ ---------- state ----------/);
+  const factory = new Function(
+    'console', 'Date', 'Math', 'Set', 'Array', 'Object', 'String', 'Number', 'Boolean', 'RegExp', 'Intl',
+    `return (() => {${match![1]}; return { accounts, devices }; })();`,
+  );
+
+  const data = factory(console, Date, Math, Set, Array, Object, String, Number, Boolean, RegExp, Intl);
+  prototypeRecords = [...data.devices, ...data.accounts].map((record) => ({
+    name: record.name,
+    srcs: record.srcs ?? [],
+  }));
+  prototypeSourceText = (sources: string[]) => {
+    const liveSources = sources.filter(
+      (source) => source && source !== '—' && LIVE_PROTOTYPE_SOURCES.includes(source as (typeof LIVE_PROTOTYPE_SOURCES)[number]),
+    );
+    const ordered = [
+      ...liveSources.filter((sourceName) => sourceName === 'Portnox AgentP'),
+      ...liveSources.filter((sourceName) => sourceName !== 'Portnox AgentP'),
+    ];
+    const markup = ordered
+      .map((sourceName) => PROTOTYPE_SHORT_LABELS[sourceName] ?? sourceName)
+      .join(', ');
+    const htmlString = markup ? `<span class="sctx" data-tip="sn|${markup}">${markup}</span>` : '—';
+    const match = htmlString.match(/data-tip="sn\|([^"]+)"/);
+    return (match ? match[1] : htmlString.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ')).replace(/\s+/g, ' ').trim() || '—';
+  };
+});
 
 describe('source column helpers', () => {
   it('uses short labels for source headers', () => {
@@ -40,6 +100,20 @@ describe('source column helpers', () => {
     expect(formatSourceCoverageText([])).toBe('—');
     expect(formatSourceCoverageText(['CrowdStrike'])).toBe('CrowdStrike');
     expect(formatSourceCoverageText(['CrowdStrike', 'Google Workspace', 'Active Directory'])).toBe('CrowdStrike, Google, AD');
+  });
+
+  it('keeps SentinelOne before Active Directory, with Portnox first if present', () => {
+    expect(formatSourceCoverageText(['SentinelOne', 'Active Directory'])).toBe('SentinelOne, AD');
+    expect(formatSourceCoverageText(['Portnox AgentP', 'SentinelOne', 'Active Directory'])).toBe('Portnox, SentinelOne, AD');
+  });
+
+  it('source coverage text matches the prototype for every record', () => {
+    expect(prototypeRecords).toHaveLength(186);
+    for (const record of prototypeRecords) {
+      const expected = prototypeSourceText(record.srcs ?? []);
+      const actual = formatSourceCoverageText(record.srcs ?? []);
+      expect(actual, record.name ?? 'record').toBe(expected);
+    }
   });
 
   it('orders device and account source columns by the prototype source type order', () => {
