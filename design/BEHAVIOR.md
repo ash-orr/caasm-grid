@@ -209,7 +209,7 @@ Add these to the original questions and assumptions:
 Not part of this repo's UI: provided by the host app.
 
 ## Renames: Exposure gaps (2026-10-19)
-The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Coverage gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
+The Coverage gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Coverage gap" label in the hover tooltips and the detail-page rows, and the "Coverage gap:" prefix in source status tooltips (now "Exposure gap:").
 On Device and Account details, the Source coverage card is now Exposure gaps (same content and rules as before).
 Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text ("Devices with coverage gaps", "Coverage gaps by group", "Coverage gaps by source"); and the Exposure Risk view description line.
 
