@@ -54,12 +54,12 @@ test.describe('Manage filters dialog', () => {
       'Account',
       'Exposure gaps',
       'Source coverage',
+      'Portnox',
       'CrowdStrike',
       'Intune',
       'Okta',
       'Google',
       'AD',
-      'AgentP',
     ];
 
     const defaultAccountHeaders = [

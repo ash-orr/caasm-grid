@@ -1,10 +1,10 @@
 export const DEVICE_SOURCE_COLUMN_NAMES = [
+  'Portnox AgentP',
   'CrowdStrike',
   'Intune',
   'Okta',
   'Google Workspace',
   'Active Directory',
-  'Portnox AgentP',
 ] as const;
 
 export const ACCOUNT_SOURCE_COLUMN_NAMES = [
@@ -14,9 +14,16 @@ export const ACCOUNT_SOURCE_COLUMN_NAMES = [
   'EntraID',
 ] as const;
 
+const SOURCE_COLUMN_ORDER = Object.fromEntries([
+  ...DEVICE_SOURCE_COLUMN_NAMES,
+  ...ACCOUNT_SOURCE_COLUMN_NAMES,
+  'Absolute Secure Endpoint',
+  'EntraID',
+].map((sourceName, index) => [sourceName, index])) as Record<string, number>;
+
 const SOURCE_COLUMN_SHORT_LABELS: Record<string, string> = {
   'Absolute Secure Endpoint': 'ASE',
-  'Portnox AgentP': 'AgentP',
+  'Portnox AgentP': 'Portnox',
   'Active Directory': 'AD',
   'Google Workspace': 'Google',
 };
@@ -36,7 +43,14 @@ export function formatCoverageGapText(gaps: string[]): string {
 }
 
 export function formatSourceCoverageText(sources: string[]): string {
-  const liveSources = sources.filter((source) => source && source !== '—');
+  const liveSources = sources
+    .filter((source) => source && source !== '—')
+    .sort((left, right) => {
+      const leftOrder = SOURCE_COLUMN_ORDER[left] ?? Number.MAX_SAFE_INTEGER;
+      const rightOrder = SOURCE_COLUMN_ORDER[right] ?? Number.MAX_SAFE_INTEGER;
+      return leftOrder - rightOrder;
+    });
+
   if (!liveSources.length) return '—';
   return liveSources.map((sourceName) => getSourceColumnLabel(sourceName)).join(', ');
 }

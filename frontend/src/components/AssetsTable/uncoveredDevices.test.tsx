@@ -1,10 +1,15 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { applyDeviceFilters } from '../../filters/engine';
 import { devices } from '../../mocks/generated/prototype-data';
 import { AssetsTable } from './AssetsTable';
 import { renderRiskScorePill, renderStatusCell } from './cellRenderers';
+import { buildSourceColumns, formatSourceCoverageText } from './sourceColumns';
+import { SourceCoverageCard } from './SourceCoverageCard';
 import { sortRowsBy } from './sort';
+
+beforeEach(() => cleanup());
+afterEach(() => cleanup());
 
 describe('uncovered devices', () => {
   it('renders null risk and status values as em dashes without pills', () => {
@@ -68,6 +73,64 @@ describe('uncovered devices', () => {
     expect(uncovered.status).toBeNull();
   });
 
+  it('shows Portnox first in the source-column headers when source columns are enabled', () => {
+    const labels = buildSourceColumns('device').map((column) => column.label);
+
+    expect(labels[0]).toBe('Portnox');
+    expect(labels.slice(1)).toEqual(['CrowdStrike', 'Intune', 'Okta', 'Google', 'AD']);
+  });
+
+  it('starts the covered device source coverage text with Portnox', () => {
+    const covered = devices.find((device) => device.riskScore != null && device.sourceCoverage['Portnox AgentP']?.status !== 'N/A')!;
+    const sourceNames = (Object.entries(covered.sourceCoverage) as Array<[string, { status: string }]>).filter(
+      ([, coverage]) => coverage.status !== 'N/A'
+    ).map(([sourceName]) => sourceName);
+    const text = formatSourceCoverageText(sourceNames);
+
+    expect(text.startsWith('Portnox')).toBe(true);
+  });
+
+  it('shows Portnox AgentP as a Not present exposure gap for SRV-1028', () => {
+    const uncovered = devices.find((device) => device.name === 'SRV-1028')!;
+    const rows = Object.entries(uncovered.sourceCoverage)
+      .map(([source, coverage]) => ({ source, status: coverage.status, lastSyncAt: coverage.lastSyncAt }))
+      .filter((row) => row.status !== 'N/A');
+
+    render(<SourceCoverageCard rows={rows} />);
+
+    expect(screen.getByText('Portnox AgentP')).toBeTruthy();
+    expect(screen.getByText('Not present')).toBeTruthy();
+  });
+
+  it('renders the uncovered device overview placeholders and keeps nullish strings out of the table', async () => {
+    render(<AssetsTable />);
+
+    const input = screen.getByRole('searchbox');
+    fireEvent.change(input, { target: { value: 'SRV-1028' } });
+
+    const matches = await screen.findAllByText(/SRV-1028/i);
+    fireEvent.click(matches[0]);
+
+    const detailText = document.body.textContent ?? '';
+    expect(detailText).toContain('Location');
+    expect(detailText).toContain('AgentP last reported');
+    expect(detailText).toContain('Last connected to network');
+    expect(detailText).toContain('Last network authentication type');
+    expect(detailText).toContain('Stale');
+    expect(detailText).not.toMatch(/null|undefined|NaN/i);
+  });
+
+  it('keeps the covered device risk and status pills visible', () => {
+    const covered = devices.find((device) => device.riskScore != null && device.status != null)!;
+    render(<AssetsTable />);
+
+    const input = screen.getByRole('searchbox');
+    fireEvent.change(input, { target: { value: covered.name } });
+
+    expect(screen.getAllByTestId('risk-pill').length).toBeGreaterThan(0);
+    expect(screen.getAllByTestId('status-pill').length).toBeGreaterThan(0);
+  });
+
   it('opens the uncovered device detail panel with the prototype copy and null-safe values', async () => {
     render(<AssetsTable />);
 
@@ -78,9 +141,10 @@ describe('uncovered devices', () => {
     fireEvent.click(matches[0]);
 
     expect(screen.getByText(/Not available\. This device is not covered by Portnox AgentP, so only data from your connected sources is shown\./i)).toBeTruthy();
-    expect(screen.getAllByText('—').length).toBeGreaterThan(0);
     expect(screen.getByText('Auth type')).toBeTruthy();
     expect(screen.getByText('Agent version')).toBeTruthy();
+    expect(document.body.textContent ?? '').toContain('—');
+    expect(document.body.textContent ?? '').not.toMatch(/null|undefined|NaN/i);
   });
 });
 
