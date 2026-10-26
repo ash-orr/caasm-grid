@@ -99,6 +99,20 @@ A section with more than five options shows a "See more" link. The popup include
 ### Chips
 Every active filter shows as a removable chip above the table, including source-coverage conditions and the active card. After five chips, a "+N more filters" link expands the rest and "Show fewer" collapses it. A Clear all link sits at the end. The filters toggle is an icon button with a badge that shows the count of active chips, a tooltip and aria state.
 
+## Selecting rows and actions
+The header checkbox selects the current page. When a full page is selected and more rows exist, a bar offers "Select all N [devices/accounts]", which selects everything matching the current filters across all pages. Then it offers "Clear selection".
+Selection survives sorting and paging, and resets when filters or search change.
+Actions sit to the right of the search box and appear depending on how many rows are selected:
+
+| Action | Accounts | Devices |
+|---|---|---|
+| Add | Always | Not offered |
+| Edit, Change group | Exactly 1 selected | Not offered |
+| Block, Deactivate | 1 or more | 1 or more |
+| Delete (red) | 1 or more | 1 or more |
+
+Export CSV stays at the far right and uses the selection count when there is one.
+
 ## Saved views
 - Shown at the top of the filter panel as radio buttons: Default view, Exposure Risk view, then user-saved views by name. Separate lists for Devices and Accounts.
 - Default view and Exposure Risk view are built in. Choosing either resets the table to that view's original layout (filters, added sections, columns, sort).
@@ -143,7 +157,7 @@ Exposure coverage tab: stays, with a table of Source, Status and Last seen. One 
 
 ### Account details
 Left column: Account details, Exposure gaps card, Associated devices card.
-Overview tab: Account details only, in a single column. Same Field | Value | Sources layout and per-row View raw values as devices. Rows include Account name, Account type, Group, Description, and the rest. Warning icon on the Overview tab title when sources conflict.
+Overview tab: Account details only, in a single column. Same Field | Value | Sources layout and per-row View raw values as devices. Rows include Account name, Account type, Group, Description, and the rest. Warning icon on the Overview tab title when sources conflict. "Last login by sources" sits directly under the heading, above the status pill, as "<time> · Reported by <sources>" (time reads "Today" or "N days ago").
 Tabs: Overview, Exposure coverage, Alerts. The Devices tab is removed because the left-column card already lists them. Alerts is a placeholder.
 MFA and privileged-account information was removed because that data isn't available. (confirm)
 
