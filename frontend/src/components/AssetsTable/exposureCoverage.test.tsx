@@ -210,7 +210,8 @@ describe('AssetsTable exposure coverage', () => {
   it('shows the warning icon only on the Overview tab, never on Exposure coverage', async () => {
     const device = devices.find((entry) => {
       const rows = Object.values(entry.sourceCoverage).map((value) => value.status);
-      return rows.includes('Not present') && rows.includes('Reporting') && rows.includes('Stale');
+      const unique = new Set(rows.filter((status) => status !== 'N/A'));
+      return unique.has('Reporting') && unique.has('Not present');
     }) ?? devices[7];
 
     await openDeviceOverview(device.name);

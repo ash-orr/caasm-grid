@@ -239,8 +239,8 @@ function renderListValues(values: string[]): ReactNode {
   );
 }
 
-function uniqSorted(values: string[]): string[] {
-  return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
+function uniqSorted(values: Array<string | null | undefined>): string[] {
+  return Array.from(new Set(values.filter((value): value is string => value != null && value !== ''))).sort((a, b) => a.localeCompare(b));
 }
 
 function toOption(value: string): Option {
@@ -266,7 +266,7 @@ function computeAccountRows(): AccountFilterRow[] {
     const accountDevices = byAccount.get(account.name) ?? [];
     const blocked = accountDevices.some((item) => item.status === 'Blocked');
     const latestConnectedMs = accountDevices.length > 0
-      ? Math.max(...accountDevices.map((item) => Date.parse(item.lastConnectedAt)))
+      ? Math.max(...accountDevices.map((item) => item.lastConnectedAt ? Date.parse(item.lastConnectedAt) : Number.NaN).filter((value) => !Number.isNaN(value)))
       : Number.NaN;
 
     const lastLoginDays = Number.isNaN(latestConnectedMs)
@@ -282,9 +282,13 @@ function computeAccountRows(): AccountFilterRow[] {
   });
 }
 
-function formatRelativeTime(isoDate: string): string {
+function formatRelativeTime(isoDate: string | null | undefined): string {
+  if (!isoDate) return '—';
+
   const now = Date.now();
   const time = Date.parse(isoDate);
+  if (Number.isNaN(time)) return '—';
+
   const diffHours = Math.max(0, Math.floor((now - time) / (1000 * 60 * 60)));
 
   if (diffHours < 1) return 'Under 1h ago';
@@ -390,21 +394,21 @@ function deviceSortValue(row: DeviceRecord, columnId: string): string | number |
     case 'os':
       return row.os;
     case 'location':
-      return row.location;
+      return row.location ?? null;
     case 'account':
       return row.account;
     case 'accountType':
-      return row.accountType;
+      return row.accountType ?? null;
     case 'group':
-      return row.group;
+      return row.group ?? null;
     case 'riskScore':
-      return row.riskScore;
+      return row.riskScore ?? null;
     case 'status':
-      return row.status;
+      return row.status ?? null;
     case 'lastConnected':
-      return Date.parse(row.lastConnectedAt);
+      return row.lastConnectedAt ? Date.parse(row.lastConnectedAt) : Number.NaN;
     case 'createdTime':
-      return Date.parse(row.createdAt);
+      return row.createdAt ? Date.parse(row.createdAt) : Number.NaN;
     case 'coverageGaps':
       return row.coverageGaps.length;
     case 'sourceCoverage':
@@ -434,13 +438,13 @@ function deviceSortValue(row: DeviceRecord, columnId: string): string | number |
     case 'browserExtensions':
       return row.browserExtensions.length;
     case 'agentpVersion':
-      return row.agentpVersion;
+      return row.agentpVersion ?? null;
     case 'riskViolations':
       return row.riskViolations.length;
     case 'nasIp':
-      return row.nasIp;
+      return row.nasIp ?? null;
     case 'agentpLastReported':
-      return Date.parse(row.agentpLastReported);
+      return row.agentpLastReported ? Date.parse(row.agentpLastReported) : null;
     default:
       return null;
   }
@@ -456,9 +460,9 @@ function accountSortValue(row: AccountFilterRow, columnId: string): string | num
     case 'name':
       return row.name;
     case 'accountType':
-      return row.accountType;
+      return row.accountType ?? null;
     case 'group':
-      return row.group;
+      return row.group ?? null;
     case 'deviceCount':
       return row.deviceCount ?? 0;
     case 'blocked':
@@ -472,9 +476,9 @@ function accountSortValue(row: AccountFilterRow, columnId: string): string | num
     case 'authRepo':
       return row.authRepo ?? null;
     case 'nasSite':
-      return row.nasSite;
+      return row.nasSite ?? null;
     case 'location':
-      return row.location;
+      return row.location ?? null;
     default:
       return null;
   }
@@ -1406,22 +1410,22 @@ export function AssetsTable() {
       { id: 'name', label: 'Device name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
       { id: 'type', label: 'Type', defaultVisible: true, render: (row) => row.type, exportValue: (row) => row.type },
       { id: 'os', label: 'OS', defaultVisible: true, render: (row) => row.os, exportValue: (row) => row.os },
-      { id: 'location', label: 'Location', defaultVisible: true, render: (row) => row.location, exportValue: (row) => row.location },
+      { id: 'location', label: 'Location', defaultVisible: true, render: (row) => row.location ?? '—', exportValue: (row) => row.location ?? '—' },
       { id: 'account', label: 'Account', defaultVisible: true, render: (row) => row.account, exportValue: (row) => row.account },
-      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
-      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
-      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore), exportValue: (row) => `${row.riskScore}` },
-      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status },
-      { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt },
-      { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt },
+      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType ?? '—', exportValue: (row) => row.accountType ?? '—' },
+      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group ?? '—', exportValue: (row) => row.group ?? '—' },
+      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore), exportValue: (row) => row.riskScore == null ? '—' : `${row.riskScore}` },
+      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status ?? '—' },
+      { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt ?? '—' },
+      { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt ?? '—' },
       { id: 'coverageGaps', label: 'Exposure gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
       { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: true, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
-      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
+      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite ?? '—', exportValue: (row) => row.nasSite ?? '—' },
       { id: 'macVendor', label: 'MAC vendor', defaultVisible: false, render: (row) => row.macVendor, exportValue: (row) => row.macVendor },
-      { id: 'manufacturer', label: 'Device manufacturer', defaultVisible: false, render: (row) => row.manufacturer, exportValue: (row) => row.manufacturer },
-      { id: 'model', label: 'Device model', defaultVisible: false, render: (row) => row.model, exportValue: (row) => row.model },
+      { id: 'manufacturer', label: 'Device manufacturer', defaultVisible: false, render: (row) => row.manufacturer ?? '—', exportValue: (row) => row.manufacturer ?? '—' },
+      { id: 'model', label: 'Device model', defaultVisible: false, render: (row) => row.model ?? '—', exportValue: (row) => row.model ?? '—' },
       { id: 'applications', label: 'Applications', defaultVisible: false, render: (row) => renderListValues(row.applications), exportValue: (row) => row.applications.length > 0 ? row.applications.join(', ') : '—' },
       { id: 'patches', label: 'Patches', defaultVisible: false, render: (row) => renderListValues(row.patches), exportValue: (row) => row.patches.length > 0 ? row.patches.join(', ') : '—' },
       { id: 'processes', label: 'Processes', defaultVisible: false, render: (row) => renderListValues(row.processes), exportValue: (row) => row.processes.length > 0 ? row.processes.join(', ') : '—' },
@@ -1429,10 +1433,10 @@ export function AssetsTable() {
       { id: 'peripherals', label: 'Peripherals', defaultVisible: false, render: (row) => renderListValues(row.peripherals), exportValue: (row) => row.peripherals.length > 0 ? row.peripherals.join(', ') : '—' },
       { id: 'browser', label: 'Browser', defaultVisible: false, render: (row) => renderListValues(row.browser), exportValue: (row) => row.browser.length > 0 ? row.browser.join(', ') : '—' },
       { id: 'browserExtensions', label: 'Browser extensions', defaultVisible: false, render: (row) => renderListValues(row.browserExtensions), exportValue: (row) => row.browserExtensions.length > 0 ? row.browserExtensions.join(', ') : '—' },
-      { id: 'agentpVersion', label: 'AgentP version', defaultVisible: false, render: (row) => row.agentpVersion, exportValue: (row) => row.agentpVersion },
+      { id: 'agentpVersion', label: 'AgentP version', defaultVisible: false, render: (row) => row.agentpVersion ?? '—', exportValue: (row) => row.agentpVersion ?? '—' },
       { id: 'riskViolations', label: 'Risk score violations', defaultVisible: false, render: (row) => renderListValues(row.riskViolations), exportValue: (row) => row.riskViolations.length > 0 ? row.riskViolations.join(', ') : '—' },
-      { id: 'nasIp', label: 'NAS IP', defaultVisible: false, render: (row) => row.nasIp, exportValue: (row) => row.nasIp },
-      { id: 'agentpLastReported', label: 'AgentP last reported', defaultVisible: false, render: (row) => formatRelativeTime(row.agentpLastReported), exportValue: (row) => row.agentpLastReported },
+      { id: 'nasIp', label: 'NAS IP', defaultVisible: false, render: (row) => row.nasIp ?? '—', exportValue: (row) => row.nasIp ?? '—' },
+      { id: 'agentpLastReported', label: 'AgentP last reported', defaultVisible: false, render: (row) => formatRelativeTime(row.agentpLastReported), exportValue: (row) => row.agentpLastReported ?? '—' },
     ];
   }, []);
 
@@ -1450,8 +1454,8 @@ export function AssetsTable() {
 
     return [
       { id: 'name', label: 'Account name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
-      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType, exportValue: (row) => row.accountType },
-      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group, exportValue: (row) => row.group },
+      { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType ?? '—', exportValue: (row) => row.accountType ?? '—' },
+      { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group ?? '—', exportValue: (row) => row.group ?? '—' },
       { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
       { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span> : <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
       { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
@@ -1459,8 +1463,8 @@ export function AssetsTable() {
       { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: true, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
       ...sourceColumns,
       { id: 'authRepo', label: 'Authentication repository', defaultVisible: false, render: (row) => row.authRepo ?? '—', exportValue: (row) => row.authRepo ?? '—' },
-      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite, exportValue: (row) => row.nasSite },
-      { id: 'location', label: 'Location', defaultVisible: false, render: (row) => row.location, exportValue: (row) => row.location },
+      { id: 'nasSite', label: 'NAS site', defaultVisible: false, render: (row) => row.nasSite ?? '—', exportValue: (row) => row.nasSite ?? '—' },
+      { id: 'location', label: 'Location', defaultVisible: false, render: (row) => row.location ?? '—', exportValue: (row) => row.location ?? '—' },
     ];
   }, []);
 
@@ -2006,7 +2010,7 @@ export function AssetsTable() {
     const isVisible = agreementRows.length > 0;
     const showSummary = isVisible && (conflictCount > 0 || agreementRows.length > 0);
 
-    const staticRows: Array<{ label: string; value: string; fieldKey?: string }> = kind === 'device'
+    const staticRows: Array<{ label: string; value: string | null; fieldKey?: string }> = kind === 'device'
       ? (() => {
           const deviceRecord = record as DeviceRecord;
           const agentpReportedAt = deviceRecord.agentpLastReported ? new Date(deviceRecord.agentpLastReported).getTime() : null;
@@ -2100,7 +2104,7 @@ export function AssetsTable() {
           {overviewRows.map((row) => (
             <div className={styles.detailAgreementRow} key={row.label}>
               <span className={styles.detailAgreementField}>{row.label}</span>
-              <span className={styles.detailAgreementValue}>{row.value}</span>
+              <span className={styles.detailAgreementValue}>{row.value ?? '—'}</span>
               <span className={styles.detailAgreementSources}>
                 {row.agreementText ? (
                   <>
@@ -2247,7 +2251,7 @@ export function AssetsTable() {
     const baseAccountName = stripSyntheticSuffix(accountRecord.name);
     const linkedDevices = devices
       .filter((device) => stripSyntheticSuffix(device.account) === baseAccountName)
-      .sort((left, right) => right.riskScore - left.riskScore || left.name.localeCompare(right.name));
+      .sort((left, right) => (right.riskScore ?? Number.NEGATIVE_INFINITY) - (left.riskScore ?? Number.NEGATIVE_INFINITY) || left.name.localeCompare(right.name));
     const detailTabs = ['Overview', 'Exposure coverage', 'Alerts'];
     const activeDetailTab = detailTabByKind.account;
     const sourceRows = toSourceCoverageRows(accountRecord, { accountOnly: true });

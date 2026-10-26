@@ -36,7 +36,8 @@ function isInTimeBucket(isoDate: string | null | undefined, buckets: readonly Ag
   });
 }
 
-function toRiskBand(score: number): 'Access' | 'Alert' | 'Blocked' {
+function toRiskBand(score: number | null | undefined): 'Access' | 'Alert' | 'Blocked' | null {
+  if (score == null) return null;
   if (score >= 70) return 'Blocked';
   if (score >= 40) return 'Alert';
   return 'Access';
@@ -143,7 +144,7 @@ export function applyDeviceFilters(rows: DeviceRecord[], state: DeviceFilterStat
       isInTimeBucket(row.agentpLastReported, state.agentpLastReported, nowMs) &&
       hasAnyByPredicate(state.riskViolation, (selected) => row.riskViolations.includes(selected)) &&
       hasAny(state.agentpVersion, row.agentpVersion) &&
-      (!state.agentpVersionOlderThan || compareVersionsNumeric(row.agentpVersion, state.agentpVersionOlderThan) < 0) &&
+      (!state.agentpVersionOlderThan || row.agentpVersion == null || compareVersionsNumeric(row.agentpVersion, state.agentpVersionOlderThan) < 0) &&
       isOnThisDeviceMatch(row, state.onThisDevice)
     );
   });
