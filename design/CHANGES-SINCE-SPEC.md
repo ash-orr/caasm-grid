@@ -228,3 +228,13 @@ The prototype is a single HTML file and opens details in the same view. **In the
 ### Risk score and status pills share one style
 - The **risk score** (a number) uses the same pill style as the status pills: 12px, weight 500, fully rounded (10px radius), 1px 8px padding, about 19px tall. Only the color differs (green, amber or red by band). The number keeps tabular figures and a minimum width of 34px so scores line up in the column.
 - This applies everywhere the score pill appears: the table, the device details card, the account details lists and the hover tooltips.
+
+## Devices not covered by Portnox AgentP (added)
+
+- Some devices (about 1 in 9 in the prototype, for example SRV-1028, MB-1091, IOT-1154) are **not covered by Portnox AgentP**. They only have data from the connected sources.
+- For these devices **Risk score, Status, Location, Account type, Group, AgentP last reported, Last connected, Last network authentication type, AgentP version and Stale** all show "—" (table and detail). Never show "null", 0 or "No".
+- The device panel's "Current risk score" card is replaced with: "Not available. This device is not covered by Portnox AgentP, so only data from your connected sources is shown."
+- The Exposure gaps card lists "Portnox AgentP: Not present" for them.
+- Risk score filters and sorting must tolerate empty scores (empty sorts last).
+- **Source columns and Source coverage text list Portnox first**, then the other sources in the existing order. The AgentP source column header is now **Portnox** (short name). Other "AgentP ..." labels (AgentP last reported, AgentP version) are unchanged.
+- Location, Account type, Group and Status come from AgentP/NAC, so they are empty for these devices (table, filters, device panel, Overview). Filters on those fields never match them.
