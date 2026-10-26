@@ -1944,6 +1944,8 @@ export function AssetsTable() {
     const staticRows: Array<{ label: string; value: string; fieldKey?: string }> = kind === 'device'
       ? (() => {
           const deviceRecord = record as DeviceRecord;
+          const agentpReportedAt = deviceRecord.agentpLastReported ? new Date(deviceRecord.agentpLastReported).getTime() : null;
+          const staleValue = agentpReportedAt == null ? '—' : (agentpReportedAt < Date.now() - 1000 * 60 * 60 * 24 * 7 ? 'Yes' : 'No');
 
           return [
             { label: 'Hostname', value: deviceRecord.name, fieldKey: 'hostname' },
@@ -1953,8 +1955,20 @@ export function AssetsTable() {
             { label: 'OS', value: deviceRecord.os, fieldKey: 'os' },
             { label: 'OS version', value: deviceRecord.sourceFieldValues.osVersion?.value ?? '—', fieldKey: 'osVersion' },
             { label: 'Location', value: deviceRecord.location },
+            { label: 'Motherboard serial number', value: '—' },
             { label: 'AgentP last reported', value: formatRelativeTime(deviceRecord.agentpLastReported) },
             { label: 'Last connected to network', value: formatRelativeTime(deviceRecord.lastConnectedAt) },
+            { label: 'Stale', value: staleValue },
+            { label: 'Last network authentication type', value: deviceRecord.authType },
+            { label: 'MAC address', value: '—' },
+            { label: 'Public IP', value: '—' },
+            { label: 'Ethernet IP', value: '—' },
+            { label: 'Network', value: '—' },
+            { label: 'VLAN', value: '—' },
+            { label: 'Port', value: '—' },
+            { label: 'NAS name (NAS IP)', value: deviceRecord.nasSite && deviceRecord.nasIp ? `${deviceRecord.nasSite} (${deviceRecord.nasIp})` : deviceRecord.nasSite || deviceRecord.nasIp || '—' },
+            { label: 'Portnox AgentP', value: deviceRecord.agentpVersion || 'N/A' },
+            { label: 'Device ID', value: String(deviceRecord.id) },
           ];
         })()
       : (() => {
@@ -1973,7 +1987,7 @@ export function AssetsTable() {
       const agreement = agreementRows.find((row) => row.fieldKey === entry.fieldKey);
       const matchingSources = agreement?.sources ?? [];
       const sourceSummary = agreement
-        ? `${agreement.hasConflict ? 'Conflict' : `Agree · ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
+        ? `${agreement.hasConflict ? 'Conflict' : `Agree ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
         : '';
 
       const sourceText = agreement
@@ -1989,7 +2003,7 @@ export function AssetsTable() {
     });
 
     const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
-    const summaryLabel = conflictCount > 0 ? `${conflictCount} field(s) differ across sources` : 'All sources agree';
+    const summaryLabel = conflictCount > 0 ? `${conflictCount} ${conflictCount === 1 ? 'field differs' : 'fields differ'} across sources` : 'All sources agree';
 
     return (
       <section className={styles.detailSection}>
