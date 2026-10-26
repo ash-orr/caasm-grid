@@ -53,10 +53,17 @@ export function sortRowsBy<T>(
   return rows
     .map((row, index) => ({ row, index }))
     .sort((left, right) => {
-      const comparison = compareSortValues(
-        getValue(left.row, sort.columnId),
-        getValue(right.row, sort.columnId)
-      );
+      const leftValue = getValue(left.row, sort.columnId);
+      const rightValue = getValue(right.row, sort.columnId);
+
+      const leftIsNull = leftValue == null;
+      const rightIsNull = rightValue == null;
+
+      if (leftIsNull !== rightIsNull) {
+        return leftIsNull ? 1 : -1;
+      }
+
+      const comparison = compareSortValues(leftValue, rightValue);
 
       if (comparison !== 0) {
         return comparison * directionFactor;

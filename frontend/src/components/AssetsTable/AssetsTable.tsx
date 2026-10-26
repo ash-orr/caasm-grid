@@ -296,6 +296,11 @@ function formatRelativeTime(isoDate: string | null | undefined): string {
   return `${Math.floor(diffHours / 24)}d ago`;
 }
 
+function displayValue(value: string | number | null | undefined): string {
+  if (value == null || value === '') return '—';
+  return String(value);
+}
+
 function formatCoverageGapsFromSourceCoverage(row: AccountRecord | DeviceRecord): string {
   const gaps = Object.entries(row.sourceCoverage)
     .filter((entry) => entry[1].status === 'Not present')
@@ -2165,28 +2170,39 @@ export function AssetsTable() {
               <div className={styles.detailCard}>
                 <h3 className={styles.detailCardTitle}>Device details</h3>
                 <dl className={styles.detailKv}>
-                  <dt>Type</dt><dd>{deviceRecord.type}</dd>
-                  <dt>OS</dt><dd>{deviceRecord.os}</dd>
-                  <dt>Location</dt><dd>{deviceRecord.location}</dd>
+                  <dt>Type</dt><dd>{displayValue(deviceRecord.type)}</dd>
+                  <dt>OS</dt><dd>{displayValue(deviceRecord.os)}</dd>
+                  <dt>Location</dt><dd>{displayValue(deviceRecord.location)}</dd>
                   <dt>AgentP last reported</dt><dd>{formatRelativeTime(deviceRecord.agentpLastReported)}</dd>
                   <dt>Last connected</dt><dd>{formatRelativeTime(deviceRecord.lastConnectedAt)}</dd>
+                  <dt>Auth type</dt><dd>{displayValue(deviceRecord.authType)}</dd>
+                  <dt>Agent version</dt><dd>{displayValue(deviceRecord.agentVersion)}</dd>
                 </dl>
               </div>
 
-              <div className={styles.detailCard}>
-                <h3 className={styles.detailCardTitle}>Current risk score</h3>
-                <dl className={styles.detailKv}>
-                  <dt>Risk score</dt><dd>{deviceRecord.riskScore}</dd>
-                  <dt>Violations</dt>
-                  <dd>
-                    {deviceRecord.riskViolations.length > 0 ? (
-                      <ul className={styles.detailList}>
-                        {deviceRecord.riskViolations.map((item) => <li key={item}>{item}</li>)}
-                      </ul>
-                    ) : 'None'}
-                  </dd>
-                </dl>
-              </div>
+              {deviceRecord.riskScore == null ? (
+                <div className={styles.detailCard}>
+                  <h3 className={styles.detailCardTitle}>Current risk score</h3>
+                  <p className={styles.detailMuted} style={{ margin: 0 }}>
+                    Not available. This device is not covered by Portnox AgentP, so only data from your connected sources is shown.
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.detailCard}>
+                  <h3 className={styles.detailCardTitle}>Current risk score</h3>
+                  <dl className={styles.detailKv}>
+                    <dt>Risk score</dt><dd>{deviceRecord.riskScore}</dd>
+                    <dt>Violations</dt>
+                    <dd>
+                      {deviceRecord.riskViolations.length > 0 ? (
+                        <ul className={styles.detailList}>
+                          {deviceRecord.riskViolations.map((item) => <li key={item}>{item}</li>)}
+                        </ul>
+                      ) : 'None'}
+                    </dd>
+                  </dl>
+                </div>
+              )}
 
               <SourceCoverageCard key={`device-${deviceRecord.id}`} rows={sourceRows} />
 
