@@ -33,7 +33,7 @@ describe('generated prototype data', () => {
     const accountConflicts = accounts.filter((account) => Object.values(account.sourceFieldValues).some((field) => field.hasConflict)).length;
 
     expect(deviceConflicts).toBe(54);
-    expect(accountConflicts).toBe(0);
+    expect(accountConflicts).toBe(13);
   });
 
   it('matches the prototype counts exactly when computed from the HTML logic', async () => {
@@ -73,7 +73,22 @@ describe('generated prototype data', () => {
     );
 
     const prototypeDeviceConflicts = prototypeData.devices.filter((device: { mis: Array<unknown> }) => device.mis.length > 0).length;
-    const prototypeAccountConflicts = 0;
+    const prototypeAccountConflicts = prototypeData.accounts.filter((account: { rec: Record<string, Record<string, unknown>>; srcs0: string[] }) => {
+      const grouped = new Map<string, { value: unknown; sources: string[] }>();
+      for (const source of account.srcs0) {
+        const record = account.rec[source];
+        if (!record) continue;
+        for (const field of ['name', 'group']) {
+          const value = record[field];
+          if (value == null) continue;
+          const key = String(value).toLowerCase();
+          const bucket = grouped.get(`${field}:${key}`) ?? { value, sources: [] };
+          bucket.sources.push(source);
+          grouped.set(`${field}:${key}`, bucket);
+        }
+      }
+      return Array.from(grouped.values()).some((group) => group.sources.length > 0 && group.sources.length < account.srcs0.length);
+    }).length;
 
     const portDeviceConflicts = devices.filter((device) => Object.values(device.sourceFieldValues).some((field) => field.hasConflict)).length;
     const portAccountConflicts = accounts.filter((account) => Object.values(account.sourceFieldValues).some((field) => field.hasConflict)).length;
@@ -81,7 +96,7 @@ describe('generated prototype data', () => {
     expect(portDeviceConflicts).toBe(prototypeDeviceConflicts);
     expect(portAccountConflicts).toBe(prototypeAccountConflicts);
     expect(portDeviceConflicts).toBe(54);
-    expect(portAccountConflicts).toBe(0);
+    expect(portAccountConflicts).toBe(13);
   });
 
   it('preserves required detail fields and conflict metadata', () => {

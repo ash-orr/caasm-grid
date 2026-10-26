@@ -30,10 +30,10 @@ const SOURCE_FIELD_SUPPORT: Record<string, Set<string>> = {
   SOTI: new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
   'Absolute Secure Endpoint': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
   'Portnox AgentP': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
-  EntraID: new Set(['host', 'os', 'ver', 'last']),
-  'Active Directory': new Set(['host', 'os', 'ver', 'last']),
-  Okta: new Set(['host', 'os', 'ver', 'last']),
-  'Google Workspace': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last']),
+  EntraID: new Set(['host', 'os', 'ver', 'last', 'name', 'group']),
+  'Active Directory': new Set(['host', 'os', 'ver', 'last', 'name', 'group']),
+  Okta: new Set(['host', 'os', 'ver', 'last', 'name', 'group']),
+  'Google Workspace': new Set(['host', 'os', 'ver', 'mfr', 'model', 'last', 'name', 'group']),
 };
 
 type SourceName = (typeof SOURCE_ORDER)[number];
@@ -249,6 +249,7 @@ function buildSourceCoverage(
 function buildSourceFieldValues(
   rawSourceRecords: Record<string, Record<string, unknown>> | undefined,
   fieldMap: Record<string, string>,
+  nowMs = DEFAULT_NOW_MS,
 ): Record<string, SourceFieldValue> {
   const result: Record<string, SourceFieldValue> = {};
 
@@ -275,15 +276,38 @@ function buildSourceFieldValues(
     if (fieldKey === 'lastSeen' || fieldKey === 'lastLogin') {
       const validEntries = Object.entries(valuesBySource)
         .filter(([, value]) => value !== null)
-        .map(([source, value]) => ({ source, value, millis: Date.parse(value as string) }))
+        .map(([source, value]) => ({
+          source,
+          value,
+          millis: Date.parse(value as string),
+          displayValue: fieldKey === 'lastLogin'
+            ? String(Math.max(0, Math.floor((nowMs - Date.parse(value as string)) / (1000 * 60 * 60 * 24))))
+            : value,
+        }))
         .filter((entry) => Number.isFinite(entry.millis));
 
       const newest = validEntries.sort((a, b) => b.millis - a.millis)[0];
 
+      const normalizedValuesBySource: Record<string, string | null> = {};
+      for (const [source, value] of Object.entries(valuesBySource)) {
+        if (value == null) {
+          normalizedValuesBySource[source] = null;
+          continue;
+        }
+
+        const millis = Date.parse(value);
+        if (fieldKey !== 'lastLogin' || !Number.isFinite(millis)) {
+          normalizedValuesBySource[source] = value;
+          continue;
+        }
+
+        normalizedValuesBySource[source] = String(Math.max(0, Math.floor((nowMs - millis) / (1000 * 60 * 60 * 24))));
+      }
+
       result[fieldKey] = {
-        value: newest ? newest.value : null,
+        value: newest ? newest.displayValue : null,
         hasConflict: false,
-        valuesBySource,
+        valuesBySource: normalizedValuesBySource,
       };
       continue;
     }
@@ -377,13 +401,28 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       name: 'name',
       group: 'group',
       lastLogin: 'last',
-    });
+    }, nowMs);
+
+    const description = account.desc ?? '';
+    const credentialsExpire = account.exp == null || account.exp === 'Never'
+      ? 'Never'
+      : new Date(account.exp).toISOString();
+    const createdBy = account.createdBy ?? 'Portnox admin (dana.whitfield@acme.com)';
+    const allowDevicesWithoutAgentP = account.noAgent ?? false;
+    const totalMacAddresses = account.macs ?? 0;
+    const totalMacVendors = account.vendors ?? 0;
 
     return {
       id: account.id,
       name: account.name,
       accountType: account.type as AccountRecord['accountType'],
       group: account.group,
+      description,
+      credentialsExpire,
+      createdBy,
+      allowDevicesWithoutAgentP,
+      totalMacAddresses,
+      totalMacVendors,
       location,
       authType: account.type,
       authRepo,
@@ -417,7 +456,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       manufacturer: 'mfr',
       model: 'model',
       lastSeen: 'last',
-    });
+    }, nowMs);
 
     const sourceCoverage = buildSourceCoverage(device.cov ?? {}, undefined, nowMs);
 
@@ -467,6 +506,7 @@ function serializeTsValue(value: unknown, indent = 0): string {
   const pad = '  '.repeat(indent);
   if (value === null) return 'null';
   if (value === undefined) return 'undefined';
+  if (value instanceof Date) return JSON.stringify(value.toISOString());
   if (typeof value === 'string') return JSON.stringify(value);
   if (typeof value === 'number' || typeof value === 'boolean') return String(value);
   if (Array.isArray(value)) {
@@ -525,6 +565,12 @@ export interface AccountRecord {
   name: string;
   accountType: 'LDAP' | 'Cloud' | 'MAC';
   group: string;
+  description?: string;
+  credentialsExpire?: string;
+  createdBy?: string;
+  allowDevicesWithoutAgentP?: boolean;
+  totalMacAddresses?: number;
+  totalMacVendors?: number;
   location: string;
   authType: string;
   authRepo: AuthRepository;
@@ -574,7 +620,7 @@ export interface DeviceRecord {
 export const accounts: AccountRecord[] = ${serializeTsValue(data.accounts)};
 export const devices: DeviceRecord[] = ${serializeTsValue(data.devices)};
 
-export function generatePrototypeData(_input: { seed?: number; nowMs?: number } = {}): Promise<{
+export function generatePrototypeData(): Promise<{
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
@@ -584,11 +630,11 @@ export function generatePrototypeData(_input: { seed?: number; nowMs?: number } 
   });
 }
 
-export function createPrototypeData(_input: { seed?: number; nowMs?: number } = {}): Promise<{
+export function createPrototypeData(): Promise<{
   accounts: AccountRecord[];
   devices: DeviceRecord[];
 }> {
-  return generatePrototypeData(_input);
+  return generatePrototypeData();
 }
 `;
 
