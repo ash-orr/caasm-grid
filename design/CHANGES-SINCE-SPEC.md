@@ -238,3 +238,4 @@ The prototype is a single HTML file and opens details in the same view. **In the
 - Risk score filters and sorting must tolerate empty scores (empty sorts last).
 - **Source columns and Source coverage text list Portnox first**, then the other sources in the existing order. The AgentP source column header is now **Portnox** (short name). Other "AgentP ..." labels (AgentP last reported, AgentP version) are unchanged.
 - Location, Account type, Group and Status come from AgentP/NAC, so they are empty for these devices (table, filters, device panel, Overview). Filters on those fields never match them.
+- **Sorting:** empty values always sort last, in both ascending and descending order (for example Risk score on uncovered devices).
