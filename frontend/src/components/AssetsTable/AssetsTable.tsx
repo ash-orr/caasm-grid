@@ -2071,19 +2071,39 @@ export function AssetsTable() {
         ? `${agreement.hasConflict ? 'Conflict' : `Agree ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
         : '';
 
-      const sourceText = agreement && shouldShowSourceText
-        ? matchingSources.map(({ source, value }) => `${source}  "${agreement.fieldKey}": "${value ?? '—'}"`).join(' \n ')
-        : '';
+      const majorityValue = agreement?.sources.length
+        ? [...agreement.sources.reduce<Map<string, number>>((counts, source) => {
+            const key = source.value ?? '';
+            counts.set(key, (counts.get(key) ?? 0) + 1);
+            return counts;
+          }, new Map()).entries()].sort((left, right) => right[1] - left[1])[0]?.[0] ?? null
+        : null;
+
+      const sourceEntries = agreement && shouldShowSourceText
+        ? matchingSources
+            .filter((source) => source.value !== null && source.value !== undefined && source.value !== '')
+            .map((source) => ({
+              source: source.source,
+              fieldName: source.fieldName ?? (agreement?.fieldKey ?? entry.fieldKey ?? ''),
+              value: String(source.value),
+              isDifferent: agreement.hasConflict && majorityValue !== null && source.value !== majorityValue,
+            }))
+        : [];
+
+      const sourceText = sourceEntries.map(({ source, fieldName, value }) => `${source}  "${fieldName}": "${value}"`).join(' \n ');
 
       return {
         ...entry,
         hasConflict: agreement?.hasConflict ?? false,
         agreementText: sourceSummary,
         sourceText,
+        sourceEntries,
+        fieldKey: agreement?.fieldKey ?? entry.fieldKey,
       };
     });
 
     const lastLogin = agreementRows.find((row) => row.fieldKey === 'lastLogin');
+    const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
     const summaryLabel = conflictCount > 0 ? `${conflictCount} ${conflictCount === 1 ? 'field differs' : 'fields differ'} across sources` : 'All sources agree';
 
     return (
@@ -2091,6 +2111,11 @@ export function AssetsTable() {
         {kind === 'account' && lastLogin ? (
           <div className={styles.detailOverviewLead}>
             Last login by sources: {lastLogin.value === '0' ? 'Today' : `${lastLogin.value} days ago`} <span className={styles.detailMuted}>· Reported by {lastLogin.sources.map((source) => source.source).join(', ')}</span>
+          </div>
+        ) : null}
+        {kind === 'device' && lastSeen && lastSeen.sourceCount > 0 ? (
+          <div className={styles.detailOverviewLead}>
+            Last seen by sources: <span className={styles.detailMuted}>Reported by {lastSeen.sources.map((source) => source.source).join(', ')}</span>
           </div>
         ) : null}
         {showSummary ? (
@@ -2114,19 +2139,26 @@ export function AssetsTable() {
                 {row.agreementText ? (
                   <>
                     <span className={row.hasConflict ? styles.detailPillWarn : styles.detailPillOk}>{row.agreementText}</span>
-                    {row.hasConflict && row.sourceText ? (
+                    {row.hasConflict && row.sourceEntries.length > 0 ? (
                       <button
                         className={styles.linkBtn}
-                        onClick={() => setExpandedFields((prev) => ({ ...prev, [row.label]: !prev[row.label] }))}
+                        onClick={() => setExpandedFields((prev) => ({ ...prev, [String(row.fieldKey)]: !(prev[String(row.fieldKey)] ?? false) }))}
                         type="button"
+                        data-rr={row.fieldKey}
+                        aria-expanded={Boolean(expandedFields[String(row.fieldKey)])}
                       >
-                        {expandedFields[row.label] ? 'Hide raw values' : 'View raw values'}
+                        {expandedFields[String(row.fieldKey)] ? 'Hide raw values' : 'View raw values'}
                       </button>
                     ) : null}
-                    {row.hasConflict && expandedFields[row.label] ? (
+                    {row.hasConflict && expandedFields[String(row.fieldKey)] ? (
                       <span className={styles.detailRawValues}>
-                        {row.sourceText.split(' \n ').map((entry) => (
-                          <span className={`${styles.detailRawValue} ${styles.detailRawValueDiff}`} key={entry}>{entry}</span>
+                        {row.sourceEntries.map((entry) => (
+                          <span
+                            className={`${styles.detailRawValue} ${entry.isDifferent ? styles.detailRawValueDiff : ''}`}
+                            key={`${row.fieldKey}-${entry.source}`}
+                          >
+                            {`${entry.source}  "${entry.fieldName}": "${entry.value}"`}
+                          </span>
                         ))}
                       </span>
                     ) : null}

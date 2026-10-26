@@ -119,8 +119,8 @@ describe('AssetsTable overview parity', () => {
 
     row.sources
       .filter((source) => source.value !== null)
-      .forEach(({ source, value }) => {
-        expect(raw).toContain(`${source}  "${row.fieldKey}": "${value}"`);
+      .forEach(({ source, value, fieldName }) => {
+        expect(raw).toContain(`${source}  "${fieldName}": "${value}"`);
       });
   });
 

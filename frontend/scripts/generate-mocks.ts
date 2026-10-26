@@ -62,6 +62,7 @@ interface SourceFieldValue {
   value: string | null;
   hasConflict: boolean;
   valuesBySource: Record<string, string | null>;
+  fieldNamesBySource?: Record<string, string>;
 }
 
 export interface AccountRecord {
@@ -114,6 +115,34 @@ export interface DeviceRecord {
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
+
+const DEVICE_SOURCE_FIELD_MAPS: Record<SourceName, Record<string, string>> = {
+  CrowdStrike: { hostname: 'hostname', os: 'platform_name', osVersion: 'os_version', manufacturer: 'system_manufacturer', model: 'system_product_name', lastSeen: 'last_seen' },
+  SentinelOne: { hostname: 'computerName', os: 'osName', osVersion: 'osRevision', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastActiveDate' },
+  Intune: { hostname: 'deviceName', os: 'operatingSystem', osVersion: 'osVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastSyncDateTime' },
+  Jamf: { hostname: 'computer_name', os: 'os_name', osVersion: 'os_version', manufacturer: 'make', model: 'model', lastSeen: 'last_contact_time' },
+  SOTI: { hostname: 'DeviceName', os: 'Platform', osVersion: 'OSVersion', manufacturer: 'Manufacturer', model: 'Model', lastSeen: 'LastCheckInTime' },
+  'Absolute Secure Endpoint': { hostname: 'deviceName', os: 'osName', osVersion: 'osVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastConnectedUtc' },
+  'Portnox AgentP': { hostname: 'hostname', os: 'os_name', osVersion: 'os_version', manufacturer: 'manufacturer', model: 'model', lastSeen: 'last_seen_at' },
+  EntraID: { hostname: 'displayName', os: 'operatingSystem', osVersion: 'operatingSystemVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'approximateLastSignInDateTime' },
+  'Active Directory': { hostname: 'cn', os: 'operatingSystem', osVersion: 'operatingSystemVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastLogonTimestamp' },
+  Okta: { hostname: 'displayName', os: 'platform', osVersion: 'osVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastUpdated' },
+  'Google Workspace': { hostname: 'name', os: 'os', osVersion: 'osVersion', manufacturer: 'manufacturer', model: 'model', lastSeen: 'lastSync' },
+};
+
+const ACCOUNT_SOURCE_FIELD_MAPS: Record<SourceName, Record<string, string>> = {
+  CrowdStrike: { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  SentinelOne: { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  Intune: { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  Jamf: { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  SOTI: { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  'Absolute Secure Endpoint': { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  'Portnox AgentP': { name: 'name', group: 'group', lastLogin: 'lastLogin' },
+  EntraID: { name: 'userPrincipalName', group: 'department', lastLogin: 'signInActivity.lastSignInDateTime' },
+  'Active Directory': { name: 'userPrincipalName', group: 'department', lastLogin: 'lastLogonTimestamp' },
+  Okta: { name: 'profile.login', group: 'profile.department', lastLogin: 'lastLogin' },
+  'Google Workspace': { name: 'primaryEmail', group: 'orgUnitPath', lastLogin: 'lastLoginTime' },
+};
 
 const SOURCE_LAST_SYNC: Record<SourceName, string> = {
   CrowdStrike: '2026-10-16T13:35:00.000Z',
@@ -249,15 +278,20 @@ function buildSourceCoverage(
 function buildSourceFieldValues(
   rawSourceRecords: Record<string, Record<string, unknown>> | undefined,
   fieldMap: Record<string, string>,
+  sourceFieldMaps: Record<string, Record<string, string>>,
   nowMs = DEFAULT_NOW_MS,
 ): Record<string, SourceFieldValue> {
   const result: Record<string, SourceFieldValue> = {};
 
   for (const [fieldKey, prototypeField] of Object.entries(fieldMap)) {
     const valuesBySource: Record<string, string | null> = {};
+    const fieldNamesBySource: Record<string, string> = {};
     const normalizedValues: string[] = [];
 
     for (const source of SOURCE_ORDER) {
+      const sourceFieldName = sourceFieldMaps[source]?.[fieldKey] ?? prototypeField;
+      fieldNamesBySource[source] = sourceFieldName;
+
       if (!SOURCE_FIELD_SUPPORT[source]?.has(prototypeField)) {
         valuesBySource[source] = null;
         continue;
@@ -308,6 +342,7 @@ function buildSourceFieldValues(
         value: newest ? newest.displayValue : null,
         hasConflict: false,
         valuesBySource: normalizedValuesBySource,
+        fieldNamesBySource,
       };
       continue;
     }
@@ -322,6 +357,7 @@ function buildSourceFieldValues(
       value: winner ? winner[0] : null,
       hasConflict: normalizedValues.length > 1 && distinctValues.size > 1,
       valuesBySource,
+      fieldNamesBySource,
     };
   }
 
@@ -401,7 +437,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       name: 'name',
       group: 'group',
       lastLogin: 'last',
-    }, nowMs);
+    }, ACCOUNT_SOURCE_FIELD_MAPS, nowMs);
 
     const description = account.desc ?? '';
     const credentialsExpire = account.exp == null || account.exp === 'Never'
@@ -456,7 +492,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       manufacturer: 'mfr',
       model: 'model',
       lastSeen: 'last',
-    }, nowMs);
+    }, DEVICE_SOURCE_FIELD_MAPS, nowMs);
 
     const sourceCoverage = buildSourceCoverage(device.cov ?? {}, undefined, nowMs);
     const isUncovered = Boolean(device.uncov);
@@ -562,6 +598,7 @@ export interface SourceFieldValue {
   value: string | null;
   hasConflict: boolean;
   valuesBySource: Record<string, string | null>;
+  fieldNamesBySource?: Record<string, string>;
 }
 
 export interface AccountRecord {

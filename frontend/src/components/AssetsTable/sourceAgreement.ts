@@ -2,6 +2,7 @@ import type { AccountRecord, DeviceRecord } from '../../mocks/generated/prototyp
 
 export interface SourceFieldAgreementSource {
   source: string;
+  fieldName: string;
   value: string | null;
 }
 
@@ -39,7 +40,11 @@ export function getSourceFieldAgreementRows(record: AccountRecord | DeviceRecord
 
       const sources: SourceFieldAgreementSource[] = Object.entries(field.valuesBySource ?? {})
         .filter(([, value]) => value !== null && value !== undefined && value !== '')
-        .map(([source, value]) => ({ source, value: value === null ? null : String(value) }));
+        .map(([source, value]) => ({
+          source,
+          fieldName: field.fieldNamesBySource?.[source] ?? fieldKey,
+          value: value === null ? null : String(value),
+        }));
 
       if (sources.length === 0) return null;
 
