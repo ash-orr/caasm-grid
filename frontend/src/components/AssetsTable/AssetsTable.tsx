@@ -2041,21 +2041,28 @@ export function AssetsTable() {
 
           return [
             { label: 'Account name', value: accountRecord.name, fieldKey: 'name' },
-            { label: 'Account type', value: accountRecord.accountType, fieldKey: 'accountType' },
+            { label: 'Account type', value: accountRecord.accountType === 'MAC' ? 'MAC-based' : accountRecord.accountType, fieldKey: 'accountType' },
             { label: 'Group', value: accountRecord.group, fieldKey: 'group' },
-            { label: 'Description', value: accountRecord.group ? '—' : '—' },
-            { label: 'Last login', value: accountRecord.lastLoginDays == null ? '—' : accountRecord.lastLoginDays === 0 ? 'Today' : `${accountRecord.lastLoginDays} days ago`, fieldKey: 'lastLogin' },
+            { label: 'Description', value: accountRecord.description || '—', fieldKey: 'description' },
+            { label: 'Credentials expire', value: accountRecord.credentialsExpire === 'Never' ? 'Never' : new Date(accountRecord.credentialsExpire ?? Date.now()).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }), fieldKey: 'credentialsExpire' },
+            { label: 'Created by', value: accountRecord.createdBy || '—', fieldKey: 'createdBy' },
+            { label: 'Allow devices without AgentP to connect using this account', value: accountRecord.allowDevicesWithoutAgentP ? 'Yes' : 'No', fieldKey: 'allowDevicesWithoutAgentP' },
+            ...(accountRecord.accountType === 'MAC' ? [
+              { label: 'Total MAC addresses', value: String(accountRecord.totalMacAddresses ?? 0), fieldKey: 'totalMacAddresses' },
+              { label: 'Total MAC vendors', value: String(accountRecord.totalMacVendors ?? 0), fieldKey: 'totalMacVendors' },
+            ] : []),
           ];
         })();
 
     const overviewRows = staticRows.map((entry) => {
       const agreement = agreementRows.find((row) => row.fieldKey === entry.fieldKey);
       const matchingSources = agreement?.sources ?? [];
-      const sourceSummary = agreement
+      const shouldShowSourceText = kind === 'account' ? ['name', 'group'].includes(entry.fieldKey ?? '') : Boolean(agreement);
+      const sourceSummary = agreement && shouldShowSourceText
         ? `${agreement.hasConflict ? 'Conflict' : `Agree ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
         : '';
 
-      const sourceText = agreement
+      const sourceText = agreement && shouldShowSourceText
         ? matchingSources.map(({ source, value }) => `${source}  "${agreement.fieldKey}": "${value ?? '—'}"`).join(' \n ')
         : '';
 
@@ -2067,14 +2074,14 @@ export function AssetsTable() {
       };
     });
 
-    const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
+    const lastLogin = agreementRows.find((row) => row.fieldKey === 'lastLogin');
     const summaryLabel = conflictCount > 0 ? `${conflictCount} ${conflictCount === 1 ? 'field differs' : 'fields differ'} across sources` : 'All sources agree';
 
     return (
       <section className={styles.detailSection}>
-        {lastSeen ? (
+        {kind === 'account' && lastLogin ? (
           <div className={styles.detailOverviewLead}>
-            Last seen by sources: {lastSeen.value} · Most recent: {lastSeen.sources[0]?.source ?? '—'}
+            Last login by sources: {lastLogin.value === '0' ? 'Today' : `${lastLogin.value} days ago`} <span className={styles.detailMuted}>· Reported by {lastLogin.sources.map((source) => source.source).join(', ')}</span>
           </div>
         ) : null}
         {showSummary ? (
