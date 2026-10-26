@@ -198,7 +198,6 @@ Add these to the original questions and assumptions:
 1. Saved views: stored where? Shared with the whole organization or per user? Who may update or remove a shared view? Is there an audit log for removals?
 2. Share link: what does the link contain (the view's id, or the filters themselves)? What happens if the recipient lacks permission, or the view has since been removed?
 3. Sites: where do NAS site names and NAS IPs come from? The filter options and the Site and NAS IP columns should use the Sites table.
-4. Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
 5. Authentication repository: the field is shown for devices as the account's repository. Is that how the backend defines it?
 6. List fields (applications, patches, processes, services, peripherals, browser, extensions): are they returned as full lists, and are filters evaluated server-side? Large lists may need server-side filtering and a count in the table.
 7. AgentP version "older than": does the backend compare versions numerically? Which version format does it use?
