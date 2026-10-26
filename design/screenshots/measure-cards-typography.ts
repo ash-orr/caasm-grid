@@ -17,15 +17,14 @@ const reportPath = path.resolve(__dirname, 'typography-cards-report.json');
 const summaryPath = path.resolve(__dirname, 'typography-cards-summary.md');
 const previewProcessPids = new Set<number>();
 
-type ManifestEntry = {
+type ElementSpec = {
   name: string;
-  prototypeSelectors: readonly string[];
-  portSelectors: readonly string[];
-  mode?: 'device' | 'account';
+  selectors: readonly string[];
 };
 
 type MatchInfo = {
   tagName: string | null;
+  text: string;
   outerHtml: string;
 };
 
@@ -39,8 +38,163 @@ type DetailIssue = {
   portMatch: MatchInfo | null;
 };
 
+type Scenario = {
+  name: string;
+  kind: 'device' | 'account';
+  recordName: string;
+  tab: string;
+  elements: readonly ElementSpec[];
+};
+
+const properties = [
+  'fontFamily',
+  'fontSize',
+  'fontWeight',
+  'lineHeight',
+  'letterSpacing',
+  'color',
+  'backgroundColor',
+  'paddingTop',
+  'paddingRight',
+  'paddingBottom',
+  'paddingLeft',
+  'borderRadius',
+  'renderedHeight',
+] as const;
+
+const MANIFEST: readonly ElementSpec[] = [
+  { name: 'detail summary pill', selectors: ['[class*="detailOverviewSummary"] span:visible', 'div:has-text("All sources agree") span:visible'] },
+  { name: 'detail source coverage header', selectors: ['[data-testid="source-coverage-card"] h3:visible:text-is("Exposure gaps")', 'h3:visible:text-is("Exposure gaps")'] },
+  { name: 'detail overview lead', selectors: ['[class*="detailOverviewLead"]:visible', 'div:has-text("Last seen by sources")', 'div:has-text("Last login by sources")'] },
+  { name: 'detail agreement header', selectors: ['[class*="detailAgreementHeader"] span:visible', 'div.detailAgreementHeader span:has-text("Field")'] },
+  { name: 'detail raw values toggle', selectors: ['button:visible:text-is("View raw values")', 'button:has-text("View raw values")'] },
+  { name: 'detail source coverage search', selectors: ['input[aria-label="Find a source"]', 'input[placeholder="Find a source"]'] },
+  { name: 'detail source coverage source row', selectors: ['[data-testid="source-coverage-source"]', 'dt:has-text("Portnox AgentP")', 'dt:has-text("CrowdStrike")'] },
+  { name: 'detail source coverage time', selectors: ['[data-testid="source-coverage-time"]', 'dd span:has-text("ago")'] },
+];
+
+const SCENARIOS: readonly Scenario[] = [
+  {
+    name: 'device overview',
+    kind: 'device',
+    recordName: 'IOT-1049',
+    tab: 'Overview',
+    elements: MANIFEST,
+  },
+  {
+    name: 'device exposure coverage',
+    kind: 'device',
+    recordName: 'IOT-1049',
+    tab: 'Exposure coverage',
+    elements: MANIFEST,
+  },
+  {
+    name: 'account overview',
+    kind: 'account',
+    recordName: 'avery@acme.com',
+    tab: 'Overview',
+    elements: MANIFEST,
+  },
+  {
+    name: 'account exposure coverage',
+    kind: 'account',
+    recordName: 'avery@acme.com',
+    tab: 'Exposure coverage',
+    elements: MANIFEST,
+  },
+];
+
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function normalizeName(value: string | null | undefined): string {
+  return (value ?? '').replace(/\s+#\d+$/, '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function normalizeText(value: string | null | undefined): string {
+  return (value ?? '').replace(/\s+/g, ' ').trim();
+}
+
+function toNumber(value: string | null | undefined): number | null {
+  if (value === null || value === undefined) return null;
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function normalizeColor(value: string | null | undefined): string {
+  if (!value) return '';
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+
+  const srgbMatch = trimmed.match(/color\(srgb\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/i);
+  if (srgbMatch) {
+    const [r, g, b] = srgbMatch.slice(1).map((part) => Number.parseFloat(part));
+    return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+  }
+
+  const rgbMatch = trimmed.match(/rgba?\(([^)]+)\)/i);
+  if (rgbMatch) {
+    const numbers = rgbMatch[1].split(',').map((part) => Number.parseFloat(part.trim()));
+    const [r, g, b, a] = numbers;
+    if (Number.isFinite(r) && Number.isFinite(g) && Number.isFinite(b)) {
+      if (a !== undefined && Number.isFinite(a) && a !== 1) {
+        return `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${a})`;
+      }
+      return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+    }
+  }
+
+  if (trimmed.startsWith('#')) {
+    const hex = trimmed.slice(1).replace(/\s+/g, '');
+    if (hex.length === 3 || hex.length === 4) {
+      const expanded = hex.split('').map((char) => char + char).join('');
+      return `rgb(${Number.parseInt(expanded.slice(0, 2), 16)}, ${Number.parseInt(expanded.slice(2, 4), 16)}, ${Number.parseInt(expanded.slice(4, 6), 16)})`;
+    }
+    if (hex.length >= 6) {
+      return `rgb(${Number.parseInt(hex.slice(0, 2), 16)}, ${Number.parseInt(hex.slice(2, 4), 16)}, ${Number.parseInt(hex.slice(4, 6), 16)})`;
+    }
+  }
+
+  return trimmed.toLowerCase();
+}
+
+function normalizeFontFamily(value: string | null | undefined): string {
+  if (!value) return '';
+  const [candidate] = value
+    .split(',')
+    .map((part) => part.trim().replace(/^"|"$/g, '').trim())
+    .filter(Boolean);
+  return (candidate ?? '').toLowerCase();
+}
+
+function compareProperty(property: string, left: string | null | undefined, right: string | null | undefined): boolean {
+  if (left === 'NOT FOUND' || right === 'NOT FOUND') return left === right;
+  if (left === 'ERROR:' || right === 'ERROR:') return left === right;
+  if (property === 'fontFamily') return normalizeFontFamily(left) === normalizeFontFamily(right);
+  if (property.includes('Color')) return normalizeColor(left) === normalizeColor(right);
+  if (property === 'fontWeight') {
+    const leftWeight = left?.replace(/[^0-9]/g, '') || left;
+    const rightWeight = right?.replace(/[^0-9]/g, '') || right;
+    if (leftWeight && rightWeight) return Math.abs(Number(leftWeight) - Number(rightWeight)) <= 1;
+    return left === right;
+  }
+  if (['fontSize', 'lineHeight', 'letterSpacing', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'renderedHeight'].includes(property)) {
+    const leftNumber = toNumber(left);
+    const rightNumber = toNumber(right);
+    if (leftNumber !== null && rightNumber !== null) return Math.abs(leftNumber - rightNumber) <= 0.5;
+    return left === right;
+  }
+  return left === right;
+}
+
+function statusForComparison(
+  property: string,
+  prototypeValue: string | null | undefined,
+  portValue: string | null | undefined,
+): 'OK' | 'MISMATCH' | 'NOT FOUND' {
+  if (prototypeValue === 'NOT FOUND' || portValue === 'NOT FOUND') return 'NOT FOUND';
+  return compareProperty(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
 }
 
 async function portInUse(port: number): Promise<boolean> {
@@ -126,216 +280,6 @@ process.on('SIGTERM', () => {
   process.exit(143);
 });
 
-const properties = [
-  'fontFamily',
-  'fontSize',
-  'fontWeight',
-  'lineHeight',
-  'letterSpacing',
-  'color',
-  'backgroundColor',
-  'paddingTop',
-  'paddingRight',
-  'paddingBottom',
-  'paddingLeft',
-  'borderRadius',
-  'renderedHeight',
-] as const;
-
-const manifest: ManifestEntry[] = [
-  { name: 'Device details heading', mode: 'device', prototypeSelectors: ['h2:has-text("Device details")'], portSelectors: ['[class*="detailCardTitle"]:text-is("Device details")', '[class*="detailCard"] h3:text-is("Device details")'] },
-  { name: 'Type dt', mode: 'device', prototypeSelectors: ['dl.kv dt:has-text("Type")'], portSelectors: ['dl dt:text-is("Type")'] },
-  { name: 'Type dd value', mode: 'device', prototypeSelectors: ['dl.kv dd:has-text("Laptop")', 'dl.kv dd:has-text("IoT/Printer")'], portSelectors: ['dl dd:text-is("Laptop")', 'dl dd:text-is("IoT/Printer")'] },
-  { name: 'Current risk score heading', mode: 'device', prototypeSelectors: ['h2:has-text("Current risk score")'], portSelectors: ['[class*="detailCardTitle"]:text-is("Current risk score")'] },
-  { name: 'Current risk score pill', mode: 'device', prototypeSelectors: ['span.score.p-bad', 'span.score.p-warn', 'span.score.p-ok'], portSelectors: ['[data-testid="risk-pill"]', '[class*="pill"] span[aria-label$="Blocked"]', '[class*="pill"] span[aria-label$="Alert"]', '[class*="pill"] span[aria-label$="Access"]'] },
-  { name: 'Exposure gaps heading', mode: 'device', prototypeSelectors: ['h2:has-text("Exposure gaps")'], portSelectors: ['[data-testid="source-coverage-card"] h3:visible:text-is("Exposure gaps")', '[class*="detailCard"] h3:visible:text-is("Exposure gaps")'] },
-  { name: 'Source name', mode: 'device', prototypeSelectors: ['dt:has-text("CrowdStrike")', 'dt:has-text("Portnox AgentP")'], portSelectors: ['[data-testid="source-coverage-source"]:text-is("CrowdStrike")', '[data-testid="source-coverage-source"]:text-is("Portnox AgentP")'] },
-  { name: 'Source status pill', mode: 'device', prototypeSelectors: ['dd .pill:has-text("Reporting")', 'dd .pill:has-text("Not present")'], portSelectors: ['[data-testid="source-coverage-pill"]'] },
-  { name: 'Muted time next to the pill', mode: 'device', prototypeSelectors: ['dd span[style*="color:var(--mute)"]'], portSelectors: ['[data-testid="source-coverage-time"]'] },
-  { name: '+N Reporting link', mode: 'device', prototypeSelectors: ['button.lk:has-text("+")', 'button.lk:has-text("+1")'], portSelectors: ['[data-testid="source-coverage-toggle"]:text-is("See details")', '[data-testid="source-coverage-toggle"]:text-is("Show details")'] },
-  { name: 'Account assignment heading', mode: 'device', prototypeSelectors: ['h2:has-text("Account assignment")'], portSelectors: ['[class*="detailCardTitle"]:text-is("Account assignment")'] },
-  { name: 'Account assignment dt', mode: 'device', prototypeSelectors: ['dl.kv dt:has-text("Account")'], portSelectors: ['dl dt:text-is("Account")'] },
-  { name: 'Account assignment dd', mode: 'device', prototypeSelectors: ['dl.kv dd:has-text("@acme.com")'], portSelectors: ['[class*="detailKv"] dd:has-text("@acme.com")'] },
-  { name: 'Account link', mode: 'device', prototypeSelectors: ['button.lk[data-open*="account"]', 'button.lk:has-text("@acme.com")'], portSelectors: ['button[class*="detailLink"]:visible'] },
-  { name: 'Not available text', mode: 'device', prototypeSelectors: ['p.sub:has-text("Not available. This device is not covered by Portnox AgentP")'], portSelectors: ['p:visible:text-is("Not available. This device is not covered by Portnox AgentP")'] },
-  { name: 'Uncovered em dash value', mode: 'device', prototypeSelectors: ['dd:has-text("—")'], portSelectors: ['dd:visible:text-is("—")'] },
-  { name: 'All sources reporting text', mode: 'account', prototypeSelectors: ['div:has-text("All sources reporting")'], portSelectors: ['[class*="detailOverviewSummary"] span:visible:text-is("All sources agree")'] },
-  { name: 'See details link', mode: 'account', prototypeSelectors: ['button.lk:has-text("See details")'], portSelectors: ['button:visible:text-is("See details")'] },
-  { name: 'Active tab', mode: 'account', prototypeSelectors: ['button.tabs button.on'], portSelectors: ['[class*="detailTabActive"]'] },
-  { name: 'Inactive tab', mode: 'account', prototypeSelectors: ['button.tabs button:not(.on)'], portSelectors: ['button[class*="detailTab"]:not([class*="detailTabActive"])'] },
-  { name: 'Overview warning icon', mode: 'account', prototypeSelectors: ['svg[aria-label="Sources disagree"]'], portSelectors: ['[aria-hidden="true"][class*="detailWarnIcon"]'] },
-  { name: 'Last seen by sources line', mode: 'device', prototypeSelectors: ['div:has-text("Last seen by sources")'], portSelectors: ['[class*="detailOverviewLead"]:has-text("Last seen by sources")'] },
-  { name: 'Overview status pill', mode: 'account', prototypeSelectors: ['span.pill.p-ok', 'span.pill.p-warn'], portSelectors: ['[class*="detailOverviewSummary"] span:visible', '[class*="detailPillOk"]', '[class*="detailPillWarn"]'] },
-  { name: 'Field header', mode: 'account', prototypeSelectors: ['div.kr.kh > span:has-text("Field")'], portSelectors: ['[class*="detailAgreementHeader"] span:text-is("Field")'] },
-  { name: 'Value header', mode: 'account', prototypeSelectors: ['div.kr.kh > span:has-text("Value")'], portSelectors: ['[class*="detailAgreementHeader"] span:text-is("Value")'] },
-  { name: 'Sources header', mode: 'account', prototypeSelectors: ['div.kr.kh > span:has-text("Sources")'], portSelectors: ['[class*="detailAgreementHeader"] span:text-is("Sources")'] },
-  { name: 'Overview row label', mode: 'account', prototypeSelectors: ['div.kr.s3 > span:has-text("Account name")', 'div.kr.s3 > span:has-text("Group")'], portSelectors: ['[class*="detailAgreementField"]:text-is("Account name")', '[class*="detailAgreementField"]:text-is("Group")'] },
-  { name: 'Overview row value', mode: 'account', prototypeSelectors: ['div.kr.s3 > div:has-text("avery")', 'div.kr.s3 > div:has-text("Legal")'], portSelectors: ['[class*="detailAgreementValue"]:visible'] },
-  { name: 'Agree pill', mode: 'account', prototypeSelectors: ['span.pill.p-ok:has-text("Agree")'], portSelectors: ['[class*="detailOverviewSummary"] span:visible:text-is("All sources agree")'] },
-  { name: 'N sources text', mode: 'account', prototypeSelectors: ['span:has-text("source")'], portSelectors: ['[class*="detailAgreementSources"]:has-text("source")'] },
-  { name: 'Conflict pill', mode: 'account', prototypeSelectors: ['span.pill.p-warn:has-text("Conflict")'], portSelectors: ['[class*="detailPillWarn"]:text-is("Conflict")'] },
-  { name: 'Group text', mode: 'account', prototypeSelectors: ['div:has-text("Google Workspace")', 'div:has-text("EntraID")'], portSelectors: ['[class*="detailAgreementSources"]:has-text("Google Workspace")', '[class*="detailAgreementSources"]:has-text("EntraID")'] },
-  { name: 'View raw values', mode: 'account', prototypeSelectors: ['button.lk:has-text("View raw values")'], portSelectors: ['button:visible:text-is("View raw values")'] },
-  { name: 'Expanded raw line', mode: 'account', prototypeSelectors: ['div.rrin .dif', '.rrin .dif'], portSelectors: ['[class*="detailRawValueDiff"]'] },
-  { name: 'Highlighted raw line', mode: 'account', prototypeSelectors: ['div.rrin.raw .dif'], portSelectors: ['[class*="detailRawValueDiff"]'] },
-  { name: 'Find a source input', mode: 'account', prototypeSelectors: ['input[placeholder="Find a source"]', 'input[aria-label="Find a source"]'], portSelectors: ['input[aria-label="Find a source"]', 'input[placeholder="Find a source"]'] },
-  { name: 'Exposure coverage Source header', mode: 'device', prototypeSelectors: ['div.kr.s3.kh > span:has-text("Source")'], portSelectors: ['[class*="detailAgreementHeader"] span:text-is("Source")', '[class*="sourceCoverage"] th:text-is("Source")'] },
-  { name: 'Exposure coverage Status header', mode: 'device', prototypeSelectors: ['div.kr.s3.kh > span:has-text("Status")'], portSelectors: ['[class*="sourceCoverage"] th:text-is("Status")', '[class*="detailAgreementHeader"] span:text-is("Status")'] },
-  { name: 'Exposure coverage Last seen header', mode: 'device', prototypeSelectors: ['div.kr.s3.kh > span:has-text("Last seen")'], portSelectors: ['[class*="sourceCoverage"] th:text-is("Last seen")'] },
-  { name: 'Source coverage source name', mode: 'device', prototypeSelectors: ['div.kr.s3 > span:has-text("Portnox AgentP")', 'div.kr.s3 > span:has-text("CrowdStrike")'], portSelectors: ['[data-testid="source-coverage-source"]'] },
-  { name: 'Source coverage status pill', mode: 'device', prototypeSelectors: ['div.kr.s3 .pill'], portSelectors: ['[data-testid="source-coverage-pill"]'] },
-  { name: 'Source coverage last seen value', mode: 'device', prototypeSelectors: ['div.kr.s3 > div.sc'], portSelectors: ['[data-testid="source-coverage-time"]'] },
-  { name: 'No sources match message', mode: 'account', prototypeSelectors: ['p.sub:has-text("No sources match")'], portSelectors: ['p:visible:text-is("No sources match")'] },
-  { name: 'Account details heading', mode: 'account', prototypeSelectors: ['h2:has-text("Account details")'], portSelectors: ['[class*="detailCardTitle"]:text-is("Account details")'] },
-  { name: 'Account details dt', mode: 'account', prototypeSelectors: ['dl.kv dt:has-text("Type")'], portSelectors: ['dl dt:text-is("Type")'] },
-  { name: 'Account details dd', mode: 'account', prototypeSelectors: ['dl.kv dd:has-text("LDAP")', 'dl.kv dd:has-text("MAC")'], portSelectors: ['dl dd:text-is("LDAP")', 'dl dd:text-is("MAC")'] },
-  { name: 'Associated devices item name', mode: 'account', prototypeSelectors: ['div:has-text("IOT-1049")', 'div:has-text("SRV-1028")'], portSelectors: ['button[class*="detailLink"]:visible'] },
-  { name: 'Associated device link', mode: 'account', prototypeSelectors: ['button.lk:has-text("IOT-1049")', 'button.lk:has-text("SRV-1028")'], portSelectors: ['button[class*="detailLink"]:visible'] },
-  { name: 'Associated device risk pill', mode: 'account', prototypeSelectors: ['span.score.p-bad', 'span.score.p-warn', 'span.score.p-ok'], portSelectors: ['[data-testid="risk-pill"]'] },
-  { name: 'Last login by sources line', mode: 'account', prototypeSelectors: ['div:has-text("Last login by sources")'], portSelectors: ['[class*="detailOverviewLead"]:has-text("Last login by sources")'] },
-  { name: 'Account overview row label', mode: 'account', prototypeSelectors: ['div.kr.s3 > span:has-text("Account name")'], portSelectors: ['[class*="detailAgreementField"]:text-is("Account name")'] },
-  { name: 'Account overview row value', mode: 'account', prototypeSelectors: ['div.kr.s3 > div:has-text("@acme.com")'], portSelectors: ['[class*="detailAgreementValue"]:visible'] },
-  { name: 'Total MAC addresses', mode: 'account', prototypeSelectors: ['div.kr.s3 > span:has-text("Total MAC addresses")'], portSelectors: ['[class*="detailAgreementField"]:text-is("Total MAC addresses")'] },
-] as const;
-
-function normalizeColor(value: string | null | undefined): string {
-  if (!value) return '';
-  const trimmed = value.trim();
-  if (!trimmed) return '';
-
-  const srgbMatch = trimmed.match(/color\(srgb\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/i);
-  if (srgbMatch) {
-    const [r, g, b] = srgbMatch.slice(1).map((part) => Number.parseFloat(part));
-    return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
-  }
-
-  const rgbMatch = trimmed.match(/rgba?\(([^)]+)\)/i);
-  if (rgbMatch) {
-    const numbers = rgbMatch[1].split(',').map((part) => Number.parseFloat(part.trim()));
-    const [r, g, b, a] = numbers;
-    if (Number.isFinite(r) && Number.isFinite(g) && Number.isFinite(b)) {
-      if (a !== undefined && Number.isFinite(a) && a !== 1) {
-        return `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${a})`;
-      }
-      return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
-    }
-  }
-
-  if (trimmed.startsWith('#')) {
-    const hex = trimmed.slice(1).replace(/\s+/g, '');
-    if (hex.length === 3 || hex.length === 4) {
-      const expanded = hex.split('').map((char) => char + char).join('');
-      return `rgb(${Number.parseInt(expanded.slice(0, 2), 16)}, ${Number.parseInt(expanded.slice(2, 4), 16)}, ${Number.parseInt(expanded.slice(4, 6), 16)})`;
-    }
-    if (hex.length >= 6) {
-      return `rgb(${Number.parseInt(hex.slice(0, 2), 16)}, ${Number.parseInt(hex.slice(2, 4), 16)}, ${Number.parseInt(hex.slice(4, 6), 16)})`;
-    }
-  }
-
-  return trimmed.toLowerCase();
-}
-
-function toNumber(value: string | null | undefined): number | null {
-  if (value === null || value === undefined) return null;
-  const parsed = Number.parseFloat(value);
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-function normalizeFontFamily(value: string | null | undefined): string {
-  if (!value) return '';
-  const [candidate] = value
-    .split(',')
-    .map((part) => part.trim().replace(/^"|"$/g, '').trim())
-    .filter(Boolean);
-  return (candidate ?? '').toLowerCase();
-}
-
-function compareProperty(property: string, left: string | null | undefined, right: string | null | undefined): boolean {
-  if (left === 'NOT FOUND' || right === 'NOT FOUND') return left === right;
-  if (left === 'ERROR:' || right === 'ERROR:') return left === right;
-  if (property === 'fontFamily') return normalizeFontFamily(left) === normalizeFontFamily(right);
-  if (property.includes('Color')) return normalizeColor(left) === normalizeColor(right);
-  if (property === 'fontWeight') {
-    const leftWeight = left?.replace(/[^0-9]/g, '') || left;
-    const rightWeight = right?.replace(/[^0-9]/g, '') || right;
-    if (leftWeight && rightWeight) return Math.abs(Number(leftWeight) - Number(rightWeight)) <= 1;
-    return left === right;
-  }
-  if (['fontSize', 'lineHeight', 'letterSpacing', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'renderedHeight'].includes(property)) {
-    const leftNumber = toNumber(left);
-    const rightNumber = toNumber(right);
-    if (leftNumber !== null && rightNumber !== null) return Math.abs(leftNumber - rightNumber) <= 0.5;
-    return left === right;
-  }
-  return left === right;
-}
-
-function statusForComparison(
-  property: string,
-  prototypeValue: string | null | undefined,
-  portValue: string | null | undefined,
-): 'OK' | 'MISMATCH' | 'NOT FOUND' {
-  if (prototypeValue === 'NOT FOUND' || portValue === 'NOT FOUND') return 'NOT FOUND';
-  return compareProperty(property, String(prototypeValue), String(portValue)) ? 'OK' : 'MISMATCH';
-}
-
-function formatCell(value: string | null | undefined): string {
-  if (value === undefined || value === null) return 'NOT FOUND';
-  return value;
-}
-
-async function resolveMatch(page: Page, selectors: readonly string[]): Promise<MatchInfo | null> {
-  for (const selector of selectors) {
-    const locator = page.locator(selector).first();
-    if (!(await locator.count())) continue;
-    const tagName = await locator.evaluate((node) => node.tagName).catch(() => null);
-    const outerHtml = await locator.evaluate((node) => node.outerHTML.slice(0, 160)).catch(() => '');
-    return { tagName, outerHtml };
-  }
-  return null;
-}
-
-async function selectorDebugInfo(page: Page, selector: string): Promise<{ count: number; firstVisible: boolean }> {
-  const locator = page.locator(selector);
-  const count = await locator.count();
-  const firstVisible = count > 0 ? await locator.first().isVisible().catch(() => false) : false;
-  return { count, firstVisible };
-}
-
-async function getElementCSS(page: Page, selectors: readonly string[]): Promise<Record<string, string> | 'NOT FOUND'> {
-  for (const selector of selectors) {
-    try {
-      const candidate = page.locator(selector).first();
-      if (!(await candidate.count())) continue;
-      await candidate.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
-        throw new Error('element not found');
-      });
-      return await candidate.evaluate((node) => {
-        const style = getComputedStyle(node);
-        return {
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-          fontWeight: style.fontWeight,
-          lineHeight: style.lineHeight,
-          letterSpacing: style.letterSpacing,
-          color: style.color,
-          backgroundColor: style.backgroundColor,
-          paddingTop: style.paddingTop,
-          paddingRight: style.paddingRight,
-          paddingBottom: style.paddingBottom,
-          paddingLeft: style.paddingLeft,
-          borderRadius: style.borderRadius,
-          renderedHeight: `${Math.round(node.getBoundingClientRect().height * 10) / 10}px`,
-        };
-      });
-    } catch {
-      continue;
-    }
-  }
-
-  return 'NOT FOUND';
-}
-
 async function ensureFreshPreview(): Promise<number> {
   const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   const npxCommand = process.platform === 'win32' ? 'npx.cmd' : 'npx';
@@ -378,55 +322,161 @@ async function launchFreshBrowser(): Promise<Browser> {
   return chromium.launch({ headless: true });
 }
 
-async function navigatePrototypeToDevice(page: Page, query: string): Promise<void> {
-  await page.goto(prototypeUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
-  await page.locator('button:has-text("Assets")').first().click({ timeout: 2000 }).catch(() => undefined);
-  await page.locator('button:has-text("Devices")').first().click({ timeout: 2000 }).catch(() => undefined);
-  const row = page.locator('tbody tr').filter({ hasText: query }).first();
-  if (!(await row.count())) return;
-  await row.click({ timeout: 2000 }).catch(() => undefined);
-  await page.waitForTimeout(300);
+async function findFirstMatch(page: Page, selectors: readonly string[]): Promise<MatchInfo | null> {
+  for (const selector of selectors) {
+    const locator = page.locator(selector).first();
+    if (!(await locator.count())) continue;
+    const tagName = await locator.evaluate((node) => node.tagName).catch(() => null);
+    const text = (await locator.textContent().catch(() => '') ?? '').replace(/\s+/g, ' ').trim();
+    const outerHtml = await locator.evaluate((node) => node.outerHTML.slice(0, 160)).catch(() => '');
+    return { tagName, text, outerHtml };
+  }
+  return null;
 }
 
-async function navigatePortToDevice(page: Page, query: string): Promise<void> {
-  await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  const row = page.locator('tbody tr').filter({ hasText: query }).first();
+async function getElementCSS(page: Page, selectors: readonly string[]): Promise<Record<string, string> | 'NOT FOUND'> {
+  for (const selector of selectors) {
+    try {
+      const candidate = page.locator(selector).first();
+      if (!(await candidate.count())) continue;
+      await candidate.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {
+        throw new Error('element not found');
+      });
+      return await candidate.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize,
+          fontWeight: style.fontWeight,
+          lineHeight: style.lineHeight,
+          letterSpacing: style.letterSpacing,
+          color: style.color,
+          backgroundColor: style.backgroundColor,
+          paddingTop: style.paddingTop,
+          paddingRight: style.paddingRight,
+          paddingBottom: style.paddingBottom,
+          paddingLeft: style.paddingLeft,
+          borderRadius: style.borderRadius,
+          renderedHeight: `${Math.round(node.getBoundingClientRect().height * 10) / 10}px`,
+        };
+      });
+    } catch {
+      continue;
+    }
+  }
+
+  return 'NOT FOUND';
+}
+
+async function openPrototypeRecord(page: Page, scenario: Scenario): Promise<void> {
+  await page.goto(prototypeUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  const topLevelButton = page.locator('button:has-text("Assets")').first();
+  if (await topLevelButton.count()) {
+    await topLevelButton.click({ timeout: 2000 }).catch(() => undefined);
+  }
+
+  const kindButton = page.locator(`button:has-text("${scenario.kind === 'device' ? 'Devices' : 'Accounts'}")`).first();
+  if (await kindButton.count()) {
+    await kindButton.click({ timeout: 2000 }).catch(() => undefined);
+  }
+
+  const row = page.locator('tbody tr').filter({ hasText: scenario.recordName }).first();
   if (await row.count()) {
     await row.click({ timeout: 2000 }).catch(() => undefined);
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(350);
+    return;
   }
-}
 
-async function navigatePrototypeToAccount(page: Page): Promise<void> {
-  await page.goto(prototypeUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
-  await page.locator('button:has-text("Accounts")').first().click({ timeout: 2000 }).catch(() => undefined);
-  const rows = page.locator('tbody tr');
-  const count = await rows.count();
-  for (let i = 0; i < count; i += 1) {
-    const row = rows.nth(i);
-    const text = (await row.textContent()) ?? '';
-    if (text.includes('LDAP') || text.includes('MAC')) {
-      await row.click({ timeout: 2000 }).catch(() => undefined);
-      await page.waitForTimeout(300);
+  const search = page.locator('input[type="search"], input[placeholder*="Search"], input[aria-label*="Search"]').first();
+  if (await search.count()) {
+    await search.fill(scenario.recordName);
+    await page.waitForTimeout(200);
+    const filteredRow = page.locator('tbody tr').filter({ hasText: scenario.recordName }).first();
+    if (await filteredRow.count()) {
+      await filteredRow.click({ timeout: 2000 }).catch(() => undefined);
+      await page.waitForTimeout(350);
       return;
     }
   }
 }
 
-async function navigatePortToAccount(page: Page): Promise<void> {
+async function openPortRecord(page: Page, scenario: Scenario): Promise<void> {
   await page.goto(portUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.getByRole('button', { name: 'Accounts' }).first().click({ timeout: 2000 });
-  const rows = page.locator('tbody tr');
-  const count = await rows.count();
-  for (let i = 0; i < count; i += 1) {
-    const row = rows.nth(i);
-    const text = (await row.textContent()) ?? '';
-    if (text.includes('LDAP') || text.includes('MAC')) {
-      await row.click({ timeout: 2000 }).catch(() => undefined);
-      await page.waitForTimeout(300);
+  const kindButton = page.locator(`button:has-text("${scenario.kind === 'device' ? 'Devices' : 'Accounts'}")`).first();
+  if (await kindButton.count()) {
+    await kindButton.click({ timeout: 2000 }).catch(() => undefined);
+  }
+
+  const row = page.locator('tbody tr').filter({ hasText: scenario.recordName }).first();
+  if (await row.count()) {
+    await row.click({ timeout: 2000 }).catch(() => undefined);
+    await page.waitForTimeout(350);
+    return;
+  }
+
+  const search = page.locator('input[aria-label*="Search"], input[placeholder*="Search"]').first();
+  if (await search.count()) {
+    await search.fill(scenario.recordName);
+    await page.waitForTimeout(200);
+    const filteredRow = page.locator('tbody tr').filter({ hasText: scenario.recordName }).first();
+    if (await filteredRow.count()) {
+      await filteredRow.click({ timeout: 2000 }).catch(() => undefined);
+      await page.waitForTimeout(350);
       return;
     }
   }
+}
+
+async function activateTab(page: Page, label: string): Promise<boolean> {
+  if (label === 'Overview') return true;
+  const tab = page.locator(`button:has-text("${label}")`).first();
+  if (!(await tab.count())) return false;
+  await tab.click({ timeout: 2000 }).catch(() => undefined);
+  await page.waitForTimeout(250);
+  return true;
+}
+
+async function getPageHeading(page: Page): Promise<string> {
+  const candidates = await page.locator('h1, h2, h3, [class*="detailCrumbCurrent"], [class*="detailPageTitle"], [data-testid="detail-title"]').evaluateAll((nodes) =>
+    nodes
+      .map((node) => (node.textContent ?? '').replace(/\s+/g, ' ').trim())
+      .filter((value) => value.length > 0)
+  );
+  return candidates.find((value) => value.length > 0) ?? '';
+}
+
+async function getActiveTab(page: Page): Promise<string> {
+  const active = await page.locator('[aria-selected="true"], [aria-current="page"], [class*="detailTabActive"], button[aria-pressed="true"], button.active, button[selected]').evaluateAll((nodes) =>
+    nodes
+      .map((node) => (node.textContent ?? '').replace(/\s+/g, ' ').trim())
+      .filter((value) => value.length > 0)
+  );
+  if (active.length) return active[0];
+
+  const buttons = await page.locator('button').evaluateAll((nodes) =>
+    nodes
+      .map((node) => (node.textContent ?? '').replace(/\s+/g, ' ').trim())
+      .filter((value) => value.length > 0)
+  );
+  const match = buttons.find((value) => ['Overview', 'Exposure coverage', 'Alerts', 'On this device', 'Connection history'].includes(value));
+  return match ?? '';
+}
+
+async function verifyScenario(page: Page, scenario: Scenario): Promise<string | null> {
+  const heading = await getPageHeading(page);
+  if (normalizeName(heading) !== normalizeName(scenario.recordName)) {
+    const body = normalizeText(await page.locator('body').textContent());
+    if (!body.includes(scenario.recordName)) {
+      return `missing record heading for ${scenario.recordName}; found ${heading || 'none'}`;
+    }
+  }
+
+  const tabText = await getActiveTab(page);
+  if (normalizeName(tabText) !== normalizeName(scenario.tab)) {
+    return `active tab mismatch: expected ${scenario.tab} but found ${tabText || 'none'}`;
+  }
+
+  return null;
 }
 
 function summarizeMarkdownRows(rows: readonly string[]) {
@@ -447,16 +497,17 @@ function summarizeMarkdownRows(rows: readonly string[]) {
   return counts;
 }
 
-async function collectRows(page: Page, entry: ManifestEntry): Promise<{ style: Record<string, string> | 'NOT FOUND'; match: MatchInfo | null }> {
-  const style = await getElementCSS(page, entry.portSelectors);
-  const match = await resolveMatch(page, entry.portSelectors);
-  return { style, match };
+function formatCell(value: string | null | undefined): string {
+  if (value === undefined || value === null) return 'NOT FOUND';
+  return value;
 }
 
 async function main() {
   const rows: string[] = ['| element | property | prototype | port | status |', '| --- | --- | --- | --- | --- |'];
   const issues: DetailIssue[] = [];
-  const seen = new Set<string>();
+  const brokenByElement = new Map<string, DetailIssue[]>();
+  const failedScenarios: Array<{ name: string; reason: string }> = [];
+  const scenarioResults: Array<{ name: string; verified: boolean; reason?: string }> = [];
 
   let previewPid: number | undefined;
   let prototypeBrowser: Browser | null = null;
@@ -470,97 +521,133 @@ async function main() {
     const prototypePage = await prototypeBrowser.newPage({ viewport: { width: 1440, height: 900 }, colorScheme: 'light' });
     const portPage = await portBrowser.newPage({ viewport: { width: 1440, height: 900 }, colorScheme: 'light' });
 
-    for (const entry of manifest) {
-      const isAccountEntry = entry.mode === 'account';
-      const isDeviceEntry = entry.mode === 'device';
+    for (const scenario of SCENARIOS) {
+      await openPrototypeRecord(prototypePage, scenario);
+      await openPortRecord(portPage, scenario);
+      await activateTab(prototypePage, scenario.tab);
+      await activateTab(portPage, scenario.tab);
 
-      if (isAccountEntry) {
-        await navigatePrototypeToAccount(prototypePage);
-        await navigatePortToAccount(portPage);
-      } else if (isDeviceEntry) {
-        await navigatePrototypeToDevice(prototypePage, 'IOT-1049');
-        await navigatePortToDevice(portPage, 'IOT-1049');
+      const prototypeFailure = await verifyScenario(prototypePage, scenario);
+      const portFailure = await verifyScenario(portPage, scenario);
+
+      if (prototypeFailure || portFailure) {
+        const reason = prototypeFailure ?? portFailure ?? 'page verification failed';
+        console.log(`SCENARIO FAILED: ${scenario.name}: ${reason}`);
+        failedScenarios.push({ name: scenario.name, reason });
+        scenarioResults.push({ name: scenario.name, verified: false, reason });
+
+        for (const element of scenario.elements) {
+          const prototypeMatch = await findFirstMatch(prototypePage, element.selectors);
+          const portMatch = await findFirstMatch(portPage, element.selectors);
+          for (const property of properties) {
+            rows.push(`| ${element.name} | ${property} | NOT FOUND | NOT FOUND | NOT FOUND |`);
+            const issue: DetailIssue = {
+              element: element.name,
+              property,
+              prototype: 'NOT FOUND',
+              port: 'NOT FOUND',
+              status: 'NOT FOUND',
+              prototypeMatch,
+              portMatch,
+            };
+            issues.push(issue);
+            const bucket = brokenByElement.get(element.name) ?? [];
+            bucket.push(issue);
+            brokenByElement.set(element.name, bucket);
+          }
+        }
+        continue;
       }
 
-      const prototypeMatch = await resolveMatch(prototypePage, entry.prototypeSelectors);
-      const portMatch = await resolveMatch(portPage, entry.portSelectors);
-      if (!prototypeMatch && !portMatch) {
-        if (!seen.has(entry.name)) seen.add(entry.name);
-      }
+      scenarioResults.push({ name: scenario.name, verified: true });
 
-      const prototypeStyle = prototypeMatch ? await getElementCSS(prototypePage, entry.prototypeSelectors) : 'NOT FOUND';
-      const portStyle = portMatch ? await getElementCSS(portPage, entry.portSelectors) : 'NOT FOUND';
-      const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
-      const portValues = typeof portStyle === 'string' ? null : portStyle;
+      for (const element of scenario.elements) {
+        const prototypeMatch = await findFirstMatch(prototypePage, element.selectors);
+        const portMatch = await findFirstMatch(portPage, element.selectors);
+        const prototypeStyle = prototypeMatch ? await getElementCSS(prototypePage, element.selectors) : 'NOT FOUND';
+        const portStyle = portMatch ? await getElementCSS(portPage, element.selectors) : 'NOT FOUND';
+        const prototypeValues = typeof prototypeStyle === 'string' ? null : prototypeStyle;
+        const portValues = typeof portStyle === 'string' ? null : portStyle;
 
-      for (const property of properties) {
-        const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
-        const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
-        const status = statusForComparison(property, String(prototypeValue), String(portValue));
-        rows.push(`| ${entry.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
+        for (const property of properties) {
+          const prototypeValue = prototypeValues ? prototypeValues[property] ?? 'NOT FOUND' : prototypeStyle;
+          const portValue = portValues ? portValues[property] ?? 'NOT FOUND' : portStyle;
+          const status = statusForComparison(property, String(prototypeValue), String(portValue));
+          rows.push(`| ${element.name} | ${property} | ${formatCell(String(prototypeValue))} | ${formatCell(String(portValue))} | ${status} |`);
 
-        if (status === 'MISMATCH' || status === 'NOT FOUND') {
-          issues.push({
-            element: entry.name,
-            property,
-            prototype: String(prototypeValue),
-            port: String(portValue),
-            status,
-            prototypeMatch,
-            portMatch,
-          });
+          if (status === 'MISMATCH' || status === 'NOT FOUND') {
+            const issue: DetailIssue = {
+              element: element.name,
+              property,
+              prototype: String(prototypeValue),
+              port: String(portValue),
+              status,
+              prototypeMatch,
+              portMatch,
+            };
+            issues.push(issue);
+            const bucket = brokenByElement.get(element.name) ?? [];
+            bucket.push(issue);
+            brokenByElement.set(element.name, bucket);
+          }
         }
       }
     }
 
     const summary = summarizeMarkdownRows(rows);
-    const header = `Counts: OK=${summary.ok} | MISMATCH=${summary.mismatches} | NOT FOUND=${summary.notFound} | TOTAL=${summary.total}`;
-    const manifestCoverage = `Manifest elements: ${manifest.length}, measured: ${manifest.length}, not found: ${issues.filter((issue) => issue.status === 'NOT FOUND').length}`;
+    const elementSummary = `Elements: ${MANIFEST.length}, measured: ${summary.total}, not found: ${summary.notFound}`;
+    const scenarioSummary = `Scenarios: ${SCENARIOS.length}, verified: ${scenarioResults.filter((result) => result.verified).length}`;
+    const counts = `Counts: OK=${summary.ok} | MISMATCH=${summary.mismatches} | NOT FOUND=${summary.notFound} | TOTAL=${summary.total}`;
+    const manifestCoverage = `Manifest elements: ${MANIFEST.length}, measured: ${summary.total}, not found: ${summary.notFound}`;
 
-    const grouped = new Map<string, DetailIssue[]>();
-    for (const issue of issues) {
-      const bucket = grouped.get(issue.element) ?? [];
-      bucket.push(issue);
-      grouped.set(issue.element, bucket);
-    }
-
-    const reportBody = [
-      manifestCoverage,
-      header,
+    const output: string[] = [
+      scenarioSummary,
+      elementSummary,
+      counts,
       '',
       ...rows,
       '',
+      '## SCENARIO FAILED',
+      ...failedScenarios.flatMap((entry) => [`SCENARIO FAILED: ${entry.name}: ${entry.reason}`]),
+      '',
       '## MISMATCH / NOT FOUND rows',
-      ...[...grouped.entries()].flatMap(([element, entries]) => {
-        const out: string[] = [`### ${element}`];
-        for (const issue of entries) {
-          out.push(`- ${issue.property}: ${issue.status}`);
-          out.push(`  - prototype tag=${issue.prototypeMatch?.tagName ?? 'null'} outerHTML=${(issue.prototypeMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
-          out.push(`  - port tag=${issue.portMatch?.tagName ?? 'null'} outerHTML=${(issue.portMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
-        }
-        return out;
-      }),
     ];
 
-    await writeFile(summaryPath, `${reportBody.join('\n')}\n`);
-    await writeFile(reportPath, JSON.stringify({ manifestCoverage, summary, issues }, null, 2));
+    for (const [element, entries] of brokenByElement.entries()) {
+      const relevant = entries.filter((entry) => entry.status === 'MISMATCH' || entry.status === 'NOT FOUND');
+      if (!relevant.length) continue;
+      output.push(`### ${element}`);
+      for (const entry of relevant) {
+        output.push(`- ${entry.property}: ${entry.status}`);
+        output.push(`  prototype text=${entry.prototypeMatch?.text ?? 'null'} outerHTML=${(entry.prototypeMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
+        output.push(`  port text=${entry.portMatch?.text ?? 'null'} outerHTML=${(entry.portMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
+      }
+    }
 
+    await writeFile(summaryPath, `${output.join('\n')}\n`);
+    await writeFile(reportPath, JSON.stringify({ scenarioSummary, elementSummary, counts, manifestCoverage, issues }, null, 2));
+
+    console.log(scenarioSummary);
+    console.log(elementSummary);
     console.log(manifestCoverage);
-    console.log(header);
-    for (const [element, entries] of grouped.entries()) {
+    console.log(counts);
+    for (const failed of failedScenarios) {
+      console.log(`SCENARIO FAILED: ${failed.name}: ${failed.reason}`);
+    }
+    for (const [element, entries] of brokenByElement.entries()) {
+      const relevant = entries.filter((entry) => entry.status === 'MISMATCH' || entry.status === 'NOT FOUND');
+      if (!relevant.length) continue;
       console.log(`## ${element}`);
-      for (const issue of entries) {
-        console.log(`- ${issue.property}: ${issue.status}`);
-        console.log(`  prototype tag=${issue.prototypeMatch?.tagName ?? 'null'} outerHTML=${(issue.prototypeMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
-        console.log(`  port tag=${issue.portMatch?.tagName ?? 'null'} outerHTML=${(issue.portMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
+      for (const entry of relevant) {
+        console.log(`- ${entry.property}: ${entry.status}`);
+        console.log(`  prototype text=${entry.prototypeMatch?.text ?? 'null'} outerHTML=${(entry.prototypeMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
+        console.log(`  port text=${entry.portMatch?.text ?? 'null'} outerHTML=${(entry.portMatch?.outerHtml ?? '').replace(/\s+/g, ' ')}`);
       }
     }
   } finally {
     await prototypeBrowser?.close().catch(() => undefined);
     await portBrowser?.close().catch(() => undefined);
-    if (previewPid) {
-      stopProcessGroup(previewPid);
-    }
+    if (previewPid) stopProcessGroup(previewPid);
   }
 }
 
