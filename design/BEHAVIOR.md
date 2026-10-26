@@ -111,7 +111,7 @@ Actions sit to the right of the search box and appear depending on how many rows
 | Block, Deactivate | 1 or more | 1 or more |
 | Delete (red) | 1 or more | 1 or more |
 
-The toolbar includes an Export menu button (CSV, PDF). Both use the selection count if rows are selected, otherwise all rows matching the filters.
+The toolbar includes an Export menu button (CSV, PDF). Both use the selection count if rows are selected, otherwise all rows matching the filtersunt if rows are selected, otherwise all rows matching the filters.
 
 ## Saved views
 - Shown at the top of the filter panel as radio buttons: Default view, Exposure Risk view, then user-saved views by name. Separate lists for Devices and Accounts.
@@ -181,9 +181,9 @@ Adding a source: a dialog with the fields that source needs (API Source ID and A
 "Manage sources" on the CAASM dashboard goes to this page. Disconnecting warns how many assets will lose that source.
 
 ## CAASM dashboard
-Cards: Total assets, Devices with coverage gaps, Stale devices.
-Coverage gaps by source: removed from this repo's Exposure Summary page; the card is intentionally not included.
-Coverage gaps by group: percentage and count of devices with gaps per group, sorted highest first.
+Cards: Total assets, Devices with exposure gaps, Stale devices.
+Exposure gaps by source: removed from this repo's Exposure Summary page; the card is intentionally not included.
+Exposure gaps by group: percentage and count of devices with gaps per group, sorted highest first.
 
 ## Visual details to match
 - Dropdowns (all select elements): custom chevron, with 30px of space to the right of the chevron so it never touches the border. One shared style for the filter panel, filter conditions, popups and Rows per page.
@@ -198,7 +198,7 @@ Add these to the original questions and assumptions:
 1. Saved views: stored where? Shared with the whole organization or per user? Who may update or remove a shared view? Is there an audit log for removals?
 2. Share link: what does the link contain (the view's id, or the filters themselves)? What happens if the recipient lacks permission, or the view has since been removed?
 3. Sites: where do NAS site names and NAS IPs come from? The filter options and the Site and NAS IP columns should use the Sites table.
-4. AgentP last reported vs Last connected: are these two separate fields? Where does each come from?
+4. Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
 5. Authentication repository: the field is shown for devices as the account's repository. Is that how the backend defines it?
 6. List fields (applications, patches, processes, services, peripherals, browser, extensions): are they returned as full lists, and are filters evaluated server-side? Large lists may need server-side filtering and a count in the table.
 7. AgentP version "older than": does the backend compare versions numerically? Which version format does it use?
@@ -209,9 +209,9 @@ Add these to the original questions and assumptions:
 Not part of this repo's UI: provided by the host app.
 
 ## Renames: Exposure gaps (2026-10-19)
-The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips (now "Exposure gap:").
+The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
 On Device and Account details, the Source coverage card is now Exposure gaps (same content and rules as before).
-Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text (Devices with coverage gaps, Coverage gaps by group, Coverage gaps by source); and the Exposure Risk view description line.
+Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text (Devices with exposure gaps, Exposure gaps by group, Exposure gaps by source); and the Exposure Risk view description line.
 
 ## Opening details in a new tab
 The prototype is a single HTML file and opens details in the same view. In the real build, clicking a row opens the device or account details page in a new browser tab. The prototype cannot do this, so do not try to imitate it there.
