@@ -7,4 +7,4 @@
 - One commit per item, with an honest message. Run vitest, playwright, typecheck, lint and build before each commit.
 - Never push, force, reset or rewrite history unless asked.
 - If something blocks you, say what blocked you in one line. Do not report it as done.
-- Where design/CHANGES-SINCE-SPEC.md and design/BEHAVIOR.md disagree, CHANGES-SINCE-SPEC.md wins.
+- Where design/BEHAVIOR.md and the prototype disagree, design/BEHAVIOR.md wins and the prototype remains the source of truth.
