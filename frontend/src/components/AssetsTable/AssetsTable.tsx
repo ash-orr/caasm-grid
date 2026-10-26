@@ -27,7 +27,7 @@ import { ColumnPickerPopover, type ColumnPickerItem } from './ColumnPickerPopove
 import { ManageFiltersDialog } from './ManageFiltersDialog';
 import { moveColumnById } from './columnOrder';
 import { SourceCoverageCard } from './SourceCoverageCard';
-import type { SourceCoverageRow } from './sourceCoverage';
+import { formatSourceSyncAge, sortSourceCoverageRows, type SourceCoverageRow } from './sourceCoverage';
 import { getSelectionBannerState } from './selection';
 import {
   buildSourceColumns,
@@ -568,6 +568,10 @@ export function AssetsTable() {
   const [sourceCoverageOpenDevice, setSourceCoverageOpenDevice] = useState(false);
   const [sourceCoverageOpenAccount, setSourceCoverageOpenAccount] = useState(false);
   const [overviewExpandedFields, setOverviewExpandedFields] = useState<Record<string, boolean>>({});
+  const [exposureCoverageSearches, setExposureCoverageSearches] = useState<Record<'device' | 'account', Record<string, string>>>({
+    device: {},
+    account: {},
+  });
 
   const [onThisDeviceOpen, setOnThisDeviceOpen] = useState(false);
 
@@ -1901,31 +1905,92 @@ export function AssetsTable() {
   function openDeviceDetail(record: DeviceRecord) {
     setDetailTabByKind((prev) => ({ ...prev, device: 'Overview' }));
     setOverviewExpandedFields({});
+    setExposureCoverageSearches((prev) => ({ ...prev, device: {} }));
     setDetailView({ kind: 'device', record });
   }
 
   function openAccountDetail(record: AccountFilterRow) {
     setDetailTabByKind((prev) => ({ ...prev, account: 'Overview' }));
     setOverviewExpandedFields({});
+    setExposureCoverageSearches((prev) => ({ ...prev, account: {} }));
     setDetailView({ kind: 'account', record });
   }
 
-  function renderSourceDataContent(rows: SourceCoverageRow[]) {
-    if (rows.length === 0) {
-      return <p className={styles.detailMuted}>No source data available.</p>;
+  function renderExposureCoverageTable(
+    record: DeviceRecord | AccountFilterRow,
+    kind: 'device' | 'account',
+    query: string,
+    onQueryChange: (value: string) => void
+  ) {
+    const connectedRows = sortSourceCoverageRows(
+      toSourceCoverageRows(record, { accountOnly: kind === 'account', omitNotApplicable: true })
+        .filter((row) => row.status !== 'N/A' && row.status !== 'Not applicable')
+    );
+
+    const normalizedQuery = query.trim().toLowerCase();
+    const filteredRows = connectedRows.filter((row) => !normalizedQuery || row.source.toLowerCase().includes(normalizedQuery));
+
+    if (connectedRows.length === 0) {
+      return (
+        <div className={styles.detailSection}>
+          <div className={styles.detailSearchWrap}>
+            <input
+              aria-label="Find a source"
+              className={styles.detailSearchInput}
+              onChange={(event) => onQueryChange(event.target.value)}
+              placeholder="Find a source"
+              type="search"
+              value={query}
+            />
+          </div>
+          <p className={styles.detailMuted}>No connected sources.</p>
+        </div>
+      );
     }
 
     return (
-      <div className={styles.detailRows}>
-        {rows.map((row) => (
-          <div className={styles.detailRow} key={row.source}>
-            <span className={styles.detailRowLabel}>{row.source}</span>
-            <span>
-              {row.status === 'N/A' ? 'Not applicable' : row.status}
-              {row.lastSyncAt ? ` • ${formatRelativeTime(row.lastSyncAt)}` : ''}
-            </span>
+      <div className={styles.detailSection}>
+        <div className={styles.detailSearchWrap}>
+          <input
+            aria-label="Find a source"
+            className={styles.detailSearchInput}
+            onChange={(event) => onQueryChange(event.target.value)}
+            placeholder="Find a source"
+            type="search"
+            value={query}
+          />
+        </div>
+
+        {filteredRows.length === 0 ? (
+          <p className={styles.detailMuted}>{`No sources match "${query}".`}</p>
+        ) : (
+          <div className={styles.detailAgreementTable}>
+            <div className={styles.detailAgreementHeader}>
+              <span>Source</span>
+              <span>Status</span>
+              <span>Last seen</span>
+            </div>
+            {filteredRows.map((row) => {
+              const lastSeenText = row.status === 'Pending' || row.status === 'Not present' || row.status === 'N/A' || row.status === 'Not applicable'
+                ? ''
+                : formatSourceSyncAge(row.status, row.lastSyncAt) ?? '';
+
+              return (
+                <div className={styles.detailAgreementRow} key={row.source}>
+                  <span className={styles.detailAgreementField}>{row.source}</span>
+                  <span className={styles.detailAgreementValue}>
+                    <span className={`${styles.detailPill} ${row.status === 'Reporting' ? styles.detailPillOk : row.status === 'Stale' ? styles.detailPillWarn : row.status === 'Not present' ? styles.detailPillBad : styles.detailPillNeutral}`}>
+                      {row.status === 'N/A' ? 'Not applicable' : row.status}
+                    </span>
+                  </span>
+                  <span className={styles.detailAgreementSources}>
+                    {lastSeenText || '—'}
+                  </span>
+                </div>
+              );
+            })}
           </div>
-        ))}
+        )}
       </div>
     );
   }
@@ -2068,10 +2133,11 @@ export function AssetsTable() {
       const deviceRecord = detailView.record;
       const accountName = stripSyntheticSuffix(deviceRecord.account);
       const linkedAccount = accountRows.find((account) => stripSyntheticSuffix(account.name) === accountName) ?? null;
-      const detailTabs = ['Overview', 'Source data', 'On this device', 'Alerts', 'ZTNA access', 'Connection history'];
+      const detailTabs = ['Overview', 'Exposure coverage', 'On this device', 'Alerts', 'ZTNA access', 'Connection history'];
       const activeDetailTab = detailTabByKind.device;
       const sourceRows = toSourceCoverageRows(deviceRecord);
       const conflictCount = estimateSourceConflictCount(sourceRows);
+      const exposureCoverageQuery = exposureCoverageSearches.device[String(deviceRecord.id)] ?? '';
 
       return (
         <div className={styles.detailPage}>
@@ -2140,9 +2206,9 @@ export function AssetsTable() {
                     type="button"
                   >
                     {tabName}
-                    {(tabName === 'Overview' || tabName === 'Source data') && conflictCount > 0 ? (
+                    {tabName === 'Overview' && conflictCount > 0 ? (
                       <Tooltip content={`${conflictCount} field(s) differ across sources`}>
-                        <span className={styles.detailWarnIcon}>⚠</span>
+                        <span aria-hidden="true" className={styles.detailWarnIcon}>⚠</span>
                       </Tooltip>
                     ) : null}
                   </button>
@@ -2151,9 +2217,17 @@ export function AssetsTable() {
 
               {activeDetailTab === 'Overview' ? renderOverviewAgreementTable(deviceRecord, 'device', overviewExpandedFields, setOverviewExpandedFields) : null}
 
-              {activeDetailTab === 'Source data' ? renderSourceDataContent(sourceRows) : null}
+              {activeDetailTab === 'Exposure coverage' ? renderExposureCoverageTable(
+                deviceRecord,
+                'device',
+                exposureCoverageQuery,
+                (value) => setExposureCoverageSearches((prev) => ({
+                  ...prev,
+                  device: { ...prev.device, [String(deviceRecord.id)]: value },
+                }))
+              ) : null}
 
-              {activeDetailTab !== 'Overview' && activeDetailTab !== 'Source data' ? (
+              {activeDetailTab !== 'Overview' && activeDetailTab !== 'Exposure coverage' ? (
                 <p className={styles.detailMuted}>{activeDetailTab} is a placeholder for now.</p>
               ) : null}
             </div>
@@ -2167,10 +2241,11 @@ export function AssetsTable() {
     const linkedDevices = devices
       .filter((device) => stripSyntheticSuffix(device.account) === baseAccountName)
       .sort((left, right) => right.riskScore - left.riskScore || left.name.localeCompare(right.name));
-    const detailTabs = ['Overview', 'Source data', 'Alerts'];
+    const detailTabs = ['Overview', 'Exposure coverage', 'Alerts'];
     const activeDetailTab = detailTabByKind.account;
     const sourceRows = toSourceCoverageRows(accountRecord, { accountOnly: true });
     const conflictCount = estimateSourceConflictCount(sourceRows);
+    const exposureCoverageQuery = exposureCoverageSearches.account[String(accountRecord.id)] ?? '';
 
     return (
       <div className={styles.detailPage}>
@@ -2221,9 +2296,9 @@ export function AssetsTable() {
                   type="button"
                 >
                   {tabName}
-                  {tabName === 'Source data' && conflictCount > 0 ? (
+                  {tabName === 'Overview' && conflictCount > 0 ? (
                     <Tooltip content={`${conflictCount} field(s) differ across sources`}>
-                      <span className={styles.detailWarnIcon}>⚠</span>
+                      <span aria-hidden="true" className={styles.detailWarnIcon}>⚠</span>
                     </Tooltip>
                   ) : null}
                 </button>
@@ -2232,7 +2307,15 @@ export function AssetsTable() {
 
             {activeDetailTab === 'Overview' ? renderOverviewAgreementTable(accountRecord, 'account', overviewExpandedFields, setOverviewExpandedFields) : null}
 
-            {activeDetailTab === 'Source data' ? renderSourceDataContent(sourceRows) : null}
+            {activeDetailTab === 'Exposure coverage' ? renderExposureCoverageTable(
+              accountRecord,
+              'account',
+              exposureCoverageQuery,
+              (value) => setExposureCoverageSearches((prev) => ({
+                ...prev,
+                account: { ...prev.account, [String(accountRecord.id)]: value },
+              }))
+            ) : null}
 
             {activeDetailTab === 'Alerts' ? <p className={styles.detailMuted}>Alerts is a placeholder for now.</p> : null}
           </div>
@@ -2306,7 +2389,7 @@ export function AssetsTable() {
             setPageByTab((prev) => ({ ...prev, [tab]: 0 }));
             clearSelectionForTab();
           }}
-          placeholder={isDevices ? 'Search devices, accounts, OS, location' : 'Search accounts or groups'}
+          placeholder="Search devices, accounts, OS, location"
           type="search"
           value={searchByTab[tab]}
         />
