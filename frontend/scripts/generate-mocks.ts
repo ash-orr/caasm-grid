@@ -67,12 +67,12 @@ interface SourceFieldValue {
 export interface AccountRecord {
   id: number;
   name: string;
-  accountType: 'LDAP' | 'Cloud' | 'MAC';
-  group: string;
-  location: string;
-  authType: string;
+  accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
+  group: string | null;
+  location: string | null;
+  authType: string | null;
   authRepo: AuthRepository;
-  nasSite: string;
+  nasSite: string | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
@@ -82,21 +82,21 @@ export interface DeviceRecord {
   name: string;
   type: 'Laptop' | 'Desktop' | 'Server' | 'Mobile' | 'IoT/Printer';
   os: string;
-  location: string;
+  location: string | null;
   account: string;
-  accountType: 'LDAP' | 'Cloud' | 'MAC';
-  group: string;
-  riskScore: number;
-  status: 'Blocked' | 'Archived' | 'No issues';
-  lastConnectedAt: string;
-  createdAt: string;
+  accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
+  group: string | null;
+  riskScore: number | null;
+  status: 'Blocked' | 'Archived' | 'No issues' | null;
+  lastConnectedAt: string | null;
+  createdAt: string | null;
   coverageGaps: string[];
-  authType: string;
+  authType: string | null;
   authRepo: AuthRepository;
-  nasSite: string;
+  nasSite: string | null;
   macVendor: string;
-  manufacturer: string;
-  model: string;
+  manufacturer: string | null;
+  model: string | null;
   applications: string[];
   patches: string[];
   processes: string[];
@@ -104,13 +104,13 @@ export interface DeviceRecord {
   peripherals: string[];
   browser: string[];
   browserExtensions: string[];
-  agentVersion: string;
-  agentpVersion: string;
-  riskPolicy: string;
-  accessPolicy: string;
+  agentVersion: string | null;
+  agentpVersion: string | null;
+  riskPolicy: string | null;
+  accessPolicy: string | null;
   riskViolations: RiskViolation[];
-  nasIp: string;
-  agentpLastReported: string;
+  nasIp: string | null;
+  agentpLastReported: string | null | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
@@ -459,22 +459,26 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
     }, nowMs);
 
     const sourceCoverage = buildSourceCoverage(device.cov ?? {}, undefined, nowMs);
+    const isUncovered = Boolean(device.uncov);
+    const coverageGaps = Array.isArray(device.gaps)
+      ? device.gaps.filter((gap) => !(gap === 'Portnox AgentP' && !isUncovered))
+      : SOURCE_ORDER.filter((source) => sourceCoverage[source].status === 'Not present');
 
     return {
       id: device.id,
       name: device.name,
       type: device.type as DeviceRecord['type'],
       os: device.os,
-      location: device.loc,
+      location: isUncovered ? null : device.loc,
       account: device.acct,
-      accountType: device.acctType as DeviceRecord['accountType'],
-      group: device.group,
-      riskScore: device.score,
-      status: device.archived ? 'Archived' : device.blocked ? 'Blocked' : 'No issues',
-      lastConnectedAt: new Date(nowMs - ((device.id * 17) % 29) * 60 * 60 * 1000).toISOString(),
+      accountType: isUncovered ? null : device.acctType as DeviceRecord['accountType'],
+      group: isUncovered ? null : device.group,
+      riskScore: isUncovered ? null : device.score,
+      status: isUncovered ? null : device.archived ? 'Archived' : device.blocked ? 'Blocked' : 'No issues',
+      lastConnectedAt: isUncovered ? null : new Date(nowMs - ((device.id * 17) % 29) * 60 * 60 * 1000).toISOString(),
       createdAt: new Date(nowMs - ((device.id * 11) % 320) * 24 * 60 * 60 * 1000).toISOString(),
-      coverageGaps: device.gaps ?? SOURCE_ORDER.filter((source) => sourceCoverage[source].status === 'Not present'),
-      authType: device.auth ?? 'Unknown',
+      coverageGaps,
+      authType: isUncovered ? null : (device.auth ?? 'Unknown'),
       authRepo: account?.authRepo ?? null,
       nasSite: account?.nasSite ?? 'AUS-HQ-01',
       macVendor: 'Samsung',
@@ -487,13 +491,13 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       peripherals: [],
       browser: ['Chrome 124'],
       browserExtensions: [],
-      agentVersion: device.agent ?? '1.1.261',
-      agentpVersion: device.agent ?? '1.1.261',
+      agentVersion: isUncovered ? null : (device.agent ?? '1.1.261'),
+      agentpVersion: isUncovered ? null : (device.agent ?? '1.1.261'),
       riskPolicy: device.policy ?? 'Corp_Laptop_Policy',
       accessPolicy: device.access ?? 'Onsite_Office_Policy',
       riskViolations: (device.viol ?? []) as RiskViolation[],
       nasIp: device.nasIp ?? '10.0.0.1',
-      agentpLastReported: new Date(nowMs - ((device.id * 7) % 10) * 24 * 60 * 60 * 1000).toISOString(),
+      agentpLastReported: isUncovered ? null : new Date(nowMs - ((device.id * 7) % 10) * 24 * 60 * 60 * 1000).toISOString(),
       sourceCoverage,
       sourceFieldValues,
     };
@@ -563,18 +567,18 @@ export interface SourceFieldValue {
 export interface AccountRecord {
   id: number;
   name: string;
-  accountType: 'LDAP' | 'Cloud' | 'MAC';
-  group: string;
+  accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
+  group: string | null;
   description?: string;
   credentialsExpire?: string;
   createdBy?: string;
   allowDevicesWithoutAgentP?: boolean;
-  totalMacAddresses?: number;
-  totalMacVendors?: number;
-  location: string;
-  authType: string;
+  totalMacAddresses?: number | null;
+  totalMacVendors?: number | null;
+  location: string | null;
+  authType: string | null;
   authRepo: AuthRepository;
-  nasSite: string;
+  nasSite: string | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
@@ -584,21 +588,21 @@ export interface DeviceRecord {
   name: string;
   type: 'Laptop' | 'Desktop' | 'Server' | 'Mobile' | 'IoT/Printer';
   os: string;
-  location: string;
+  location: string | null;
   account: string;
-  accountType: 'LDAP' | 'Cloud' | 'MAC';
-  group: string;
-  riskScore: number;
-  status: 'Blocked' | 'Archived' | 'No issues';
-  lastConnectedAt: string;
-  createdAt: string;
+  accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
+  group: string | null;
+  riskScore: number | null;
+  status: 'Blocked' | 'Archived' | 'No issues' | null;
+  lastConnectedAt: string | null;
+  createdAt: string | null;
   coverageGaps: string[];
-  authType: string;
+  authType: string | null;
   authRepo: AuthRepository;
-  nasSite: string;
+  nasSite: string | null;
   macVendor: string;
-  manufacturer: string;
-  model: string;
+  manufacturer: string | null;
+  model: string | null;
   applications: string[];
   patches: string[];
   processes: string[];
@@ -606,13 +610,13 @@ export interface DeviceRecord {
   peripherals: string[];
   browser: string[];
   browserExtensions: string[];
-  agentVersion: string;
-  agentpVersion: string;
-  riskPolicy: string;
-  accessPolicy: string;
+  agentVersion: string | null;
+  agentpVersion: string | null;
+  riskPolicy: string | null;
+  accessPolicy: string | null;
   riskViolations: RiskViolation[];
-  nasIp: string;
-  agentpLastReported: string;
+  nasIp: string | null;
+  agentpLastReported: string | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
