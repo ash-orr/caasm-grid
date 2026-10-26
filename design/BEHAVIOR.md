@@ -181,9 +181,9 @@ Adding a source: a dialog with the fields that source needs (API Source ID and A
 "Manage sources" on the CAASM dashboard goes to this page. Disconnecting warns how many assets will lose that source.
 
 ## CAASM dashboard
-Cards: Total assets, Devices with exposure gaps, Stale devices.
-Exposure gaps by source: removed from this repo's Exposure Summary page; the card is intentionally not included.
-Exposure gaps by group: percentage and count of devices with gaps per group, sorted highest first.
+Cards: Total assets, Devices with coverage gaps, Stale devices.
+Coverage gaps by source: for each connected source, percentage and count of applicable devices and accounts that are Not present. Clicking a figure opens the matching filtered table.
+Coverage gaps by group: percentage and count of devices with gaps per group, sorted highest first.
 
 ## Visual details to match
 - Dropdowns (all select elements): custom chevron, with 30px of space to the right of the chevron so it never touches the border. One shared style for the filter panel, filter conditions, popups and Rows per page.
@@ -209,9 +209,9 @@ Add these to the original questions and assumptions:
 Not part of this repo's UI: provided by the host app.
 
 ## Renames: Exposure gaps (2026-10-19)
-The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
+The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Coverage gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips.
 On Device and Account details, the Source coverage card is now Exposure gaps (same content and rules as before).
-Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text (Devices with exposure gaps, Exposure gaps by group, Exposure gaps by source); and the Exposure Risk view description line.
+Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text ("Devices with coverage gaps", "Coverage gaps by group", "Coverage gaps by source"); and the Exposure Risk view description line.
 
 ## Opening details in a new tab
 The prototype is a single HTML file and opens details in the same view. In the real build, clicking a row opens the device or account details page in a new browser tab. The prototype cannot do this, so do not try to imitate it there.
