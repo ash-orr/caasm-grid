@@ -20,14 +20,14 @@ Source statuses (per device or account, per source):
 
 - Reporting: Present, and sent data within the last day. Green. This source sent data for the device within the last day.
 - Stale: Present, but nothing in the last day. Amber. The device is in this source, but it hasn't sent data in the last day.
-- Not present: The source has no record of it (a coverage gap). Red. Coverage gap: This source has no record of the device.
+- Not present: The source has no record of it (an exposure gap). Red. Exposure gap: This source has no record of the device.
 - Pending: First seen after the source's last poll; waiting for the next poll. Light grey. Waiting for this source's next sync.
 - Not applicable: The source doesn't cover this type. Light grey. This source doesn't cover this type of device.
 
 The one-day threshold is a setting (confirm the real value, and whether it varies by source).
 Pending is not a gap, not stale, and is left out of coverage percentages. In the source correlation table, the last-sync cell says "Awaiting next poll (~Nh)", where N is hours until that source's next scheduled poll.
 Accounts only use Reporting, Not present and Not applicable. Account tooltips say "account" instead of "device".
-Coverage gap means "Not present" sources only. It is shown as plain red text, listing the first two sources then "+N". Hovering "+N" lists all missing sources. "None" is in the normal text color.
+Exposure gap means "Not present" sources only. It is shown as plain red text, listing the first two sources then "+N". Hovering "+N" lists all missing sources. "None" is in the normal text color.
 Coverage percentages use applicable assets only: Not applicable and Pending are excluded from the denominator.
 
 ## Risk
@@ -47,8 +47,8 @@ Tabs: Devices, Accounts, Sites (a placeholder reading "NAS Sites table would go 
 The card controls were removed. The page starts with the table for the selected tab, with no quick filters or preset cards. Opening Devices from a group link on the Exposure Summary page only filters by that group.
 
 ## Table columns
-Devices: Device name (fixed), Type, OS, Location, Account, Account type (plain text), Group, Risk score, Status, Last connected, Created time, Coverage gaps, then one column per connected source in type order.
-Accounts: Account name (fixed), Account type (plain text), Group, Devices, Blocked, Last login, Coverage gaps, then one column per connected source that reports accounts (Okta, Google Workspace, Active Directory, EntraID).
+Devices: Device name (fixed), Type, OS, Location, Account, Account type (plain text), Group, Risk score, Status, Last connected, Created time, Exposure gaps, then one column per connected source in type order.
+Accounts: Account name (fixed), Account type (plain text), Group, Devices, Blocked, Last login, Exposure gaps, then one column per connected source that reports accounts (Okta, Google Workspace, Active Directory, EntraID).
 Source columns show the status pill. They are sortable (Reporting first, then Stale, Pending, Not present, Not applicable). The pills are not clickable.
 Hovering the account count in the Devices column shows up to three devices (highest risk first, then most gaps, then alphabetical) and "+N more". Hovering a device's Account shows account details. These tooltips are display-only.
 Column picker: a button at the far right of the header. It lists every column, with checkboxes, drag handles and up/down arrows, and a "Reset to default" link. The fixed column is locked. Source columns are labeled "CAASM - [full source name]" in the picker only.
@@ -64,7 +64,7 @@ Devices (16, plus Source coverage below): Authentication repository, NAS site, M
 - AgentP last reported: when AgentP last sent status to Portnox Cloud. It is not the same as Last connected, which is the last network authentication. (confirm both exist as separate fields in the backend.)
 - List-type columns (Applications, Patches, Processes, Services, Peripherals, Browser, Browser extensions, Risk score violations): show the first two values, then a hoverable "+N" whose tooltip lists all values ("All N" heading). Empty shows "—".
 - Per-source status columns are hidden by default in the Default view and visible in Exposure Risk view. "Reset to default" follows the same rule for the current view.
-- Source coverage column (new, Devices and Accounts, hidden by default in both views): plain text listing the connected sources that have this record, in the same short names as the per-source columns. Empty shows "—". The cell is capped at 250px with an ellipsis, with a dotted underline and a tooltip with the full text. Sorting by this column sorts by the number of sources. Placed right after Coverage gaps in the default column order.
+- Source coverage column (new, Devices and Accounts, hidden by default in both views): plain text listing the connected sources that have this record, in the same short names as the per-source columns. Empty shows "—". The cell is capped at 250px with an ellipsis, with a dotted underline and a tooltip with the full text. Sorting by this column sorts by the number of sources. Placed right after Exposure gaps in the default column order.
 - Column labels: "NAS site", "AgentP last reported", "Risk score violations", "Peripherals", "Browser extensions".
 
 ### Accounts
@@ -111,7 +111,7 @@ Actions sit to the right of the search box and appear depending on how many rows
 | Block, Deactivate | 1 or more | 1 or more |
 | Delete (red) | 1 or more | 1 or more |
 
-Export CSV stays at the far right and uses the selection count when there is one.
+The toolbar includes an Export menu button (CSV, PDF). Both use the selection count if rows are selected, otherwise all rows matching the filters.
 
 ## Saved views
 - Shown at the top of the filter panel as radio buttons: Default view, Exposure Risk view, then user-saved views by name. Separate lists for Devices and Accounts.
@@ -174,6 +174,17 @@ Device card: every connected source.
 Account card: only sources that report accounts (Active Directory, EntraID, Okta, Google Workspace). The same collapse rules apply.
 For accounts, the time shown for a Reporting source is that source's last sync time. (confirm the real per-account last-seen time.)
 
+## Sources page
+Connected and Available sections, a search box and type filter chips (EDR, MDM, Identity, Directory, NAC).
+Connected cards show status (Healthy, Syncing, Credentials expired) and last sync. All actions are in a three-dot menu: View devices, View accounts, Sync now, Edit credentials, Disconnect.
+Adding a source: a dialog with the fields that source needs (API Source ID and API Shared Secret for now; each source will get its own form), a Test connection step that must pass, and a note that secrets are stored encrypted and can't be viewed again.
+"Manage sources" on the CAASM dashboard goes to this page. Disconnecting warns how many assets will lose that source.
+
+## CAASM dashboard
+Cards: Total assets, Devices with coverage gaps, Stale devices.
+Coverage gaps by source: removed from this repo's Exposure Summary page; the card is intentionally not included.
+Coverage gaps by group: percentage and count of devices with gaps per group, sorted highest first.
+
 ## Visual details to match
 - Dropdowns (all select elements): custom chevron, with 30px of space to the right of the chevron so it never touches the border. One shared style for the filter panel, filter conditions, popups and Rows per page.
 - Checkboxes and radios in filter lists are 15px, vertically centered on their labels, with consistent spacing. Do not let the browser default margins through.
@@ -198,7 +209,7 @@ Add these to the original questions and assumptions:
 Not part of this repo's UI: provided by the host app.
 
 ## Renames: Exposure gaps (2026-10-19)
-The Coverage gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Coverage gap" label in the hover tooltips and the detail-page rows, and the "Coverage gap:" prefix in source-status tooltips (now "Exposure gap:").
+The Exposure gaps column (Devices and Accounts tables) is now Exposure gaps. The same field label is renamed everywhere it appears as a label: column header and column picker, the "Exposure gap" label in the hover tooltips and the detail-page rows, and the "Exposure gap:" prefix in source-status tooltips (now "Exposure gap:").
 On Device and Account details, the Source coverage card is now Exposure gaps (same content and rules as before).
 Not renamed: the Source coverage filter section in the filter panel and the new Source coverage table column (list of sources); the Exposure Summary page text (Devices with coverage gaps, Coverage gaps by group, Coverage gaps by source); and the Exposure Risk view description line.
 
