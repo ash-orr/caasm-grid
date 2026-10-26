@@ -2389,7 +2389,7 @@ export function AssetsTable() {
             setPageByTab((prev) => ({ ...prev, [tab]: 0 }));
             clearSelectionForTab();
           }}
-          placeholder="Search devices, accounts, OS, location"
+          placeholder={isAccounts ? 'Search accounts or groups' : 'Search devices, accounts, OS, location'}
           type="search"
           value={searchByTab[tab]}
         />

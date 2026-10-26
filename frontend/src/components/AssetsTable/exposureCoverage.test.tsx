@@ -36,7 +36,7 @@ async function openAccountOverview(accountName: string) {
 
   fireEvent.click(screen.getByRole('button', { name: 'Accounts' }));
 
-  const search = document.querySelector('input[placeholder="Search devices, accounts, OS, location"]') as HTMLInputElement | null;
+  const search = document.querySelector('input[placeholder="Search accounts or groups"]') as HTMLInputElement | null;
   expect(search).not.toBeNull();
 
   fireEvent.change(search as HTMLInputElement, { target: { value: accountName } });
