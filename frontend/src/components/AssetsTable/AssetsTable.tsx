@@ -99,9 +99,6 @@ const PAGE_SIZE_OPTIONS: Array<{ value: number; label: string }> = [
   { value: -1, label: 'Show all' },
 ];
 
-const DEVICE_TARGET_ROW_COUNT = 1000;
-const ACCOUNT_TARGET_ROW_COUNT = 1000;
-
 const DEVICE_DEFAULT_SECTION_IDS = [
   'deviceType',
   'os',
@@ -188,36 +185,6 @@ const ACCOUNT_LAST_LOGIN_OPTIONS: Option[] = [
   { value: 'days8to30', label: '8 to 30 days ago' },
   { value: 'over30d', label: 'Over 30 days ago' },
 ];
-
-function expandDeviceRows(seedRows: DeviceRecord[], targetCount: number): DeviceRecord[] {
-  if (seedRows.length >= targetCount) return seedRows;
-
-  const rows: DeviceRecord[] = [];
-  for (let index = 0; index < targetCount; index += 1) {
-    const seed = seedRows[index % seedRows.length];
-    rows.push({
-      ...seed,
-      id: index + 1,
-      name: `${seed.name} #${index + 1}`,
-    });
-  }
-  return rows;
-}
-
-function expandAccountRows(seedRows: AccountFilterRow[], targetCount: number): AccountFilterRow[] {
-  if (seedRows.length >= targetCount) return seedRows;
-
-  const rows: AccountFilterRow[] = [];
-  for (let index = 0; index < targetCount; index += 1) {
-    const seed = seedRows[index % seedRows.length];
-    rows.push({
-      ...seed,
-      id: index + 1,
-      name: `${seed.name} #${index + 1}`,
-    });
-  }
-  return rows;
-}
 
 import { Tooltip } from './Tooltip';
 
@@ -489,10 +456,6 @@ function accountSortValue(row: AccountFilterRow, columnId: string): string | num
   }
 }
 
-function stripSyntheticSuffix(value: string): string {
-  return value.replace(/ #\d+$/, '');
-}
-
 function toSourceCoverageRows(
   row: AccountRecord | DeviceRecord,
   options?: { accountOnly?: boolean; omitNotApplicable?: boolean }
@@ -729,8 +692,8 @@ export function AssetsTable() {
   }, [columnPickerAnchorEl, columnPickerOpen, seeMoreOpenFor]);
 
   const accountRows = useMemo(() => computeAccountRows(), []);
-  const deviceRowsForTable = useMemo(() => expandDeviceRows(devices, DEVICE_TARGET_ROW_COUNT), []);
-  const accountRowsForTable = useMemo(() => expandAccountRows(accountRows, ACCOUNT_TARGET_ROW_COUNT), [accountRows]);
+  const deviceRowsForTable = devices;
+  const accountRowsForTable = accountRows;
 
   const filteredDeviceRows = useMemo(
     () => applyDeviceFilters(deviceRowsForTable, deviceFilters),
@@ -2179,8 +2142,8 @@ export function AssetsTable() {
 
     if (detailView.kind === 'device') {
       const deviceRecord = detailView.record;
-      const accountName = stripSyntheticSuffix(deviceRecord.account);
-      const linkedAccount = accountRows.find((account) => stripSyntheticSuffix(account.name) === accountName) ?? null;
+      const accountName = deviceRecord.account;
+      const linkedAccount = accountRows.find((account) => account.name === accountName) ?? null;
       const detailTabs = ['Overview', 'Exposure coverage', 'On this device', 'Alerts', 'ZTNA access', 'Connection history'];
       const activeDetailTab = detailTabByKind.device;
       const sourceRows = toSourceCoverageRows(deviceRecord);
@@ -2296,9 +2259,9 @@ export function AssetsTable() {
     }
 
     const accountRecord = detailView.record;
-    const baseAccountName = stripSyntheticSuffix(accountRecord.name);
+    const baseAccountName = accountRecord.name;
     const linkedDevices = devices
-      .filter((device) => stripSyntheticSuffix(device.account) === baseAccountName)
+      .filter((device) => device.account === baseAccountName)
       .sort((left, right) => (right.riskScore ?? Number.NEGATIVE_INFINITY) - (left.riskScore ?? Number.NEGATIVE_INFINITY) || left.name.localeCompare(right.name));
     const detailTabs = ['Overview', 'Exposure coverage', 'Alerts'];
     const activeDetailTab = detailTabByKind.account;
@@ -2592,7 +2555,7 @@ export function AssetsTable() {
                 onClick={selectAllMatching}
                 type="button"
               >
-                Select all {selectionBannerState.totalCount.toLocaleString()}
+                Select all {selectionBannerState.totalCount.toLocaleString()} {isDevices ? 'devices' : 'accounts'}
               </button>
             </>
           ) : (

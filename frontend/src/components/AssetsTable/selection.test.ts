@@ -25,15 +25,15 @@ describe('getSelectionBannerState', () => {
     });
   });
 
-  it('matches the 1000-row / 100-per-page logic', () => {
+  it('matches a full-page selection when more rows remain', () => {
     expect(getSelectionBannerState({
-      selectedIds: Array.from({ length: 100 }, (_, index) => index + 1),
-      pageIds: Array.from({ length: 100 }, (_, index) => index + 1),
-      totalMatchingIds: Array.from({ length: 1000 }, (_, index) => index + 1),
+      selectedIds: Array.from({ length: 50 }, (_, index) => index + 1),
+      pageIds: Array.from({ length: 50 }, (_, index) => index + 1),
+      totalMatchingIds: Array.from({ length: 140 }, (_, index) => index + 1),
     })).toEqual({
       type: 'pageSelected',
-      pageCount: 100,
-      totalCount: 1000,
+      pageCount: 50,
+      totalCount: 140,
     });
   });
 
