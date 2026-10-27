@@ -809,6 +809,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailPage {
   --detail-body-size: 14px;
   --detail-body-line-height: 20.3px;
+  --detail-left-size: 13px;
+  --detail-left-line-height: 18.85px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -818,6 +820,33 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   color: var(--mute);
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
+}
+
+.detailRail .detailKv,
+.detailRail .detailKv dt,
+.detailRail .detailKv dd,
+.detailRail .detailList,
+.detailRail .detailList li,
+.detailRail .detailAssociatedMeta,
+.detailRail .detailLink,
+.detailCard .sourceCoverageRow,
+.detailCard .sourceName,
+.detailCard .sourceNameValue,
+.detailCard .sourceValue {
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
+}
+
+.detailList {
+  margin: 0;
+  padding-left: 16px;
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
+}
+
+.detailList li {
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
 }
 
 .detailCrumbCurrent {
@@ -867,12 +896,14 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   grid-template-columns: 120px 1fr;
   gap: 6px 10px;
   margin: 0;
-  font-size: var(--detail-body-size);
-  line-height: var(--detail-body-line-height);
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
 }
 
 .detailKv dt {
   color: var(--mute);
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
 }
 
 .detailKv dd {
@@ -1126,11 +1157,6 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   white-space: nowrap;
   font-size: 13px;
   line-height: 1.45;
-}
-
-.detailList {
-  margin: 0;
-  padding-left: 16px;
 }
 
 .detailAssociatedItem {

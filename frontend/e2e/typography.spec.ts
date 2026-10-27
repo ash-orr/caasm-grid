@@ -15,19 +15,28 @@ test.describe('Typography parity', () => {
     await page.goto('/');
 
     const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
-    await search.fill('MB-1126');
-    await expect(page.locator('tbody tr')).toContainText('MB-1126');
+    await search.fill('MB-1175');
+    await expect(page.locator('tbody tr')).toContainText('MB-1175');
 
-    const row = page.locator('tbody tr').filter({ hasText: 'MB-1126' }).first();
+    const row = page.locator('tbody tr').filter({ hasText: 'MB-1175' }).first();
     await row.click();
 
     const hostnameLabel = page.getByText('Hostname', { exact: true }).first();
     await expect(hostnameLabel).toHaveCSS('font-size', '14px');
     await expect(hostnameLabel).toHaveCSS('line-height', '20.3px');
 
-    const typeLabel = page.locator('dt').filter({ hasText: 'Type' }).first();
-    await expect(typeLabel).toHaveCSS('font-size', '14px');
-    await expect(typeLabel).toHaveCSS('line-height', '20.3px');
+    const typeRow = page.locator('dl').filter({ has: page.getByText('Type', { exact: true }) }).first();
+    const typeLabel = typeRow.locator('dt').filter({ hasText: 'Type' }).first();
+    const typeValue = typeRow.locator('dd').first();
+    await expect(typeLabel).toHaveCSS('font-size', '13px');
+    await expect(typeLabel).toHaveCSS('line-height', '18.85px');
+    await expect(typeValue).toHaveCSS('font-size', '13px');
+    await expect(typeValue).toHaveCSS('line-height', '18.85px');
+
+    const riskCard = page.locator('div').filter({ has: page.getByRole('heading', { name: 'Current risk score' }) }).first();
+    const violationItem = riskCard.locator('li').first();
+    await expect(violationItem).toHaveCSS('font-size', '13px');
+    await expect(violationItem).toHaveCSS('line-height', '18.85px');
   });
 
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {

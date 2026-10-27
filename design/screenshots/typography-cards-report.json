@@ -3,42 +3,18 @@
   "mism": [
     {
       "state": "P1",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P1",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P1",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
       "text": "Devices",
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P1",
+      "text": "IOT-1049",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
       "tag": "span"
     },
     {
@@ -128,7 +104,7 @@
       "text": "Stale",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -144,7 +120,7 @@
       "text": "Stale",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -195,6 +171,22 @@
       "text": "Stale",
       "prop": "height",
       "prototype": "19.4px",
+      "tag": "span"
+    },
+    {
+      "state": "P1",
+      "text": "IOT-1049",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P1",
+      "text": "IOT-1049",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -272,225 +264,49 @@
     {
       "state": "P1",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P1",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P1",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P1",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P1",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P1",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Hostname",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Hostname",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Device type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Device type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "IoT/Printer",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "IoT/Printer",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Vendor",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Vendor",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Zebra",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Zebra",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Device model",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Device model",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "ZT411",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "ZT411",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "OS",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "OS",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Firmware 4.2",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Firmware 4.2",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "OS version",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "OS version",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "12.1.472",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "12.1.472",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -498,7 +314,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -514,7 +330,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -562,7 +378,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -583,246 +399,6 @@
     },
     {
       "state": "P1",
-      "text": "Location",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Location",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Singapore",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Singapore",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Motherboard serial number",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Motherboard serial number",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "AgentP last reported",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "AgentP last reported",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Last connected to network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Last connected to network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Last network authentication type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Last network authentication type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Supplicant certificate (EAP-TLS)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Supplicant certificate (EAP-TLS)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "MAC address",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "MAC address",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Public IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Public IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Ethernet IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Ethernet IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "VLAN",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "VLAN",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Port",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Port",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "NAS name (NAS IP)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "NAS name (NAS IP)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Portnox AgentP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Portnox AgentP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
       "text": "1.1.254",
       "prop": "fontSize",
       "prototype": "14px",
@@ -836,54 +412,6 @@
       "prototype": "20.3px",
       "port": "18.85px",
       "tag": "dd"
-    },
-    {
-      "state": "P1",
-      "text": "Device ID",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "text": "Device ID",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P2",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P2",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
     },
     {
       "state": "P2",
@@ -891,6 +419,14 @@
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P2",
+      "text": "IOT-1049",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
       "tag": "span"
     },
     {
@@ -977,66 +513,66 @@
     },
     {
       "state": "P2",
-      "text": "Source",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "text": "Okta",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P2",
+      "text": "Okta",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P2",
       "text": "Source",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P2",
+      "text": "Source",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P2",
       "text": "Status",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P2",
       "text": "Status",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P2",
       "text": "Last seen",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P2",
       "text": "Last seen",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "Active Directory",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "Active Directory",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1050,22 +586,6 @@
     {
       "state": "P2",
       "text": "CrowdStrike",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "CrowdStrike",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "CrowdStrike",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
@@ -1074,57 +594,9 @@
     {
       "state": "P2",
       "text": "Portnox AgentP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "Portnox AgentP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "text": "Portnox AgentP",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P3",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P3",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
       "tag": "span"
     },
     {
@@ -1133,6 +605,14 @@
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P3",
+      "text": "IOT-1049",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
       "tag": "span"
     },
     {
@@ -1222,7 +702,7 @@
       "text": "Stale",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1238,7 +718,7 @@
       "text": "Stale",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1289,6 +769,22 @@
       "text": "Stale",
       "prop": "height",
       "prototype": "19.4px",
+      "tag": "span"
+    },
+    {
+      "state": "P3",
+      "text": "IOT-1049",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P3",
+      "text": "IOT-1049",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1366,225 +862,49 @@
     {
       "state": "P3",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P3",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P3",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P3",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P3",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P3",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Hostname",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Hostname",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Device type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Device type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "IoT/Printer",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "IoT/Printer",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Vendor",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Vendor",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Zebra",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Zebra",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Device model",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Device model",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "ZT411",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "ZT411",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "OS",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "OS",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Firmware 4.2",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Firmware 4.2",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "OS version",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "OS version",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "12.1.472",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "12.1.472",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1592,7 +912,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1608,7 +928,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1656,7 +976,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1688,7 +1008,7 @@
       "text": "CrowdStrike \"os_version\": \"12.1.472\"",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1696,7 +1016,7 @@
       "text": "CrowdStrike \"os_version\": \"12.1.472\"",
       "prop": "lineHeight",
       "prototype": "20.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1712,7 +1032,7 @@
       "text": "Portnox AgentP \"os_version\": \"12.1.472\"",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1720,7 +1040,7 @@
       "text": "Portnox AgentP \"os_version\": \"12.1.472\"",
       "prop": "lineHeight",
       "prototype": "20.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1736,7 +1056,7 @@
       "text": "Active Directory \"operatingSystemVersion\": \"12.1.472\"",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1744,7 +1064,7 @@
       "text": "Active Directory \"operatingSystemVersion\": \"12.1.472\"",
       "prop": "lineHeight",
       "prototype": "20.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1760,7 +1080,7 @@
       "text": "Okta \"osVersion\": \"11.1.472\"",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -1768,7 +1088,7 @@
       "text": "Okta \"osVersion\": \"11.1.472\"",
       "prop": "lineHeight",
       "prototype": "20.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -1800,247 +1120,7 @@
       "text": "Okta \"osVersion\": \"11.1.472\"",
       "prop": "height",
       "prototype": "20.4px",
-      "port": "18.8px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Location",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Location",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Singapore",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Singapore",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Motherboard serial number",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Motherboard serial number",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "AgentP last reported",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "AgentP last reported",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Last connected to network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Last connected to network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Last network authentication type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Last network authentication type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Supplicant certificate (EAP-TLS)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Supplicant certificate (EAP-TLS)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "MAC address",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "MAC address",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Public IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Public IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Ethernet IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Ethernet IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "VLAN",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "VLAN",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Port",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Port",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "NAS name (NAS IP)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "NAS name (NAS IP)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Portnox AgentP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Portnox AgentP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -2058,54 +1138,6 @@
       "prototype": "20.3px",
       "port": "18.85px",
       "tag": "dd"
-    },
-    {
-      "state": "P3",
-      "text": "Device ID",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "text": "Device ID",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P4",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P4",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
     },
     {
       "state": "P4",
@@ -2117,19 +1149,27 @@
     },
     {
       "state": "P4",
-      "text": "Not available. This device is not covered by Portnox AgentP, so only data from your connected sources is shown.",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "p"
+      "text": "SRV-1028",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
+      "tag": "span"
     },
     {
       "state": "P4",
-      "text": "Not available. This device is not covered by Portnox AgentP, so only data from your connected sources is shown.",
+      "text": "—",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P4",
+      "text": "—",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "p"
+      "prototype": "18.85px",
+      "port": "20.3px",
+      "tag": "span"
     },
     {
       "state": "P4",
@@ -2137,6 +1177,38 @@
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P4",
+      "text": "—",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P4",
+      "text": "—",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
+      "tag": "span"
+    },
+    {
+      "state": "P4",
+      "text": "SRV-1028",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P4",
+      "text": "SRV-1028",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -2214,225 +1286,49 @@
     {
       "state": "P4",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P4",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P4",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P4",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P4",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P4",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Hostname",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Hostname",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Server",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Server",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Vendor",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Vendor",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "HPE",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "HPE",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device model",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device model",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "ProLiant DL380",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "ProLiant DL380",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "OS",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "OS",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Ubuntu 22.04",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Ubuntu 22.04",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "OS version",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "OS version",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "18.2.486",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "18.2.486",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -2440,7 +1336,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -2456,7 +1352,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -2504,7 +1400,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -2525,34 +1421,10 @@
     },
     {
       "state": "P4",
-      "text": "Location",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Location",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
       "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prop": "color",
+      "prototype": "rgb(20, 33, 43)",
+      "port": "rgb(93, 107, 120)",
       "tag": "span"
     },
     {
@@ -2565,354 +1437,10 @@
     },
     {
       "state": "P4",
-      "text": "Motherboard serial number",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Motherboard serial number",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "AgentP last reported",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "AgentP last reported",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Last connected to network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Last connected to network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
       "text": "—",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Stale",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Stale",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Last network authentication type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Last network authentication type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "—",
-      "prop": "color",
-      "prototype": "rgb(20, 33, 43)",
-      "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "MAC address",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "MAC address",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Public IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Public IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Ethernet IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Ethernet IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "VLAN",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "VLAN",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Port",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Port",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "NAS name (NAS IP)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "NAS name (NAS IP)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Portnox AgentP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Portnox AgentP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "N/A",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "N/A",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device ID",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "text": "Device ID",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P5",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P5",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
       "tag": "span"
     },
     {
@@ -2921,6 +1449,14 @@
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P5",
+      "text": "MB-1042",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
       "tag": "span"
     },
     {
@@ -3008,26 +1544,26 @@
     {
       "state": "P5",
       "text": "All sources reporting",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P5",
-      "text": "All sources reporting",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P5",
-      "text": "All sources reporting",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
       "tag": "div"
+    },
+    {
+      "state": "P5",
+      "text": "MB-1042",
+      "prop": "fontSize",
+      "prototype": "13px",
+      "port": "14px",
+      "tag": "span"
+    },
+    {
+      "state": "P5",
+      "text": "MB-1042",
+      "prop": "lineHeight",
+      "prototype": "18.85px",
+      "port": "20.3px",
+      "tag": "span"
     },
     {
       "state": "P5",
@@ -3104,161 +1640,49 @@
     {
       "state": "P5",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P5",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P5",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P5",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P5",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P5",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Hostname",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Hostname",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Device type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Device type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Mobile",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Mobile",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Vendor",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Vendor",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Google",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Google",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Device model",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Device model",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Pixel 8",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Pixel 8",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -3266,7 +1690,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -3282,7 +1706,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -3330,7 +1754,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -3351,326 +1775,6 @@
     },
     {
       "state": "P5",
-      "text": "OS",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "OS",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "iOS 17",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "iOS 17",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "OS version",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "OS version",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "20.3.111",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "20.3.111",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Location",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Location",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Denver",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Denver",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Motherboard serial number",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Motherboard serial number",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "AgentP last reported",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "AgentP last reported",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Last connected to network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Last connected to network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Stale",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Stale",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Last network authentication type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Last network authentication type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Username/password (PEAP)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Username/password (PEAP)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "MAC address",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "MAC address",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Public IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Public IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Ethernet IP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Ethernet IP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Network",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Network",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "VLAN",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "VLAN",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Port",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Port",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "NAS name (NAS IP)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "NAS name (NAS IP)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Portnox AgentP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Portnox AgentP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
       "text": "1.1.305",
       "prop": "fontSize",
       "prototype": "14px",
@@ -3684,54 +1788,6 @@
       "prototype": "20.3px",
       "port": "18.85px",
       "tag": "dd"
-    },
-    {
-      "state": "P5",
-      "text": "Device ID",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "text": "Device ID",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P6",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P6",
-      "text": "Accounts",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Accounts",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
     },
     {
       "state": "P6",
@@ -3740,6 +1796,46 @@
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
       "tag": "span"
+    },
+    {
+      "state": "P6",
+      "text": "blake@acme.com",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
+      "tag": "span"
+    },
+    {
+      "state": "P6",
+      "text": "IOT-1427",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P6",
+      "text": "IOT-1427",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
+    },
+    {
+      "state": "P6",
+      "text": "LT-1875",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P6",
+      "text": "LT-1875",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
     },
     {
       "state": "P6",
@@ -3816,129 +1912,49 @@
     {
       "state": "P6",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P6",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P6",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Account name",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Account name",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Account type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Account type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "LDAP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "LDAP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Group",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Group",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Sales",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Sales",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -3946,7 +1962,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -3962,7 +1978,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4010,7 +2026,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4031,170 +2047,10 @@
     },
     {
       "state": "P6",
-      "text": "Description",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Description",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
       "text": "—",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Credentials expire",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Credentials expire",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Never",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Never",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Created by",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Created by",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Portnox admin (dana.whitfield@acme.com)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Portnox admin (dana.whitfield@acme.com)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "No",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "text": "No",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P6b",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P6b",
-      "text": "Accounts",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Accounts",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
       "tag": "span"
     },
     {
@@ -4204,6 +2060,46 @@
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
       "tag": "span"
+    },
+    {
+      "state": "P6b",
+      "text": "blake@acme.com",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
+      "tag": "span"
+    },
+    {
+      "state": "P6b",
+      "text": "IOT-1427",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P6b",
+      "text": "IOT-1427",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
+    },
+    {
+      "state": "P6b",
+      "text": "LT-1875",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P6b",
+      "text": "LT-1875",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
     },
     {
       "state": "P6b",
@@ -4280,129 +2176,49 @@
     {
       "state": "P6b",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6b",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P6b",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6b",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P6b",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P6b",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Account name",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Account name",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Account type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Account type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "LDAP",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "LDAP",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Group",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Group",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Sales",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Sales",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4410,7 +2226,7 @@
       "text": "Conflict",
       "prop": "fontSize",
       "prototype": "12px",
-      "port": "13px",
+      "port": "14px",
       "tag": "span"
     },
     {
@@ -4426,7 +2242,7 @@
       "text": "Conflict",
       "prop": "lineHeight",
       "prototype": "17.4px",
-      "port": "18.85px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4474,7 +2290,7 @@
       "text": "Conflict",
       "prop": "height",
       "prototype": "19.4px",
-      "port": "18.8px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4495,170 +2311,10 @@
     },
     {
       "state": "P6b",
-      "text": "Description",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Description",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
       "text": "—",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Credentials expire",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Credentials expire",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Never",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Never",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Created by",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Created by",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Portnox admin (dana.whitfield@acme.com)",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Portnox admin (dana.whitfield@acme.com)",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "No",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "text": "No",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P7",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P7",
-      "text": "Accounts",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Accounts",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
       "tag": "span"
     },
     {
@@ -4667,70 +2323,94 @@
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P7",
+      "text": "blake@acme.com",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
+      "tag": "span"
+    },
+    {
+      "state": "P7",
+      "text": "IOT-1427",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P7",
+      "text": "IOT-1427",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
+    },
+    {
+      "state": "P7",
+      "text": "LT-1875",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P7",
+      "text": "LT-1875",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
+    },
+    {
+      "state": "P7",
+      "text": "Source",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P7",
       "text": "Source",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Source",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P7",
       "text": "Status",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P7",
       "text": "Status",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P7",
       "text": "Last seen",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P7",
       "text": "Last seen",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Active Directory",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Active Directory",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4768,57 +2448,9 @@
     {
       "state": "P7",
       "text": "Google Workspace",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Google Workspace",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "text": "Google Workspace",
       "prop": "color",
       "prototype": "rgb(20, 33, 43)",
       "port": "rgb(93, 107, 120)",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P8",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P8",
-      "text": "Accounts",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Accounts",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
       "tag": "span"
     },
     {
@@ -4831,82 +2463,74 @@
     },
     {
       "state": "P8",
+      "text": "mab-finley",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
+      "tag": "span"
+    },
+    {
+      "state": "P8",
+      "text": "SRV-1448",
+      "prop": "fontSize",
+      "prototype": "14px",
+      "port": "13px",
+      "tag": "button"
+    },
+    {
+      "state": "P8",
+      "text": "SRV-1448",
+      "prop": "lineHeight",
+      "prototype": "20.3px",
+      "port": "18.85px",
+      "tag": "button"
+    },
+    {
+      "state": "P8",
       "text": "Field",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P8",
       "text": "Field",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P8",
       "text": "Value",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P8",
       "text": "Value",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
+      "prop": "lineHeight",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
       "state": "P8",
       "text": "Sources",
-      "prop": "letterSpacing",
-      "prototype": "normal",
-      "port": "0.48px",
+      "prop": "fontSize",
+      "prototype": "12px",
+      "port": "14px",
       "tag": "span"
     },
     {
       "state": "P8",
       "text": "Sources",
-      "prop": "textTransform",
-      "prototype": "none",
-      "port": "uppercase",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Account name",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Account name",
       "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "—",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "—",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
+      "prototype": "17.4px",
+      "port": "20.3px",
       "tag": "span"
     },
     {
@@ -4918,299 +2542,19 @@
       "tag": "span"
     },
     {
-      "state": "P8",
-      "text": "Account type",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Account type",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "MAC-based",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "MAC-based",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Group",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Group",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "IT Ops",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "IT Ops",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Description",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Description",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Contractor access, Q4 project",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Contractor access, Q4 project",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Credentials expire",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Credentials expire",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Never",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Never",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Created by",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Created by",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "MAB authentication",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "MAB authentication",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Allow devices without AgentP to connect using this account",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "No",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "No",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Total MAC addresses",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Total MAC addresses",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "2",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "2",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Total MAC vendors",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "Total MAC vendors",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "2",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "text": "2",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
-      "state": "P9",
-      "text": "/ /",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "div"
-    },
-    {
-      "state": "P9",
-      "text": "/ /",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "div"
-    },
-    {
-      "state": "P9",
-      "text": "Devices",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "span"
-    },
-    {
-      "state": "P9",
-      "text": "Devices",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "span"
-    },
-    {
       "state": "P9",
       "text": "Devices",
       "prop": "color",
       "prototype": "rgb(11, 110, 138)",
       "port": "rgb(93, 107, 120)",
+      "tag": "span"
+    },
+    {
+      "state": "P9",
+      "text": "IOT-1049",
+      "prop": "fontWeight",
+      "prototype": "700",
+      "port": "600",
       "tag": "span"
     },
     {
@@ -5294,22 +2638,6 @@
       "prop": "height",
       "prototype": "19.4px",
       "tag": "dd"
-    },
-    {
-      "state": "P9",
-      "text": "No sources match \"zzz\".",
-      "prop": "fontSize",
-      "prototype": "14px",
-      "port": "13px",
-      "tag": "p"
-    },
-    {
-      "state": "P9",
-      "text": "No sources match \"zzz\".",
-      "prop": "lineHeight",
-      "prototype": "20.3px",
-      "port": "18.85px",
-      "tag": "p"
     }
   ],
   "only": [
@@ -5322,25 +2650,19 @@
     {
       "state": "P1",
       "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "b"
-    },
-    {
-      "state": "P1",
-      "side": "prototype",
       "text": "11h ago",
       "tag": "dd"
     },
     {
       "state": "P1",
       "side": "prototype",
-      "text": "Oct 18 11:33 PM",
+      "text": "Oct 19 5:52 PM",
       "tag": "dd"
     },
     {
       "state": "P1",
       "side": "prototype",
-      "text": "1.1.254 — enrolled Aug 28, 2026",
+      "text": "1.1.254 — enrolled Aug 29, 2026",
       "tag": "dd"
     },
     {
@@ -5414,12 +2736,6 @@
       "side": "prototype",
       "text": "1 total",
       "tag": "dd"
-    },
-    {
-      "state": "P1",
-      "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "span"
     },
     {
       "state": "P1",
@@ -5514,7 +2830,7 @@
     {
       "state": "P1",
       "side": "prototype",
-      "text": "Oct 18 11:33 PM",
+      "text": "Oct 19 5:52 PM",
       "tag": "div"
     },
     {
@@ -5555,6 +2871,18 @@
     },
     {
       "state": "P1",
+      "side": "prototype",
+      "text": "110",
+      "tag": "div"
+    },
+    {
+      "state": "P1",
+      "side": "prototype",
+      "text": "Gi1/0/29",
+      "tag": "div"
+    },
+    {
+      "state": "P1",
       "side": "port",
       "text": "Assets",
       "tag": "h1"
@@ -5568,19 +2896,13 @@
     {
       "state": "P1",
       "side": "port",
-      "text": "IOT-1049 #148",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "dd"
     },
     {
       "state": "P1",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "dd"
     },
     {
@@ -5610,12 +2932,6 @@
     {
       "state": "P1",
       "side": "port",
-      "text": "IOT-1049 #148",
-      "tag": "span"
-    },
-    {
-      "state": "P1",
-      "side": "port",
       "text": "Agree 5 sources",
       "tag": "span"
     },
@@ -5664,7 +2980,7 @@
     {
       "state": "P1",
       "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "span"
     },
     {
@@ -5676,7 +2992,7 @@
     {
       "state": "P1",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -5794,16 +3110,22 @@
       "tag": "span"
     },
     {
-      "state": "P2",
-      "side": "prototype",
-      "text": "Asset Explorer",
-      "tag": "button"
+      "state": "P1",
+      "side": "port",
+      "text": "—",
+      "tag": "span"
+    },
+    {
+      "state": "P1",
+      "side": "port",
+      "text": "7",
+      "tag": "span"
     },
     {
       "state": "P2",
       "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "b"
+      "text": "Asset Explorer",
+      "tag": "button"
     },
     {
       "state": "P2",
@@ -5814,13 +3136,13 @@
     {
       "state": "P2",
       "side": "prototype",
-      "text": "Oct 18 11:33 PM",
+      "text": "Oct 19 5:53 PM",
       "tag": "dd"
     },
     {
       "state": "P2",
       "side": "prototype",
-      "text": "1.1.254 — enrolled Aug 28, 2026",
+      "text": "1.1.254 — enrolled Aug 29, 2026",
       "tag": "dd"
     },
     {
@@ -5976,19 +3298,13 @@
     {
       "state": "P2",
       "side": "port",
-      "text": "IOT-1049 #148",
-      "tag": "span"
-    },
-    {
-      "state": "P2",
-      "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "dd"
     },
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "dd"
     },
     {
@@ -6012,19 +3328,19 @@
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -6036,7 +3352,7 @@
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -6054,7 +3370,7 @@
     {
       "state": "P2",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -6066,25 +3382,19 @@
     {
       "state": "P3",
       "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "b"
-    },
-    {
-      "state": "P3",
-      "side": "prototype",
       "text": "11h ago",
       "tag": "dd"
     },
     {
       "state": "P3",
       "side": "prototype",
-      "text": "Oct 18 11:33 PM",
+      "text": "Oct 19 5:53 PM",
       "tag": "dd"
     },
     {
       "state": "P3",
       "side": "prototype",
-      "text": "1.1.254 — enrolled Aug 28, 2026",
+      "text": "1.1.254 — enrolled Aug 29, 2026",
       "tag": "dd"
     },
     {
@@ -6158,12 +3468,6 @@
       "side": "prototype",
       "text": "1 total",
       "tag": "dd"
-    },
-    {
-      "state": "P3",
-      "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "span"
     },
     {
       "state": "P3",
@@ -6258,7 +3562,7 @@
     {
       "state": "P3",
       "side": "prototype",
-      "text": "Oct 18 11:33 PM",
+      "text": "Oct 19 5:53 PM",
       "tag": "div"
     },
     {
@@ -6299,6 +3603,18 @@
     },
     {
       "state": "P3",
+      "side": "prototype",
+      "text": "110",
+      "tag": "div"
+    },
+    {
+      "state": "P3",
+      "side": "prototype",
+      "text": "Gi1/0/29",
+      "tag": "div"
+    },
+    {
+      "state": "P3",
       "side": "port",
       "text": "Assets",
       "tag": "h1"
@@ -6312,19 +3628,13 @@
     {
       "state": "P3",
       "side": "port",
-      "text": "IOT-1049 #148",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "dd"
     },
     {
       "state": "P3",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "dd"
     },
     {
@@ -6349,12 +3659,6 @@
       "state": "P3",
       "side": "port",
       "text": "Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory, Okta",
-      "tag": "span"
-    },
-    {
-      "state": "P3",
-      "side": "port",
-      "text": "IOT-1049 #148",
       "tag": "span"
     },
     {
@@ -6414,7 +3718,7 @@
     {
       "state": "P3",
       "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "span"
     },
     {
@@ -6426,7 +3730,7 @@
     {
       "state": "P3",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -6538,16 +3842,22 @@
       "tag": "span"
     },
     {
-      "state": "P4",
-      "side": "prototype",
-      "text": "Asset Explorer",
-      "tag": "button"
+      "state": "P3",
+      "side": "port",
+      "text": "1.1.254",
+      "tag": "span"
+    },
+    {
+      "state": "P3",
+      "side": "port",
+      "text": "—",
+      "tag": "span"
     },
     {
       "state": "P4",
       "side": "prototype",
-      "text": "SRV-1028",
-      "tag": "b"
+      "text": "Asset Explorer",
+      "tag": "button"
     },
     {
       "state": "P4",
@@ -6584,12 +3894,6 @@
       "side": "prototype",
       "text": "DT-1021",
       "tag": "button"
-    },
-    {
-      "state": "P4",
-      "side": "prototype",
-      "text": "SRV-1028",
-      "tag": "span"
     },
     {
       "state": "P4",
@@ -6756,12 +4060,6 @@
     {
       "state": "P4",
       "side": "port",
-      "text": "SRV-1028 #145",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "side": "port",
       "text": "+4 Reporting, 6 Not applicable",
       "tag": "button"
     },
@@ -6781,12 +4079,6 @@
       "state": "P4",
       "side": "port",
       "text": "Reported by CrowdStrike, SentinelOne, Active Directory, Okta",
-      "tag": "span"
-    },
-    {
-      "state": "P4",
-      "side": "port",
-      "text": "SRV-1028 #145",
       "tag": "span"
     },
     {
@@ -6942,7 +4234,7 @@
     {
       "state": "P4",
       "side": "port",
-      "text": "145",
+      "text": "4",
       "tag": "span"
     },
     {
@@ -6960,25 +4252,19 @@
     {
       "state": "P5",
       "side": "prototype",
-      "text": "MB-1042",
-      "tag": "b"
-    },
-    {
-      "state": "P5",
-      "side": "prototype",
       "text": "13h ago",
       "tag": "dd"
     },
     {
       "state": "P5",
       "side": "prototype",
-      "text": "Oct 18 5:21 AM",
+      "text": "Oct 18 11:41 PM",
       "tag": "dd"
     },
     {
       "state": "P5",
       "side": "prototype",
-      "text": "1.1.305 — enrolled Jul 12, 2026",
+      "text": "1.1.305 — enrolled Jul 13, 2026",
       "tag": "dd"
     },
     {
@@ -7034,12 +4320,6 @@
       "side": "prototype",
       "text": "2 total",
       "tag": "dd"
-    },
-    {
-      "state": "P5",
-      "side": "prototype",
-      "text": "MB-1042",
-      "tag": "span"
     },
     {
       "state": "P5",
@@ -7140,7 +4420,7 @@
     {
       "state": "P5",
       "side": "prototype",
-      "text": "Oct 18 5:21 AM",
+      "text": "Oct 18 11:41 PM",
       "tag": "div"
     },
     {
@@ -7193,6 +4473,12 @@
     },
     {
       "state": "P5",
+      "side": "prototype",
+      "text": "3f75be45-b7b2-f79b-a94848a8fc6d",
+      "tag": "div"
+    },
+    {
+      "state": "P5",
       "side": "port",
       "text": "Assets",
       "tag": "h1"
@@ -7206,13 +4492,7 @@
     {
       "state": "P5",
       "side": "port",
-      "text": "MB-1042 #147",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "side": "port",
-      "text": "12d ago",
+      "text": "13d ago",
       "tag": "dd"
     },
     {
@@ -7231,12 +4511,6 @@
       "state": "P5",
       "side": "port",
       "text": "Reported by CrowdStrike, SentinelOne, Intune, Portnox AgentP, EntraID, Active Directory, Okta, Google Workspace",
-      "tag": "span"
-    },
-    {
-      "state": "P5",
-      "side": "port",
-      "text": "MB-1042 #147",
       "tag": "span"
     },
     {
@@ -7290,7 +4564,7 @@
     {
       "state": "P5",
       "side": "port",
-      "text": "12d ago",
+      "text": "13d ago",
       "tag": "span"
     },
     {
@@ -7428,7 +4702,13 @@
     {
       "state": "P5",
       "side": "port",
-      "text": "147",
+      "text": "6",
+      "tag": "span"
+    },
+    {
+      "state": "P5",
+      "side": "port",
+      "text": "—",
       "tag": "span"
     },
     {
@@ -7436,12 +4716,6 @@
       "side": "prototype",
       "text": "Asset Explorer",
       "tag": "button"
-    },
-    {
-      "state": "P6",
-      "side": "prototype",
-      "text": "blake@acme.com",
-      "tag": "b"
     },
     {
       "state": "P6",
@@ -7494,7 +4768,7 @@
     {
       "state": "P6",
       "side": "prototype",
-      "text": "Laptop · Last connected Oct 25 3:30 AM",
+      "text": "Laptop · Last connected Oct 25 9:50 PM",
       "tag": "div"
     },
     {
@@ -7536,12 +4810,6 @@
     {
       "state": "P6",
       "side": "prototype",
-      "text": "blake@acme.com",
-      "tag": "div"
-    },
-    {
-      "state": "P6",
-      "side": "prototype",
       "text": "Agree",
       "tag": "span"
     },
@@ -7572,13 +4840,7 @@
     {
       "state": "P6",
       "side": "port",
-      "text": "blake@acme.com #140",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "side": "port",
-      "text": "10 days ago",
+      "text": "11 days ago",
       "tag": "dd"
     },
     {
@@ -7608,7 +4870,7 @@
     {
       "state": "P6",
       "side": "port",
-      "text": "IoT/Printer • Last connected 11d ago",
+      "text": "IoT/Printer • Last connected 12d ago",
       "tag": "div"
     },
     {
@@ -7620,7 +4882,7 @@
     {
       "state": "P6",
       "side": "port",
-      "text": "Laptop • Last connected 10d ago",
+      "text": "Laptop • Last connected 11d ago",
       "tag": "div"
     },
     {
@@ -7645,12 +4907,6 @@
       "state": "P6",
       "side": "port",
       "text": "· Reported by EntraID, Active Directory, Okta",
-      "tag": "span"
-    },
-    {
-      "state": "P6",
-      "side": "port",
-      "text": "blake@acme.com #140",
       "tag": "span"
     },
     {
@@ -7698,12 +4954,6 @@
     {
       "state": "P6b",
       "side": "prototype",
-      "text": "blake@acme.com",
-      "tag": "b"
-    },
-    {
-      "state": "P6b",
-      "side": "prototype",
       "text": "37 days ago",
       "tag": "dd"
     },
@@ -7752,7 +5002,7 @@
     {
       "state": "P6b",
       "side": "prototype",
-      "text": "Laptop · Last connected Oct 25 3:30 AM",
+      "text": "Laptop · Last connected Oct 25 9:50 PM",
       "tag": "div"
     },
     {
@@ -7790,12 +5040,6 @@
       "side": "prototype",
       "text": "· Reported by Active Directory, Okta",
       "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "side": "prototype",
-      "text": "blake@acme.com",
-      "tag": "div"
     },
     {
       "state": "P6b",
@@ -7842,13 +5086,7 @@
     {
       "state": "P6b",
       "side": "port",
-      "text": "blake@acme.com #140",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "side": "port",
-      "text": "10 days ago",
+      "text": "11 days ago",
       "tag": "dd"
     },
     {
@@ -7878,7 +5116,7 @@
     {
       "state": "P6b",
       "side": "port",
-      "text": "IoT/Printer • Last connected 11d ago",
+      "text": "IoT/Printer • Last connected 12d ago",
       "tag": "div"
     },
     {
@@ -7890,7 +5128,7 @@
     {
       "state": "P6b",
       "side": "port",
-      "text": "Laptop • Last connected 10d ago",
+      "text": "Laptop • Last connected 11d ago",
       "tag": "div"
     },
     {
@@ -7915,12 +5153,6 @@
       "state": "P6b",
       "side": "port",
       "text": "· Reported by EntraID, Active Directory, Okta",
-      "tag": "span"
-    },
-    {
-      "state": "P6b",
-      "side": "port",
-      "text": "blake@acme.com #140",
       "tag": "span"
     },
     {
@@ -7986,12 +5218,6 @@
     {
       "state": "P7",
       "side": "prototype",
-      "text": "blake@acme.com",
-      "tag": "b"
-    },
-    {
-      "state": "P7",
-      "side": "prototype",
       "text": "37 days ago",
       "tag": "dd"
     },
@@ -8040,7 +5266,7 @@
     {
       "state": "P7",
       "side": "prototype",
-      "text": "Laptop · Last connected Oct 25 3:30 AM",
+      "text": "Laptop · Last connected Oct 25 9:50 PM",
       "tag": "div"
     },
     {
@@ -8094,13 +5320,7 @@
     {
       "state": "P7",
       "side": "port",
-      "text": "blake@acme.com #140",
-      "tag": "span"
-    },
-    {
-      "state": "P7",
-      "side": "port",
-      "text": "10 days ago",
+      "text": "11 days ago",
       "tag": "dd"
     },
     {
@@ -8124,7 +5344,7 @@
     {
       "state": "P7",
       "side": "port",
-      "text": "IoT/Printer • Last connected 11d ago",
+      "text": "IoT/Printer • Last connected 12d ago",
       "tag": "div"
     },
     {
@@ -8136,7 +5356,7 @@
     {
       "state": "P7",
       "side": "port",
-      "text": "Laptop • Last connected 10d ago",
+      "text": "Laptop • Last connected 11d ago",
       "tag": "div"
     },
     {
@@ -8172,13 +5392,13 @@
     {
       "state": "P7",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
       "state": "P7",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "span"
     },
     {
@@ -8186,12 +5406,6 @@
       "side": "prototype",
       "text": "Asset Explorer",
       "tag": "button"
-    },
-    {
-      "state": "P8",
-      "side": "prototype",
-      "text": "mab-finley",
-      "tag": "b"
     },
     {
       "state": "P8",
@@ -8208,7 +5422,7 @@
     {
       "state": "P8",
       "side": "prototype",
-      "text": "Server · Last connected Oct 18 7:17 AM",
+      "text": "Server · Last connected Oct 19 1:37 AM",
       "tag": "div"
     },
     {
@@ -8250,12 +5464,6 @@
     {
       "state": "P8",
       "side": "port",
-      "text": "mab-finley #144",
-      "tag": "span"
-    },
-    {
-      "state": "P8",
-      "side": "port",
       "text": "11 days ago",
       "tag": "dd"
     },
@@ -8292,7 +5500,7 @@
     {
       "state": "P8",
       "side": "port",
-      "text": "mab-finley #144",
+      "text": "mab-finley",
       "tag": "span"
     },
     {
@@ -8352,25 +5560,19 @@
     {
       "state": "P9",
       "side": "prototype",
-      "text": "IOT-1049",
-      "tag": "b"
-    },
-    {
-      "state": "P9",
-      "side": "prototype",
       "text": "11h ago",
       "tag": "dd"
     },
     {
       "state": "P9",
       "side": "prototype",
-      "text": "Oct 18 11:34 PM",
+      "text": "Oct 19 5:53 PM",
       "tag": "dd"
     },
     {
       "state": "P9",
       "side": "prototype",
-      "text": "1.1.254 — enrolled Aug 28, 2026",
+      "text": "1.1.254 — enrolled Aug 29, 2026",
       "tag": "dd"
     },
     {
@@ -8472,19 +5674,13 @@
     {
       "state": "P9",
       "side": "port",
-      "text": "IOT-1049 #148",
-      "tag": "span"
-    },
-    {
-      "state": "P9",
-      "side": "port",
-      "text": "19d ago",
+      "text": "20d ago",
       "tag": "dd"
     },
     {
       "state": "P9",
       "side": "port",
-      "text": "10d ago",
+      "text": "11d ago",
       "tag": "dd"
     },
     {
@@ -8507,8 +5703,8 @@
     }
   ],
   "counts": {
-    "ok": 3441,
-    "mismatch": 669,
-    "notFound": 549
+    "ok": 3903,
+    "mismatch": 335,
+    "notFound": 517
   }
 }

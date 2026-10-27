@@ -3,11 +3,11 @@
 ```
 States: 10, verified: 10
 Compared keys per state:
-  P1: 113 prototype keys, 112 port keys (cut: 4 prototype, 3 port)
+  P1: 113 prototype keys, 112 port keys (cut: 2 prototype, 1 port)
   P2: 72 prototype keys, 60 port keys
-  P3: 117 prototype keys, 117 port keys (cut: 4 prototype, 4 port)
+  P3: 117 prototype keys, 117 port keys (cut: 2 prototype, 2 port)
   P4: 107 prototype keys, 108 port keys
-  P5: 111 prototype keys, 111 port keys (cut: 1 prototype, 1 port)
+  P5: 111 prototype keys, 111 port keys
   P6: 54 prototype keys, 55 port keys
   P6b: 56 prototype keys, 58 port keys
   P7: 39 prototype keys, 39 port keys
@@ -15,446 +15,6 @@ Compared keys per state:
   P9: 54 prototype keys, 43 port keys
 
 MISMATCH rows (grouped by property):
-## fontSize (219)
-- [P1] "/ /" <div>: prototype 14px | port 13px
-- [P1] "Devices" <span>: prototype 14px | port 13px
-- [P1] "55" <dd>: prototype 12px | port 13px
-- [P1] "Stale" <span>: prototype 12px | port 13px
-- [P1] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P1] "Hostname" <span>: prototype 14px | port 13px
-- [P1] "Device type" <span>: prototype 14px | port 13px
-- [P1] "IoT/Printer" <span>: prototype 14px | port 13px
-- [P1] "Vendor" <span>: prototype 14px | port 13px
-- [P1] "Zebra" <span>: prototype 14px | port 13px
-- [P1] "Device model" <span>: prototype 14px | port 13px
-- [P1] "ZT411" <span>: prototype 14px | port 13px
-- [P1] "OS" <span>: prototype 14px | port 13px
-- [P1] "Firmware 4.2" <span>: prototype 14px | port 13px
-- [P1] "OS version" <span>: prototype 14px | port 13px
-- [P1] "12.1.472" <span>: prototype 14px | port 13px
-- [P1] "Conflict" <span>: prototype 12px | port 13px
-- [P1] "View raw values" <button>: prototype 12.5px | port 13px
-- [P1] "Location" <span>: prototype 14px | port 13px
-- [P1] "Singapore" <span>: prototype 14px | port 13px
-- [P1] "Motherboard serial number" <span>: prototype 14px | port 13px
-- [P1] "AgentP last reported" <span>: prototype 14px | port 13px
-- [P1] "Last connected to network" <span>: prototype 14px | port 13px
-- [P1] "Last network authentication type" <span>: prototype 14px | port 13px
-- [P1] "Supplicant certificate (EAP-TLS)" <span>: prototype 14px | port 13px
-- [P1] "MAC address" <span>: prototype 14px | port 13px
-- [P1] "Public IP" <span>: prototype 14px | port 13px
-- [P1] "Ethernet IP" <span>: prototype 14px | port 13px
-- [P1] "Network" <span>: prototype 14px | port 13px
-- [P1] "VLAN" <span>: prototype 14px | port 13px
-- [P1] "Port" <span>: prototype 14px | port 13px
-- [P1] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
-- [P1] "Portnox AgentP" <span>: prototype 14px | port 13px
-- [P1] "1.1.254" <dd>: prototype 14px | port 13px
-- [P1] "Device ID" <span>: prototype 14px | port 13px
-- [P2] "/ /" <div>: prototype 14px | port 13px
-- [P2] "Devices" <span>: prototype 14px | port 13px
-- [P2] "55" <dd>: prototype 12px | port 13px
-- [P2] "Active Directory" <span>: prototype 14px | port 13px
-- [P2] "CrowdStrike" <span>: prototype 14px | port 13px
-- [P2] "Portnox AgentP" <span>: prototype 14px | port 13px
-- [P3] "/ /" <div>: prototype 14px | port 13px
-- [P3] "Devices" <span>: prototype 14px | port 13px
-- [P3] "55" <dd>: prototype 12px | port 13px
-- [P3] "Stale" <span>: prototype 12px | port 13px
-- [P3] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P3] "Hostname" <span>: prototype 14px | port 13px
-- [P3] "Device type" <span>: prototype 14px | port 13px
-- [P3] "IoT/Printer" <span>: prototype 14px | port 13px
-- [P3] "Vendor" <span>: prototype 14px | port 13px
-- [P3] "Zebra" <span>: prototype 14px | port 13px
-- [P3] "Device model" <span>: prototype 14px | port 13px
-- [P3] "ZT411" <span>: prototype 14px | port 13px
-- [P3] "OS" <span>: prototype 14px | port 13px
-- [P3] "Firmware 4.2" <span>: prototype 14px | port 13px
-- [P3] "OS version" <span>: prototype 14px | port 13px
-- [P3] "12.1.472" <span>: prototype 14px | port 13px
-- [P3] "Conflict" <span>: prototype 12px | port 13px
-- [P3] "Hide raw values" <button>: prototype 12.5px | port 13px
-- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 12px | port 13px
-- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 12px | port 13px
-- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 12px | port 13px
-- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 12px | port 13px
-- [P3] "Location" <span>: prototype 14px | port 13px
-- [P3] "Singapore" <span>: prototype 14px | port 13px
-- [P3] "Motherboard serial number" <span>: prototype 14px | port 13px
-- [P3] "AgentP last reported" <span>: prototype 14px | port 13px
-- [P3] "Last connected to network" <span>: prototype 14px | port 13px
-- [P3] "Last network authentication type" <span>: prototype 14px | port 13px
-- [P3] "Supplicant certificate (EAP-TLS)" <span>: prototype 14px | port 13px
-- [P3] "MAC address" <span>: prototype 14px | port 13px
-- [P3] "Public IP" <span>: prototype 14px | port 13px
-- [P3] "Ethernet IP" <span>: prototype 14px | port 13px
-- [P3] "Network" <span>: prototype 14px | port 13px
-- [P3] "VLAN" <span>: prototype 14px | port 13px
-- [P3] "Port" <span>: prototype 14px | port 13px
-- [P3] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
-- [P3] "Portnox AgentP" <span>: prototype 14px | port 13px
-- [P3] "1.1.254" <dd>: prototype 14px | port 13px
-- [P3] "Device ID" <span>: prototype 14px | port 13px
-- [P4] "/ /" <div>: prototype 14px | port 13px
-- [P4] "Devices" <span>: prototype 14px | port 13px
-- [P4] "Not available. This device is not covered by Portnox AgentP," <p>: prototype 14px | port 13px
-- [P4] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P4] "Hostname" <span>: prototype 14px | port 13px
-- [P4] "Device type" <span>: prototype 14px | port 13px
-- [P4] "Server" <span>: prototype 14px | port 13px
-- [P4] "Vendor" <span>: prototype 14px | port 13px
-- [P4] "HPE" <span>: prototype 14px | port 13px
-- [P4] "Device model" <span>: prototype 14px | port 13px
-- [P4] "ProLiant DL380" <span>: prototype 14px | port 13px
-- [P4] "OS" <span>: prototype 14px | port 13px
-- [P4] "Ubuntu 22.04" <span>: prototype 14px | port 13px
-- [P4] "OS version" <span>: prototype 14px | port 13px
-- [P4] "18.2.486" <span>: prototype 14px | port 13px
-- [P4] "Conflict" <span>: prototype 12px | port 13px
-- [P4] "View raw values" <button>: prototype 12.5px | port 13px
-- [P4] "Location" <span>: prototype 14px | port 13px
-- [P4] "—" <span>: prototype 14px | port 13px
-- [P4] "Motherboard serial number" <span>: prototype 14px | port 13px
-- [P4] "AgentP last reported" <span>: prototype 14px | port 13px
-- [P4] "—" <span>: prototype 14px | port 13px
-- [P4] "Last connected to network" <span>: prototype 14px | port 13px
-- [P4] "—" <span>: prototype 14px | port 13px
-- [P4] "Stale" <span>: prototype 14px | port 13px
-- [P4] "—" <span>: prototype 14px | port 13px
-- [P4] "Last network authentication type" <span>: prototype 14px | port 13px
-- [P4] "—" <span>: prototype 14px | port 13px
-- [P4] "MAC address" <span>: prototype 14px | port 13px
-- [P4] "Public IP" <span>: prototype 14px | port 13px
-- [P4] "Ethernet IP" <span>: prototype 14px | port 13px
-- [P4] "Network" <span>: prototype 14px | port 13px
-- [P4] "VLAN" <span>: prototype 14px | port 13px
-- [P4] "Port" <span>: prototype 14px | port 13px
-- [P4] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
-- [P4] "Portnox AgentP" <span>: prototype 14px | port 13px
-- [P4] "N/A" <span>: prototype 14px | port 13px
-- [P4] "Device ID" <span>: prototype 14px | port 13px
-- [P5] "/ /" <div>: prototype 14px | port 13px
-- [P5] "Devices" <span>: prototype 14px | port 13px
-- [P5] "38" <dd>: prototype 12px | port 13px
-- [P5] "All sources reporting" <div>: prototype 14px | port 13px
-- [P5] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P5] "Hostname" <span>: prototype 14px | port 13px
-- [P5] "Device type" <span>: prototype 14px | port 13px
-- [P5] "Mobile" <span>: prototype 14px | port 13px
-- [P5] "Vendor" <span>: prototype 14px | port 13px
-- [P5] "Google" <span>: prototype 14px | port 13px
-- [P5] "Device model" <span>: prototype 14px | port 13px
-- [P5] "Pixel 8" <span>: prototype 14px | port 13px
-- [P5] "Conflict" <span>: prototype 12px | port 13px
-- [P5] "View raw values" <button>: prototype 12.5px | port 13px
-- [P5] "OS" <span>: prototype 14px | port 13px
-- [P5] "iOS 17" <span>: prototype 14px | port 13px
-- [P5] "OS version" <span>: prototype 14px | port 13px
-- [P5] "20.3.111" <span>: prototype 14px | port 13px
-- [P5] "Location" <span>: prototype 14px | port 13px
-- [P5] "Denver" <span>: prototype 14px | port 13px
-- [P5] "Motherboard serial number" <span>: prototype 14px | port 13px
-- [P5] "AgentP last reported" <span>: prototype 14px | port 13px
-- [P5] "Last connected to network" <span>: prototype 14px | port 13px
-- [P5] "Stale" <span>: prototype 14px | port 13px
-- [P5] "Last network authentication type" <span>: prototype 14px | port 13px
-- [P5] "Username/password (PEAP)" <span>: prototype 14px | port 13px
-- [P5] "MAC address" <span>: prototype 14px | port 13px
-- [P5] "Public IP" <span>: prototype 14px | port 13px
-- [P5] "Ethernet IP" <span>: prototype 14px | port 13px
-- [P5] "Network" <span>: prototype 14px | port 13px
-- [P5] "VLAN" <span>: prototype 14px | port 13px
-- [P5] "Port" <span>: prototype 14px | port 13px
-- [P5] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
-- [P5] "Portnox AgentP" <span>: prototype 14px | port 13px
-- [P5] "1.1.305" <dd>: prototype 14px | port 13px
-- [P5] "Device ID" <span>: prototype 14px | port 13px
-- [P6] "/ /" <div>: prototype 14px | port 13px
-- [P6] "Accounts" <span>: prototype 14px | port 13px
-- [P6] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P6] "Account name" <span>: prototype 14px | port 13px
-- [P6] "Account type" <span>: prototype 14px | port 13px
-- [P6] "LDAP" <span>: prototype 14px | port 13px
-- [P6] "Group" <span>: prototype 14px | port 13px
-- [P6] "Sales" <span>: prototype 14px | port 13px
-- [P6] "Conflict" <span>: prototype 12px | port 13px
-- [P6] "View raw values" <button>: prototype 12.5px | port 13px
-- [P6] "Description" <span>: prototype 14px | port 13px
-- [P6] "—" <span>: prototype 14px | port 13px
-- [P6] "Credentials expire" <span>: prototype 14px | port 13px
-- [P6] "Never" <span>: prototype 14px | port 13px
-- [P6] "Created by" <span>: prototype 14px | port 13px
-- [P6] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 14px | port 13px
-- [P6] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
-- [P6] "No" <span>: prototype 14px | port 13px
-- [P6b] "/ /" <div>: prototype 14px | port 13px
-- [P6b] "Accounts" <span>: prototype 14px | port 13px
-- [P6b] "1 field differs across sources" <span>: prototype 12px | port 14px
-- [P6b] "Account name" <span>: prototype 14px | port 13px
-- [P6b] "Account type" <span>: prototype 14px | port 13px
-- [P6b] "LDAP" <span>: prototype 14px | port 13px
-- [P6b] "Group" <span>: prototype 14px | port 13px
-- [P6b] "Sales" <span>: prototype 14px | port 13px
-- [P6b] "Conflict" <span>: prototype 12px | port 13px
-- [P6b] "Hide raw values" <button>: prototype 12.5px | port 13px
-- [P6b] "Description" <span>: prototype 14px | port 13px
-- [P6b] "—" <span>: prototype 14px | port 13px
-- [P6b] "Credentials expire" <span>: prototype 14px | port 13px
-- [P6b] "Never" <span>: prototype 14px | port 13px
-- [P6b] "Created by" <span>: prototype 14px | port 13px
-- [P6b] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 14px | port 13px
-- [P6b] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
-- [P6b] "No" <span>: prototype 14px | port 13px
-- [P7] "/ /" <div>: prototype 14px | port 13px
-- [P7] "Accounts" <span>: prototype 14px | port 13px
-- [P7] "Active Directory" <span>: prototype 14px | port 13px
-- [P7] "Okta" <span>: prototype 14px | port 13px
-- [P7] "Google Workspace" <span>: prototype 14px | port 13px
-- [P8] "/ /" <div>: prototype 14px | port 13px
-- [P8] "Accounts" <span>: prototype 14px | port 13px
-- [P8] "Account name" <span>: prototype 14px | port 13px
-- [P8] "—" <span>: prototype 14px | port 13px
-- [P8] "Account type" <span>: prototype 14px | port 13px
-- [P8] "MAC-based" <span>: prototype 14px | port 13px
-- [P8] "Group" <span>: prototype 14px | port 13px
-- [P8] "IT Ops" <span>: prototype 14px | port 13px
-- [P8] "Description" <span>: prototype 14px | port 13px
-- [P8] "Contractor access, Q4 project" <span>: prototype 14px | port 13px
-- [P8] "Credentials expire" <span>: prototype 14px | port 13px
-- [P8] "Never" <span>: prototype 14px | port 13px
-- [P8] "Created by" <span>: prototype 14px | port 13px
-- [P8] "MAB authentication" <span>: prototype 14px | port 13px
-- [P8] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
-- [P8] "No" <span>: prototype 14px | port 13px
-- [P8] "Total MAC addresses" <span>: prototype 14px | port 13px
-- [P8] "2" <span>: prototype 14px | port 13px
-- [P8] "Total MAC vendors" <span>: prototype 14px | port 13px
-- [P8] "2" <span>: prototype 14px | port 13px
-- [P9] "/ /" <div>: prototype 14px | port 13px
-- [P9] "Devices" <span>: prototype 14px | port 13px
-- [P9] "55" <dd>: prototype 12px | port 13px
-- [P9] "No sources match "zzz"." <p>: prototype 14px | port 13px
-## lineHeight (219)
-- [P1] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P1] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P1] "55" <dd>: prototype 17.4px | port 18.85px
-- [P1] "Stale" <span>: prototype 17.4px | port 18.85px
-- [P1] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P1] "Hostname" <span>: prototype 20.3px | port 18.85px
-- [P1] "Device type" <span>: prototype 20.3px | port 18.85px
-- [P1] "IoT/Printer" <span>: prototype 20.3px | port 18.85px
-- [P1] "Vendor" <span>: prototype 20.3px | port 18.85px
-- [P1] "Zebra" <span>: prototype 20.3px | port 18.85px
-- [P1] "Device model" <span>: prototype 20.3px | port 18.85px
-- [P1] "ZT411" <span>: prototype 20.3px | port 18.85px
-- [P1] "OS" <span>: prototype 20.3px | port 18.85px
-- [P1] "Firmware 4.2" <span>: prototype 20.3px | port 18.85px
-- [P1] "OS version" <span>: prototype 20.3px | port 18.85px
-- [P1] "12.1.472" <span>: prototype 20.3px | port 18.85px
-- [P1] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P1] "View raw values" <button>: prototype 18.125px | port 18.85px
-- [P1] "Location" <span>: prototype 20.3px | port 18.85px
-- [P1] "Singapore" <span>: prototype 20.3px | port 18.85px
-- [P1] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
-- [P1] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
-- [P1] "Last connected to network" <span>: prototype 20.3px | port 18.85px
-- [P1] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
-- [P1] "Supplicant certificate (EAP-TLS)" <span>: prototype 20.3px | port 18.85px
-- [P1] "MAC address" <span>: prototype 20.3px | port 18.85px
-- [P1] "Public IP" <span>: prototype 20.3px | port 18.85px
-- [P1] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
-- [P1] "Network" <span>: prototype 20.3px | port 18.85px
-- [P1] "VLAN" <span>: prototype 20.3px | port 18.85px
-- [P1] "Port" <span>: prototype 20.3px | port 18.85px
-- [P1] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
-- [P1] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
-- [P1] "1.1.254" <dd>: prototype 20.3px | port 18.85px
-- [P1] "Device ID" <span>: prototype 20.3px | port 18.85px
-- [P2] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P2] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P2] "55" <dd>: prototype 17.4px | port 18.85px
-- [P2] "Active Directory" <span>: prototype 20.3px | port 18.85px
-- [P2] "CrowdStrike" <span>: prototype 20.3px | port 18.85px
-- [P2] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
-- [P3] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P3] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P3] "55" <dd>: prototype 17.4px | port 18.85px
-- [P3] "Stale" <span>: prototype 17.4px | port 18.85px
-- [P3] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P3] "Hostname" <span>: prototype 20.3px | port 18.85px
-- [P3] "Device type" <span>: prototype 20.3px | port 18.85px
-- [P3] "IoT/Printer" <span>: prototype 20.3px | port 18.85px
-- [P3] "Vendor" <span>: prototype 20.3px | port 18.85px
-- [P3] "Zebra" <span>: prototype 20.3px | port 18.85px
-- [P3] "Device model" <span>: prototype 20.3px | port 18.85px
-- [P3] "ZT411" <span>: prototype 20.3px | port 18.85px
-- [P3] "OS" <span>: prototype 20.3px | port 18.85px
-- [P3] "Firmware 4.2" <span>: prototype 20.3px | port 18.85px
-- [P3] "OS version" <span>: prototype 20.3px | port 18.85px
-- [P3] "12.1.472" <span>: prototype 20.3px | port 18.85px
-- [P3] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P3] "Hide raw values" <button>: prototype 18.125px | port 18.85px
-- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 20.4px | port 18.85px
-- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 20.4px | port 18.85px
-- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 20.4px | port 18.85px
-- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 18.85px
-- [P3] "Location" <span>: prototype 20.3px | port 18.85px
-- [P3] "Singapore" <span>: prototype 20.3px | port 18.85px
-- [P3] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
-- [P3] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
-- [P3] "Last connected to network" <span>: prototype 20.3px | port 18.85px
-- [P3] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
-- [P3] "Supplicant certificate (EAP-TLS)" <span>: prototype 20.3px | port 18.85px
-- [P3] "MAC address" <span>: prototype 20.3px | port 18.85px
-- [P3] "Public IP" <span>: prototype 20.3px | port 18.85px
-- [P3] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
-- [P3] "Network" <span>: prototype 20.3px | port 18.85px
-- [P3] "VLAN" <span>: prototype 20.3px | port 18.85px
-- [P3] "Port" <span>: prototype 20.3px | port 18.85px
-- [P3] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
-- [P3] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
-- [P3] "1.1.254" <dd>: prototype 20.3px | port 18.85px
-- [P3] "Device ID" <span>: prototype 20.3px | port 18.85px
-- [P4] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P4] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P4] "Not available. This device is not covered by Portnox AgentP," <p>: prototype 20.3px | port 18.85px
-- [P4] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P4] "Hostname" <span>: prototype 20.3px | port 18.85px
-- [P4] "Device type" <span>: prototype 20.3px | port 18.85px
-- [P4] "Server" <span>: prototype 20.3px | port 18.85px
-- [P4] "Vendor" <span>: prototype 20.3px | port 18.85px
-- [P4] "HPE" <span>: prototype 20.3px | port 18.85px
-- [P4] "Device model" <span>: prototype 20.3px | port 18.85px
-- [P4] "ProLiant DL380" <span>: prototype 20.3px | port 18.85px
-- [P4] "OS" <span>: prototype 20.3px | port 18.85px
-- [P4] "Ubuntu 22.04" <span>: prototype 20.3px | port 18.85px
-- [P4] "OS version" <span>: prototype 20.3px | port 18.85px
-- [P4] "18.2.486" <span>: prototype 20.3px | port 18.85px
-- [P4] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P4] "View raw values" <button>: prototype 18.125px | port 18.85px
-- [P4] "Location" <span>: prototype 20.3px | port 18.85px
-- [P4] "—" <span>: prototype 20.3px | port 18.85px
-- [P4] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
-- [P4] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
-- [P4] "—" <span>: prototype 20.3px | port 18.85px
-- [P4] "Last connected to network" <span>: prototype 20.3px | port 18.85px
-- [P4] "—" <span>: prototype 20.3px | port 18.85px
-- [P4] "Stale" <span>: prototype 20.3px | port 18.85px
-- [P4] "—" <span>: prototype 20.3px | port 18.85px
-- [P4] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
-- [P4] "—" <span>: prototype 20.3px | port 18.85px
-- [P4] "MAC address" <span>: prototype 20.3px | port 18.85px
-- [P4] "Public IP" <span>: prototype 20.3px | port 18.85px
-- [P4] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
-- [P4] "Network" <span>: prototype 20.3px | port 18.85px
-- [P4] "VLAN" <span>: prototype 20.3px | port 18.85px
-- [P4] "Port" <span>: prototype 20.3px | port 18.85px
-- [P4] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
-- [P4] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
-- [P4] "N/A" <span>: prototype 20.3px | port 18.85px
-- [P4] "Device ID" <span>: prototype 20.3px | port 18.85px
-- [P5] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P5] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P5] "38" <dd>: prototype 17.4px | port 18.85px
-- [P5] "All sources reporting" <div>: prototype 20.3px | port 18.85px
-- [P5] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P5] "Hostname" <span>: prototype 20.3px | port 18.85px
-- [P5] "Device type" <span>: prototype 20.3px | port 18.85px
-- [P5] "Mobile" <span>: prototype 20.3px | port 18.85px
-- [P5] "Vendor" <span>: prototype 20.3px | port 18.85px
-- [P5] "Google" <span>: prototype 20.3px | port 18.85px
-- [P5] "Device model" <span>: prototype 20.3px | port 18.85px
-- [P5] "Pixel 8" <span>: prototype 20.3px | port 18.85px
-- [P5] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P5] "View raw values" <button>: prototype 18.125px | port 18.85px
-- [P5] "OS" <span>: prototype 20.3px | port 18.85px
-- [P5] "iOS 17" <span>: prototype 20.3px | port 18.85px
-- [P5] "OS version" <span>: prototype 20.3px | port 18.85px
-- [P5] "20.3.111" <span>: prototype 20.3px | port 18.85px
-- [P5] "Location" <span>: prototype 20.3px | port 18.85px
-- [P5] "Denver" <span>: prototype 20.3px | port 18.85px
-- [P5] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
-- [P5] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
-- [P5] "Last connected to network" <span>: prototype 20.3px | port 18.85px
-- [P5] "Stale" <span>: prototype 20.3px | port 18.85px
-- [P5] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
-- [P5] "Username/password (PEAP)" <span>: prototype 20.3px | port 18.85px
-- [P5] "MAC address" <span>: prototype 20.3px | port 18.85px
-- [P5] "Public IP" <span>: prototype 20.3px | port 18.85px
-- [P5] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
-- [P5] "Network" <span>: prototype 20.3px | port 18.85px
-- [P5] "VLAN" <span>: prototype 20.3px | port 18.85px
-- [P5] "Port" <span>: prototype 20.3px | port 18.85px
-- [P5] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
-- [P5] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
-- [P5] "1.1.305" <dd>: prototype 20.3px | port 18.85px
-- [P5] "Device ID" <span>: prototype 20.3px | port 18.85px
-- [P6] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P6] "Accounts" <span>: prototype 20.3px | port 18.85px
-- [P6] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P6] "Account name" <span>: prototype 20.3px | port 18.85px
-- [P6] "Account type" <span>: prototype 20.3px | port 18.85px
-- [P6] "LDAP" <span>: prototype 20.3px | port 18.85px
-- [P6] "Group" <span>: prototype 20.3px | port 18.85px
-- [P6] "Sales" <span>: prototype 20.3px | port 18.85px
-- [P6] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P6] "View raw values" <button>: prototype 18.125px | port 18.85px
-- [P6] "Description" <span>: prototype 20.3px | port 18.85px
-- [P6] "—" <span>: prototype 20.3px | port 18.85px
-- [P6] "Credentials expire" <span>: prototype 20.3px | port 18.85px
-- [P6] "Never" <span>: prototype 20.3px | port 18.85px
-- [P6] "Created by" <span>: prototype 20.3px | port 18.85px
-- [P6] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 20.3px | port 18.85px
-- [P6] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
-- [P6] "No" <span>: prototype 20.3px | port 18.85px
-- [P6b] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P6b] "Accounts" <span>: prototype 20.3px | port 18.85px
-- [P6b] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
-- [P6b] "Account name" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Account type" <span>: prototype 20.3px | port 18.85px
-- [P6b] "LDAP" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Group" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Sales" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Conflict" <span>: prototype 17.4px | port 18.85px
-- [P6b] "Hide raw values" <button>: prototype 18.125px | port 18.85px
-- [P6b] "Description" <span>: prototype 20.3px | port 18.85px
-- [P6b] "—" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Credentials expire" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Never" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Created by" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 20.3px | port 18.85px
-- [P6b] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
-- [P6b] "No" <span>: prototype 20.3px | port 18.85px
-- [P7] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P7] "Accounts" <span>: prototype 20.3px | port 18.85px
-- [P7] "Active Directory" <span>: prototype 20.3px | port 18.85px
-- [P7] "Okta" <span>: prototype 20.3px | port 18.85px
-- [P7] "Google Workspace" <span>: prototype 20.3px | port 18.85px
-- [P8] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P8] "Accounts" <span>: prototype 20.3px | port 18.85px
-- [P8] "Account name" <span>: prototype 20.3px | port 18.85px
-- [P8] "—" <span>: prototype 20.3px | port 18.85px
-- [P8] "Account type" <span>: prototype 20.3px | port 18.85px
-- [P8] "MAC-based" <span>: prototype 20.3px | port 18.85px
-- [P8] "Group" <span>: prototype 20.3px | port 18.85px
-- [P8] "IT Ops" <span>: prototype 20.3px | port 18.85px
-- [P8] "Description" <span>: prototype 20.3px | port 18.85px
-- [P8] "Contractor access, Q4 project" <span>: prototype 20.3px | port 18.85px
-- [P8] "Credentials expire" <span>: prototype 20.3px | port 18.85px
-- [P8] "Never" <span>: prototype 20.3px | port 18.85px
-- [P8] "Created by" <span>: prototype 20.3px | port 18.85px
-- [P8] "MAB authentication" <span>: prototype 20.3px | port 18.85px
-- [P8] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
-- [P8] "No" <span>: prototype 20.3px | port 18.85px
-- [P8] "Total MAC addresses" <span>: prototype 20.3px | port 18.85px
-- [P8] "2" <span>: prototype 20.3px | port 18.85px
-- [P8] "Total MAC vendors" <span>: prototype 20.3px | port 18.85px
-- [P8] "2" <span>: prototype 20.3px | port 18.85px
-- [P9] "/ /" <div>: prototype 20.3px | port 18.85px
-- [P9] "Devices" <span>: prototype 20.3px | port 18.85px
-- [P9] "55" <dd>: prototype 17.4px | port 18.85px
-- [P9] "No sources match "zzz"." <p>: prototype 20.3px | port 18.85px
 ## color (31)
 - [P1] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
 - [P1] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
@@ -487,26 +47,186 @@ MISMATCH rows (grouped by property):
 - [P8] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
 - [P9] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
 - [P9] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
-## fontWeight (19)
+## fontWeight (29)
+- [P1] "IOT-1049" <span>: prototype 700 | port 600
 - [P1] "55" <dd>: prototype 500 | port 400
 - [P1] "Stale" <span>: prototype 500 | port 400
 - [P1] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P1] "Conflict" <span>: prototype 500 | port 400
+- [P2] "IOT-1049" <span>: prototype 700 | port 600
 - [P2] "55" <dd>: prototype 500 | port 400
+- [P3] "IOT-1049" <span>: prototype 700 | port 600
 - [P3] "55" <dd>: prototype 500 | port 400
 - [P3] "Stale" <span>: prototype 500 | port 400
 - [P3] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P3] "Conflict" <span>: prototype 500 | port 400
+- [P4] "SRV-1028" <span>: prototype 700 | port 600
 - [P4] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P4] "Conflict" <span>: prototype 500 | port 400
+- [P5] "MB-1042" <span>: prototype 700 | port 600
 - [P5] "38" <dd>: prototype 500 | port 400
 - [P5] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P5] "Conflict" <span>: prototype 500 | port 400
+- [P6] "blake@acme.com" <span>: prototype 700 | port 600
 - [P6] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P6] "Conflict" <span>: prototype 500 | port 400
+- [P6b] "blake@acme.com" <span>: prototype 700 | port 600
 - [P6b] "1 field differs across sources" <span>: prototype 500 | port 400
 - [P6b] "Conflict" <span>: prototype 500 | port 400
+- [P7] "blake@acme.com" <span>: prototype 700 | port 600
+- [P8] "mab-finley" <span>: prototype 700 | port 600
+- [P9] "IOT-1049" <span>: prototype 700 | port 600
 - [P9] "55" <dd>: prototype 500 | port 400
+## fontSize (74)
+- [P1] "55" <dd>: prototype 12px | port 13px
+- [P1] "Stale" <span>: prototype 12px | port 14px
+- [P1] "IOT-1049" <span>: prototype 13px | port 14px
+- [P1] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P1] "Field" <span>: prototype 12px | port 14px
+- [P1] "Value" <span>: prototype 12px | port 14px
+- [P1] "Sources" <span>: prototype 12px | port 14px
+- [P1] "Conflict" <span>: prototype 12px | port 14px
+- [P1] "View raw values" <button>: prototype 12.5px | port 13px
+- [P1] "1.1.254" <dd>: prototype 14px | port 13px
+- [P2] "55" <dd>: prototype 12px | port 13px
+- [P2] "Okta" <span>: prototype 13px | port 14px
+- [P2] "Source" <span>: prototype 12px | port 14px
+- [P2] "Status" <span>: prototype 12px | port 14px
+- [P2] "Last seen" <span>: prototype 12px | port 14px
+- [P3] "55" <dd>: prototype 12px | port 13px
+- [P3] "Stale" <span>: prototype 12px | port 14px
+- [P3] "IOT-1049" <span>: prototype 13px | port 14px
+- [P3] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P3] "Field" <span>: prototype 12px | port 14px
+- [P3] "Value" <span>: prototype 12px | port 14px
+- [P3] "Sources" <span>: prototype 12px | port 14px
+- [P3] "Conflict" <span>: prototype 12px | port 14px
+- [P3] "Hide raw values" <button>: prototype 12.5px | port 13px
+- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 12px | port 14px
+- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 12px | port 14px
+- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 12px | port 14px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 12px | port 14px
+- [P3] "1.1.254" <dd>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 13px | port 14px
+- [P4] "—" <span>: prototype 13px | port 14px
+- [P4] "SRV-1028" <span>: prototype 13px | port 14px
+- [P4] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P4] "Field" <span>: prototype 12px | port 14px
+- [P4] "Value" <span>: prototype 12px | port 14px
+- [P4] "Sources" <span>: prototype 12px | port 14px
+- [P4] "Conflict" <span>: prototype 12px | port 14px
+- [P4] "View raw values" <button>: prototype 12.5px | port 13px
+- [P5] "38" <dd>: prototype 12px | port 13px
+- [P5] "MB-1042" <span>: prototype 13px | port 14px
+- [P5] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P5] "Field" <span>: prototype 12px | port 14px
+- [P5] "Value" <span>: prototype 12px | port 14px
+- [P5] "Sources" <span>: prototype 12px | port 14px
+- [P5] "Conflict" <span>: prototype 12px | port 14px
+- [P5] "View raw values" <button>: prototype 12.5px | port 13px
+- [P5] "1.1.305" <dd>: prototype 14px | port 13px
+- [P6] "IOT-1427" <button>: prototype 14px | port 13px
+- [P6] "LT-1875" <button>: prototype 14px | port 13px
+- [P6] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P6] "Field" <span>: prototype 12px | port 14px
+- [P6] "Value" <span>: prototype 12px | port 14px
+- [P6] "Sources" <span>: prototype 12px | port 14px
+- [P6] "Conflict" <span>: prototype 12px | port 14px
+- [P6] "View raw values" <button>: prototype 12.5px | port 13px
+- [P6b] "IOT-1427" <button>: prototype 14px | port 13px
+- [P6b] "LT-1875" <button>: prototype 14px | port 13px
+- [P6b] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P6b] "Field" <span>: prototype 12px | port 14px
+- [P6b] "Value" <span>: prototype 12px | port 14px
+- [P6b] "Sources" <span>: prototype 12px | port 14px
+- [P6b] "Conflict" <span>: prototype 12px | port 14px
+- [P6b] "Hide raw values" <button>: prototype 12.5px | port 13px
+- [P7] "IOT-1427" <button>: prototype 14px | port 13px
+- [P7] "LT-1875" <button>: prototype 14px | port 13px
+- [P7] "Source" <span>: prototype 12px | port 14px
+- [P7] "Status" <span>: prototype 12px | port 14px
+- [P7] "Last seen" <span>: prototype 12px | port 14px
+- [P7] "Okta" <span>: prototype 14px | port 13px
+- [P8] "SRV-1448" <button>: prototype 14px | port 13px
+- [P8] "Field" <span>: prototype 12px | port 14px
+- [P8] "Value" <span>: prototype 12px | port 14px
+- [P8] "Sources" <span>: prototype 12px | port 14px
+- [P9] "55" <dd>: prototype 12px | port 13px
+## lineHeight (74)
+- [P1] "55" <dd>: prototype 17.4px | port 18.85px
+- [P1] "Stale" <span>: prototype 17.4px | port 20.3px
+- [P1] "IOT-1049" <span>: prototype 18.85px | port 20.3px
+- [P1] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P1] "Field" <span>: prototype 17.4px | port 20.3px
+- [P1] "Value" <span>: prototype 17.4px | port 20.3px
+- [P1] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P1] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P1] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P1] "1.1.254" <dd>: prototype 20.3px | port 18.85px
+- [P2] "55" <dd>: prototype 17.4px | port 18.85px
+- [P2] "Okta" <span>: prototype 18.85px | port 20.3px
+- [P2] "Source" <span>: prototype 17.4px | port 20.3px
+- [P2] "Status" <span>: prototype 17.4px | port 20.3px
+- [P2] "Last seen" <span>: prototype 17.4px | port 20.3px
+- [P3] "55" <dd>: prototype 17.4px | port 18.85px
+- [P3] "Stale" <span>: prototype 17.4px | port 20.3px
+- [P3] "IOT-1049" <span>: prototype 18.85px | port 20.3px
+- [P3] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P3] "Field" <span>: prototype 17.4px | port 20.3px
+- [P3] "Value" <span>: prototype 17.4px | port 20.3px
+- [P3] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P3] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P3] "Hide raw values" <button>: prototype 18.125px | port 18.85px
+- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 20.4px | port 20.3px
+- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 20.4px | port 20.3px
+- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 20.4px | port 20.3px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 20.3px
+- [P3] "1.1.254" <dd>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 18.85px | port 20.3px
+- [P4] "—" <span>: prototype 18.85px | port 20.3px
+- [P4] "SRV-1028" <span>: prototype 18.85px | port 20.3px
+- [P4] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P4] "Field" <span>: prototype 17.4px | port 20.3px
+- [P4] "Value" <span>: prototype 17.4px | port 20.3px
+- [P4] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P4] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P4] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P5] "38" <dd>: prototype 17.4px | port 18.85px
+- [P5] "MB-1042" <span>: prototype 18.85px | port 20.3px
+- [P5] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P5] "Field" <span>: prototype 17.4px | port 20.3px
+- [P5] "Value" <span>: prototype 17.4px | port 20.3px
+- [P5] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P5] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P5] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P5] "1.1.305" <dd>: prototype 20.3px | port 18.85px
+- [P6] "IOT-1427" <button>: prototype 20.3px | port 18.85px
+- [P6] "LT-1875" <button>: prototype 20.3px | port 18.85px
+- [P6] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P6] "Field" <span>: prototype 17.4px | port 20.3px
+- [P6] "Value" <span>: prototype 17.4px | port 20.3px
+- [P6] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P6] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P6] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P6b] "IOT-1427" <button>: prototype 20.3px | port 18.85px
+- [P6b] "LT-1875" <button>: prototype 20.3px | port 18.85px
+- [P6b] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Field" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Value" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Conflict" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Hide raw values" <button>: prototype 18.125px | port 18.85px
+- [P7] "IOT-1427" <button>: prototype 20.3px | port 18.85px
+- [P7] "LT-1875" <button>: prototype 20.3px | port 18.85px
+- [P7] "Source" <span>: prototype 17.4px | port 20.3px
+- [P7] "Status" <span>: prototype 17.4px | port 20.3px
+- [P7] "Last seen" <span>: prototype 17.4px | port 20.3px
+- [P7] "Okta" <span>: prototype 20.3px | port 18.85px
+- [P8] "SRV-1448" <button>: prototype 20.3px | port 18.85px
+- [P8] "Field" <span>: prototype 17.4px | port 20.3px
+- [P8] "Value" <span>: prototype 17.4px | port 20.3px
+- [P8] "Sources" <span>: prototype 17.4px | port 20.3px
+- [P9] "55" <dd>: prototype 17.4px | port 18.85px
 ## fontVariantNumeric (5)
 - [P1] "55" <dd>: prototype tabular-nums | port normal
 - [P2] "55" <dd>: prototype tabular-nums | port normal
@@ -620,79 +340,23 @@ MISMATCH rows (grouped by property):
 - [P1] "55" <dd>: prototype 19.4px | port undefined
 - [P1] "Stale" <span>: prototype 19.4px | port undefined
 - [P1] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P1] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P1] "Conflict" <span>: prototype 19.4px | port 20.3px
 - [P2] "55" <dd>: prototype 19.4px | port undefined
 - [P3] "55" <dd>: prototype 19.4px | port undefined
 - [P3] "Stale" <span>: prototype 19.4px | port undefined
 - [P3] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P3] "Conflict" <span>: prototype 19.4px | port 18.8px
-- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 18.8px
+- [P3] "Conflict" <span>: prototype 19.4px | port 20.3px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 20.3px
 - [P4] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P4] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P4] "Conflict" <span>: prototype 19.4px | port 20.3px
 - [P5] "38" <dd>: prototype 19.4px | port undefined
 - [P5] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P5] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P5] "Conflict" <span>: prototype 19.4px | port 20.3px
 - [P6] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P6] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P6] "Conflict" <span>: prototype 19.4px | port 20.3px
 - [P6b] "1 field differs across sources" <span>: prototype 19.4px | port 17px
-- [P6b] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P6b] "Conflict" <span>: prototype 19.4px | port 20.3px
 - [P9] "55" <dd>: prototype 19.4px | port undefined
-## letterSpacing (27)
-- [P1] "Field" <span>: prototype normal | port 0.48px
-- [P1] "Value" <span>: prototype normal | port 0.48px
-- [P1] "Sources" <span>: prototype normal | port 0.48px
-- [P2] "Source" <span>: prototype normal | port 0.48px
-- [P2] "Status" <span>: prototype normal | port 0.48px
-- [P2] "Last seen" <span>: prototype normal | port 0.48px
-- [P3] "Field" <span>: prototype normal | port 0.48px
-- [P3] "Value" <span>: prototype normal | port 0.48px
-- [P3] "Sources" <span>: prototype normal | port 0.48px
-- [P4] "Field" <span>: prototype normal | port 0.48px
-- [P4] "Value" <span>: prototype normal | port 0.48px
-- [P4] "Sources" <span>: prototype normal | port 0.48px
-- [P5] "Field" <span>: prototype normal | port 0.48px
-- [P5] "Value" <span>: prototype normal | port 0.48px
-- [P5] "Sources" <span>: prototype normal | port 0.48px
-- [P6] "Field" <span>: prototype normal | port 0.48px
-- [P6] "Value" <span>: prototype normal | port 0.48px
-- [P6] "Sources" <span>: prototype normal | port 0.48px
-- [P6b] "Field" <span>: prototype normal | port 0.48px
-- [P6b] "Value" <span>: prototype normal | port 0.48px
-- [P6b] "Sources" <span>: prototype normal | port 0.48px
-- [P7] "Source" <span>: prototype normal | port 0.48px
-- [P7] "Status" <span>: prototype normal | port 0.48px
-- [P7] "Last seen" <span>: prototype normal | port 0.48px
-- [P8] "Field" <span>: prototype normal | port 0.48px
-- [P8] "Value" <span>: prototype normal | port 0.48px
-- [P8] "Sources" <span>: prototype normal | port 0.48px
-## textTransform (27)
-- [P1] "Field" <span>: prototype none | port uppercase
-- [P1] "Value" <span>: prototype none | port uppercase
-- [P1] "Sources" <span>: prototype none | port uppercase
-- [P2] "Source" <span>: prototype none | port uppercase
-- [P2] "Status" <span>: prototype none | port uppercase
-- [P2] "Last seen" <span>: prototype none | port uppercase
-- [P3] "Field" <span>: prototype none | port uppercase
-- [P3] "Value" <span>: prototype none | port uppercase
-- [P3] "Sources" <span>: prototype none | port uppercase
-- [P4] "Field" <span>: prototype none | port uppercase
-- [P4] "Value" <span>: prototype none | port uppercase
-- [P4] "Sources" <span>: prototype none | port uppercase
-- [P5] "Field" <span>: prototype none | port uppercase
-- [P5] "Value" <span>: prototype none | port uppercase
-- [P5] "Sources" <span>: prototype none | port uppercase
-- [P6] "Field" <span>: prototype none | port uppercase
-- [P6] "Value" <span>: prototype none | port uppercase
-- [P6] "Sources" <span>: prototype none | port uppercase
-- [P6b] "Field" <span>: prototype none | port uppercase
-- [P6b] "Value" <span>: prototype none | port uppercase
-- [P6b] "Sources" <span>: prototype none | port uppercase
-- [P7] "Source" <span>: prototype none | port uppercase
-- [P7] "Status" <span>: prototype none | port uppercase
-- [P7] "Last seen" <span>: prototype none | port uppercase
-- [P8] "Field" <span>: prototype none | port uppercase
-- [P8] "Value" <span>: prototype none | port uppercase
-- [P8] "Sources" <span>: prototype none | port uppercase
 ## fontFamily (4)
 - [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
 - [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
@@ -701,10 +365,9 @@ MISMATCH rows (grouped by property):
 
 Only on one side (NOT FOUND):
 - [P1] only in prototype: "Asset Explorer" <button>
-- [P1] only in prototype: "IOT-1049" <b>
 - [P1] only in prototype: "11h ago" <dd>
-- [P1] only in prototype: "Oct 18 11:33 PM" <dd>
-- [P1] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P1] only in prototype: "Oct 19 5:52 PM" <dd>
+- [P1] only in prototype: "1.1.254 — enrolled Aug 29, 2026" <dd>
 - [P1] only in prototype: "(Restrict)" <dd>
 - [P1] only in prototype: "Risk policy" <dt>
 - [P1] only in prototype: "Server_Policy" <i>
@@ -717,7 +380,6 @@ Only on one side (NOT FOUND):
 - [P1] only in prototype: "None" <dd>
 - [P1] only in prototype: "Device(s)" <dt>
 - [P1] only in prototype: "1 total" <dd>
-- [P1] only in prototype: "IOT-1049" <span>
 - [P1] only in prototype: "Last seen by sources" <span>
 - [P1] only in prototype: "5h ago" <div>
 - [P1] only in prototype: "· Most recent: CrowdStrike" <span>
@@ -733,23 +395,23 @@ Only on one side (NOT FOUND):
 - [P1] only in prototype: "CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1" <div>
 - [P1] only in prototype: "9880B0CBAA" <div>
 - [P1] only in prototype: "11h ago" <div>
-- [P1] only in prototype: "Oct 18 11:33 PM" <div>
+- [P1] only in prototype: "Oct 19 5:52 PM" <div>
 - [P1] only in prototype: "Stale" <span>
 - [P1] only in prototype: "No" <div>
 - [P1] only in prototype: "54:55:EE:35:6D:37" <div>
 - [P1] only in prototype: "63.87.204.73" <div>
 - [P1] only in prototype: "10.0.183.14" <div>
 - [P1] only in prototype: "Wired" <div>
+- [P1] only in prototype: "110" <div>
+- [P1] only in prototype: "Gi1/0/29" <div>
 - [P1] only in port: "Assets" <h1>
 - [P1] only in port: "Assets" <button>
-- [P1] only in port: "IOT-1049 #148" <span>
-- [P1] only in port: "19d ago" <dd>
-- [P1] only in port: "10d ago" <dd>
+- [P1] only in port: "20d ago" <dd>
+- [P1] only in port: "11d ago" <dd>
 - [P1] only in port: "All sources reporting" <div>
 - [P1] only in port: "See details" <button>
 - [P1] only in port: "Last seen by sources:" <div>
 - [P1] only in port: "Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory" <span>
-- [P1] only in port: "IOT-1049 #148" <span>
 - [P1] only in port: "Agree 5 sources" <span>
 - [P1] only in port: "—" <span>
 - [P1] only in port: "Agree 2 sources" <span>
@@ -758,9 +420,9 @@ Only on one side (NOT FOUND):
 - [P1] only in port: "—" <span>
 - [P1] only in port: "—" <span>
 - [P1] only in port: "—" <span>
-- [P1] only in port: "19d ago" <span>
+- [P1] only in port: "20d ago" <span>
 - [P1] only in port: "—" <span>
-- [P1] only in port: "10d ago" <span>
+- [P1] only in port: "11d ago" <span>
 - [P1] only in port: "—" <span>
 - [P1] only in port: "Yes" <span>
 - [P1] only in port: "—" <span>
@@ -780,11 +442,12 @@ Only on one side (NOT FOUND):
 - [P1] only in port: "SIN-CORP-01 (10.20.1.4)" <span>
 - [P1] only in port: "—" <span>
 - [P1] only in port: "1.1.254" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "7" <span>
 - [P2] only in prototype: "Asset Explorer" <button>
-- [P2] only in prototype: "IOT-1049" <b>
 - [P2] only in prototype: "11h ago" <dd>
-- [P2] only in prototype: "Oct 18 11:33 PM" <dd>
-- [P2] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P2] only in prototype: "Oct 19 5:53 PM" <dd>
+- [P2] only in prototype: "1.1.254 — enrolled Aug 29, 2026" <dd>
 - [P2] only in prototype: "(Restrict)" <dd>
 - [P2] only in prototype: "Risk policy" <dt>
 - [P2] only in prototype: "Server_Policy" <i>
@@ -810,25 +473,23 @@ Only on one side (NOT FOUND):
 - [P2] only in prototype: "Not applicable" <span>
 - [P2] only in port: "Assets" <h1>
 - [P2] only in port: "Assets" <button>
-- [P2] only in port: "IOT-1049 #148" <span>
-- [P2] only in port: "19d ago" <dd>
-- [P2] only in port: "10d ago" <dd>
+- [P2] only in port: "20d ago" <dd>
+- [P2] only in port: "11d ago" <dd>
 - [P2] only in port: "1.1.254" <dd>
 - [P2] only in port: "All sources reporting" <div>
 - [P2] only in port: "See details" <button>
-- [P2] only in port: "10d ago" <span>
-- [P2] only in port: "10d ago" <span>
-- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "11d ago" <span>
+- [P2] only in port: "11d ago" <span>
+- [P2] only in port: "11d ago" <span>
 - [P2] only in port: "Reporting" <span>
-- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "11d ago" <span>
 - [P2] only in port: "SentinelOne" <span>
 - [P2] only in port: "Reporting" <span>
-- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "11d ago" <span>
 - [P3] only in prototype: "Asset Explorer" <button>
-- [P3] only in prototype: "IOT-1049" <b>
 - [P3] only in prototype: "11h ago" <dd>
-- [P3] only in prototype: "Oct 18 11:33 PM" <dd>
-- [P3] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P3] only in prototype: "Oct 19 5:53 PM" <dd>
+- [P3] only in prototype: "1.1.254 — enrolled Aug 29, 2026" <dd>
 - [P3] only in prototype: "(Restrict)" <dd>
 - [P3] only in prototype: "Risk policy" <dt>
 - [P3] only in prototype: "Server_Policy" <i>
@@ -841,7 +502,6 @@ Only on one side (NOT FOUND):
 - [P3] only in prototype: "None" <dd>
 - [P3] only in prototype: "Device(s)" <dt>
 - [P3] only in prototype: "1 total" <dd>
-- [P3] only in prototype: "IOT-1049" <span>
 - [P3] only in prototype: "Last seen by sources" <span>
 - [P3] only in prototype: "5h ago" <div>
 - [P3] only in prototype: "· Most recent: CrowdStrike" <span>
@@ -857,23 +517,23 @@ Only on one side (NOT FOUND):
 - [P3] only in prototype: "CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1" <div>
 - [P3] only in prototype: "9880B0CBAA" <div>
 - [P3] only in prototype: "11h ago" <div>
-- [P3] only in prototype: "Oct 18 11:33 PM" <div>
+- [P3] only in prototype: "Oct 19 5:53 PM" <div>
 - [P3] only in prototype: "Stale" <span>
 - [P3] only in prototype: "No" <div>
 - [P3] only in prototype: "54:55:EE:35:6D:37" <div>
 - [P3] only in prototype: "63.87.204.73" <div>
 - [P3] only in prototype: "10.0.183.14" <div>
 - [P3] only in prototype: "Wired" <div>
+- [P3] only in prototype: "110" <div>
+- [P3] only in prototype: "Gi1/0/29" <div>
 - [P3] only in port: "Assets" <h1>
 - [P3] only in port: "Assets" <button>
-- [P3] only in port: "IOT-1049 #148" <span>
-- [P3] only in port: "19d ago" <dd>
-- [P3] only in port: "10d ago" <dd>
+- [P3] only in port: "20d ago" <dd>
+- [P3] only in port: "11d ago" <dd>
 - [P3] only in port: "All sources reporting" <div>
 - [P3] only in port: "See details" <button>
 - [P3] only in port: "Last seen by sources:" <div>
 - [P3] only in port: "Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory" <span>
-- [P3] only in port: "IOT-1049 #148" <span>
 - [P3] only in port: "Agree 5 sources" <span>
 - [P3] only in port: "—" <span>
 - [P3] only in port: "Agree 2 sources" <span>
@@ -883,9 +543,9 @@ Only on one side (NOT FOUND):
 - [P3] only in port: "—" <span>
 - [P3] only in port: "—" <span>
 - [P3] only in port: "—" <span>
-- [P3] only in port: "19d ago" <span>
+- [P3] only in port: "20d ago" <span>
 - [P3] only in port: "—" <span>
-- [P3] only in port: "10d ago" <span>
+- [P3] only in port: "11d ago" <span>
 - [P3] only in port: "—" <span>
 - [P3] only in port: "Yes" <span>
 - [P3] only in port: "—" <span>
@@ -904,15 +564,15 @@ Only on one side (NOT FOUND):
 - [P3] only in port: "—" <span>
 - [P3] only in port: "SIN-CORP-01 (10.20.1.4)" <span>
 - [P3] only in port: "—" <span>
+- [P3] only in port: "1.1.254" <span>
+- [P3] only in port: "—" <span>
 - [P4] only in prototype: "Asset Explorer" <button>
-- [P4] only in prototype: "SRV-1028" <b>
 - [P4] only in prototype: "+3 Reporting, 2 Not applicable" <button>
 - [P4] only in prototype: "Exposure gap" <dt>
 - [P4] only in prototype: "None" <dd>
 - [P4] only in prototype: "Device(s)" <dt>
 - [P4] only in prototype: "5 total" <dd>
 - [P4] only in prototype: "DT-1021" <button>
-- [P4] only in prototype: "SRV-1028" <span>
 - [P4] only in prototype: "LT-1518" <button>
 - [P4] only in prototype: "LT-1525" <button>
 - [P4] only in prototype: "IOT-1532" <button>
@@ -940,12 +600,10 @@ Only on one side (NOT FOUND):
 - [P4] only in prototype: "aa9c7fa2-4586-c66d-0f75e13fa769" <div>
 - [P4] only in port: "Assets" <h1>
 - [P4] only in port: "Assets" <button>
-- [P4] only in port: "SRV-1028 #145" <span>
 - [P4] only in port: "+4 Reporting, 6 Not applicable" <button>
 - [P4] only in port: "⚠" <span>
 - [P4] only in port: "Last seen by sources:" <div>
 - [P4] only in port: "Reported by CrowdStrike, SentinelOne, Active Directory, Okta" <span>
-- [P4] only in port: "SRV-1028 #145" <span>
 - [P4] only in port: "Agree 4 sources" <span>
 - [P4] only in port: "Agree 1 source" <span>
 - [P4] only in port: "Agree 1 source" <span>
@@ -971,13 +629,12 @@ Only on one side (NOT FOUND):
 - [P4] only in port: "DEN-CORE-01 (10.50.1.3)" <span>
 - [P4] only in port: "—" <span>
 - [P4] only in port: "—" <span>
-- [P4] only in port: "145" <span>
+- [P4] only in port: "4" <span>
 - [P4] only in port: "—" <span>
 - [P5] only in prototype: "Asset Explorer" <button>
-- [P5] only in prototype: "MB-1042" <b>
 - [P5] only in prototype: "13h ago" <dd>
-- [P5] only in prototype: "Oct 18 5:21 AM" <dd>
-- [P5] only in prototype: "1.1.305 — enrolled Jul 12, 2026" <dd>
+- [P5] only in prototype: "Oct 18 11:41 PM" <dd>
+- [P5] only in prototype: "1.1.305 — enrolled Jul 13, 2026" <dd>
 - [P5] only in prototype: "(Allow)" <dd>
 - [P5] only in prototype: "Risk policy" <dt>
 - [P5] only in prototype: "IoT_Policy" <i>
@@ -987,7 +644,6 @@ Only on one side (NOT FOUND):
 - [P5] only in prototype: "None" <dd>
 - [P5] only in prototype: "Device(s)" <dt>
 - [P5] only in prototype: "2 total" <dd>
-- [P5] only in prototype: "MB-1042" <span>
 - [P5] only in prototype: "IOT-1406" <button>
 - [P5] only in prototype: "Last seen by sources" <span>
 - [P5] only in prototype: "Just now" <div>
@@ -1004,7 +660,7 @@ Only on one side (NOT FOUND):
 - [P5] only in prototype: "6 sources" <div>
 - [P5] only in prototype: "CAA01875FA" <div>
 - [P5] only in prototype: "13h ago" <div>
-- [P5] only in prototype: "Oct 18 5:21 AM" <div>
+- [P5] only in prototype: "Oct 18 11:41 PM" <div>
 - [P5] only in prototype: "No" <div>
 - [P5] only in prototype: "59:35:C5:E3:11:FF" <div>
 - [P5] only in prototype: "126.137.218.211" <div>
@@ -1013,14 +669,13 @@ Only on one side (NOT FOUND):
 - [P5] only in prototype: "10" <div>
 - [P5] only in prototype: "N/A" <div>
 - [P5] only in prototype: "WLC-AUS-01 (10.50.1.3)" <div>
+- [P5] only in prototype: "3f75be45-b7b2-f79b-a94848a8fc6d" <div>
 - [P5] only in port: "Assets" <h1>
 - [P5] only in port: "Assets" <button>
-- [P5] only in port: "MB-1042 #147" <span>
-- [P5] only in port: "12d ago" <dd>
+- [P5] only in port: "13d ago" <dd>
 - [P5] only in port: "11d ago" <dd>
 - [P5] only in port: "Last seen by sources:" <div>
 - [P5] only in port: "Reported by CrowdStrike, SentinelOne, Intune, Portnox AgentP, EntraID," <span>
-- [P5] only in port: "MB-1042 #147" <span>
 - [P5] only in port: "Agree 8 sources" <span>
 - [P5] only in port: "—" <span>
 - [P5] only in port: "Agree 4 sources" <span>
@@ -1029,7 +684,7 @@ Only on one side (NOT FOUND):
 - [P5] only in port: "—" <span>
 - [P5] only in port: "—" <span>
 - [P5] only in port: "—" <span>
-- [P5] only in port: "12d ago" <span>
+- [P5] only in port: "13d ago" <span>
 - [P5] only in port: "—" <span>
 - [P5] only in port: "11d ago" <span>
 - [P5] only in port: "—" <span>
@@ -1052,9 +707,9 @@ Only on one side (NOT FOUND):
 - [P5] only in port: "—" <span>
 - [P5] only in port: "1.1.305" <span>
 - [P5] only in port: "—" <span>
-- [P5] only in port: "147" <span>
+- [P5] only in port: "6" <span>
+- [P5] only in port: "—" <span>
 - [P6] only in prototype: "Asset Explorer" <button>
-- [P6] only in prototype: "blake@acme.com" <b>
 - [P6] only in prototype: "37 days ago" <dd>
 - [P6] only in prototype: "All sources reporting" <div>
 - [P6] only in prototype: "See details" <button>
@@ -1063,33 +718,30 @@ Only on one side (NOT FOUND):
 - [P6] only in prototype: "Risk score" <div>
 - [P6] only in prototype: "62" <span>
 - [P6] only in prototype: "Exposure gap: None" <div>
-- [P6] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P6] only in prototype: "Laptop · Last connected Oct 25 9:50 PM" <div>
 - [P6] only in prototype: "Risk score" <div>
 - [P6] only in prototype: "41" <span>
 - [P6] only in prototype: "Exposure gap: None" <div>
 - [P6] only in prototype: "Last login by sources" <span>
 - [P6] only in prototype: "37 days ago" <div>
 - [P6] only in prototype: "· Reported by Active Directory, Okta" <span>
-- [P6] only in prototype: "blake@acme.com" <div>
 - [P6] only in prototype: "Agree" <span>
 - [P6] only in prototype: "2 sources" <div>
 - [P6] only in prototype: "Active Directory → Sales · Okta → Marketing" <div>
 - [P6] only in port: "Assets" <h1>
 - [P6] only in port: "Assets" <button>
-- [P6] only in port: "blake@acme.com #140" <span>
-- [P6] only in port: "10 days ago" <dd>
+- [P6] only in port: "11 days ago" <dd>
 - [P6] only in port: "Okta" <span>
 - [P6] only in port: "Not present" <span>
 - [P6] only in port: "+2 Reporting, 1 Not applicable" <button>
 - [P6] only in port: "Associated devices ( 2 )" <h3>
-- [P6] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P6] only in port: "IoT/Printer • Last connected 12d ago" <div>
 - [P6] only in port: "Risk score 62" <div>
-- [P6] only in port: "Laptop • Last connected 10d ago" <div>
+- [P6] only in port: "Laptop • Last connected 11d ago" <div>
 - [P6] only in port: "Risk score 41" <div>
 - [P6] only in port: "⚠" <span>
 - [P6] only in port: "Last login by sources: 26 days ago" <div>
 - [P6] only in port: "· Reported by EntraID, Active Directory, Okta" <span>
-- [P6] only in port: "blake@acme.com #140" <span>
 - [P6] only in port: "Agree 3 sources" <span>
 - [P6] only in port: "—" <span>
 - [P6] only in port: "—" <span>
@@ -1097,7 +749,6 @@ Only on one side (NOT FOUND):
 - [P6] only in port: "—" <span>
 - [P6] only in port: "—" <span>
 - [P6b] only in prototype: "Asset Explorer" <button>
-- [P6b] only in prototype: "blake@acme.com" <b>
 - [P6b] only in prototype: "37 days ago" <dd>
 - [P6b] only in prototype: "All sources reporting" <div>
 - [P6b] only in prototype: "See details" <button>
@@ -1106,14 +757,13 @@ Only on one side (NOT FOUND):
 - [P6b] only in prototype: "Risk score" <div>
 - [P6b] only in prototype: "62" <span>
 - [P6b] only in prototype: "Exposure gap: None" <div>
-- [P6b] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P6b] only in prototype: "Laptop · Last connected Oct 25 9:50 PM" <div>
 - [P6b] only in prototype: "Risk score" <div>
 - [P6b] only in prototype: "41" <span>
 - [P6b] only in prototype: "Exposure gap: None" <div>
 - [P6b] only in prototype: "Last login by sources" <span>
 - [P6b] only in prototype: "37 days ago" <div>
 - [P6b] only in prototype: "· Reported by Active Directory, Okta" <span>
-- [P6b] only in prototype: "blake@acme.com" <div>
 - [P6b] only in prototype: "Agree" <span>
 - [P6b] only in prototype: "2 sources" <div>
 - [P6b] only in prototype: "Active Directory → Sales · Okta → Marketing" <div>
@@ -1121,20 +771,18 @@ Only on one side (NOT FOUND):
 - [P6b] only in prototype: "Okta "profile.department": "Marketing"" <div>
 - [P6b] only in port: "Assets" <h1>
 - [P6b] only in port: "Assets" <button>
-- [P6b] only in port: "blake@acme.com #140" <span>
-- [P6b] only in port: "10 days ago" <dd>
+- [P6b] only in port: "11 days ago" <dd>
 - [P6b] only in port: "Okta" <span>
 - [P6b] only in port: "Not present" <span>
 - [P6b] only in port: "+2 Reporting, 1 Not applicable" <button>
 - [P6b] only in port: "Associated devices ( 2 )" <h3>
-- [P6b] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P6b] only in port: "IoT/Printer • Last connected 12d ago" <div>
 - [P6b] only in port: "Risk score 62" <div>
-- [P6b] only in port: "Laptop • Last connected 10d ago" <div>
+- [P6b] only in port: "Laptop • Last connected 11d ago" <div>
 - [P6b] only in port: "Risk score 41" <div>
 - [P6b] only in port: "⚠" <span>
 - [P6b] only in port: "Last login by sources: 26 days ago" <div>
 - [P6b] only in port: "· Reported by EntraID, Active Directory, Okta" <span>
-- [P6b] only in port: "blake@acme.com #140" <span>
 - [P6b] only in port: "Agree 3 sources" <span>
 - [P6b] only in port: "EntraID "department": "sales"" <span>
 - [P6b] only in port: "Active Directory "department": "sales"" <span>
@@ -1145,7 +793,6 @@ Only on one side (NOT FOUND):
 - [P6b] only in port: "—" <span>
 - [P6b] only in port: "—" <span>
 - [P7] only in prototype: "Asset Explorer" <button>
-- [P7] only in prototype: "blake@acme.com" <b>
 - [P7] only in prototype: "37 days ago" <dd>
 - [P7] only in prototype: "All sources reporting" <div>
 - [P7] only in prototype: "See details" <button>
@@ -1154,7 +801,7 @@ Only on one side (NOT FOUND):
 - [P7] only in prototype: "Risk score" <div>
 - [P7] only in prototype: "62" <span>
 - [P7] only in prototype: "Exposure gap: None" <div>
-- [P7] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P7] only in prototype: "Laptop · Last connected Oct 25 9:50 PM" <div>
 - [P7] only in prototype: "Risk score" <div>
 - [P7] only in prototype: "41" <span>
 - [P7] only in prototype: "Exposure gap: None" <div>
@@ -1163,40 +810,37 @@ Only on one side (NOT FOUND):
 - [P7] only in prototype: "Not applicable" <span>
 - [P7] only in port: "Assets" <h1>
 - [P7] only in port: "Assets" <button>
-- [P7] only in port: "blake@acme.com #140" <span>
-- [P7] only in port: "10 days ago" <dd>
+- [P7] only in port: "11 days ago" <dd>
 - [P7] only in port: "Not present" <span>
 - [P7] only in port: "+2 Reporting, 1 Not applicable" <button>
 - [P7] only in port: "Associated devices ( 2 )" <h3>
-- [P7] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P7] only in port: "IoT/Printer • Last connected 12d ago" <div>
 - [P7] only in port: "Risk score 62" <div>
-- [P7] only in port: "Laptop • Last connected 10d ago" <div>
+- [P7] only in port: "Laptop • Last connected 11d ago" <div>
 - [P7] only in port: "Risk score 41" <div>
 - [P7] only in port: "⚠" <span>
 - [P7] only in port: "Okta" <span>
 - [P7] only in port: "Not present" <span>
 - [P7] only in port: "—" <span>
-- [P7] only in port: "10d ago" <span>
-- [P7] only in port: "10d ago" <span>
+- [P7] only in port: "11d ago" <span>
+- [P7] only in port: "11d ago" <span>
 - [P8] only in prototype: "Asset Explorer" <button>
-- [P8] only in prototype: "mab-finley" <b>
 - [P8] only in prototype: "40 days ago" <dd>
 - [P8] only in prototype: "Associated devices (1)" <h2>
-- [P8] only in prototype: "Server · Last connected Oct 18 7:17 AM" <div>
+- [P8] only in prototype: "Server · Last connected Oct 19 1:37 AM" <div>
 - [P8] only in prototype: "Risk score" <div>
 - [P8] only in prototype: "25" <span>
 - [P8] only in prototype: "Exposure gap:" <div>
 - [P8] only in prototype: "Portnox AgentP" <span>
 - [P8] only in port: "Assets" <h1>
 - [P8] only in port: "Assets" <button>
-- [P8] only in port: "mab-finley #144" <span>
 - [P8] only in port: "11 days ago" <dd>
 - [P8] only in port: "EntraID" <span>
 - [P8] only in port: "Not applicable" <span>
 - [P8] only in port: "Associated devices ( 1 )" <h3>
 - [P8] only in port: "Server • Last connected 11d ago" <div>
 - [P8] only in port: "Risk score 25" <div>
-- [P8] only in port: "mab-finley #144" <span>
+- [P8] only in port: "mab-finley" <span>
 - [P8] only in port: "—" <span>
 - [P8] only in port: "—" <span>
 - [P8] only in port: "—" <span>
@@ -1206,10 +850,9 @@ Only on one side (NOT FOUND):
 - [P8] only in port: "—" <span>
 - [P8] only in port: "—" <span>
 - [P9] only in prototype: "Asset Explorer" <button>
-- [P9] only in prototype: "IOT-1049" <b>
 - [P9] only in prototype: "11h ago" <dd>
-- [P9] only in prototype: "Oct 18 11:34 PM" <dd>
-- [P9] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P9] only in prototype: "Oct 19 5:53 PM" <dd>
+- [P9] only in prototype: "1.1.254 — enrolled Aug 29, 2026" <dd>
 - [P9] only in prototype: "(Restrict)" <dd>
 - [P9] only in prototype: "Risk policy" <dt>
 - [P9] only in prototype: "Server_Policy" <i>
@@ -1226,12 +869,11 @@ Only on one side (NOT FOUND):
 - [P9] only in prototype: "IOT-1049" <span>
 - [P9] only in port: "Assets" <h1>
 - [P9] only in port: "Assets" <button>
-- [P9] only in port: "IOT-1049 #148" <span>
-- [P9] only in port: "19d ago" <dd>
-- [P9] only in port: "10d ago" <dd>
+- [P9] only in port: "20d ago" <dd>
+- [P9] only in port: "11d ago" <dd>
 - [P9] only in port: "1.1.254" <dd>
 - [P9] only in port: "All sources reporting" <div>
 - [P9] only in port: "See details" <button>
 
-Counts: OK=3441 | MISMATCH=669 | NOT FOUND=549 | TOTAL=4659
+Counts: OK=3903 | MISMATCH=335 | NOT FOUND=517 | TOTAL=4755
 ```
