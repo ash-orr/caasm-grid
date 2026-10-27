@@ -1,1625 +1,1237 @@
-Scenarios: 4, verified: 1
-Elements: 8, measured: 416, not found: 390
-Counts: OK=20 | MISMATCH=6 | NOT FOUND=390 | TOTAL=416
+# Card typography audit (text-keyed)
 
-| element | property | prototype | port | status |
-| --- | --- | --- | --- | --- |
-| detail summary pill | fontFamily | NOT FOUND | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND |
-| detail summary pill | fontSize | NOT FOUND | 14px | NOT FOUND |
-| detail summary pill | fontWeight | NOT FOUND | 400 | NOT FOUND |
-| detail summary pill | lineHeight | NOT FOUND | 20.3px | NOT FOUND |
-| detail summary pill | letterSpacing | NOT FOUND | normal | NOT FOUND |
-| detail summary pill | color | NOT FOUND | rgb(183, 121, 31) | NOT FOUND |
-| detail summary pill | backgroundColor | NOT FOUND | rgb(251, 241, 220) | NOT FOUND |
-| detail summary pill | paddingTop | NOT FOUND | 0px | NOT FOUND |
-| detail summary pill | paddingRight | NOT FOUND | 0px | NOT FOUND |
-| detail summary pill | paddingBottom | NOT FOUND | 0px | NOT FOUND |
-| detail summary pill | paddingLeft | NOT FOUND | 0px | NOT FOUND |
-| detail summary pill | borderRadius | NOT FOUND | 0px | NOT FOUND |
-| detail summary pill | renderedHeight | NOT FOUND | 17px | NOT FOUND |
-| detail source coverage header | fontFamily | NOT FOUND | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND |
-| detail source coverage header | fontSize | NOT FOUND | 15px | NOT FOUND |
-| detail source coverage header | fontWeight | NOT FOUND | 700 | NOT FOUND |
-| detail source coverage header | lineHeight | NOT FOUND | 21.75px | NOT FOUND |
-| detail source coverage header | letterSpacing | NOT FOUND | normal | NOT FOUND |
-| detail source coverage header | color | NOT FOUND | rgb(20, 33, 43) | NOT FOUND |
-| detail source coverage header | backgroundColor | NOT FOUND | rgba(0, 0, 0, 0) | NOT FOUND |
-| detail source coverage header | paddingTop | NOT FOUND | 0px | NOT FOUND |
-| detail source coverage header | paddingRight | NOT FOUND | 0px | NOT FOUND |
-| detail source coverage header | paddingBottom | NOT FOUND | 0px | NOT FOUND |
-| detail source coverage header | paddingLeft | NOT FOUND | 0px | NOT FOUND |
-| detail source coverage header | borderRadius | NOT FOUND | 0px | NOT FOUND |
-| detail source coverage header | renderedHeight | NOT FOUND | 21.8px | NOT FOUND |
-| detail overview lead | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
-| detail overview lead | fontSize | 14px | 13px | MISMATCH |
-| detail overview lead | fontWeight | 400 | 400 | OK |
-| detail overview lead | lineHeight | 20.3px | 18.85px | MISMATCH |
-| detail overview lead | letterSpacing | normal | normal | OK |
-| detail overview lead | color | rgb(20, 33, 43) | rgb(93, 107, 120) | MISMATCH |
-| detail overview lead | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
-| detail overview lead | paddingTop | 0px | 0px | OK |
-| detail overview lead | paddingRight | 0px | 0px | OK |
-| detail overview lead | paddingBottom | 0px | 0px | OK |
-| detail overview lead | paddingLeft | 0px | 0px | OK |
-| detail overview lead | borderRadius | 0px | 0px | OK |
-| detail overview lead | renderedHeight | 1046.7px | 18.8px | MISMATCH |
-| detail agreement header | fontFamily | NOT FOUND | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND |
-| detail agreement header | fontSize | NOT FOUND | 12px | NOT FOUND |
-| detail agreement header | fontWeight | NOT FOUND | 600 | NOT FOUND |
-| detail agreement header | lineHeight | NOT FOUND | 17.4px | NOT FOUND |
-| detail agreement header | letterSpacing | NOT FOUND | 0.48px | NOT FOUND |
-| detail agreement header | color | NOT FOUND | rgb(93, 107, 120) | NOT FOUND |
-| detail agreement header | backgroundColor | NOT FOUND | rgba(0, 0, 0, 0) | NOT FOUND |
-| detail agreement header | paddingTop | NOT FOUND | 0px | NOT FOUND |
-| detail agreement header | paddingRight | NOT FOUND | 0px | NOT FOUND |
-| detail agreement header | paddingBottom | NOT FOUND | 0px | NOT FOUND |
-| detail agreement header | paddingLeft | NOT FOUND | 0px | NOT FOUND |
-| detail agreement header | borderRadius | NOT FOUND | 0px | NOT FOUND |
-| detail agreement header | renderedHeight | NOT FOUND | 17.4px | NOT FOUND |
-| detail raw values toggle | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | OK |
-| detail raw values toggle | fontSize | 12.5px | 13px | OK |
-| detail raw values toggle | fontWeight | 400 | 400 | OK |
-| detail raw values toggle | lineHeight | 18.125px | 18.85px | MISMATCH |
-| detail raw values toggle | letterSpacing | normal | normal | OK |
-| detail raw values toggle | color | rgb(11, 110, 138) | rgb(11, 110, 138) | OK |
-| detail raw values toggle | backgroundColor | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | OK |
-| detail raw values toggle | paddingTop | 0px | 0px | OK |
-| detail raw values toggle | paddingRight | 0px | 0px | OK |
-| detail raw values toggle | paddingBottom | 0px | 0px | OK |
-| detail raw values toggle | paddingLeft | 0px | 0px | OK |
-| detail raw values toggle | borderRadius | 0px | 0px | OK |
-| detail raw values toggle | renderedHeight | 18.1px | 18.8px | MISMATCH |
-| detail source coverage search | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontFamily | "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontSize | 13px | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontWeight | 400 | NOT FOUND | NOT FOUND |
-| detail source coverage time | lineHeight | 18.85px | NOT FOUND | NOT FOUND |
-| detail source coverage time | letterSpacing | normal | NOT FOUND | NOT FOUND |
-| detail source coverage time | color | rgb(93, 107, 120) | NOT FOUND | NOT FOUND |
-| detail source coverage time | backgroundColor | rgba(0, 0, 0, 0) | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingTop | 0px | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingRight | 0px | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingBottom | 0px | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingLeft | 0px | NOT FOUND | NOT FOUND |
-| detail source coverage time | borderRadius | 0px | NOT FOUND | NOT FOUND |
-| detail source coverage time | renderedHeight | 18.8px | NOT FOUND | NOT FOUND |
-| detail summary pill | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail summary pill | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail overview lead | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail agreement header | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail raw values toggle | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage search | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage source row | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontFamily | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontSize | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | fontWeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | lineHeight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | letterSpacing | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | color | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | backgroundColor | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingTop | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingRight | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingBottom | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | paddingLeft | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | borderRadius | NOT FOUND | NOT FOUND | NOT FOUND |
-| detail source coverage time | renderedHeight | NOT FOUND | NOT FOUND | NOT FOUND |
+```
+States: 10, verified: 10
+Compared keys per state:
+  P1: 113 prototype keys, 112 port keys (cut: 4 prototype, 3 port)
+  P2: 72 prototype keys, 60 port keys
+  P3: 117 prototype keys, 117 port keys (cut: 4 prototype, 4 port)
+  P4: 107 prototype keys, 108 port keys
+  P5: 111 prototype keys, 111 port keys (cut: 1 prototype, 1 port)
+  P6: 54 prototype keys, 55 port keys
+  P6b: 56 prototype keys, 58 port keys
+  P7: 39 prototype keys, 39 port keys
+  P8: 49 prototype keys, 58 port keys
+  P9: 54 prototype keys, 43 port keys
 
-## SCENARIO FAILED
-SCENARIO FAILED: device exposure coverage: active tab mismatch: expected Exposure coverage but found Overview
-SCENARIO FAILED: account overview: active tab mismatch: expected Overview but found Overview⚠
-SCENARIO FAILED: account exposure coverage: active tab mismatch: expected Exposure coverage but found Overview
+MISMATCH rows (grouped by property):
+## fontSize (219)
+- [P1] "/ /" <div>: prototype 14px | port 13px
+- [P1] "Devices" <span>: prototype 14px | port 13px
+- [P1] "55" <dd>: prototype 12px | port 13px
+- [P1] "Stale" <span>: prototype 12px | port 13px
+- [P1] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P1] "Hostname" <span>: prototype 14px | port 13px
+- [P1] "Device type" <span>: prototype 14px | port 13px
+- [P1] "IoT/Printer" <span>: prototype 14px | port 13px
+- [P1] "Vendor" <span>: prototype 14px | port 13px
+- [P1] "Zebra" <span>: prototype 14px | port 13px
+- [P1] "Device model" <span>: prototype 14px | port 13px
+- [P1] "ZT411" <span>: prototype 14px | port 13px
+- [P1] "OS" <span>: prototype 14px | port 13px
+- [P1] "Firmware 4.2" <span>: prototype 14px | port 13px
+- [P1] "OS version" <span>: prototype 14px | port 13px
+- [P1] "12.1.472" <span>: prototype 14px | port 13px
+- [P1] "Conflict" <span>: prototype 12px | port 13px
+- [P1] "View raw values" <button>: prototype 12.5px | port 13px
+- [P1] "Location" <span>: prototype 14px | port 13px
+- [P1] "Singapore" <span>: prototype 14px | port 13px
+- [P1] "Motherboard serial number" <span>: prototype 14px | port 13px
+- [P1] "AgentP last reported" <span>: prototype 14px | port 13px
+- [P1] "Last connected to network" <span>: prototype 14px | port 13px
+- [P1] "Last network authentication type" <span>: prototype 14px | port 13px
+- [P1] "Supplicant certificate (EAP-TLS)" <span>: prototype 14px | port 13px
+- [P1] "MAC address" <span>: prototype 14px | port 13px
+- [P1] "Public IP" <span>: prototype 14px | port 13px
+- [P1] "Ethernet IP" <span>: prototype 14px | port 13px
+- [P1] "Network" <span>: prototype 14px | port 13px
+- [P1] "VLAN" <span>: prototype 14px | port 13px
+- [P1] "Port" <span>: prototype 14px | port 13px
+- [P1] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
+- [P1] "Portnox AgentP" <span>: prototype 14px | port 13px
+- [P1] "1.1.254" <dd>: prototype 14px | port 13px
+- [P1] "Device ID" <span>: prototype 14px | port 13px
+- [P2] "/ /" <div>: prototype 14px | port 13px
+- [P2] "Devices" <span>: prototype 14px | port 13px
+- [P2] "55" <dd>: prototype 12px | port 13px
+- [P2] "Active Directory" <span>: prototype 14px | port 13px
+- [P2] "CrowdStrike" <span>: prototype 14px | port 13px
+- [P2] "Portnox AgentP" <span>: prototype 14px | port 13px
+- [P3] "/ /" <div>: prototype 14px | port 13px
+- [P3] "Devices" <span>: prototype 14px | port 13px
+- [P3] "55" <dd>: prototype 12px | port 13px
+- [P3] "Stale" <span>: prototype 12px | port 13px
+- [P3] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P3] "Hostname" <span>: prototype 14px | port 13px
+- [P3] "Device type" <span>: prototype 14px | port 13px
+- [P3] "IoT/Printer" <span>: prototype 14px | port 13px
+- [P3] "Vendor" <span>: prototype 14px | port 13px
+- [P3] "Zebra" <span>: prototype 14px | port 13px
+- [P3] "Device model" <span>: prototype 14px | port 13px
+- [P3] "ZT411" <span>: prototype 14px | port 13px
+- [P3] "OS" <span>: prototype 14px | port 13px
+- [P3] "Firmware 4.2" <span>: prototype 14px | port 13px
+- [P3] "OS version" <span>: prototype 14px | port 13px
+- [P3] "12.1.472" <span>: prototype 14px | port 13px
+- [P3] "Conflict" <span>: prototype 12px | port 13px
+- [P3] "Hide raw values" <button>: prototype 12.5px | port 13px
+- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 12px | port 13px
+- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 12px | port 13px
+- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 12px | port 13px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 12px | port 13px
+- [P3] "Location" <span>: prototype 14px | port 13px
+- [P3] "Singapore" <span>: prototype 14px | port 13px
+- [P3] "Motherboard serial number" <span>: prototype 14px | port 13px
+- [P3] "AgentP last reported" <span>: prototype 14px | port 13px
+- [P3] "Last connected to network" <span>: prototype 14px | port 13px
+- [P3] "Last network authentication type" <span>: prototype 14px | port 13px
+- [P3] "Supplicant certificate (EAP-TLS)" <span>: prototype 14px | port 13px
+- [P3] "MAC address" <span>: prototype 14px | port 13px
+- [P3] "Public IP" <span>: prototype 14px | port 13px
+- [P3] "Ethernet IP" <span>: prototype 14px | port 13px
+- [P3] "Network" <span>: prototype 14px | port 13px
+- [P3] "VLAN" <span>: prototype 14px | port 13px
+- [P3] "Port" <span>: prototype 14px | port 13px
+- [P3] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
+- [P3] "Portnox AgentP" <span>: prototype 14px | port 13px
+- [P3] "1.1.254" <dd>: prototype 14px | port 13px
+- [P3] "Device ID" <span>: prototype 14px | port 13px
+- [P4] "/ /" <div>: prototype 14px | port 13px
+- [P4] "Devices" <span>: prototype 14px | port 13px
+- [P4] "Not available. This device is not covered by Portnox AgentP," <p>: prototype 14px | port 13px
+- [P4] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P4] "Hostname" <span>: prototype 14px | port 13px
+- [P4] "Device type" <span>: prototype 14px | port 13px
+- [P4] "Server" <span>: prototype 14px | port 13px
+- [P4] "Vendor" <span>: prototype 14px | port 13px
+- [P4] "HPE" <span>: prototype 14px | port 13px
+- [P4] "Device model" <span>: prototype 14px | port 13px
+- [P4] "ProLiant DL380" <span>: prototype 14px | port 13px
+- [P4] "OS" <span>: prototype 14px | port 13px
+- [P4] "Ubuntu 22.04" <span>: prototype 14px | port 13px
+- [P4] "OS version" <span>: prototype 14px | port 13px
+- [P4] "18.2.486" <span>: prototype 14px | port 13px
+- [P4] "Conflict" <span>: prototype 12px | port 13px
+- [P4] "View raw values" <button>: prototype 12.5px | port 13px
+- [P4] "Location" <span>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 14px | port 13px
+- [P4] "Motherboard serial number" <span>: prototype 14px | port 13px
+- [P4] "AgentP last reported" <span>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 14px | port 13px
+- [P4] "Last connected to network" <span>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 14px | port 13px
+- [P4] "Stale" <span>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 14px | port 13px
+- [P4] "Last network authentication type" <span>: prototype 14px | port 13px
+- [P4] "—" <span>: prototype 14px | port 13px
+- [P4] "MAC address" <span>: prototype 14px | port 13px
+- [P4] "Public IP" <span>: prototype 14px | port 13px
+- [P4] "Ethernet IP" <span>: prototype 14px | port 13px
+- [P4] "Network" <span>: prototype 14px | port 13px
+- [P4] "VLAN" <span>: prototype 14px | port 13px
+- [P4] "Port" <span>: prototype 14px | port 13px
+- [P4] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
+- [P4] "Portnox AgentP" <span>: prototype 14px | port 13px
+- [P4] "N/A" <span>: prototype 14px | port 13px
+- [P4] "Device ID" <span>: prototype 14px | port 13px
+- [P5] "/ /" <div>: prototype 14px | port 13px
+- [P5] "Devices" <span>: prototype 14px | port 13px
+- [P5] "38" <dd>: prototype 12px | port 13px
+- [P5] "All sources reporting" <div>: prototype 14px | port 13px
+- [P5] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P5] "Hostname" <span>: prototype 14px | port 13px
+- [P5] "Device type" <span>: prototype 14px | port 13px
+- [P5] "Mobile" <span>: prototype 14px | port 13px
+- [P5] "Vendor" <span>: prototype 14px | port 13px
+- [P5] "Google" <span>: prototype 14px | port 13px
+- [P5] "Device model" <span>: prototype 14px | port 13px
+- [P5] "Pixel 8" <span>: prototype 14px | port 13px
+- [P5] "Conflict" <span>: prototype 12px | port 13px
+- [P5] "View raw values" <button>: prototype 12.5px | port 13px
+- [P5] "OS" <span>: prototype 14px | port 13px
+- [P5] "iOS 17" <span>: prototype 14px | port 13px
+- [P5] "OS version" <span>: prototype 14px | port 13px
+- [P5] "20.3.111" <span>: prototype 14px | port 13px
+- [P5] "Location" <span>: prototype 14px | port 13px
+- [P5] "Denver" <span>: prototype 14px | port 13px
+- [P5] "Motherboard serial number" <span>: prototype 14px | port 13px
+- [P5] "AgentP last reported" <span>: prototype 14px | port 13px
+- [P5] "Last connected to network" <span>: prototype 14px | port 13px
+- [P5] "Stale" <span>: prototype 14px | port 13px
+- [P5] "Last network authentication type" <span>: prototype 14px | port 13px
+- [P5] "Username/password (PEAP)" <span>: prototype 14px | port 13px
+- [P5] "MAC address" <span>: prototype 14px | port 13px
+- [P5] "Public IP" <span>: prototype 14px | port 13px
+- [P5] "Ethernet IP" <span>: prototype 14px | port 13px
+- [P5] "Network" <span>: prototype 14px | port 13px
+- [P5] "VLAN" <span>: prototype 14px | port 13px
+- [P5] "Port" <span>: prototype 14px | port 13px
+- [P5] "NAS name (NAS IP)" <span>: prototype 14px | port 13px
+- [P5] "Portnox AgentP" <span>: prototype 14px | port 13px
+- [P5] "1.1.305" <dd>: prototype 14px | port 13px
+- [P5] "Device ID" <span>: prototype 14px | port 13px
+- [P6] "/ /" <div>: prototype 14px | port 13px
+- [P6] "Accounts" <span>: prototype 14px | port 13px
+- [P6] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P6] "Account name" <span>: prototype 14px | port 13px
+- [P6] "Account type" <span>: prototype 14px | port 13px
+- [P6] "LDAP" <span>: prototype 14px | port 13px
+- [P6] "Group" <span>: prototype 14px | port 13px
+- [P6] "Sales" <span>: prototype 14px | port 13px
+- [P6] "Conflict" <span>: prototype 12px | port 13px
+- [P6] "View raw values" <button>: prototype 12.5px | port 13px
+- [P6] "Description" <span>: prototype 14px | port 13px
+- [P6] "—" <span>: prototype 14px | port 13px
+- [P6] "Credentials expire" <span>: prototype 14px | port 13px
+- [P6] "Never" <span>: prototype 14px | port 13px
+- [P6] "Created by" <span>: prototype 14px | port 13px
+- [P6] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 14px | port 13px
+- [P6] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
+- [P6] "No" <span>: prototype 14px | port 13px
+- [P6b] "/ /" <div>: prototype 14px | port 13px
+- [P6b] "Accounts" <span>: prototype 14px | port 13px
+- [P6b] "1 field differs across sources" <span>: prototype 12px | port 14px
+- [P6b] "Account name" <span>: prototype 14px | port 13px
+- [P6b] "Account type" <span>: prototype 14px | port 13px
+- [P6b] "LDAP" <span>: prototype 14px | port 13px
+- [P6b] "Group" <span>: prototype 14px | port 13px
+- [P6b] "Sales" <span>: prototype 14px | port 13px
+- [P6b] "Conflict" <span>: prototype 12px | port 13px
+- [P6b] "Hide raw values" <button>: prototype 12.5px | port 13px
+- [P6b] "Description" <span>: prototype 14px | port 13px
+- [P6b] "—" <span>: prototype 14px | port 13px
+- [P6b] "Credentials expire" <span>: prototype 14px | port 13px
+- [P6b] "Never" <span>: prototype 14px | port 13px
+- [P6b] "Created by" <span>: prototype 14px | port 13px
+- [P6b] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 14px | port 13px
+- [P6b] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
+- [P6b] "No" <span>: prototype 14px | port 13px
+- [P7] "/ /" <div>: prototype 14px | port 13px
+- [P7] "Accounts" <span>: prototype 14px | port 13px
+- [P7] "Active Directory" <span>: prototype 14px | port 13px
+- [P7] "Okta" <span>: prototype 14px | port 13px
+- [P7] "Google Workspace" <span>: prototype 14px | port 13px
+- [P8] "/ /" <div>: prototype 14px | port 13px
+- [P8] "Accounts" <span>: prototype 14px | port 13px
+- [P8] "Account name" <span>: prototype 14px | port 13px
+- [P8] "—" <span>: prototype 14px | port 13px
+- [P8] "Account type" <span>: prototype 14px | port 13px
+- [P8] "MAC-based" <span>: prototype 14px | port 13px
+- [P8] "Group" <span>: prototype 14px | port 13px
+- [P8] "IT Ops" <span>: prototype 14px | port 13px
+- [P8] "Description" <span>: prototype 14px | port 13px
+- [P8] "Contractor access, Q4 project" <span>: prototype 14px | port 13px
+- [P8] "Credentials expire" <span>: prototype 14px | port 13px
+- [P8] "Never" <span>: prototype 14px | port 13px
+- [P8] "Created by" <span>: prototype 14px | port 13px
+- [P8] "MAB authentication" <span>: prototype 14px | port 13px
+- [P8] "Allow devices without AgentP to connect using this account" <span>: prototype 14px | port 13px
+- [P8] "No" <span>: prototype 14px | port 13px
+- [P8] "Total MAC addresses" <span>: prototype 14px | port 13px
+- [P8] "2" <span>: prototype 14px | port 13px
+- [P8] "Total MAC vendors" <span>: prototype 14px | port 13px
+- [P8] "2" <span>: prototype 14px | port 13px
+- [P9] "/ /" <div>: prototype 14px | port 13px
+- [P9] "Devices" <span>: prototype 14px | port 13px
+- [P9] "55" <dd>: prototype 12px | port 13px
+- [P9] "No sources match "zzz"." <p>: prototype 14px | port 13px
+## lineHeight (219)
+- [P1] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P1] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P1] "55" <dd>: prototype 17.4px | port 18.85px
+- [P1] "Stale" <span>: prototype 17.4px | port 18.85px
+- [P1] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P1] "Hostname" <span>: prototype 20.3px | port 18.85px
+- [P1] "Device type" <span>: prototype 20.3px | port 18.85px
+- [P1] "IoT/Printer" <span>: prototype 20.3px | port 18.85px
+- [P1] "Vendor" <span>: prototype 20.3px | port 18.85px
+- [P1] "Zebra" <span>: prototype 20.3px | port 18.85px
+- [P1] "Device model" <span>: prototype 20.3px | port 18.85px
+- [P1] "ZT411" <span>: prototype 20.3px | port 18.85px
+- [P1] "OS" <span>: prototype 20.3px | port 18.85px
+- [P1] "Firmware 4.2" <span>: prototype 20.3px | port 18.85px
+- [P1] "OS version" <span>: prototype 20.3px | port 18.85px
+- [P1] "12.1.472" <span>: prototype 20.3px | port 18.85px
+- [P1] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P1] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P1] "Location" <span>: prototype 20.3px | port 18.85px
+- [P1] "Singapore" <span>: prototype 20.3px | port 18.85px
+- [P1] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
+- [P1] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
+- [P1] "Last connected to network" <span>: prototype 20.3px | port 18.85px
+- [P1] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
+- [P1] "Supplicant certificate (EAP-TLS)" <span>: prototype 20.3px | port 18.85px
+- [P1] "MAC address" <span>: prototype 20.3px | port 18.85px
+- [P1] "Public IP" <span>: prototype 20.3px | port 18.85px
+- [P1] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
+- [P1] "Network" <span>: prototype 20.3px | port 18.85px
+- [P1] "VLAN" <span>: prototype 20.3px | port 18.85px
+- [P1] "Port" <span>: prototype 20.3px | port 18.85px
+- [P1] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
+- [P1] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
+- [P1] "1.1.254" <dd>: prototype 20.3px | port 18.85px
+- [P1] "Device ID" <span>: prototype 20.3px | port 18.85px
+- [P2] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P2] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P2] "55" <dd>: prototype 17.4px | port 18.85px
+- [P2] "Active Directory" <span>: prototype 20.3px | port 18.85px
+- [P2] "CrowdStrike" <span>: prototype 20.3px | port 18.85px
+- [P2] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
+- [P3] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P3] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P3] "55" <dd>: prototype 17.4px | port 18.85px
+- [P3] "Stale" <span>: prototype 17.4px | port 18.85px
+- [P3] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P3] "Hostname" <span>: prototype 20.3px | port 18.85px
+- [P3] "Device type" <span>: prototype 20.3px | port 18.85px
+- [P3] "IoT/Printer" <span>: prototype 20.3px | port 18.85px
+- [P3] "Vendor" <span>: prototype 20.3px | port 18.85px
+- [P3] "Zebra" <span>: prototype 20.3px | port 18.85px
+- [P3] "Device model" <span>: prototype 20.3px | port 18.85px
+- [P3] "ZT411" <span>: prototype 20.3px | port 18.85px
+- [P3] "OS" <span>: prototype 20.3px | port 18.85px
+- [P3] "Firmware 4.2" <span>: prototype 20.3px | port 18.85px
+- [P3] "OS version" <span>: prototype 20.3px | port 18.85px
+- [P3] "12.1.472" <span>: prototype 20.3px | port 18.85px
+- [P3] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P3] "Hide raw values" <button>: prototype 18.125px | port 18.85px
+- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype 20.4px | port 18.85px
+- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype 20.4px | port 18.85px
+- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype 20.4px | port 18.85px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 18.85px
+- [P3] "Location" <span>: prototype 20.3px | port 18.85px
+- [P3] "Singapore" <span>: prototype 20.3px | port 18.85px
+- [P3] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
+- [P3] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
+- [P3] "Last connected to network" <span>: prototype 20.3px | port 18.85px
+- [P3] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
+- [P3] "Supplicant certificate (EAP-TLS)" <span>: prototype 20.3px | port 18.85px
+- [P3] "MAC address" <span>: prototype 20.3px | port 18.85px
+- [P3] "Public IP" <span>: prototype 20.3px | port 18.85px
+- [P3] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
+- [P3] "Network" <span>: prototype 20.3px | port 18.85px
+- [P3] "VLAN" <span>: prototype 20.3px | port 18.85px
+- [P3] "Port" <span>: prototype 20.3px | port 18.85px
+- [P3] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
+- [P3] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
+- [P3] "1.1.254" <dd>: prototype 20.3px | port 18.85px
+- [P3] "Device ID" <span>: prototype 20.3px | port 18.85px
+- [P4] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P4] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P4] "Not available. This device is not covered by Portnox AgentP," <p>: prototype 20.3px | port 18.85px
+- [P4] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P4] "Hostname" <span>: prototype 20.3px | port 18.85px
+- [P4] "Device type" <span>: prototype 20.3px | port 18.85px
+- [P4] "Server" <span>: prototype 20.3px | port 18.85px
+- [P4] "Vendor" <span>: prototype 20.3px | port 18.85px
+- [P4] "HPE" <span>: prototype 20.3px | port 18.85px
+- [P4] "Device model" <span>: prototype 20.3px | port 18.85px
+- [P4] "ProLiant DL380" <span>: prototype 20.3px | port 18.85px
+- [P4] "OS" <span>: prototype 20.3px | port 18.85px
+- [P4] "Ubuntu 22.04" <span>: prototype 20.3px | port 18.85px
+- [P4] "OS version" <span>: prototype 20.3px | port 18.85px
+- [P4] "18.2.486" <span>: prototype 20.3px | port 18.85px
+- [P4] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P4] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P4] "Location" <span>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 20.3px | port 18.85px
+- [P4] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
+- [P4] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 20.3px | port 18.85px
+- [P4] "Last connected to network" <span>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 20.3px | port 18.85px
+- [P4] "Stale" <span>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 20.3px | port 18.85px
+- [P4] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
+- [P4] "—" <span>: prototype 20.3px | port 18.85px
+- [P4] "MAC address" <span>: prototype 20.3px | port 18.85px
+- [P4] "Public IP" <span>: prototype 20.3px | port 18.85px
+- [P4] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
+- [P4] "Network" <span>: prototype 20.3px | port 18.85px
+- [P4] "VLAN" <span>: prototype 20.3px | port 18.85px
+- [P4] "Port" <span>: prototype 20.3px | port 18.85px
+- [P4] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
+- [P4] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
+- [P4] "N/A" <span>: prototype 20.3px | port 18.85px
+- [P4] "Device ID" <span>: prototype 20.3px | port 18.85px
+- [P5] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P5] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P5] "38" <dd>: prototype 17.4px | port 18.85px
+- [P5] "All sources reporting" <div>: prototype 20.3px | port 18.85px
+- [P5] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P5] "Hostname" <span>: prototype 20.3px | port 18.85px
+- [P5] "Device type" <span>: prototype 20.3px | port 18.85px
+- [P5] "Mobile" <span>: prototype 20.3px | port 18.85px
+- [P5] "Vendor" <span>: prototype 20.3px | port 18.85px
+- [P5] "Google" <span>: prototype 20.3px | port 18.85px
+- [P5] "Device model" <span>: prototype 20.3px | port 18.85px
+- [P5] "Pixel 8" <span>: prototype 20.3px | port 18.85px
+- [P5] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P5] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P5] "OS" <span>: prototype 20.3px | port 18.85px
+- [P5] "iOS 17" <span>: prototype 20.3px | port 18.85px
+- [P5] "OS version" <span>: prototype 20.3px | port 18.85px
+- [P5] "20.3.111" <span>: prototype 20.3px | port 18.85px
+- [P5] "Location" <span>: prototype 20.3px | port 18.85px
+- [P5] "Denver" <span>: prototype 20.3px | port 18.85px
+- [P5] "Motherboard serial number" <span>: prototype 20.3px | port 18.85px
+- [P5] "AgentP last reported" <span>: prototype 20.3px | port 18.85px
+- [P5] "Last connected to network" <span>: prototype 20.3px | port 18.85px
+- [P5] "Stale" <span>: prototype 20.3px | port 18.85px
+- [P5] "Last network authentication type" <span>: prototype 20.3px | port 18.85px
+- [P5] "Username/password (PEAP)" <span>: prototype 20.3px | port 18.85px
+- [P5] "MAC address" <span>: prototype 20.3px | port 18.85px
+- [P5] "Public IP" <span>: prototype 20.3px | port 18.85px
+- [P5] "Ethernet IP" <span>: prototype 20.3px | port 18.85px
+- [P5] "Network" <span>: prototype 20.3px | port 18.85px
+- [P5] "VLAN" <span>: prototype 20.3px | port 18.85px
+- [P5] "Port" <span>: prototype 20.3px | port 18.85px
+- [P5] "NAS name (NAS IP)" <span>: prototype 20.3px | port 18.85px
+- [P5] "Portnox AgentP" <span>: prototype 20.3px | port 18.85px
+- [P5] "1.1.305" <dd>: prototype 20.3px | port 18.85px
+- [P5] "Device ID" <span>: prototype 20.3px | port 18.85px
+- [P6] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P6] "Accounts" <span>: prototype 20.3px | port 18.85px
+- [P6] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P6] "Account name" <span>: prototype 20.3px | port 18.85px
+- [P6] "Account type" <span>: prototype 20.3px | port 18.85px
+- [P6] "LDAP" <span>: prototype 20.3px | port 18.85px
+- [P6] "Group" <span>: prototype 20.3px | port 18.85px
+- [P6] "Sales" <span>: prototype 20.3px | port 18.85px
+- [P6] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P6] "View raw values" <button>: prototype 18.125px | port 18.85px
+- [P6] "Description" <span>: prototype 20.3px | port 18.85px
+- [P6] "—" <span>: prototype 20.3px | port 18.85px
+- [P6] "Credentials expire" <span>: prototype 20.3px | port 18.85px
+- [P6] "Never" <span>: prototype 20.3px | port 18.85px
+- [P6] "Created by" <span>: prototype 20.3px | port 18.85px
+- [P6] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 20.3px | port 18.85px
+- [P6] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
+- [P6] "No" <span>: prototype 20.3px | port 18.85px
+- [P6b] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P6b] "Accounts" <span>: prototype 20.3px | port 18.85px
+- [P6b] "1 field differs across sources" <span>: prototype 17.4px | port 20.3px
+- [P6b] "Account name" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Account type" <span>: prototype 20.3px | port 18.85px
+- [P6b] "LDAP" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Group" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Sales" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Conflict" <span>: prototype 17.4px | port 18.85px
+- [P6b] "Hide raw values" <button>: prototype 18.125px | port 18.85px
+- [P6b] "Description" <span>: prototype 20.3px | port 18.85px
+- [P6b] "—" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Credentials expire" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Never" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Created by" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Portnox admin (dana.whitfield@acme.com)" <span>: prototype 20.3px | port 18.85px
+- [P6b] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
+- [P6b] "No" <span>: prototype 20.3px | port 18.85px
+- [P7] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P7] "Accounts" <span>: prototype 20.3px | port 18.85px
+- [P7] "Active Directory" <span>: prototype 20.3px | port 18.85px
+- [P7] "Okta" <span>: prototype 20.3px | port 18.85px
+- [P7] "Google Workspace" <span>: prototype 20.3px | port 18.85px
+- [P8] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P8] "Accounts" <span>: prototype 20.3px | port 18.85px
+- [P8] "Account name" <span>: prototype 20.3px | port 18.85px
+- [P8] "—" <span>: prototype 20.3px | port 18.85px
+- [P8] "Account type" <span>: prototype 20.3px | port 18.85px
+- [P8] "MAC-based" <span>: prototype 20.3px | port 18.85px
+- [P8] "Group" <span>: prototype 20.3px | port 18.85px
+- [P8] "IT Ops" <span>: prototype 20.3px | port 18.85px
+- [P8] "Description" <span>: prototype 20.3px | port 18.85px
+- [P8] "Contractor access, Q4 project" <span>: prototype 20.3px | port 18.85px
+- [P8] "Credentials expire" <span>: prototype 20.3px | port 18.85px
+- [P8] "Never" <span>: prototype 20.3px | port 18.85px
+- [P8] "Created by" <span>: prototype 20.3px | port 18.85px
+- [P8] "MAB authentication" <span>: prototype 20.3px | port 18.85px
+- [P8] "Allow devices without AgentP to connect using this account" <span>: prototype 20.3px | port 18.85px
+- [P8] "No" <span>: prototype 20.3px | port 18.85px
+- [P8] "Total MAC addresses" <span>: prototype 20.3px | port 18.85px
+- [P8] "2" <span>: prototype 20.3px | port 18.85px
+- [P8] "Total MAC vendors" <span>: prototype 20.3px | port 18.85px
+- [P8] "2" <span>: prototype 20.3px | port 18.85px
+- [P9] "/ /" <div>: prototype 20.3px | port 18.85px
+- [P9] "Devices" <span>: prototype 20.3px | port 18.85px
+- [P9] "55" <dd>: prototype 17.4px | port 18.85px
+- [P9] "No sources match "zzz"." <p>: prototype 20.3px | port 18.85px
+## color (31)
+- [P1] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P1] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
+- [P1] "Stale" <span>: prototype rgb(183, 121, 31) | port rgb(93, 107, 120)
+- [P2] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P2] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
+- [P2] "Active Directory" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P2] "CrowdStrike" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P2] "Portnox AgentP" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P3] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P3] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
+- [P3] "Stale" <span>: prototype rgb(183, 121, 31) | port rgb(93, 107, 120)
+- [P4] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P4] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P4] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P4] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P4] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P5] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P5] "38" <dd>: prototype rgb(31, 138, 91) | port rgb(20, 33, 43)
+- [P5] "All sources reporting" <div>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P6] "Accounts" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P6] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P6b] "Accounts" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P6b] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P7] "Accounts" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P7] "Active Directory" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P7] "Okta" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P7] "Google Workspace" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P8] "Accounts" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P8] "—" <span>: prototype rgb(20, 33, 43) | port rgb(93, 107, 120)
+- [P9] "Devices" <span>: prototype rgb(11, 110, 138) | port rgb(93, 107, 120)
+- [P9] "55" <dd>: prototype rgb(183, 121, 31) | port rgb(20, 33, 43)
+## fontWeight (19)
+- [P1] "55" <dd>: prototype 500 | port 400
+- [P1] "Stale" <span>: prototype 500 | port 400
+- [P1] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P1] "Conflict" <span>: prototype 500 | port 400
+- [P2] "55" <dd>: prototype 500 | port 400
+- [P3] "55" <dd>: prototype 500 | port 400
+- [P3] "Stale" <span>: prototype 500 | port 400
+- [P3] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P3] "Conflict" <span>: prototype 500 | port 400
+- [P4] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P4] "Conflict" <span>: prototype 500 | port 400
+- [P5] "38" <dd>: prototype 500 | port 400
+- [P5] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P5] "Conflict" <span>: prototype 500 | port 400
+- [P6] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P6] "Conflict" <span>: prototype 500 | port 400
+- [P6b] "1 field differs across sources" <span>: prototype 500 | port 400
+- [P6b] "Conflict" <span>: prototype 500 | port 400
+- [P9] "55" <dd>: prototype 500 | port 400
+## fontVariantNumeric (5)
+- [P1] "55" <dd>: prototype tabular-nums | port normal
+- [P2] "55" <dd>: prototype tabular-nums | port normal
+- [P3] "55" <dd>: prototype tabular-nums | port normal
+- [P5] "38" <dd>: prototype tabular-nums | port normal
+- [P9] "55" <dd>: prototype tabular-nums | port normal
+## paddingTop (19)
+- [P1] "55" <dd>: prototype 1px | port undefined
+- [P1] "Stale" <span>: prototype 1px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P1] "Conflict" <span>: prototype 1px | port 0px
+- [P2] "55" <dd>: prototype 1px | port undefined
+- [P3] "55" <dd>: prototype 1px | port undefined
+- [P3] "Stale" <span>: prototype 1px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P3] "Conflict" <span>: prototype 1px | port 0px
+- [P4] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P4] "Conflict" <span>: prototype 1px | port 0px
+- [P5] "38" <dd>: prototype 1px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P5] "Conflict" <span>: prototype 1px | port 0px
+- [P6] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P6] "Conflict" <span>: prototype 1px | port 0px
+- [P6b] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P6b] "Conflict" <span>: prototype 1px | port 0px
+- [P9] "55" <dd>: prototype 1px | port undefined
+## paddingRight (20)
+- [P1] "55" <dd>: prototype 8px | port undefined
+- [P1] "Stale" <span>: prototype 8px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P1] "Conflict" <span>: prototype 8px | port 0px
+- [P2] "55" <dd>: prototype 8px | port undefined
+- [P3] "55" <dd>: prototype 8px | port undefined
+- [P3] "Stale" <span>: prototype 8px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P3] "Conflict" <span>: prototype 8px | port 0px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 6px | port 0px
+- [P4] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P4] "Conflict" <span>: prototype 8px | port 0px
+- [P5] "38" <dd>: prototype 8px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P5] "Conflict" <span>: prototype 8px | port 0px
+- [P6] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P6] "Conflict" <span>: prototype 8px | port 0px
+- [P6b] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P6b] "Conflict" <span>: prototype 8px | port 0px
+- [P9] "55" <dd>: prototype 8px | port undefined
+## paddingBottom (19)
+- [P1] "55" <dd>: prototype 1px | port undefined
+- [P1] "Stale" <span>: prototype 1px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P1] "Conflict" <span>: prototype 1px | port 0px
+- [P2] "55" <dd>: prototype 1px | port undefined
+- [P3] "55" <dd>: prototype 1px | port undefined
+- [P3] "Stale" <span>: prototype 1px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P3] "Conflict" <span>: prototype 1px | port 0px
+- [P4] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P4] "Conflict" <span>: prototype 1px | port 0px
+- [P5] "38" <dd>: prototype 1px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P5] "Conflict" <span>: prototype 1px | port 0px
+- [P6] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P6] "Conflict" <span>: prototype 1px | port 0px
+- [P6b] "1 field differs across sources" <span>: prototype 1px | port 0px
+- [P6b] "Conflict" <span>: prototype 1px | port 0px
+- [P9] "55" <dd>: prototype 1px | port undefined
+## paddingLeft (20)
+- [P1] "55" <dd>: prototype 8px | port undefined
+- [P1] "Stale" <span>: prototype 8px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P1] "Conflict" <span>: prototype 8px | port 0px
+- [P2] "55" <dd>: prototype 8px | port undefined
+- [P3] "55" <dd>: prototype 8px | port undefined
+- [P3] "Stale" <span>: prototype 8px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P3] "Conflict" <span>: prototype 8px | port 0px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 6px | port 4px
+- [P4] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P4] "Conflict" <span>: prototype 8px | port 0px
+- [P5] "38" <dd>: prototype 8px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P5] "Conflict" <span>: prototype 8px | port 0px
+- [P6] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P6] "Conflict" <span>: prototype 8px | port 0px
+- [P6b] "1 field differs across sources" <span>: prototype 8px | port 0px
+- [P6b] "Conflict" <span>: prototype 8px | port 0px
+- [P9] "55" <dd>: prototype 8px | port undefined
+## borderRadius (20)
+- [P1] "55" <dd>: prototype 10px | port undefined
+- [P1] "Stale" <span>: prototype 10px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P1] "Conflict" <span>: prototype 10px | port 0px
+- [P2] "55" <dd>: prototype 10px | port undefined
+- [P3] "55" <dd>: prototype 10px | port undefined
+- [P3] "Stale" <span>: prototype 10px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P3] "Conflict" <span>: prototype 10px | port 0px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 4px | port 0px
+- [P4] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P4] "Conflict" <span>: prototype 10px | port 0px
+- [P5] "38" <dd>: prototype 10px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P5] "Conflict" <span>: prototype 10px | port 0px
+- [P6] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P6] "Conflict" <span>: prototype 10px | port 0px
+- [P6b] "1 field differs across sources" <span>: prototype 10px | port 0px
+- [P6b] "Conflict" <span>: prototype 10px | port 0px
+- [P9] "55" <dd>: prototype 10px | port undefined
+## height (20)
+- [P1] "55" <dd>: prototype 19.4px | port undefined
+- [P1] "Stale" <span>: prototype 19.4px | port undefined
+- [P1] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P1] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P2] "55" <dd>: prototype 19.4px | port undefined
+- [P3] "55" <dd>: prototype 19.4px | port undefined
+- [P3] "Stale" <span>: prototype 19.4px | port undefined
+- [P3] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P3] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype 20.4px | port 18.8px
+- [P4] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P4] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P5] "38" <dd>: prototype 19.4px | port undefined
+- [P5] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P5] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P6] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P6] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P6b] "1 field differs across sources" <span>: prototype 19.4px | port 17px
+- [P6b] "Conflict" <span>: prototype 19.4px | port 18.8px
+- [P9] "55" <dd>: prototype 19.4px | port undefined
+## letterSpacing (27)
+- [P1] "Field" <span>: prototype normal | port 0.48px
+- [P1] "Value" <span>: prototype normal | port 0.48px
+- [P1] "Sources" <span>: prototype normal | port 0.48px
+- [P2] "Source" <span>: prototype normal | port 0.48px
+- [P2] "Status" <span>: prototype normal | port 0.48px
+- [P2] "Last seen" <span>: prototype normal | port 0.48px
+- [P3] "Field" <span>: prototype normal | port 0.48px
+- [P3] "Value" <span>: prototype normal | port 0.48px
+- [P3] "Sources" <span>: prototype normal | port 0.48px
+- [P4] "Field" <span>: prototype normal | port 0.48px
+- [P4] "Value" <span>: prototype normal | port 0.48px
+- [P4] "Sources" <span>: prototype normal | port 0.48px
+- [P5] "Field" <span>: prototype normal | port 0.48px
+- [P5] "Value" <span>: prototype normal | port 0.48px
+- [P5] "Sources" <span>: prototype normal | port 0.48px
+- [P6] "Field" <span>: prototype normal | port 0.48px
+- [P6] "Value" <span>: prototype normal | port 0.48px
+- [P6] "Sources" <span>: prototype normal | port 0.48px
+- [P6b] "Field" <span>: prototype normal | port 0.48px
+- [P6b] "Value" <span>: prototype normal | port 0.48px
+- [P6b] "Sources" <span>: prototype normal | port 0.48px
+- [P7] "Source" <span>: prototype normal | port 0.48px
+- [P7] "Status" <span>: prototype normal | port 0.48px
+- [P7] "Last seen" <span>: prototype normal | port 0.48px
+- [P8] "Field" <span>: prototype normal | port 0.48px
+- [P8] "Value" <span>: prototype normal | port 0.48px
+- [P8] "Sources" <span>: prototype normal | port 0.48px
+## textTransform (27)
+- [P1] "Field" <span>: prototype none | port uppercase
+- [P1] "Value" <span>: prototype none | port uppercase
+- [P1] "Sources" <span>: prototype none | port uppercase
+- [P2] "Source" <span>: prototype none | port uppercase
+- [P2] "Status" <span>: prototype none | port uppercase
+- [P2] "Last seen" <span>: prototype none | port uppercase
+- [P3] "Field" <span>: prototype none | port uppercase
+- [P3] "Value" <span>: prototype none | port uppercase
+- [P3] "Sources" <span>: prototype none | port uppercase
+- [P4] "Field" <span>: prototype none | port uppercase
+- [P4] "Value" <span>: prototype none | port uppercase
+- [P4] "Sources" <span>: prototype none | port uppercase
+- [P5] "Field" <span>: prototype none | port uppercase
+- [P5] "Value" <span>: prototype none | port uppercase
+- [P5] "Sources" <span>: prototype none | port uppercase
+- [P6] "Field" <span>: prototype none | port uppercase
+- [P6] "Value" <span>: prototype none | port uppercase
+- [P6] "Sources" <span>: prototype none | port uppercase
+- [P6b] "Field" <span>: prototype none | port uppercase
+- [P6b] "Value" <span>: prototype none | port uppercase
+- [P6b] "Sources" <span>: prototype none | port uppercase
+- [P7] "Source" <span>: prototype none | port uppercase
+- [P7] "Status" <span>: prototype none | port uppercase
+- [P7] "Last seen" <span>: prototype none | port uppercase
+- [P8] "Field" <span>: prototype none | port uppercase
+- [P8] "Value" <span>: prototype none | port uppercase
+- [P8] "Sources" <span>: prototype none | port uppercase
+## fontFamily (4)
+- [P3] "CrowdStrike "os_version": "12.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
+- [P3] "Portnox AgentP "os_version": "12.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
+- [P3] "Active Directory "operatingSystemVersion": "12.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
+- [P3] "Okta "osVersion": "11.1.472"" <span>: prototype ui-monospace, Menlo, Consolas, monospace | port ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace
 
-## MISMATCH / NOT FOUND rows
-### detail summary pill
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=1 field differs across sources outerHTML=<span class="_detailPillWarn_16vjz_1072">1 field differs across sources</span>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- fontSize: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- fontWeight: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- lineHeight: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- letterSpacing: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- color: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- backgroundColor: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- paddingTop: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- paddingRight: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- paddingBottom: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- paddingLeft: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- borderRadius: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- renderedHeight: NOT FOUND
-  prototype text=Not present outerHTML=<span class="pill p-bad" data-tip="sa|Not present">Not present</span>
-  port text=All sources agree outerHTML=<span class="_detailPillOk_16vjz_1067">All sources agree</span>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-### detail source coverage header
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Exposure gaps outerHTML=<h3 class="_detailCardTitle_16vjz_855">Exposure gaps</h3>
-### detail overview lead
-- fontSize: MISMATCH
-  prototype text=Device detailsTypeIoT/PrinterOSFirmware 4.2LocationSingaporeAgentP last reported11h agoLast connectedOct 18 9:07 PMAuth typeSupplicant certificate (EAP-TLS)Agent version1.1.254 — enrolled Aug 28, 2026 Current risk scoreRisk score55 (Restrict)Risk policyServer_PolicyViolationsApplicationsAdministrator privilegesAccess policyRemediation_VLAN_Policy Exposure gapsOktaStale21d ago+3 Reporting, 2 Not applicable Account assignmentAccountcasey@acme.comAccount typeCloudGroupIT OpsExposure gapNoneDevice(s)1 totalIOT-1049Overview Exposure coverageOn this deviceAlertsZTNA accessConnection historyLast seen by sources5h ago · Most recent: CrowdStrike1 field differs across sourcesFieldValueSourcesHostnameIOT-1049Agree 4 sourcesDevice typeIoT/PrinterVendorZebraAgree 2 sourcesDevice modelZT411Agree 2 sourcesOSFirmware 4.2Agree 4 sourcesOS version12.1.472Conflict CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1.472View raw valuesLocationSingaporeMotherboard serial number9880B0CBAAAgentP last reported11h agoLast connected to networkOct 18 9:07 PMStaleNoLast network authentication typeSupplicant certificate (EAP-TLS)MAC address54:55:EE:35:6D:37Public IP63.87.204.73Ethernet IP10.0.183.14NetworkWiredVLAN110PortGi1/0/29NAS name (NAS IP)SW-DEN-02 (10.20.1.4)Portnox AgentP1.1.254Device ID7f0fa291-74d3-8150-f41ac63f9884 outerHTML=<div class="dv"><div class="rail"><h2>Device details</h2><dl class="kv"><dt>Type</dt><dd>IoT/Printer</dd><dt>OS</dt><dd>Firmware 4.2</dd><dt>Location</dt><dd>Si
-  port text=Last seen by sources: Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last seen by sources: <span class="_detailMuted_16vjz_1046">Reported by CrowdStrike, SentinelOne, Portnox AgentP, Act
-- lineHeight: MISMATCH
-  prototype text=Device detailsTypeIoT/PrinterOSFirmware 4.2LocationSingaporeAgentP last reported11h agoLast connectedOct 18 9:07 PMAuth typeSupplicant certificate (EAP-TLS)Agent version1.1.254 — enrolled Aug 28, 2026 Current risk scoreRisk score55 (Restrict)Risk policyServer_PolicyViolationsApplicationsAdministrator privilegesAccess policyRemediation_VLAN_Policy Exposure gapsOktaStale21d ago+3 Reporting, 2 Not applicable Account assignmentAccountcasey@acme.comAccount typeCloudGroupIT OpsExposure gapNoneDevice(s)1 totalIOT-1049Overview Exposure coverageOn this deviceAlertsZTNA accessConnection historyLast seen by sources5h ago · Most recent: CrowdStrike1 field differs across sourcesFieldValueSourcesHostnameIOT-1049Agree 4 sourcesDevice typeIoT/PrinterVendorZebraAgree 2 sourcesDevice modelZT411Agree 2 sourcesOSFirmware 4.2Agree 4 sourcesOS version12.1.472Conflict CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1.472View raw valuesLocationSingaporeMotherboard serial number9880B0CBAAAgentP last reported11h agoLast connected to networkOct 18 9:07 PMStaleNoLast network authentication typeSupplicant certificate (EAP-TLS)MAC address54:55:EE:35:6D:37Public IP63.87.204.73Ethernet IP10.0.183.14NetworkWiredVLAN110PortGi1/0/29NAS name (NAS IP)SW-DEN-02 (10.20.1.4)Portnox AgentP1.1.254Device ID7f0fa291-74d3-8150-f41ac63f9884 outerHTML=<div class="dv"><div class="rail"><h2>Device details</h2><dl class="kv"><dt>Type</dt><dd>IoT/Printer</dd><dt>OS</dt><dd>Firmware 4.2</dd><dt>Location</dt><dd>Si
-  port text=Last seen by sources: Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last seen by sources: <span class="_detailMuted_16vjz_1046">Reported by CrowdStrike, SentinelOne, Portnox AgentP, Act
-- color: MISMATCH
-  prototype text=Device detailsTypeIoT/PrinterOSFirmware 4.2LocationSingaporeAgentP last reported11h agoLast connectedOct 18 9:07 PMAuth typeSupplicant certificate (EAP-TLS)Agent version1.1.254 — enrolled Aug 28, 2026 Current risk scoreRisk score55 (Restrict)Risk policyServer_PolicyViolationsApplicationsAdministrator privilegesAccess policyRemediation_VLAN_Policy Exposure gapsOktaStale21d ago+3 Reporting, 2 Not applicable Account assignmentAccountcasey@acme.comAccount typeCloudGroupIT OpsExposure gapNoneDevice(s)1 totalIOT-1049Overview Exposure coverageOn this deviceAlertsZTNA accessConnection historyLast seen by sources5h ago · Most recent: CrowdStrike1 field differs across sourcesFieldValueSourcesHostnameIOT-1049Agree 4 sourcesDevice typeIoT/PrinterVendorZebraAgree 2 sourcesDevice modelZT411Agree 2 sourcesOSFirmware 4.2Agree 4 sourcesOS version12.1.472Conflict CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1.472View raw valuesLocationSingaporeMotherboard serial number9880B0CBAAAgentP last reported11h agoLast connected to networkOct 18 9:07 PMStaleNoLast network authentication typeSupplicant certificate (EAP-TLS)MAC address54:55:EE:35:6D:37Public IP63.87.204.73Ethernet IP10.0.183.14NetworkWiredVLAN110PortGi1/0/29NAS name (NAS IP)SW-DEN-02 (10.20.1.4)Portnox AgentP1.1.254Device ID7f0fa291-74d3-8150-f41ac63f9884 outerHTML=<div class="dv"><div class="rail"><h2>Device details</h2><dl class="kv"><dt>Type</dt><dd>IoT/Printer</dd><dt>OS</dt><dd>Firmware 4.2</dd><dt>Location</dt><dd>Si
-  port text=Last seen by sources: Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last seen by sources: <span class="_detailMuted_16vjz_1046">Reported by CrowdStrike, SentinelOne, Portnox AgentP, Act
-- renderedHeight: MISMATCH
-  prototype text=Device detailsTypeIoT/PrinterOSFirmware 4.2LocationSingaporeAgentP last reported11h agoLast connectedOct 18 9:07 PMAuth typeSupplicant certificate (EAP-TLS)Agent version1.1.254 — enrolled Aug 28, 2026 Current risk scoreRisk score55 (Restrict)Risk policyServer_PolicyViolationsApplicationsAdministrator privilegesAccess policyRemediation_VLAN_Policy Exposure gapsOktaStale21d ago+3 Reporting, 2 Not applicable Account assignmentAccountcasey@acme.comAccount typeCloudGroupIT OpsExposure gapNoneDevice(s)1 totalIOT-1049Overview Exposure coverageOn this deviceAlertsZTNA accessConnection historyLast seen by sources5h ago · Most recent: CrowdStrike1 field differs across sourcesFieldValueSourcesHostnameIOT-1049Agree 4 sourcesDevice typeIoT/PrinterVendorZebraAgree 2 sourcesDevice modelZT411Agree 2 sourcesOSFirmware 4.2Agree 4 sourcesOS version12.1.472Conflict CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1.472View raw valuesLocationSingaporeMotherboard serial number9880B0CBAAAgentP last reported11h agoLast connected to networkOct 18 9:07 PMStaleNoLast network authentication typeSupplicant certificate (EAP-TLS)MAC address54:55:EE:35:6D:37Public IP63.87.204.73Ethernet IP10.0.183.14NetworkWiredVLAN110PortGi1/0/29NAS name (NAS IP)SW-DEN-02 (10.20.1.4)Portnox AgentP1.1.254Device ID7f0fa291-74d3-8150-f41ac63f9884 outerHTML=<div class="dv"><div class="rail"><h2>Device details</h2><dl class="kv"><dt>Type</dt><dd>IoT/Printer</dd><dt>OS</dt><dd>Firmware 4.2</dd><dt>Location</dt><dd>Si
-  port text=Last seen by sources: Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last seen by sources: <span class="_detailMuted_16vjz_1046">Reported by CrowdStrike, SentinelOne, Portnox AgentP, Act
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- fontSize: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- fontWeight: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- lineHeight: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- letterSpacing: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- color: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- backgroundColor: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- paddingTop: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- paddingRight: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- paddingBottom: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- paddingLeft: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- borderRadius: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- renderedHeight: NOT FOUND
-  prototype text=Account detailsTypeLDAPGroupExecutiveLast login51 days ago Exposure gapsActive DirectoryNot present+1 Reporting, 1 Not applicable Associated devices (4)SRV-1413Server · Last connected Oct 14 1:35 PMRisk score 22Exposure gap: NoneMB-1168Mobile · Last connected Oct 23 5:33 PMRisk score 3Exposure gap: Google WorkspaceSRV-1896Server · Last connected Oct 22 6:25 PMRisk score 1Exposure gap: NoneMB-1658Mobile · Last connected —Risk score —Exposure gap: Portnox AgentPOverviewExposure coverageAlertsLast login by sources51 days ago · Reported by OktaAll sources agreeFieldValueSourcesAccount nameavery@acme.comAgree 1 sourceAccount typeLDAPGroupExecutiveAgree 1 sourceDescription—Credentials expireNeverCreated byPortnox admin (marcus.lee@acme.com)Allow devices without AgentP to connect using this accountNo outerHTML=<div class="dv"><div class="rail"><h2>Account details</h2><dl class="kv"><dt>Type</dt><dd>LDAP</dd><dt>Group</dt><dd>Executive</dd><dt>Last login</dt><dd>51 day
-  port text=Last login by sources: 40 days ago · Reported by EntraID, Okta outerHTML=<div class="_detailOverviewLead_16vjz_940">Last login by sources: 40 days ago <span class="_detailMuted_16vjz_1046">· Reported by EntraID, Okta</span></div>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-### detail agreement header
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Field outerHTML=<span>Field</span>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Source outerHTML=<span>Source</span>
-### detail raw values toggle
-- lineHeight: MISMATCH
-  prototype text=View raw values outerHTML=<button class="lk" data-rr="ver" aria-expanded="false" style="font-size:12.5px;margin-top:2px">View raw values</button>
-  port text=View raw values outerHTML=<button class="_linkBtn_16vjz_184" type="button" data-rr="osVersion" aria-expanded="false">View raw values</button>
-- renderedHeight: MISMATCH
-  prototype text=View raw values outerHTML=<button class="lk" data-rr="ver" aria-expanded="false" style="font-size:12.5px;margin-top:2px">View raw values</button>
-  port text=View raw values outerHTML=<button class="_linkBtn_16vjz_184" type="button" data-rr="osVersion" aria-expanded="false">View raw values</button>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-### detail source coverage search
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- fontSize: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- fontWeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- lineHeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- letterSpacing: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- color: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- backgroundColor: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingTop: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingRight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingBottom: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingLeft: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- borderRadius: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- renderedHeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- fontSize: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- fontWeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- lineHeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- letterSpacing: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- color: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- backgroundColor: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingTop: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingRight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingBottom: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- paddingLeft: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- borderRadius: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-- renderedHeight: NOT FOUND
-  prototype text= outerHTML=<input type="search" id="covq" placeholder="Find a source" aria-label="Find a source" value="" oninput="covFind(this.value)">
-  port text= outerHTML=<input aria-label="Find a source" placeholder="Find a source" type="search" value="">
-### detail source coverage source row
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=Active Directory outerHTML=<dt class="_sourceName_16vjz_1096" data-testid="source-coverage-source"><span class="_sourceNameValue_16vjz_1104">Active Directory</span></dt>
-### detail source coverage time
-- fontFamily: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=21d ago outerHTML=<span style="color:var(--mute)">21d ago</span>
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontFamily: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontSize: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- fontWeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- lineHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- letterSpacing: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- color: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- backgroundColor: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingTop: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingRight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingBottom: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- paddingLeft: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- borderRadius: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
-- renderedHeight: NOT FOUND
-  prototype text=null outerHTML=
-  port text=null outerHTML=
+Only on one side (NOT FOUND):
+- [P1] only in prototype: "Asset Explorer" <button>
+- [P1] only in prototype: "IOT-1049" <b>
+- [P1] only in prototype: "11h ago" <dd>
+- [P1] only in prototype: "Oct 18 11:33 PM" <dd>
+- [P1] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P1] only in prototype: "(Restrict)" <dd>
+- [P1] only in prototype: "Risk policy" <dt>
+- [P1] only in prototype: "Server_Policy" <i>
+- [P1] only in prototype: "Access policy" <dt>
+- [P1] only in prototype: "Remediation_VLAN_Policy" <dd>
+- [P1] only in prototype: "Okta" <dt>
+- [P1] only in prototype: "21d ago" <span>
+- [P1] only in prototype: "+3 Reporting, 2 Not applicable" <button>
+- [P1] only in prototype: "Exposure gap" <dt>
+- [P1] only in prototype: "None" <dd>
+- [P1] only in prototype: "Device(s)" <dt>
+- [P1] only in prototype: "1 total" <dd>
+- [P1] only in prototype: "IOT-1049" <span>
+- [P1] only in prototype: "Last seen by sources" <span>
+- [P1] only in prototype: "5h ago" <div>
+- [P1] only in prototype: "· Most recent: CrowdStrike" <span>
+- [P1] only in prototype: "IOT-1049" <div>
+- [P1] only in prototype: "Agree" <span>
+- [P1] only in prototype: "4 sources" <div>
+- [P1] only in prototype: "Agree" <span>
+- [P1] only in prototype: "2 sources" <div>
+- [P1] only in prototype: "Agree" <span>
+- [P1] only in prototype: "2 sources" <div>
+- [P1] only in prototype: "Agree" <span>
+- [P1] only in prototype: "4 sources" <div>
+- [P1] only in prototype: "CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1" <div>
+- [P1] only in prototype: "9880B0CBAA" <div>
+- [P1] only in prototype: "11h ago" <div>
+- [P1] only in prototype: "Oct 18 11:33 PM" <div>
+- [P1] only in prototype: "Stale" <span>
+- [P1] only in prototype: "No" <div>
+- [P1] only in prototype: "54:55:EE:35:6D:37" <div>
+- [P1] only in prototype: "63.87.204.73" <div>
+- [P1] only in prototype: "10.0.183.14" <div>
+- [P1] only in prototype: "Wired" <div>
+- [P1] only in port: "Assets" <h1>
+- [P1] only in port: "Assets" <button>
+- [P1] only in port: "IOT-1049 #148" <span>
+- [P1] only in port: "19d ago" <dd>
+- [P1] only in port: "10d ago" <dd>
+- [P1] only in port: "All sources reporting" <div>
+- [P1] only in port: "See details" <button>
+- [P1] only in port: "Last seen by sources:" <div>
+- [P1] only in port: "Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory" <span>
+- [P1] only in port: "IOT-1049 #148" <span>
+- [P1] only in port: "Agree 5 sources" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "Agree 2 sources" <span>
+- [P1] only in port: "Agree 2 sources" <span>
+- [P1] only in port: "Agree 5 sources" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "19d ago" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "10d ago" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "Yes" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "SIN-CORP-01 (10.20.1.4)" <span>
+- [P1] only in port: "—" <span>
+- [P1] only in port: "1.1.254" <span>
+- [P2] only in prototype: "Asset Explorer" <button>
+- [P2] only in prototype: "IOT-1049" <b>
+- [P2] only in prototype: "11h ago" <dd>
+- [P2] only in prototype: "Oct 18 11:33 PM" <dd>
+- [P2] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P2] only in prototype: "(Restrict)" <dd>
+- [P2] only in prototype: "Risk policy" <dt>
+- [P2] only in prototype: "Server_Policy" <i>
+- [P2] only in prototype: "Access policy" <dt>
+- [P2] only in prototype: "Remediation_VLAN_Policy" <dd>
+- [P2] only in prototype: "Stale" <span>
+- [P2] only in prototype: "21d ago" <span>
+- [P2] only in prototype: "+3 Reporting, 2 Not applicable" <button>
+- [P2] only in prototype: "Exposure gap" <dt>
+- [P2] only in prototype: "None" <dd>
+- [P2] only in prototype: "Device(s)" <dt>
+- [P2] only in prototype: "1 total" <dd>
+- [P2] only in prototype: "IOT-1049" <span>
+- [P2] only in prototype: "Okta" <span>
+- [P2] only in prototype: "Stale" <span>
+- [P2] only in prototype: "21d ago" <div>
+- [P2] only in prototype: "6h ago" <div>
+- [P2] only in prototype: "5h ago" <div>
+- [P2] only in prototype: "6h ago" <div>
+- [P2] only in prototype: "Google Workspace" <span>
+- [P2] only in prototype: "Not applicable" <span>
+- [P2] only in prototype: "Intune" <span>
+- [P2] only in prototype: "Not applicable" <span>
+- [P2] only in port: "Assets" <h1>
+- [P2] only in port: "Assets" <button>
+- [P2] only in port: "IOT-1049 #148" <span>
+- [P2] only in port: "19d ago" <dd>
+- [P2] only in port: "10d ago" <dd>
+- [P2] only in port: "1.1.254" <dd>
+- [P2] only in port: "All sources reporting" <div>
+- [P2] only in port: "See details" <button>
+- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "Reporting" <span>
+- [P2] only in port: "10d ago" <span>
+- [P2] only in port: "SentinelOne" <span>
+- [P2] only in port: "Reporting" <span>
+- [P2] only in port: "10d ago" <span>
+- [P3] only in prototype: "Asset Explorer" <button>
+- [P3] only in prototype: "IOT-1049" <b>
+- [P3] only in prototype: "11h ago" <dd>
+- [P3] only in prototype: "Oct 18 11:33 PM" <dd>
+- [P3] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P3] only in prototype: "(Restrict)" <dd>
+- [P3] only in prototype: "Risk policy" <dt>
+- [P3] only in prototype: "Server_Policy" <i>
+- [P3] only in prototype: "Access policy" <dt>
+- [P3] only in prototype: "Remediation_VLAN_Policy" <dd>
+- [P3] only in prototype: "Okta" <dt>
+- [P3] only in prototype: "21d ago" <span>
+- [P3] only in prototype: "+3 Reporting, 2 Not applicable" <button>
+- [P3] only in prototype: "Exposure gap" <dt>
+- [P3] only in prototype: "None" <dd>
+- [P3] only in prototype: "Device(s)" <dt>
+- [P3] only in prototype: "1 total" <dd>
+- [P3] only in prototype: "IOT-1049" <span>
+- [P3] only in prototype: "Last seen by sources" <span>
+- [P3] only in prototype: "5h ago" <div>
+- [P3] only in prototype: "· Most recent: CrowdStrike" <span>
+- [P3] only in prototype: "IOT-1049" <div>
+- [P3] only in prototype: "Agree" <span>
+- [P3] only in prototype: "4 sources" <div>
+- [P3] only in prototype: "Agree" <span>
+- [P3] only in prototype: "2 sources" <div>
+- [P3] only in prototype: "Agree" <span>
+- [P3] only in prototype: "2 sources" <div>
+- [P3] only in prototype: "Agree" <span>
+- [P3] only in prototype: "4 sources" <div>
+- [P3] only in prototype: "CrowdStrike, Portnox AgentP, Active Directory → 12.1.472 · Okta → 11.1" <div>
+- [P3] only in prototype: "9880B0CBAA" <div>
+- [P3] only in prototype: "11h ago" <div>
+- [P3] only in prototype: "Oct 18 11:33 PM" <div>
+- [P3] only in prototype: "Stale" <span>
+- [P3] only in prototype: "No" <div>
+- [P3] only in prototype: "54:55:EE:35:6D:37" <div>
+- [P3] only in prototype: "63.87.204.73" <div>
+- [P3] only in prototype: "10.0.183.14" <div>
+- [P3] only in prototype: "Wired" <div>
+- [P3] only in port: "Assets" <h1>
+- [P3] only in port: "Assets" <button>
+- [P3] only in port: "IOT-1049 #148" <span>
+- [P3] only in port: "19d ago" <dd>
+- [P3] only in port: "10d ago" <dd>
+- [P3] only in port: "All sources reporting" <div>
+- [P3] only in port: "See details" <button>
+- [P3] only in port: "Last seen by sources:" <div>
+- [P3] only in port: "Reported by CrowdStrike, SentinelOne, Portnox AgentP, Active Directory" <span>
+- [P3] only in port: "IOT-1049 #148" <span>
+- [P3] only in port: "Agree 5 sources" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "Agree 2 sources" <span>
+- [P3] only in port: "Agree 2 sources" <span>
+- [P3] only in port: "Agree 5 sources" <span>
+- [P3] only in port: "SentinelOne "osRevision": "12.1.472"" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "19d ago" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "10d ago" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "Yes" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "—" <span>
+- [P3] only in port: "SIN-CORP-01 (10.20.1.4)" <span>
+- [P3] only in port: "—" <span>
+- [P4] only in prototype: "Asset Explorer" <button>
+- [P4] only in prototype: "SRV-1028" <b>
+- [P4] only in prototype: "+3 Reporting, 2 Not applicable" <button>
+- [P4] only in prototype: "Exposure gap" <dt>
+- [P4] only in prototype: "None" <dd>
+- [P4] only in prototype: "Device(s)" <dt>
+- [P4] only in prototype: "5 total" <dd>
+- [P4] only in prototype: "DT-1021" <button>
+- [P4] only in prototype: "SRV-1028" <span>
+- [P4] only in prototype: "LT-1518" <button>
+- [P4] only in prototype: "LT-1525" <button>
+- [P4] only in prototype: "IOT-1532" <button>
+- [P4] only in prototype: "Last seen by sources" <span>
+- [P4] only in prototype: "Just now" <div>
+- [P4] only in prototype: "· Most recent: CrowdStrike" <span>
+- [P4] only in prototype: "SRV-1028" <div>
+- [P4] only in prototype: "Agree" <span>
+- [P4] only in prototype: "3 sources" <div>
+- [P4] only in prototype: "Agree" <span>
+- [P4] only in prototype: "1 source" <div>
+- [P4] only in prototype: "Agree" <span>
+- [P4] only in prototype: "1 source" <div>
+- [P4] only in prototype: "Agree" <span>
+- [P4] only in prototype: "3 sources" <div>
+- [P4] only in prototype: "CrowdStrike, Active Directory → 18.2.486 · Okta → 17.2.486" <div>
+- [P4] only in prototype: "04A213942A" <div>
+- [P4] only in prototype: "C1:B7:5B:8A:C7:A8" <div>
+- [P4] only in prototype: "130.162.102.22" <div>
+- [P4] only in prototype: "10.5.139.188" <div>
+- [P4] only in prototype: "Wired" <div>
+- [P4] only in prototype: "10" <div>
+- [P4] only in prototype: "Gi1/0/43" <div>
+- [P4] only in prototype: "SW-AUS-03 (10.50.1.3)" <div>
+- [P4] only in prototype: "aa9c7fa2-4586-c66d-0f75e13fa769" <div>
+- [P4] only in port: "Assets" <h1>
+- [P4] only in port: "Assets" <button>
+- [P4] only in port: "SRV-1028 #145" <span>
+- [P4] only in port: "+4 Reporting, 6 Not applicable" <button>
+- [P4] only in port: "⚠" <span>
+- [P4] only in port: "Last seen by sources:" <div>
+- [P4] only in port: "Reported by CrowdStrike, SentinelOne, Active Directory, Okta" <span>
+- [P4] only in port: "SRV-1028 #145" <span>
+- [P4] only in port: "Agree 4 sources" <span>
+- [P4] only in port: "Agree 1 source" <span>
+- [P4] only in port: "Agree 1 source" <span>
+- [P4] only in port: "Agree 4 sources" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "DEN-CORE-01 (10.50.1.3)" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "—" <span>
+- [P4] only in port: "145" <span>
+- [P4] only in port: "—" <span>
+- [P5] only in prototype: "Asset Explorer" <button>
+- [P5] only in prototype: "MB-1042" <b>
+- [P5] only in prototype: "13h ago" <dd>
+- [P5] only in prototype: "Oct 18 5:21 AM" <dd>
+- [P5] only in prototype: "1.1.305 — enrolled Jul 12, 2026" <dd>
+- [P5] only in prototype: "(Allow)" <dd>
+- [P5] only in prototype: "Risk policy" <dt>
+- [P5] only in prototype: "IoT_Policy" <i>
+- [P5] only in prototype: "Access policy" <dt>
+- [P5] only in prototype: "Onsite_Office_Policy" <dd>
+- [P5] only in prototype: "Exposure gap" <dt>
+- [P5] only in prototype: "None" <dd>
+- [P5] only in prototype: "Device(s)" <dt>
+- [P5] only in prototype: "2 total" <dd>
+- [P5] only in prototype: "MB-1042" <span>
+- [P5] only in prototype: "IOT-1406" <button>
+- [P5] only in prototype: "Last seen by sources" <span>
+- [P5] only in prototype: "Just now" <div>
+- [P5] only in prototype: "· Most recent: Google Workspace" <span>
+- [P5] only in prototype: "MB-1042" <div>
+- [P5] only in prototype: "Agree" <span>
+- [P5] only in prototype: "6 sources" <div>
+- [P5] only in prototype: "Agree" <span>
+- [P5] only in prototype: "4 sources" <div>
+- [P5] only in prototype: "CrowdStrike, Intune, Portnox AgentP → Pixel 8 · Google Workspace → Pix" <div>
+- [P5] only in prototype: "Agree" <span>
+- [P5] only in prototype: "6 sources" <div>
+- [P5] only in prototype: "Agree" <span>
+- [P5] only in prototype: "6 sources" <div>
+- [P5] only in prototype: "CAA01875FA" <div>
+- [P5] only in prototype: "13h ago" <div>
+- [P5] only in prototype: "Oct 18 5:21 AM" <div>
+- [P5] only in prototype: "No" <div>
+- [P5] only in prototype: "59:35:C5:E3:11:FF" <div>
+- [P5] only in prototype: "126.137.218.211" <div>
+- [P5] only in prototype: "10.39.225.53" <div>
+- [P5] only in prototype: "Wi-Fi (Acme-Secure)" <div>
+- [P5] only in prototype: "10" <div>
+- [P5] only in prototype: "N/A" <div>
+- [P5] only in prototype: "WLC-AUS-01 (10.50.1.3)" <div>
+- [P5] only in port: "Assets" <h1>
+- [P5] only in port: "Assets" <button>
+- [P5] only in port: "MB-1042 #147" <span>
+- [P5] only in port: "12d ago" <dd>
+- [P5] only in port: "11d ago" <dd>
+- [P5] only in port: "Last seen by sources:" <div>
+- [P5] only in port: "Reported by CrowdStrike, SentinelOne, Intune, Portnox AgentP, EntraID," <span>
+- [P5] only in port: "MB-1042 #147" <span>
+- [P5] only in port: "Agree 8 sources" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "Agree 4 sources" <span>
+- [P5] only in port: "Agree 8 sources" <span>
+- [P5] only in port: "Agree 8 sources" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "12d ago" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "11d ago" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "Yes" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "SIN-CORP-01 (10.50.1.3)" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "1.1.305" <span>
+- [P5] only in port: "—" <span>
+- [P5] only in port: "147" <span>
+- [P6] only in prototype: "Asset Explorer" <button>
+- [P6] only in prototype: "blake@acme.com" <b>
+- [P6] only in prototype: "37 days ago" <dd>
+- [P6] only in prototype: "All sources reporting" <div>
+- [P6] only in prototype: "See details" <button>
+- [P6] only in prototype: "Associated devices (2)" <h2>
+- [P6] only in prototype: "IoT/Printer · Last connected 21h ago" <div>
+- [P6] only in prototype: "Risk score" <div>
+- [P6] only in prototype: "62" <span>
+- [P6] only in prototype: "Exposure gap: None" <div>
+- [P6] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P6] only in prototype: "Risk score" <div>
+- [P6] only in prototype: "41" <span>
+- [P6] only in prototype: "Exposure gap: None" <div>
+- [P6] only in prototype: "Last login by sources" <span>
+- [P6] only in prototype: "37 days ago" <div>
+- [P6] only in prototype: "· Reported by Active Directory, Okta" <span>
+- [P6] only in prototype: "blake@acme.com" <div>
+- [P6] only in prototype: "Agree" <span>
+- [P6] only in prototype: "2 sources" <div>
+- [P6] only in prototype: "Active Directory → Sales · Okta → Marketing" <div>
+- [P6] only in port: "Assets" <h1>
+- [P6] only in port: "Assets" <button>
+- [P6] only in port: "blake@acme.com #140" <span>
+- [P6] only in port: "10 days ago" <dd>
+- [P6] only in port: "Okta" <span>
+- [P6] only in port: "Not present" <span>
+- [P6] only in port: "+2 Reporting, 1 Not applicable" <button>
+- [P6] only in port: "Associated devices ( 2 )" <h3>
+- [P6] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P6] only in port: "Risk score 62" <div>
+- [P6] only in port: "Laptop • Last connected 10d ago" <div>
+- [P6] only in port: "Risk score 41" <div>
+- [P6] only in port: "⚠" <span>
+- [P6] only in port: "Last login by sources: 26 days ago" <div>
+- [P6] only in port: "· Reported by EntraID, Active Directory, Okta" <span>
+- [P6] only in port: "blake@acme.com #140" <span>
+- [P6] only in port: "Agree 3 sources" <span>
+- [P6] only in port: "—" <span>
+- [P6] only in port: "—" <span>
+- [P6] only in port: "—" <span>
+- [P6] only in port: "—" <span>
+- [P6] only in port: "—" <span>
+- [P6b] only in prototype: "Asset Explorer" <button>
+- [P6b] only in prototype: "blake@acme.com" <b>
+- [P6b] only in prototype: "37 days ago" <dd>
+- [P6b] only in prototype: "All sources reporting" <div>
+- [P6b] only in prototype: "See details" <button>
+- [P6b] only in prototype: "Associated devices (2)" <h2>
+- [P6b] only in prototype: "IoT/Printer · Last connected 21h ago" <div>
+- [P6b] only in prototype: "Risk score" <div>
+- [P6b] only in prototype: "62" <span>
+- [P6b] only in prototype: "Exposure gap: None" <div>
+- [P6b] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P6b] only in prototype: "Risk score" <div>
+- [P6b] only in prototype: "41" <span>
+- [P6b] only in prototype: "Exposure gap: None" <div>
+- [P6b] only in prototype: "Last login by sources" <span>
+- [P6b] only in prototype: "37 days ago" <div>
+- [P6b] only in prototype: "· Reported by Active Directory, Okta" <span>
+- [P6b] only in prototype: "blake@acme.com" <div>
+- [P6b] only in prototype: "Agree" <span>
+- [P6b] only in prototype: "2 sources" <div>
+- [P6b] only in prototype: "Active Directory → Sales · Okta → Marketing" <div>
+- [P6b] only in prototype: "Active Directory "department": "Sales"" <div>
+- [P6b] only in prototype: "Okta "profile.department": "Marketing"" <div>
+- [P6b] only in port: "Assets" <h1>
+- [P6b] only in port: "Assets" <button>
+- [P6b] only in port: "blake@acme.com #140" <span>
+- [P6b] only in port: "10 days ago" <dd>
+- [P6b] only in port: "Okta" <span>
+- [P6b] only in port: "Not present" <span>
+- [P6b] only in port: "+2 Reporting, 1 Not applicable" <button>
+- [P6b] only in port: "Associated devices ( 2 )" <h3>
+- [P6b] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P6b] only in port: "Risk score 62" <div>
+- [P6b] only in port: "Laptop • Last connected 10d ago" <div>
+- [P6b] only in port: "Risk score 41" <div>
+- [P6b] only in port: "⚠" <span>
+- [P6b] only in port: "Last login by sources: 26 days ago" <div>
+- [P6b] only in port: "· Reported by EntraID, Active Directory, Okta" <span>
+- [P6b] only in port: "blake@acme.com #140" <span>
+- [P6b] only in port: "Agree 3 sources" <span>
+- [P6b] only in port: "EntraID "department": "sales"" <span>
+- [P6b] only in port: "Active Directory "department": "sales"" <span>
+- [P6b] only in port: "Okta "profile.department": "marketing"" <span>
+- [P6b] only in port: "—" <span>
+- [P6b] only in port: "—" <span>
+- [P6b] only in port: "—" <span>
+- [P6b] only in port: "—" <span>
+- [P6b] only in port: "—" <span>
+- [P7] only in prototype: "Asset Explorer" <button>
+- [P7] only in prototype: "blake@acme.com" <b>
+- [P7] only in prototype: "37 days ago" <dd>
+- [P7] only in prototype: "All sources reporting" <div>
+- [P7] only in prototype: "See details" <button>
+- [P7] only in prototype: "Associated devices (2)" <h2>
+- [P7] only in prototype: "IoT/Printer · Last connected 21h ago" <div>
+- [P7] only in prototype: "Risk score" <div>
+- [P7] only in prototype: "62" <span>
+- [P7] only in prototype: "Exposure gap: None" <div>
+- [P7] only in prototype: "Laptop · Last connected Oct 25 3:30 AM" <div>
+- [P7] only in prototype: "Risk score" <div>
+- [P7] only in prototype: "41" <span>
+- [P7] only in prototype: "Exposure gap: None" <div>
+- [P7] only in prototype: "12 min ago" <div>
+- [P7] only in prototype: "4 min ago" <div>
+- [P7] only in prototype: "Not applicable" <span>
+- [P7] only in port: "Assets" <h1>
+- [P7] only in port: "Assets" <button>
+- [P7] only in port: "blake@acme.com #140" <span>
+- [P7] only in port: "10 days ago" <dd>
+- [P7] only in port: "Not present" <span>
+- [P7] only in port: "+2 Reporting, 1 Not applicable" <button>
+- [P7] only in port: "Associated devices ( 2 )" <h3>
+- [P7] only in port: "IoT/Printer • Last connected 11d ago" <div>
+- [P7] only in port: "Risk score 62" <div>
+- [P7] only in port: "Laptop • Last connected 10d ago" <div>
+- [P7] only in port: "Risk score 41" <div>
+- [P7] only in port: "⚠" <span>
+- [P7] only in port: "Okta" <span>
+- [P7] only in port: "Not present" <span>
+- [P7] only in port: "—" <span>
+- [P7] only in port: "10d ago" <span>
+- [P7] only in port: "10d ago" <span>
+- [P8] only in prototype: "Asset Explorer" <button>
+- [P8] only in prototype: "mab-finley" <b>
+- [P8] only in prototype: "40 days ago" <dd>
+- [P8] only in prototype: "Associated devices (1)" <h2>
+- [P8] only in prototype: "Server · Last connected Oct 18 7:17 AM" <div>
+- [P8] only in prototype: "Risk score" <div>
+- [P8] only in prototype: "25" <span>
+- [P8] only in prototype: "Exposure gap:" <div>
+- [P8] only in prototype: "Portnox AgentP" <span>
+- [P8] only in port: "Assets" <h1>
+- [P8] only in port: "Assets" <button>
+- [P8] only in port: "mab-finley #144" <span>
+- [P8] only in port: "11 days ago" <dd>
+- [P8] only in port: "EntraID" <span>
+- [P8] only in port: "Not applicable" <span>
+- [P8] only in port: "Associated devices ( 1 )" <h3>
+- [P8] only in port: "Server • Last connected 11d ago" <div>
+- [P8] only in port: "Risk score 25" <div>
+- [P8] only in port: "mab-finley #144" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P8] only in port: "—" <span>
+- [P9] only in prototype: "Asset Explorer" <button>
+- [P9] only in prototype: "IOT-1049" <b>
+- [P9] only in prototype: "11h ago" <dd>
+- [P9] only in prototype: "Oct 18 11:34 PM" <dd>
+- [P9] only in prototype: "1.1.254 — enrolled Aug 28, 2026" <dd>
+- [P9] only in prototype: "(Restrict)" <dd>
+- [P9] only in prototype: "Risk policy" <dt>
+- [P9] only in prototype: "Server_Policy" <i>
+- [P9] only in prototype: "Access policy" <dt>
+- [P9] only in prototype: "Remediation_VLAN_Policy" <dd>
+- [P9] only in prototype: "Okta" <dt>
+- [P9] only in prototype: "Stale" <span>
+- [P9] only in prototype: "21d ago" <span>
+- [P9] only in prototype: "+3 Reporting, 2 Not applicable" <button>
+- [P9] only in prototype: "Exposure gap" <dt>
+- [P9] only in prototype: "None" <dd>
+- [P9] only in prototype: "Device(s)" <dt>
+- [P9] only in prototype: "1 total" <dd>
+- [P9] only in prototype: "IOT-1049" <span>
+- [P9] only in port: "Assets" <h1>
+- [P9] only in port: "Assets" <button>
+- [P9] only in port: "IOT-1049 #148" <span>
+- [P9] only in port: "19d ago" <dd>
+- [P9] only in port: "10d ago" <dd>
+- [P9] only in port: "1.1.254" <dd>
+- [P9] only in port: "All sources reporting" <div>
+- [P9] only in port: "See details" <button>
+
+Counts: OK=3441 | MISMATCH=669 | NOT FOUND=549 | TOTAL=4659
+```
