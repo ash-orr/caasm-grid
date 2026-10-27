@@ -3,6 +3,8 @@
 node_modules/
 frontend/test-results/
 frontend/playwright-report/
+test-results/
+playwright-report/
 design/screenshots/port/
 design/screenshots/typography-report.json
 design/screenshots/typography-summary.md
