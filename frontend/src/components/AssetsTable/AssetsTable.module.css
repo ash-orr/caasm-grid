@@ -807,6 +807,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 }
 
 .detailPage {
+  --detail-body-size: 14px;
+  --detail-body-line-height: 20.3px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -814,7 +816,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailCrumb {
   color: var(--mute);
-  font-size: 13px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailCrumbCurrent {
@@ -864,7 +867,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   grid-template-columns: 120px 1fr;
   gap: 6px 10px;
   margin: 0;
-  font-size: 13px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailKv dt {
@@ -893,6 +897,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailTabActive {
@@ -939,8 +945,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailOverviewLead {
   color: var(--mute);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
   margin: 0 0 12px;
 }
 
@@ -967,10 +973,11 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailAgreementHeader {
   color: var(--mute);
-  font-size: 12px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .detailAgreementField,
@@ -981,21 +988,21 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailAgreementField {
   color: var(--mute);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailAgreementValue {
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailAgreementSources {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailRawValues {
@@ -1039,15 +1046,15 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailRowLabel {
   color: var(--mute);
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailMuted {
   color: var(--mute);
   margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailPill {

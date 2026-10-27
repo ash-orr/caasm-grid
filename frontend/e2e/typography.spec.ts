@@ -11,6 +11,25 @@ test.describe('Typography parity', () => {
     await expect(page.getByRole('button', { name: 'Manage filters' })).toHaveCSS('font-family', '"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif');
   });
 
+  test('detail page labels use the prototype 14px / 20.3px sizing', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('MB-1126');
+    await expect(page.locator('tbody tr')).toContainText('MB-1126');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'MB-1126' }).first();
+    await row.click();
+
+    const hostnameLabel = page.getByText('Hostname', { exact: true }).first();
+    await expect(hostnameLabel).toHaveCSS('font-size', '14px');
+    await expect(hostnameLabel).toHaveCSS('line-height', '20.3px');
+
+    const typeLabel = page.locator('dt').filter({ hasText: 'Type' }).first();
+    await expect(typeLabel).toHaveCSS('font-size', '14px');
+    await expect(typeLabel).toHaveCSS('line-height', '20.3px');
+  });
+
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {
     await page.goto('/');
 
