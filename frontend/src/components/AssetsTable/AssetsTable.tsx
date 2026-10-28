@@ -1949,7 +1949,7 @@ export function AssetsTable() {
 
               return (
                 <div className={styles.detailAgreementRow} key={row.source}>
-                  <span className={styles.detailAgreementField}>{row.source}</span>
+                  <span className={`${styles.detailAgreementField} ${styles.detailAgreementSourceName}`}>{row.source}</span>
                   <span className={styles.detailAgreementValue}>
                     <StatusPill status={row.status === 'N/A' ? 'N/A' : row.status === 'Not applicable' ? 'N/A' : row.status === 'Pending' ? 'Pending' : row.status === 'Not present' ? 'Not present' : row.status === 'Stale' ? 'Stale' : 'Reporting'} label={row.status === 'N/A' || row.status === 'Not applicable' ? 'Not applicable' : row.status} />
                   </span>

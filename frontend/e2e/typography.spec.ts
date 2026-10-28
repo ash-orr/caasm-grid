@@ -146,6 +146,64 @@ test.describe('Typography parity', () => {
     await expect(associatedScorePill).toHaveCSS('font-variant-numeric', 'tabular-nums');
   });
 
+  test('detail page header rows, source names, breadcrumb links and title weight match the prototype', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const overviewHeader = page.locator('[class*="detailAgreementHeader"]').first().locator('span').filter({ hasText: 'Field' }).first();
+    await expect(overviewHeader).toHaveCSS('font-size', '12px');
+    await expect(overviewHeader).toHaveCSS('line-height', '17.4px');
+
+    const inkColor = await page.locator('[class*="detailCrumbCurrent"]').first().evaluate((element) => getComputedStyle(element).color);
+
+    const exposureCoverageTab = page.getByRole('button', { name: /^Exposure coverage/ }).first();
+    await exposureCoverageTab.click();
+    const coverageHeader = page.locator('span').filter({ hasText: 'Source' }).first();
+    await expect(coverageHeader).toHaveCSS('font-size', '12px');
+
+    const sourceName = page.locator('[class*="detailAgreementField"]').filter({ hasText: 'Active Directory' }).first();
+    await expect(sourceName).toHaveCSS('color', inkColor);
+
+    const accentColor = await page.getByRole('button', { name: 'Assets' }).first().evaluate((element) => getComputedStyle(element).color);
+    const breadcrumbDevices = page.locator('[class*="detailCrumb"]').first().getByText('Devices', { exact: true }).first();
+    await expect(breadcrumbDevices).toHaveCSS('color', accentColor);
+
+    const breadcrumbTitle = page.locator('[class*="detailCrumbCurrent"]').first();
+    await expect(breadcrumbTitle).toHaveCSS('font-weight', '700');
+  });
+
+  test('Exposure gaps card source names stay muted while coverage tab source names stay ink', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('MB-1056');
+    await expect(page.locator('tbody tr')).toContainText('MB-1056');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'MB-1056' }).first();
+    await row.click();
+
+    const typeLabel = page.locator('dt').filter({ hasText: 'Type' }).first();
+    const mutedColor = await typeLabel.evaluate((element) => getComputedStyle(element).color);
+
+    const gapSource = page.locator('[data-testid="source-coverage-source"]').filter({ hasText: 'Jamf' }).first();
+    await expect(gapSource).toHaveCSS('color', mutedColor);
+
+    const hostnameValue = page.locator('[class*="detailAgreementValue"]').filter({ hasText: 'MB-1056' }).first();
+    const inkColor = await hostnameValue.evaluate((element) => getComputedStyle(element).color);
+
+    const exposureCoverageTab = page.getByRole('button', { name: /^Exposure coverage/ }).first();
+    await exposureCoverageTab.click();
+
+    const coverageSource = page.locator('[class*="detailAgreementSourceName"]').filter({ hasText: 'Active Directory' }).first();
+    await expect(coverageSource).toHaveCSS('color', inkColor);
+  });
+
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {
     await page.goto('/');
 

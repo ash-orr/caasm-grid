@@ -849,9 +849,13 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   line-height: var(--detail-left-line-height);
 }
 
+.detailCrumb > span:not(.detailCrumbCurrent) {
+  color: var(--acc);
+}
+
 .detailCrumbCurrent {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .detailLayout {
@@ -1004,8 +1008,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailAgreementHeader {
   color: var(--mute);
-  font-size: var(--detail-body-size);
-  line-height: var(--detail-body-line-height);
+  font-size: 12px;
+  line-height: 17.4px;
   font-weight: 600;
   text-transform: none;
   letter-spacing: normal;
@@ -1021,6 +1025,10 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   color: var(--mute);
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
+}
+
+.detailAgreementSourceName {
+  color: var(--ink);
 }
 
 .detailAgreementValue {
@@ -1133,11 +1141,16 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 }
 
 .sourceName {
-  color: var(--mute);
+  color: var(--ink);
   min-width: 0;
   font-size: 13px;
   line-height: 1.45;
   font-weight: 400;
+}
+
+.detailCard .sourceName,
+.detailCard .sourceNameValue {
+  color: var(--mute);
 }
 
 .sourceNameValue {
@@ -1147,7 +1160,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   text-overflow: ellipsis;
   font-size: 13px;
   line-height: 1.45;
-  color: var(--mute);
+  color: var(--ink);
 }
 
 .sourceValue {
