@@ -11,6 +11,9 @@
   min-width: 34px;
   box-sizing: border-box;
   white-space: nowrap;
+}
+
+.score {
   font-variant-numeric: tabular-nums;
 }
 

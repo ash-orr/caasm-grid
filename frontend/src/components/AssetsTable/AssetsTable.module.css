@@ -1034,6 +1034,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   gap: 6px;
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
+  color: var(--mute);
 }
 
 .detailRawValues {

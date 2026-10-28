@@ -15,7 +15,7 @@ export function renderRiskScorePill(score: number | null): ReactNode {
   const band = riskBand(score);
   const tone = band === 'Blocked' ? statusPillStyles.bad : band === 'Alert' ? statusPillStyles.warn : statusPillStyles.ok;
   return (
-    <span aria-label={`${score} ${band}`} data-testid="risk-pill" className={`${statusPillStyles.pill} ${tone}`}>
+    <span aria-label={`${score} ${band}`} data-testid="risk-pill" className={`${statusPillStyles.pill} ${statusPillStyles.score} ${tone}`}>
       {score}
     </span>
   );

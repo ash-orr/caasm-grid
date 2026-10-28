@@ -58,6 +58,7 @@ test.describe('Typography parity', () => {
     await expect(conflictPill).toHaveCSS('border-radius', '10px');
     await expect(conflictPill).toHaveCSS('padding-top', '1px');
     await expect(conflictPill).toHaveCSS('padding-left', '8px');
+    await expect(conflictPill).toHaveCSS('font-variant-numeric', 'normal');
 
     const summaryPill = page.locator('[aria-label*="field differs across sources"], [aria-label*="fields differ across sources"]').first();
     await expect(summaryPill).toHaveCSS('font-size', '12px');
@@ -73,6 +74,10 @@ test.describe('Typography parity', () => {
     await expect(agreePill).toHaveCSS('padding-top', '1px');
     await expect(agreePill).toHaveCSS('padding-left', '8px');
     await expect(agreePill).toHaveText('Agree');
+
+    const leftColumnColor = await page.locator('dt').filter({ hasText: 'Type' }).first().evaluate((element) => getComputedStyle(element).color);
+    const sourceCountText = page.locator('[class*="detailAgreementSources"]').filter({ hasText: /\d+ sources?/ }).first();
+    await expect(sourceCountText).toHaveCSS('color', leftColumnColor);
   });
 
   test('detail page score and status pills match the prototype on device and account pages', async ({ page }) => {
