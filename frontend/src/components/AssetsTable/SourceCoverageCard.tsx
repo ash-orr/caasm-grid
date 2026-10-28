@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { StatusPill } from '../StatusPill';
 import { Tooltip } from './Tooltip';
 import styles from './AssetsTable.module.css';
 import { formatSourceSyncAge, getExposureGapCardState, type SourceCoverageRow } from './sourceCoverage';
@@ -7,15 +8,17 @@ interface SourceCoverageCardProps {
   rows: SourceCoverageRow[];
 }
 
-function statusClass(status: SourceCoverageRow['status']): string {
-  if (status === 'Reporting') return styles.detailPillOk;
-  if (status === 'Stale') return styles.detailPillWarn;
-  if (status === 'Not present') return styles.detailPillBad;
-  return styles.detailPillNeutral;
+function statusPillStatus(status: SourceCoverageRow['status']): 'Reporting' | 'Stale' | 'Pending' | 'Not present' | 'N/A' {
+  if (status === 'Not applicable') return 'N/A';
+  if (status === 'N/A') return 'N/A';
+  if (status === 'Pending') return 'Pending';
+  if (status === 'Not present') return 'Not present';
+  if (status === 'Stale') return 'Stale';
+  return 'Reporting';
 }
 
 function statusLabel(status: SourceCoverageRow['status']): string {
-  if (status === 'N/A') return 'Not applicable';
+  if (status === 'N/A' || status === 'Not applicable') return 'Not applicable';
   return status;
 }
 
@@ -74,9 +77,7 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
                   <SourceNameCell value={row.source} />
                 </dt>
                 <dd className={styles.sourceValue}>
-                  <span className={`${styles.detailPill} ${statusClass(row.status)}`} data-testid="source-coverage-pill">
-                    {statusLabel(row.status)}
-                  </span>
+                  <StatusPill status={statusPillStatus(row.status)} label={statusLabel(row.status)} dataTestId="source-coverage-pill" />
                   {age ? <span className={styles.detailMuted} data-testid="source-coverage-time">{age}</span> : null}
                 </dd>
               </div>

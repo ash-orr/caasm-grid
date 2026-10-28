@@ -1951,9 +1951,7 @@ export function AssetsTable() {
                 <div className={styles.detailAgreementRow} key={row.source}>
                   <span className={styles.detailAgreementField}>{row.source}</span>
                   <span className={styles.detailAgreementValue}>
-                    <span className={`${styles.detailPill} ${row.status === 'Reporting' ? styles.detailPillOk : row.status === 'Stale' ? styles.detailPillWarn : row.status === 'Not present' ? styles.detailPillBad : styles.detailPillNeutral}`}>
-                      {row.status === 'N/A' ? 'Not applicable' : row.status}
-                    </span>
+                    <StatusPill status={row.status === 'N/A' ? 'N/A' : row.status === 'Not applicable' ? 'N/A' : row.status === 'Pending' ? 'Pending' : row.status === 'Not present' ? 'Not present' : row.status === 'Stale' ? 'Stale' : 'Reporting'} label={row.status === 'N/A' || row.status === 'Not applicable' ? 'Not applicable' : row.status} />
                   </span>
                   <span className={styles.detailAgreementSources}>
                     {lastSeenText || '—'}
@@ -2189,7 +2187,7 @@ export function AssetsTable() {
                 <div className={styles.detailCard}>
                   <h3 className={styles.detailCardTitle}>Current risk score</h3>
                   <dl className={styles.detailKv}>
-                    <dt>Risk score</dt><dd>{deviceRecord.riskScore}</dd>
+                    <dt>Risk score</dt><dd>{renderRiskScorePill(deviceRecord.riskScore)}</dd>
                     <dt>Violations</dt>
                     <dd>
                       {deviceRecord.riskViolations.length > 0 ? (
@@ -2304,7 +2302,7 @@ export function AssetsTable() {
                   <div className={styles.detailAssociatedItem} key={device.id}>
                     <button className={styles.detailLink} onClick={() => openDeviceDetail(device)} type="button">{device.name}</button>
                     <div className={styles.detailAssociatedMeta}>{device.type} • Last connected {formatRelativeTime(device.lastConnectedAt)}</div>
-                    <div className={styles.detailAssociatedMeta}>Risk score {device.riskScore}</div>
+                    <div className={styles.detailAssociatedMeta}>Risk score {renderRiskScorePill(device.riskScore)}</div>
                   </div>
                 ))
               )}

@@ -29,18 +29,19 @@ type Props = {
   status: SourceStatus;
   kind?: 'device' | 'account';
   label?: string; // optional text, e.g. "Okta: Reporting"
+  dataTestId?: string;
 };
 
 export type StatusPillProps = Props;
 
-export function StatusPill({ status, kind = 'device', label }: StatusPillProps) {
+export function StatusPill({ status, kind = 'device', label, dataTestId = 'status-pill' }: StatusPillProps) {
   const text = label ?? (status === 'N/A' ? 'Not applicable' : status);
   const tip = kind === 'account' ? ACCOUNT_TIP[status] ?? DEVICE_TIP[status] : DEVICE_TIP[status];
   return (
     <Tooltip.Provider delayDuration={150}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <span aria-label={text} data-testid="status-pill" className={`${styles.pill} ${TONE[status]}`}>
+          <span aria-label={text} data-testid={dataTestId} className={`${styles.pill} ${TONE[status]}`}>
             {text}
           </span>
         </Tooltip.Trigger>

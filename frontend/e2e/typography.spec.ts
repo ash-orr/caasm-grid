@@ -75,6 +75,72 @@ test.describe('Typography parity', () => {
     await expect(agreePill).toHaveText('Agree');
   });
 
+  test('detail page score and status pills match the prototype on device and account pages', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const riskCard = page.locator('div').filter({ has: page.getByRole('heading', { name: 'Current risk score' }) }).first();
+    const scorePill = riskCard.locator('[data-testid="risk-pill"]').first();
+    await expect(scorePill).toHaveCSS('font-size', '12px');
+    await expect(scorePill).toHaveCSS('font-weight', '500');
+    await expect(scorePill).toHaveCSS('border-radius', '10px');
+    await expect(scorePill).toHaveCSS('padding-top', '1px');
+    await expect(scorePill).toHaveCSS('padding-left', '8px');
+    await expect(scorePill).toHaveCSS('font-variant-numeric', 'tabular-nums');
+
+    const exposureCoverageTab = page.getByRole('button', { name: /^Exposure coverage/ }).first();
+    await exposureCoverageTab.click();
+    const coveragePill = page.locator('[data-testid="status-pill"]').filter({ hasText: /Reporting|Stale|Pending|Not present|Not applicable/ }).first();
+    await expect(coveragePill).toHaveCSS('font-size', '12px');
+    await expect(coveragePill).toHaveCSS('font-weight', '500');
+    await expect(coveragePill).toHaveCSS('border-radius', '10px');
+    await expect(coveragePill).toHaveCSS('padding-top', '1px');
+    await expect(coveragePill).toHaveCSS('padding-left', '8px');
+
+    await page.getByRole('button', { name: 'Assets' }).click();
+
+    const gapSearch = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await gapSearch.fill('avery@acme.com');
+    const gapMatches = page.locator('tbody tr').filter({ hasText: 'avery@acme.com' });
+    await expect(gapMatches.first()).toContainText('avery@acme.com');
+
+    const gapRow = gapMatches.first();
+    await gapRow.click();
+
+    const exposureGapPill = page.locator('[data-testid="source-coverage-pill"]').first();
+    await expect(exposureGapPill).toHaveCSS('font-size', '12px');
+    await expect(exposureGapPill).toHaveCSS('font-weight', '500');
+    await expect(exposureGapPill).toHaveCSS('border-radius', '10px');
+    await expect(exposureGapPill).toHaveCSS('padding-top', '1px');
+    await expect(exposureGapPill).toHaveCSS('padding-left', '8px');
+
+    await page.getByRole('button', { name: 'Assets' }).click();
+    await page.getByRole('button', { name: 'Accounts' }).click();
+
+    const accountSearch = page.locator('input[placeholder="Search accounts or groups"]').first();
+    await accountSearch.fill('avery@acme.com');
+    const accountMatches = page.locator('tbody tr').filter({ hasText: 'avery@acme.com' });
+    await expect(accountMatches.first()).toContainText('avery@acme.com');
+
+    const accountRow = accountMatches.first();
+    await accountRow.click();
+
+    const associatedDevicesCard = page.locator('div').filter({ has: page.getByRole('heading', { name: /Associated devices/ }) }).first();
+    const associatedScorePill = associatedDevicesCard.locator('[data-testid="risk-pill"]').first();
+    await expect(associatedScorePill).toHaveCSS('font-size', '12px');
+    await expect(associatedScorePill).toHaveCSS('font-weight', '500');
+    await expect(associatedScorePill).toHaveCSS('border-radius', '10px');
+    await expect(associatedScorePill).toHaveCSS('padding-top', '1px');
+    await expect(associatedScorePill).toHaveCSS('padding-left', '8px');
+    await expect(associatedScorePill).toHaveCSS('font-variant-numeric', 'tabular-nums');
+  });
+
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {
     await page.goto('/');
 

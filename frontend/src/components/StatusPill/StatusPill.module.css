@@ -1,13 +1,17 @@
 .pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 1px 8px;
   border-radius: 10px;
   font-size: 12px;
   font-weight: 500;
   line-height: 17.4px;
   height: 19.4px;
+  min-width: 34px;
   box-sizing: border-box;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .ok { background: var(--ok-s, #e3f4ec); color: var(--ok, #1f8a5b); }
