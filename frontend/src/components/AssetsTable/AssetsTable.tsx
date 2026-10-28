@@ -2031,7 +2031,10 @@ export function AssetsTable() {
       const matchingSources = agreement?.sources ?? [];
       const shouldShowSourceText = kind === 'account' ? ['name', 'group'].includes(entry.fieldKey ?? '') : Boolean(agreement);
       const sourceSummary = agreement && shouldShowSourceText
-        ? `${agreement.hasConflict ? 'Conflict' : `Agree ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`}`
+        ? (agreement.hasConflict ? 'Conflict' : 'Agree')
+        : '';
+      const sourceSummarySuffix = agreement && shouldShowSourceText && !agreement.hasConflict
+        ? ` ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`
         : '';
 
       const majorityValue = agreement?.sources.length
@@ -2059,6 +2062,7 @@ export function AssetsTable() {
         ...entry,
         hasConflict: agreement?.hasConflict ?? false,
         agreementText: sourceSummary,
+        agreementTextSuffix: sourceSummarySuffix,
         sourceText,
         sourceEntries,
         fieldKey: agreement?.fieldKey ?? entry.fieldKey,
@@ -2083,9 +2087,7 @@ export function AssetsTable() {
         ) : null}
         {showSummary ? (
           <div className={styles.detailOverviewSummary}>
-            <span className={conflictCount > 0 ? styles.detailPillWarn : styles.detailPillOk}>
-              {summaryLabel}
-            </span>
+            <StatusPill status={conflictCount > 0 ? 'Stale' : 'Reporting'} label={summaryLabel} />
           </div>
         ) : null}
         <div className={styles.detailAgreementTable}>
@@ -2101,7 +2103,8 @@ export function AssetsTable() {
               <span className={styles.detailAgreementSources}>
                 {row.agreementText ? (
                   <>
-                    <span className={row.hasConflict ? styles.detailPillWarn : styles.detailPillOk}>{row.agreementText}</span>
+                    <StatusPill status={row.hasConflict ? 'Stale' : 'Reporting'} label={row.agreementText} />
+                    {row.agreementTextSuffix ? <span>{row.agreementTextSuffix}</span> : null}
                     {row.hasConflict && row.sourceEntries.length > 0 ? (
                       <button
                         className={styles.linkBtn}

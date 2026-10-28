@@ -39,6 +39,42 @@ test.describe('Typography parity', () => {
     await expect(violationItem).toHaveCSS('line-height', '18.85px');
   });
 
+  test('Overview pills use the shared status-pill styling and text on IOT-1049', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const overviewTab = page.getByRole('button', { name: /^Overview/ }).first();
+    await overviewTab.click();
+
+    const conflictPill = page.locator('[aria-label="Conflict"]').first();
+    await expect(conflictPill).toHaveCSS('font-size', '12px');
+    await expect(conflictPill).toHaveCSS('font-weight', '500');
+    await expect(conflictPill).toHaveCSS('border-radius', '10px');
+    await expect(conflictPill).toHaveCSS('padding-top', '1px');
+    await expect(conflictPill).toHaveCSS('padding-left', '8px');
+
+    const summaryPill = page.locator('[aria-label*="field differs across sources"], [aria-label*="fields differ across sources"]').first();
+    await expect(summaryPill).toHaveCSS('font-size', '12px');
+    await expect(summaryPill).toHaveCSS('font-weight', '500');
+    await expect(summaryPill).toHaveCSS('border-radius', '10px');
+    await expect(summaryPill).toHaveCSS('padding-top', '1px');
+    await expect(summaryPill).toHaveCSS('padding-left', '8px');
+
+    const agreePill = page.locator('[aria-label="Agree"]').first();
+    await expect(agreePill).toHaveCSS('font-size', '12px');
+    await expect(agreePill).toHaveCSS('font-weight', '500');
+    await expect(agreePill).toHaveCSS('border-radius', '10px');
+    await expect(agreePill).toHaveCSS('padding-top', '1px');
+    await expect(agreePill).toHaveCSS('padding-left', '8px');
+    await expect(agreePill).toHaveText('Agree');
+  });
+
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {
     await page.goto('/');
 

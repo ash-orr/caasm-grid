@@ -139,7 +139,8 @@ describe('AssetsTable overview parity', () => {
     const agreeText = sourceEntries.find((entry) => entry.includes('Agree')) ?? '';
 
     expect(conflictText).toContain('Conflict');
-    expect(agreeText).toContain(`Agree ${agreeRow.sourceCount} source${agreeRow.sourceCount === 1 ? '' : 's'}`);
+    expect(agreeText).toContain('Agree');
+    expect(agreeText).toContain(`${agreeRow.sourceCount} source${agreeRow.sourceCount === 1 ? '' : 's'}`);
     expect(conflictText).not.toBe(agreeText);
     expect(conflictRow.hasConflict).toBe(true);
     expect(agreeRow.hasConflict).toBe(false);
