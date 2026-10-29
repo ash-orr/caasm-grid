@@ -164,6 +164,9 @@ Overview tab: Account details only, in a single column. Same Field | Value | Sou
 Tabs: Overview, Exposure coverage, Alerts. The Devices tab is removed because the left-column card already lists them. Alerts is a placeholder.
 MFA and privileged-account information was removed because that data isn't available. (confirm)
 
+## Row hover on detail pages
+Rows in the detail page tables (the Overview Field / Value / Sources rows, the "Last seen by sources" row, and the Exposure coverage source rows) get a very light grey background on hover, using a new token `--row-hover` (light `#f5f7f9`, dark `#1b2733`). The highlight extends 8px past the row's text on both sides (drawn outside the layout, so nothing moves). Header rows (Field / Value / Sources, Source / Status / Last seen) do not highlight. These rows are not clickable, so the pointer stays the default arrow and the hover is only a reading aid. This is deliberately different from the Devices/Accounts tables, whose rows are clickable and use the accent tint (`--acc-s`).
+
 ### Exposure gaps card (both pages)
 Header text: Exposure gaps. Styled like the other left-column cards: muted source name on the left, value on the right.
 Each row is one line: a source name, the status pill, then a muted time to the right of the pill. Time format: "<1h ago", "Nh ago", "Nd ago" once 48 hours or more. Pending shows no time. Not applicable and Not present show no time.
