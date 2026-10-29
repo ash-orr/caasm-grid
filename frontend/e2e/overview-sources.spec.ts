@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 
 type InlineMeasure = {
   pillWidth: number;
@@ -12,7 +12,7 @@ type InlineMeasure = {
   buttonY: number | null;
 };
 
-async function measureInlineRow(page: any, rowText: string, buttonName?: string): Promise<InlineMeasure> {
+async function measureInlineRow(page: Page, rowText: string, buttonName?: string): Promise<InlineMeasure> {
   const row = page.locator('[class*="detailAgreementRow"]').filter({ hasText: rowText }).first();
   await expect(row).toBeVisible();
 
@@ -73,6 +73,15 @@ test('Overview Sources keeps the status pill inline with the text and raw values
   expect(conflictMeasure.buttonY).not.toBeNull();
   expect(conflictMeasure.buttonY).toBeGreaterThanOrEqual(conflictMeasure.textY + conflictMeasure.textHeight);
 
+  const deviceEmptyRows = ['Device type', 'Location'];
+  for (const label of deviceEmptyRows) {
+    const field = page.locator('[class*="detailAgreementField"]').filter({ hasText: label }).first();
+    await expect(field).toBeVisible();
+    const row = field.locator('xpath=ancestor::*[contains(@class,"detailAgreementRow")][1]');
+    const sources = row.locator('[class*="detailAgreementSources"]').first();
+    await expect(sources).toHaveText('');
+  }
+
   await page.getByRole('button', { name: 'Assets' }).click();
   await page.getByRole('button', { name: 'Accounts' }).click();
   const accountSearch = page.locator('input[placeholder="Search accounts or groups"]').first();
@@ -92,4 +101,19 @@ test('Overview Sources keeps the status pill inline with the text and raw values
   expect(Math.abs(groupMeasure.pillHeight - 19.4)).toBeLessThanOrEqual(0.5);
   expect(groupMeasure.textX).toBeGreaterThan(groupMeasure.pillX + groupMeasure.pillWidth - 1);
   expect(Math.abs((groupMeasure.pillY + groupMeasure.pillHeight / 2) - (groupMeasure.textY + groupMeasure.textHeight / 2))).toBeLessThanOrEqual(4);
+
+  const accountEmptyRows = ['Account type', 'Description', 'Credentials expire', 'Created by', 'Allow devices without AgentP to connect using this account'];
+  for (const label of accountEmptyRows) {
+    const field = page.locator('[class*="detailAgreementField"]').filter({ hasText: label }).first();
+    await expect(field).toBeVisible();
+    const row = field.locator('xpath=ancestor::*[contains(@class,"detailAgreementRow")][1]');
+    const sources = row.locator('[class*="detailAgreementSources"]').first();
+    await expect(sources).toHaveText('');
+  }
+
+  const sourceCountText = page.locator('[class*="detailSourceText"]').filter({ hasText: /\d+ source/ }).first();
+  await expect(sourceCountText).toBeVisible();
+  await expect(sourceCountText).toHaveCSS('color', 'rgb(93, 107, 120)');
+  await expect(sourceCountText).toHaveCSS('font-size', '14px');
+  await expect(sourceCountText).toHaveCSS('line-height', '20.3px');
 });

@@ -2036,24 +2036,27 @@ export function AssetsTable() {
           }, new Map()).entries()].sort((left, right) => right[1] - left[1])[0]?.[0] ?? null
         : null;
 
-      const sourceEntries = agreement && shouldShowSourceText
+      const visibleAgreement = agreement && shouldShowSourceText ? agreement : null;
+      const hasSourceData = Boolean(visibleAgreement && (visibleAgreement.sourceCount ?? matchingSources.length ?? 0) > 0);
+
+      const sourceEntries = hasSourceData && visibleAgreement
         ? matchingSources
             .filter((source) => source.value !== null && source.value !== undefined && source.value !== '')
             .map((source) => ({
               source: source.source,
-              fieldName: source.fieldName ?? (agreement?.fieldKey ?? entry.fieldKey ?? ''),
+              fieldName: source.fieldName ?? (visibleAgreement.fieldKey ?? entry.fieldKey ?? ''),
               value: String(source.value),
-              isDifferent: agreement.hasConflict && majorityValue !== null && source.value !== majorityValue,
+              isDifferent: visibleAgreement.hasConflict && majorityValue !== null && source.value !== majorityValue,
             }))
         : [];
 
-      const sourceSummary = agreement && shouldShowSourceText
-        ? (agreement.hasConflict ? 'Conflict' : 'Agree')
+      const sourceSummary = hasSourceData && visibleAgreement
+        ? (visibleAgreement.hasConflict ? 'Conflict' : 'Agree')
         : '';
-      const sourceSummaryText = agreement && shouldShowSourceText
-        ? (agreement.hasConflict
+      const sourceSummaryText = hasSourceData && visibleAgreement
+        ? (visibleAgreement.hasConflict
           ? sourceEntries.map(({ source, value }) => `${source} → ${value}`).join(' · ')
-          : `${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`)
+          : `${visibleAgreement.sourceCount} source${visibleAgreement.sourceCount === 1 ? '' : 's'}`)
         : '';
 
       const sourceText = sourceEntries.map(({ source, fieldName, value }) => `${source}  "${fieldName}": "${value}"`).join(' \n ');
@@ -2131,9 +2134,7 @@ export function AssetsTable() {
                       </span>
                     ) : null}
                   </>
-                ) : (
-                  <span className={styles.detailMuted}>—</span>
-                )}
+                ) : null}
               </span>
             </div>
           ))}
