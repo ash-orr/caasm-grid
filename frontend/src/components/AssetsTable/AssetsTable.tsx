@@ -1048,7 +1048,7 @@ export function AssetsTable() {
           ))}
           {showSeeMore ? (
             <button
-              className={`${styles.linkBtn} ${styles.smallLink}`}
+              className={styles.linkBtn}
               onClick={(event) => openSeeMore(sectionId, event.currentTarget)}
               type="button"
             >
@@ -1159,7 +1159,7 @@ export function AssetsTable() {
             </div>
           ))}
           <button
-            className={`${styles.linkBtn} ${styles.smallLink}`}
+            className={styles.linkBtn}
             onClick={() => {
               if (isDevices) {
                 safeSetDeviceFilters((prev) => ({
@@ -1253,7 +1253,7 @@ export function AssetsTable() {
           ))}
 
           <button
-            className={`${styles.linkBtn} ${styles.smallLink}`}
+            className={styles.linkBtn}
             onClick={() => {
               safeSetDeviceFilters((prev) => ({
                 ...prev,
@@ -1294,7 +1294,7 @@ export function AssetsTable() {
           ))}
           {versions.length > 5 ? (
             <button
-              className={`${styles.linkBtn} ${styles.smallLink}`}
+              className={styles.linkBtn}
               onClick={(event) => openSeeMore('agentpVersion', event.currentTarget)}
               type="button"
             >
@@ -2069,7 +2069,7 @@ export function AssetsTable() {
 
     const lastLogin = agreementRows.find((row) => row.fieldKey === 'lastLogin');
     const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
-    const summaryLabel = conflictCount > 0 ? `${conflictCount} ${conflictCount === 1 ? 'field differs' : 'fields differ'} across sources` : 'All sources agree';
+    const summaryLabel = conflictCount > 0 ? 'Stale' : 'All sources agree';
 
     return (
       <section className={styles.detailSection}>
@@ -2105,7 +2105,7 @@ export function AssetsTable() {
                     {row.agreementTextSuffix ? <span>{row.agreementTextSuffix}</span> : null}
                     {row.hasConflict && row.sourceEntries.length > 0 ? (
                       <button
-                        className={styles.linkBtn}
+                        className={`${styles.linkBtn} ${styles.rawValueToggle}`}
                         onClick={() => setExpandedFields((prev) => ({ ...prev, [String(row.fieldKey)]: !(prev[String(row.fieldKey)] ?? false) }))}
                         type="button"
                         data-rr={row.fieldKey}

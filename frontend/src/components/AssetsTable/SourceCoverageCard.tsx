@@ -62,7 +62,7 @@ export function SourceCoverageCard({ rows }: SourceCoverageCardProps) {
     <div className={styles.detailCard} data-testid="source-coverage-card">
       <h3 className={styles.detailCardTitle}>Exposure gaps</h3>
       {cardState.summaryText ? (
-        <div className={styles.detailMuted}>{cardState.summaryText}</div>
+        <div className={styles.detailCardSummary}>{cardState.summaryText}</div>
       ) : null}
       {rows.length === 0 ? (
         <p className={styles.detailMuted}>No connected sources.</p>
