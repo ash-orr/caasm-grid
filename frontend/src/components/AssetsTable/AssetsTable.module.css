@@ -377,10 +377,9 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .tableShell table th:first-child input[type='checkbox'],
 .tableShell table td:first-child input[type='checkbox'] {
-  display: block;
-  width: 15px;
-  height: 15px;
-  margin: 0;
+  width: 13px;
+  height: 13px;
+  margin: 3px 0;
   padding: 0;
   box-sizing: border-box;
 }
