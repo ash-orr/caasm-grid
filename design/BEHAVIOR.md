@@ -53,6 +53,9 @@ Source columns show the status pill. They are sortable (Reporting first, then St
 Hovering the account count in the Devices column shows up to three devices (highest risk first, then most gaps, then alphabetical) and "+N more". Hovering a device's Account shows account details. These tooltips are display-only.
 Column picker: a button at the far right of the header. It lists every column, with checkboxes, drag handles and up/down arrows, and a "Reset to default" link. The fixed column is locked. Source columns are labeled "CAASM - [full source name]" in the picker only.
 
+## Selection checkbox column width
+The selection checkbox column is fixed at 44px wide on the Devices, Accounts and Sites tables, with 12px cell padding on each side. The first data column therefore starts at the same x position on every tab, and the checkbox sits 12px from the table's left edge.
+
 ## Fields
 All of these are columns, hidden by default, available in the column picker. Defaults for existing columns are unchanged.
 
