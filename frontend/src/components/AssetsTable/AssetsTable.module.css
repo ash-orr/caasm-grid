@@ -1008,6 +1008,13 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
   margin: 0 0 12px;
+  cursor: default;
+}
+
+.detailOverviewLead:hover,
+.detailAgreementRow:hover {
+  background: var(--row-hover);
+  box-shadow: -8px 0 0 var(--row-hover), 8px 0 0 var(--row-hover);
 }
 
 .detailSectionTitle {
@@ -1029,6 +1036,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   align-items: start;
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
+  cursor: default;
 }
 
 .detailAgreementHeader {

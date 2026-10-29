@@ -7,6 +7,7 @@
   --acc: #0b6e8a;
   --link: #0b6e8a;
   --acc-s: #e2f1f5;
+  --row-hover: #f5f7f9;
   --ok: #1f8a5b;
   --ok-s: #e3f4ec;
   --warn: #b7791f;
@@ -31,6 +32,7 @@
     --acc: #1d4954;
     --link: #4fb8d4;
     --acc-s: #16323c;
+    --row-hover: #1b2733;
     --ok: #47c18c;
     --ok-s: #15332a;
     --warn: #e0a94a;
@@ -51,6 +53,7 @@
   --acc: #1d4954;
   --link: #4fb8d4;
   --acc-s: #16323c;
+  --row-hover: #1b2733;
   --ok: #47c18c;
   --ok-s: #15332a;
   --warn: #e0a94a;
