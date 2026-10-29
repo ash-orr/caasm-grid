@@ -190,7 +190,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   text-decoration: underline;
   text-underline-offset: 2px;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 18.85px;
   font-weight: 400;
 }
 
@@ -703,6 +703,12 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .smallLink {
   font-size: 12.5px;
+  line-height: 18.125px;
+}
+
+.rawValueToggle {
+  font-size: 12.5px;
+  line-height: 18.125px;
 }
 
 .dropdownMenu {
@@ -850,7 +856,7 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 }
 
 .detailCrumb > span:not(.detailCrumbCurrent) {
-  color: var(--acc);
+  color: var(--link);
 }
 
 .detailCrumbCurrent {
@@ -1029,9 +1035,12 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .detailAgreementSourceName {
   color: var(--ink);
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .detailAgreementValue {
+  color: var(--ink);
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
 }
@@ -1049,7 +1058,9 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 20.4px;
   color: var(--ink);
   background: transparent;
   border: 0;
@@ -1060,15 +1071,18 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailRawValue {
   display: block;
   white-space: pre-wrap;
-  padding: 0;
   background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font: inherit;
 }
 
 .detailRawValueDiff {
   color: var(--warn);
   background: color-mix(in srgb, var(--warn) 18%, transparent);
   border-left: 2px solid var(--warn);
-  padding-left: 4px;
+  padding: 0 6px;
+  border-radius: 4px;
 }
 
 .detailRows {
@@ -1148,6 +1162,12 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   font-weight: 400;
 }
 
+.sourceCoverageRow .detailMuted,
+.sourceCoverageRow [data-testid='source-coverage-time'] {
+  font-size: var(--detail-left-size);
+  line-height: var(--detail-left-line-height);
+}
+
 .detailCard .sourceName,
 .detailCard .sourceNameValue {
   color: var(--mute);
@@ -1161,6 +1181,19 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   font-size: 13px;
   line-height: 1.45;
   color: var(--ink);
+}
+
+.detailCard .sourceNameValue {
+  color: var(--mute);
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.detailCardSummary {
+  color: var(--ink);
+  margin: 0;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 .sourceValue {
@@ -1179,8 +1212,20 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 }
 
 .detailAssociatedMeta {
-  color: var(--mute);
+  color: var(--ink);
   margin-top: 2px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
+}
+
+.detailAssociatedItem .detailAssociatedMeta,
+.detailAssociatedItem .detailLink {
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
+}
+
+.detailAssociatedItem .detailLink {
+  color: var(--link);
 }
 
 .detailLink {
@@ -1191,6 +1236,8 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   color: var(--link);
   text-decoration: underline;
   text-underline-offset: 2px;
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
 }
 
 @media (max-width: 900px) {
