@@ -263,6 +263,48 @@ function formatRelativeTime(isoDate: string | null | undefined): string {
   return `${Math.floor(diffHours / 24)}d ago`;
 }
 
+function normalizeSourceDateValue(value: string | null | undefined): string | null {
+  if (!value) return null;
+
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  const withIsoLowercase = trimmed.replace(/t/gi, 'T').replace(/z/gi, 'Z');
+  return withIsoLowercase;
+}
+
+function formatMostRecentSourceAge(value: string | null | undefined): string {
+  const normalized = normalizeSourceDateValue(value);
+  if (!normalized) return '—';
+
+  const time = Date.parse(normalized);
+  if (Number.isNaN(time)) return '—';
+
+  const diffHours = Math.max(0, Math.floor((Date.now() - time) / (1000 * 60 * 60)));
+
+  if (diffHours < 1) return 'Just now';
+  if (diffHours < 24) return `${diffHours}h ago`;
+  return `${Math.floor(diffHours / 24)}d ago`;
+}
+
+function pickMostRecentSourceEntry(entries: Array<{ source: string; value: string | null | undefined }>): { source: string; value: string | null | undefined } | null {
+  const validEntries = entries.filter(({ value }) => {
+    const normalized = normalizeSourceDateValue(value);
+    return normalized !== null && !Number.isNaN(Date.parse(normalized));
+  });
+
+  if (validEntries.length === 0) return null;
+
+  return validEntries.reduce((best, entry) => {
+    const bestValue = normalizeSourceDateValue(best.value);
+    const entryValue = normalizeSourceDateValue(entry.value);
+
+    if (!bestValue || !entryValue) return best;
+
+    return Date.parse(entryValue) > Date.parse(bestValue) ? entry : best;
+  });
+}
+
 function displayValue(value: string | number | null | undefined): string {
   if (value == null || value === '') return '—';
   return String(value);
@@ -2076,16 +2118,31 @@ export function AssetsTable() {
     const lastSeen = agreementRows.find((row) => row.fieldKey === 'lastSeen');
     const summaryLabel = conflictCount > 0 ? 'Stale' : 'All sources agree';
 
+    const accountSources = lastLogin?.sources
+      .filter((source) => source.value !== null && source.value !== undefined && source.value !== '')
+      .map((source) => source.source) ?? [];
+    const mostRecentSeenSource = pickMostRecentSourceEntry(lastSeen?.sources ?? []);
+    const mostRecentSeenValue = mostRecentSeenSource ? formatMostRecentSourceAge(mostRecentSeenSource.value) : '—';
+    const mostRecentSeenSourceName = mostRecentSeenSource?.source ?? '—';
+
     return (
       <section className={styles.detailSection}>
         {kind === 'account' && lastLogin ? (
           <div className={styles.detailOverviewLead}>
-            Last login by sources: {lastLogin.value === '0' ? 'Today' : `${lastLogin.value} days ago`} <span className={styles.detailMuted}>· Reported by {lastLogin.sources.map((source) => source.source).join(', ')}</span>
+            <span className={styles.detailOverviewLeadLabel}>Last login by sources</span>
+            <span className={styles.detailOverviewLeadValue}>
+              <span className={styles.detailOverviewLeadInk}>{lastLogin.value === '0' ? 'Today' : `${lastLogin.value} days ago`}</span>
+              <span className={styles.detailOverviewLeadMuted}> · Reported by {accountSources.join(', ')}</span>
+            </span>
           </div>
         ) : null}
         {kind === 'device' && lastSeen && lastSeen.sourceCount > 0 ? (
           <div className={styles.detailOverviewLead}>
-            Last seen by sources: <span className={styles.detailMuted}>Reported by {lastSeen.sources.map((source) => source.source).join(', ')}</span>
+            <span className={styles.detailOverviewLeadLabel}>Last seen by sources</span>
+            <span className={styles.detailOverviewLeadValue}>
+              <span className={styles.detailOverviewLeadInk}>{mostRecentSeenValue}</span>
+              <span className={styles.detailOverviewLeadMuted}> · Most recent: {mostRecentSeenSourceName}</span>
+            </span>
           </div>
         ) : null}
         {showSummary ? (

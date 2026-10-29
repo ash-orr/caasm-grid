@@ -1004,11 +1004,46 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 }
 
 .detailOverviewLead {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
   color: var(--mute);
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
   margin: 0 0 12px;
   cursor: default;
+}
+
+.detailOverviewLeadLabel,
+.detailOverviewLeadValue {
+  min-width: 0;
+}
+
+.detailOverviewLeadLabel {
+  color: var(--mute);
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
+}
+
+.detailOverviewLeadValue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0;
+  color: var(--ink);
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
+}
+
+.detailOverviewLeadInk {
+  color: var(--ink);
+}
+
+.detailOverviewLeadMuted {
+  color: rgb(93, 107, 120);
 }
 
 .detailOverviewLead:hover,
