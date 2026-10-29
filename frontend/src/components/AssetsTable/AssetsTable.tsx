@@ -2028,13 +2028,6 @@ export function AssetsTable() {
       const agreement = agreementRows.find((row) => row.fieldKey === entry.fieldKey);
       const matchingSources = agreement?.sources ?? [];
       const shouldShowSourceText = kind === 'account' ? ['name', 'group'].includes(entry.fieldKey ?? '') : Boolean(agreement);
-      const sourceSummary = agreement && shouldShowSourceText
-        ? (agreement.hasConflict ? 'Conflict' : 'Agree')
-        : '';
-      const sourceSummarySuffix = agreement && shouldShowSourceText && !agreement.hasConflict
-        ? ` ${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`
-        : '';
-
       const majorityValue = agreement?.sources.length
         ? [...agreement.sources.reduce<Map<string, number>>((counts, source) => {
             const key = source.value ?? '';
@@ -2054,13 +2047,22 @@ export function AssetsTable() {
             }))
         : [];
 
+      const sourceSummary = agreement && shouldShowSourceText
+        ? (agreement.hasConflict ? 'Conflict' : 'Agree')
+        : '';
+      const sourceSummaryText = agreement && shouldShowSourceText
+        ? (agreement.hasConflict
+          ? sourceEntries.map(({ source, value }) => `${source} → ${value}`).join(' · ')
+          : `${agreement.sourceCount} source${agreement.sourceCount === 1 ? '' : 's'}`)
+        : '';
+
       const sourceText = sourceEntries.map(({ source, fieldName, value }) => `${source}  "${fieldName}": "${value}"`).join(' \n ');
 
       return {
         ...entry,
         hasConflict: agreement?.hasConflict ?? false,
         agreementText: sourceSummary,
-        agreementTextSuffix: sourceSummarySuffix,
+        agreementTextSuffix: sourceSummaryText,
         sourceText,
         sourceEntries,
         fieldKey: agreement?.fieldKey ?? entry.fieldKey,
@@ -2101,8 +2103,10 @@ export function AssetsTable() {
               <span className={styles.detailAgreementSources}>
                 {row.agreementText ? (
                   <>
-                    <StatusPill status={row.hasConflict ? 'Stale' : 'Reporting'} label={row.agreementText} />
-                    {row.agreementTextSuffix ? <span>{row.agreementTextSuffix}</span> : null}
+                    <span className={styles.detailSourceLine}>
+                      <StatusPill status={row.hasConflict ? 'Stale' : 'Reporting'} label={row.agreementText} />
+                      {row.agreementTextSuffix ? <span className={styles.detailSourceText}>{row.agreementTextSuffix}</span> : null}
+                    </span>
                     {row.hasConflict && row.sourceEntries.length > 0 ? (
                       <button
                         className={`${styles.linkBtn} ${styles.rawValueToggle}`}

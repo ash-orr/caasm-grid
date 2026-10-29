@@ -1067,10 +1067,27 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailAgreementSources {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
   font-size: var(--detail-body-size);
   line-height: var(--detail-body-line-height);
   color: var(--mute);
+}
+
+.detailSourceLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.detailSourceText {
+  color: var(--ink);
+  font-size: var(--detail-body-size);
+  line-height: var(--detail-body-line-height);
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .detailRawValues {
