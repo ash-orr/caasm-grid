@@ -60,7 +60,7 @@ test.describe('Typography parity', () => {
     await expect(conflictPill).toHaveCSS('padding-left', '8px');
     await expect(conflictPill).toHaveCSS('font-variant-numeric', 'normal');
 
-    const summaryPill = page.locator('[aria-label*="field differs across sources"], [aria-label*="fields differ across sources"]').first();
+    const summaryPill = page.locator('[data-testid="status-pill"]').filter({ hasText: 'Stale' }).first();
     await expect(summaryPill).toHaveCSS('font-size', '12px');
     await expect(summaryPill).toHaveCSS('font-weight', '500');
     await expect(summaryPill).toHaveCSS('border-radius', '10px');
@@ -178,6 +178,43 @@ test.describe('Typography parity', () => {
     await expect(breadcrumbTitle).toHaveCSS('font-weight', '700');
   });
 
+  test('empty overview values stay ink on uncovered devices', async ({ page }) => {
+    await page.goto('/');
+
+    const deviceSearch = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await deviceSearch.fill('SRV-1028');
+    await expect(page.locator('tbody tr')).toContainText('SRV-1028');
+
+    const deviceRow = page.locator('tbody tr').filter({ hasText: 'SRV-1028' }).first();
+    await deviceRow.click();
+
+    const locationRow = page.locator('[class*="detailAgreementRow"]').filter({ has: page.getByText('Location', { exact: true }) }).first();
+    const locationValue = locationRow.locator('span').nth(1);
+    await expect(locationValue).toHaveCSS('color', 'rgb(20, 33, 43)');
+    await expect(locationValue).toHaveCSS('font-size', '14px');
+    await expect(locationValue).toHaveCSS('line-height', '20.3px');
+  });
+
+  test('shared link buttons keep the accent color', async ({ page }) => {
+    await page.goto('/');
+
+    const deviceSearch = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await deviceSearch.fill('casey@acme.com');
+    await expect(page.locator('tbody tr')).toContainText('casey@acme.com');
+
+    const accountRow = page.locator('tbody tr').filter({ hasText: 'casey@acme.com' }).first();
+    await accountRow.click();
+
+    const accountEmailButton = page.getByRole('button', { name: 'casey@acme.com' }).first();
+    await expect(accountEmailButton).toHaveCSS('color', 'rgb(11, 110, 138)');
+
+    const breadcrumbAssets = page.getByRole('button', { name: 'Assets' }).first();
+    await expect(breadcrumbAssets).toHaveCSS('color', 'rgb(11, 110, 138)');
+
+    const breadcrumbDevices = page.locator('[class*="detailCrumb"]').first().getByText('Devices', { exact: true }).first();
+    await expect(breadcrumbDevices).toHaveCSS('color', 'rgb(11, 110, 138)');
+  });
+
   test('Exposure gaps card source names stay muted while coverage tab source names stay ink', async ({ page }) => {
     await page.goto('/');
 
@@ -202,6 +239,140 @@ test.describe('Typography parity', () => {
 
     const coverageSource = page.locator('[class*="detailAgreementSourceName"]').filter({ hasText: 'Active Directory' }).first();
     await expect(coverageSource).toHaveCSS('color', inkColor);
+  });
+
+  test('1. raw value lines use the prototype monospace sizing, padding and highlight box', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const rawValuesButton = page.getByRole('button', { name: 'View raw values' }).first();
+    await rawValuesButton.click();
+    const differingRawLine = page.locator('span[class*="detailRawValueDiff"]').filter({ hasText: 'Okta' }).first();
+    await expect(differingRawLine).toHaveCSS('font-family', 'ui-monospace, Menlo, Consolas, monospace');
+    await expect(differingRawLine).toHaveCSS('font-size', '12px');
+    await expect(differingRawLine).toHaveCSS('line-height', '20.4px');
+    await expect(differingRawLine).toHaveCSS('padding-left', '6px');
+    await expect(differingRawLine).toHaveCSS('padding-right', '6px');
+    await expect(differingRawLine).toHaveCSS('border-radius', '4px');
+
+    const nonDifferingRawLine = page.locator('span[class*="detailRawValue"]:not([class*="detailRawValueDiff"])').filter({ hasText: 'CrowdStrike' }).first();
+    await expect(nonDifferingRawLine).toHaveCSS('padding-left', '0px');
+    await expect(nonDifferingRawLine).toHaveCSS('padding-right', '0px');
+    await expect(nonDifferingRawLine).toHaveCSS('border-radius', '0px');
+  });
+
+  test('2. the raw-value toggle uses 12.5px / 18.125px while detail links stay 13px / 18.85px', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const seeDetailsButton = page.locator('button').filter({ hasText: 'See details' }).first();
+    await expect(seeDetailsButton).toHaveCSS('font-size', '13px');
+    await expect(seeDetailsButton).toHaveCSS('line-height', '18.85px');
+
+    const toggle = page.getByRole('button', { name: 'View raw values' }).first();
+    await expect(toggle).toHaveCSS('font-size', '12.5px');
+    await expect(toggle).toHaveCSS('line-height', '18.125px');
+  });
+
+  test('3. account page associated devices use the prototype label/value sizing and ink color', async ({ page }) => {
+    await page.goto('/');
+
+    await page.getByRole('button', { name: 'Accounts' }).click();
+    const accountSearch = page.locator('input[placeholder="Search accounts or groups"]').first();
+    await accountSearch.fill('blake@acme.com');
+    await expect(page.locator('tbody tr')).toContainText('blake@acme.com');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'blake@acme.com' }).first();
+    await row.click();
+
+    const deviceNameButton = page.locator('[class*="detailAssociatedItem"] button').first();
+    await expect(deviceNameButton).toHaveCSS('font-size', '14px');
+    await expect(deviceNameButton).toHaveCSS('line-height', '20.3px');
+    await expect(deviceNameButton).toHaveCSS('color', 'rgb(11, 110, 138)');
+
+    const scoreLabel = page.locator('[class*="detailAssociatedMeta"]').filter({ hasText: /^Risk score/ }).first();
+    await expect(scoreLabel).toHaveCSS('font-size', '14px');
+    await expect(scoreLabel).toHaveCSS('line-height', '20.3px');
+    await expect(scoreLabel).toHaveCSS('color', 'rgb(20, 33, 43)');
+  });
+
+  test('4. exposure gaps card source names and times stay muted at 13px / 18.85px', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const detailsToggle = page.getByRole('button', { name: /See details|Hide details/ }).first();
+    await detailsToggle.click();
+
+    const sourceName = page.locator('[data-testid="source-coverage-source"]').filter({ hasText: 'Okta' }).first();
+    await expect(sourceName).toHaveCSS('font-size', '13px');
+    await expect(sourceName).toHaveCSS('line-height', '18.85px');
+    await expect(sourceName).toHaveCSS('color', 'rgb(93, 107, 120)');
+
+    const timeText = page.locator('[data-testid="source-coverage-time"]').first();
+    await expect(timeText).toHaveCSS('font-size', '13px');
+    await expect(timeText).toHaveCSS('line-height', '18.85px');
+    await expect(timeText).toHaveCSS('color', 'rgb(93, 107, 120)');
+
+    const exposureCoverageTab = page.getByRole('button', { name: /^Exposure coverage/ }).first();
+    await exposureCoverageTab.click();
+    const coverageSource = page.locator('[class*="detailAgreementSourceName"]').filter({ hasText: 'Okta' }).first();
+    await expect(coverageSource).toHaveCSS('font-size', '14px');
+    await expect(coverageSource).toHaveCSS('line-height', '20.3px');
+    await expect(coverageSource).toHaveCSS('color', 'rgb(20, 33, 43)');
+  });
+
+  test('5. the exposure summary uses ink for "All sources reporting"', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('MB-1042');
+    await expect(page.locator('tbody tr')).toContainText('MB-1042');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'MB-1042' }).first();
+    await row.click();
+
+    const summary = page.getByText('All sources reporting', { exact: true }).first();
+    await expect(summary).toHaveCSS('color', 'rgb(20, 33, 43)');
+  });
+
+  test('6. the overview stale badge keeps the shared status-pill prototype sizing', async ({ page }) => {
+    await page.goto('/');
+
+    const search = page.locator('input[placeholder="Search devices, accounts, OS, location"]').first();
+    await search.fill('IOT-1049');
+    await expect(page.locator('tbody tr')).toContainText('IOT-1049');
+
+    const row = page.locator('tbody tr').filter({ hasText: 'IOT-1049' }).first();
+    await row.click();
+
+    const stalePill = page.locator('[data-testid="status-pill"]').filter({ hasText: 'Stale' }).first();
+    await expect(stalePill).toHaveCSS('font-size', '12px');
+    await expect(stalePill).toHaveCSS('font-weight', '500');
+    await expect(stalePill).toHaveCSS('padding-left', '8px');
+    await expect(stalePill).toHaveCSS('padding-top', '1px');
+    await expect(stalePill).toHaveCSS('border-radius', '10px');
+    // Chromium rounds 19.4px to 19.390625px in 1/64px layout units, so the height is allowed to differ by under 0.05px.
+    const stalePillHeight = parseFloat(await stalePill.evaluate((element) => getComputedStyle(element).height));
+    expect(Math.abs(stalePillHeight - 19.4)).toBeLessThan(0.05);
+    await expect(stalePill).toHaveCSS('color', 'rgb(183, 121, 31)');
   });
 
   test('keeps core table and filter typography aligned with the prototype', async ({ page }) => {

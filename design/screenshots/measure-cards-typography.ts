@@ -84,7 +84,16 @@ const collectFn = () => {
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') continue;
     seen.add(el);
-    const o = { text: own, tag: el.tagName.toLowerCase(), inTable: !!el.closest('table, [role="grid"], [role="table"] [role="row"]') };
+    const lab = (n) => { const t = (n.textContent || '').replace(/\s+/g, ' ').trim(); return t.length > 28 ? t.slice(0, 28) + '…' : t; };
+    const chain = []; let a = el.parentElement;
+    for (let i = 0; a && a !== document.body && i < 5; i++, a = a.parentElement) {
+      let s1 = a.tagName.toLowerCase(); if (a.getAttribute('role')) s1 += '[' + a.getAttribute('role') + ']';
+      const h = a.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > header'); if (h) s1 += '{' + lab(h) + '}';
+      chain.push(s1);
+    }
+    let dtl = ''; const dd = el.closest('dd'); if (dd && dd.previousElementSibling && dd.previousElementSibling.tagName === 'DT') dtl = lab(dd.previousElementSibling);
+    let region = ''; { let r = el.parentElement; for (let i = 0; r && r !== document.body && i < 10 && !region; i++, r = r.parentElement) { const h = r.querySelector(':scope > h2, :scope > h3, :scope > h4, :scope > header'); if (h) region = lab(h); } }
+    const o = { region, dtl, ctx: (dtl ? 'dt=' + dtl + ' ' : '') + chain.join(' < '), text: own, tag: el.tagName.toLowerCase(), inTable: !!el.closest('table, [role="grid"], [role="table"] [role="row"]') };
     for (const p of ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'textTransform', 'fontVariantNumeric']) o[p] = cs[p];
     o.color = norm(cs.color);
     o.fontFamily = o.fontFamily.replace(/["']/g, '');
@@ -178,7 +187,7 @@ async function openState0(page, url, st) {
 
 function keyed(list) {
   const idx = new Map(); const m = new Map();
-  for (const o of list) { const n = (idx.get(o.text) || 0) + 1; idx.set(o.text, n); m.set(`${o.text}#${n}`, o); }
+  for (const o of list) { const base = `${o.text}|${o.region}|${o.dtl}|${o.box ? 'box' : 'plain'}`; const n = (idx.get(base) || 0) + 1; idx.set(base, n); m.set(`${base}#${n}`, o); }
   return m;
 }
 
@@ -204,7 +213,7 @@ function keyed(list) {
       const props = a.box || b.box ? [...PROPS, ...BOX] : PROPS;
       for (const p of props) {
         const same = a[p] === b[p];
-        if (same) ok++; else { mismatch++; mism.push({ state: st.id, text: a.text, prop: p, prototype: a[p], port: b[p], tag: b.tag }); }
+        if (same) ok++; else { mismatch++; mism.push({ state: st.id, text: a.text, prop: p, prototype: a[p], port: b[p], tag: b.tag, pctx: a.ctx, qctx: b.ctx }); }
       }
     }
     for (const [k, b] of B) {
@@ -225,7 +234,7 @@ function keyed(list) {
   lines.push('', 'MISMATCH rows (grouped by property):');
   for (const [p, arr] of Object.entries(byProp)) {
     lines.push(`## ${p} (${arr.length})`);
-    arr.forEach((m) => lines.push(`- [${m.state}] "${m.text.slice(0, 60)}" <${m.tag}>: prototype ${m.prototype} | port ${m.port}`));
+    arr.forEach((m) => lines.push(`- [${m.state}] "${m.text.slice(0, 60)}" <${m.tag}>: prototype ${m.prototype} | port ${m.port}` + (process.env.AUDIT_CTX ? `\n    proto ctx: ${m.pctx}\n    port  ctx: ${m.qctx}` : '')));
   }
   lines.push('', 'Only on one side (NOT FOUND):');
   only.forEach((o) => lines.push(`- [${o.state}] only in ${o.side}: "${o.text.slice(0, 70)}" <${o.tag}>`));
