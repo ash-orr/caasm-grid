@@ -365,6 +365,26 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   border-bottom: 1px solid var(--line);
 }
 
+.tableShell table th:first-child,
+.tableShell table td:first-child {
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.tableShell table th:first-child input[type='checkbox'],
+.tableShell table td:first-child input[type='checkbox'] {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .head {
   font-size: 12px;
   line-height: 17.4px;
