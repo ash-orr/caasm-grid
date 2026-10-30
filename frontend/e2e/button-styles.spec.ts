@@ -1,5 +1,18 @@
 import { expect, test } from '@playwright/test';
 
+test('toolbar icon buttons use the secondary button border contract', async ({ page }) => {
+  await page.goto('/');
+
+  const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
+  await expect(columnsButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
+  await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  await expect(columnsButton).toHaveCSS('color', 'rgb(0, 124, 150)');
+  await columnsButton.hover();
+  await expect(columnsButton).toHaveCSS('background-color', 'rgb(242, 250, 251)');
+  await expect(columnsButton).toHaveCSS('height', '32px');
+  await expect(columnsButton).toHaveCSS('padding', '7px 9px');
+});
+
 test.describe('Button styles', () => {
   test('matches the prototype button token contract in light mode', async ({ page }) => {
     await page.goto('/');

@@ -2518,7 +2518,7 @@ export function AssetsTable() {
           <button
             aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
             aria-pressed={showFilters}
-            className={`${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
+            className={`${sharedButtonStyles.buttonSecondary} ${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
             onClick={() => setShowFilters((prev) => !prev)}
             type="button"
           >
@@ -2562,7 +2562,7 @@ export function AssetsTable() {
           <button
             aria-label="Show/hide columns"
             aria-pressed={columnPickerOpen}
-            className={`${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
+            className={`${sharedButtonStyles.buttonSecondary} ${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
             onClick={openColumnPickerDirectly}
             ref={columnsButtonRef}
             type="button"
