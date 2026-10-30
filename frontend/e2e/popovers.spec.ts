@@ -174,4 +174,5 @@ test.describe('popover scrolling regressions', () => {
     await page.getByRole('button', { name: 'Accounts' }).click();
     await expect(page.locator('[data-testid="status-pill"]').filter({ hasText: 'Blocked' }).first()).toBeVisible();
   });
+
 });

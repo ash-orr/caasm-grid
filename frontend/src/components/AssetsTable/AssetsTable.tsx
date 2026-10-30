@@ -207,6 +207,85 @@ function renderListValues(values: string[]): ReactNode {
   );
 }
 
+function getAccountDeviceList(accountName: string): DeviceRecord[] {
+  return devices
+    .filter((device) => device.account === accountName)
+    .sort((left, right) => {
+      const riskDiff = (right.riskScore ?? -1) - (left.riskScore ?? -1);
+      if (riskDiff !== 0) return riskDiff;
+      const gapDiff = right.coverageGaps.length - left.coverageGaps.length;
+      if (gapDiff !== 0) return gapDiff;
+      return left.name.localeCompare(right.name);
+    });
+}
+
+function renderAccountTooltip(accountName: string): ReactNode {
+  const account = accounts.find((entry) => entry.name === accountName);
+  const accountDevices = getAccountDeviceList(accountName);
+  const accountType = account?.accountType ?? '—';
+  const group = account?.group ?? '—';
+  const exposureGaps = account ? Object.entries(account.sourceCoverage).filter(([, entry]) => entry.status === 'Not present').map(([sourceName]) => sourceName) : [];
+
+  return (
+    <div>
+      <div style={{ fontWeight: 600, marginBottom: '4px' }}>Account</div>
+      <div>Type: {accountType}</div>
+      <div>Group: {group}</div>
+      <div>Devices: {accountDevices.length}</div>
+      <div>Exposure gap: {exposureGaps.length > 0 ? exposureGaps.slice(0, 2).join(', ') + (exposureGaps.length > 2 ? ` +${exposureGaps.length - 2}` : '') : 'None'}</div>
+    </div>
+  );
+}
+
+function renderAccountDeviceTooltip(accountName: string): ReactNode {
+  const accountDevices = getAccountDeviceList(accountName);
+  if (accountDevices.length === 0) {
+    return undefined;
+  }
+
+  const preview = accountDevices.slice(0, 3);
+  const total = accountDevices.length;
+
+  return (
+    <div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr 1fr 1.4fr 1.2fr', gap: '4px 8px', alignItems: 'center' }}>
+        <div style={{ fontWeight: 600 }}>Device</div>
+        <div style={{ fontWeight: 600 }}>Type</div>
+        <div style={{ fontWeight: 600 }}>Risk score</div>
+        <div style={{ fontWeight: 600 }}>Last connected</div>
+        <div style={{ fontWeight: 600 }}>Exposure gap</div>
+        {preview.map((device) => (
+          <>
+            <div key={`${device.id}-name`}>{device.name}</div>
+            <div key={`${device.id}-type`}>{device.type}</div>
+            <div key={`${device.id}-risk`}>{device.riskScore ?? '—'}</div>
+            <div key={`${device.id}-connected`}>{formatRelativeTime(device.lastConnectedAt)}</div>
+            <div key={`${device.id}-gaps`}>{device.coverageGaps.length ? device.coverageGaps.slice(0, 2).join(', ') + (device.coverageGaps.length > 2 ? ` +${device.coverageGaps.length - 2}` : '') : 'None'}</div>
+          </>
+        ))}
+      </div>
+      {total > 3 ? <div style={{ marginTop: '4px' }}>+{total - 3} more</div> : null}
+    </div>
+  );
+}
+
+function renderAccountBlockedTooltip(account: AccountRecord | AccountFilterRow): ReactNode {
+  const reasons = [
+    account.byAdmin && `Blocked by Admin: ${account.byAdmin}`,
+    account.byPolicy && `Blocked by Policy: ${account.byPolicy}`,
+  ].filter(Boolean) as string[];
+
+  if (reasons.length === 0) return undefined;
+
+  return (
+    <div>
+      {reasons.map((reason, index) => (
+        <div key={reason} style={{ marginTop: index === 0 ? undefined : '4px' }}>{reason}</div>
+      ))}
+    </div>
+  );
+}
+
 function uniqSorted(values: Array<string | null | undefined>): string[] {
   return Array.from(new Set(values.filter((value): value is string => value != null && value !== ''))).sort((a, b) => a.localeCompare(b));
 }
@@ -1436,11 +1515,21 @@ export function AssetsTable() {
       { id: 'type', label: 'Type', defaultVisible: true, render: (row) => row.type, exportValue: (row) => row.type },
       { id: 'os', label: 'OS', defaultVisible: true, render: (row) => row.os, exportValue: (row) => row.os },
       { id: 'location', label: 'Location', defaultVisible: true, render: (row) => row.location ?? '—', exportValue: (row) => row.location ?? '—' },
-      { id: 'account', label: 'Account', defaultVisible: true, render: (row) => row.account, exportValue: (row) => row.account },
+      {
+        id: 'account',
+        label: 'Account',
+        defaultVisible: true,
+        render: (row) => (
+          <Tooltip content={renderAccountTooltip(row.account)}>
+            <span style={{ borderBottom: '1px dotted var(--mute, #6b7280)', cursor: 'help' }}>{row.account}</span>
+          </Tooltip>
+        ),
+        exportValue: (row) => row.account,
+      },
       { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType ?? '—', exportValue: (row) => row.accountType ?? '—' },
       { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group ?? '—', exportValue: (row) => row.group ?? '—' },
       { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore), exportValue: (row) => row.riskScore == null ? '—' : `${row.riskScore}` },
-      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status), exportValue: (row) => row.status ?? '—' },
+      { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status, row), exportValue: (row) => row.status ?? '—' },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt ?? '—' },
       { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt ?? '—' },
       { id: 'coverageGaps', label: 'Exposure gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => row.coverageGaps.length > 0 ? row.coverageGaps.join(', ') : 'None' },
@@ -1481,8 +1570,38 @@ export function AssetsTable() {
       { id: 'name', label: 'Account name', fixed: true, defaultVisible: true, render: (row) => <strong>{row.name}</strong>, exportValue: (row) => row.name },
       { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType ?? '—', exportValue: (row) => row.accountType ?? '—' },
       { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group ?? '—', exportValue: (row) => row.group ?? '—' },
-      { id: 'deviceCount', label: 'Devices', defaultVisible: true, render: (row) => row.deviceCount ?? 0, exportValue: (row) => `${row.deviceCount ?? 0}` },
-      { id: 'blocked', label: 'Blocked', defaultVisible: true, render: (row) => (row.blocked ? <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span> : <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>), exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked') },
+      {
+        id: 'deviceCount',
+        label: 'Devices',
+        defaultVisible: true,
+        render: (row) => {
+          const count = row.deviceCount ?? 0;
+          if (count === 0) return 0;
+
+          return (
+            <Tooltip content={renderAccountDeviceTooltip(row.name)}>
+              <span style={{ borderBottom: '1px dotted var(--mute, #6b7280)', cursor: 'help' }}>{count}</span>
+            </Tooltip>
+          );
+        },
+        exportValue: (row) => `${row.deviceCount ?? 0}`,
+      },
+      {
+        id: 'blocked',
+        label: 'Blocked',
+        defaultVisible: true,
+        render: (row) => {
+          const pill = row.blocked ? (
+            <Tooltip content={renderAccountBlockedTooltip(row)}>
+              <span className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span>
+            </Tooltip>
+          ) : (
+            <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>
+          );
+          return pill;
+        },
+        exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked'),
+      },
       { id: 'lastLogin', label: 'Last login', defaultVisible: true, render: (row) => (row.lastLoginDays == null ? '—' : row.lastLoginDays === 0 ? 'Today' : `${row.lastLoginDays}d ago`), exportValue: (row) => row.lastLoginDays == null ? '—' : `${row.lastLoginDays}` },
       { id: 'coverageGaps', label: 'Exposure gaps', defaultVisible: true, render: (row) => renderCoverageGapCell(row), exportValue: (row) => formatCoverageGapsFromSourceCoverage(row) },
       { id: 'sourceCoverage', label: 'Source coverage', defaultVisible: true, render: (row) => renderSourceCoverageCell(row), exportValue: (row) => formatSourceCoverageText((Object.keys(row.sourceCoverage) as SourceName[]).filter((sourceName) => row.sourceCoverage[sourceName].status !== 'N/A')) },
