@@ -2360,13 +2360,33 @@ export function AssetsTable() {
               {linkedDevices.length === 0 ? (
                 <p className={styles.detailMuted}>None</p>
               ) : (
-                linkedDevices.map((device) => (
-                  <div className={styles.detailAssociatedItem} key={device.id}>
-                    <button className={styles.detailLink} onClick={() => openDeviceDetail(device)} type="button">{device.name}</button>
-                    <div className={styles.detailAssociatedMeta}>{device.type} • Last connected {formatRelativeTime(device.lastConnectedAt)}</div>
-                    <div className={styles.detailAssociatedMeta}>Risk score {renderRiskScorePill(device.riskScore)}</div>
-                  </div>
-                ))
+                linkedDevices.map((device) => {
+                  const exposureGapList = Array.isArray(device.coverageGaps) ? device.coverageGaps : [];
+                  const gapText = exposureGapList.length > 0 ? exposureGapList.join(', ') : 'None';
+
+                  return (
+                    <div className={styles.detailAssociatedItem} key={device.id}>
+                      <button className={styles.detailLink} onClick={() => openDeviceDetail(device)} type="button">{device.name}</button>
+                      <div className={`${styles.detailAssociatedMeta} ${styles.detailAssociatedMetaMuted}`}>
+                        {`${device.type} · Last connected ${formatRelativeTime(device.lastConnectedAt)}`}
+                      </div>
+                      <div className={styles.detailAssociatedMeta}>
+                        {`Risk score ${device.riskScore}`}
+                        {renderRiskScorePill(device.riskScore)}
+                      </div>
+                      <div className={styles.detailAssociatedMeta}>
+                        {exposureGapList.length === 0 ? (
+                          `Exposure gap: None`
+                        ) : (
+                          <>
+                            Exposure gap: {' '}
+                            <span className={styles.detailAssociatedGapValue}>{gapText}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
               )}
             </div>
           </div>

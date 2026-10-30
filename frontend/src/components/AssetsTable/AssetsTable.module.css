@@ -1288,19 +1288,43 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .detailAssociatedItem {
   border-top: 1px solid var(--line);
   padding: 9px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .detailAssociatedMeta {
   color: var(--ink);
   margin-top: 2px;
-  font-size: var(--detail-body-size);
-  line-height: var(--detail-body-line-height);
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.detailAssociatedMetaMuted {
+  color: var(--mute);
+}
+
+.detailAssociatedSeparator {
+  margin: 0 4px;
+  color: var(--mute);
+}
+
+.detailAssociatedGapLabel {
+  color: var(--ink);
+}
+
+.detailAssociatedGapNone {
+  color: var(--ink);
+}
+
+.detailAssociatedGapValue {
+  color: var(--bad);
 }
 
 .detailAssociatedItem .detailAssociatedMeta,
 .detailAssociatedItem .detailLink {
-  font-size: var(--detail-body-size);
-  line-height: var(--detail-body-line-height);
+  font-size: 14px;
+  line-height: 20.3px;
 }
 
 .detailAssociatedItem .detailLink {
