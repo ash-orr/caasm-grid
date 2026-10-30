@@ -2207,6 +2207,10 @@ export function AssetsTable() {
       const deviceRecord = detailView.record;
       const accountName = deviceRecord.account;
       const linkedAccount = accountRows.find((account) => account.name === accountName) ?? null;
+      const linkedDevices = devices
+        .filter((device) => device.account === accountName)
+        .sort((left, right) => (right.riskScore ?? Number.NEGATIVE_INFINITY) - (left.riskScore ?? Number.NEGATIVE_INFINITY) || left.name.localeCompare(right.name));
+      const accountGaps = deviceRecord.coverageGaps ?? [];
       const detailTabs = ['Overview', 'Exposure coverage', 'On this device', 'Alerts', 'ZTNA access', 'Connection history'];
       const activeDetailTab = detailTabByKind.device;
       const sourceRows = toSourceCoverageRows(deviceRecord);
@@ -2277,6 +2281,25 @@ export function AssetsTable() {
                   </dd>
                   <dt>Account type</dt><dd>{deviceRecord.accountType}</dd>
                   <dt>Group</dt><dd>{deviceRecord.group}</dd>
+                  <dt>Exposure gap</dt>
+                  <dd>
+                    {accountGaps.length === 0 ? 'None' : <span className={styles.detailAssociatedGapValue}>{accountGaps.join(', ')}</span>}
+                  </dd>
+                  <dt>Device(s)</dt>
+                  <dd>
+                    <div>{linkedDevices.length} total</div>
+                    {linkedDevices.map((linkedDevice) => (
+                      <div key={linkedDevice.id}>
+                        {linkedDevice.id === deviceRecord.id ? (
+                          <span>{linkedDevice.name}</span>
+                        ) : (
+                          <button className={styles.detailLink} onClick={() => openDeviceDetail(linkedDevice)} type="button">
+                            {linkedDevice.name}
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </dd>
                 </dl>
               </div>
             </div>
