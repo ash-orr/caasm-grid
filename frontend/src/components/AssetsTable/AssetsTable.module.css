@@ -64,6 +64,10 @@
   width: auto;
   height: 32px;
   padding: 7px 9px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--b-tx);
 }
 
 .toolbarIconButton svg {
@@ -85,15 +89,6 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   border-color: var(--acc);
 }
 
-.btn {
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  border-radius: 6px;
-  color: var(--ink);
-  cursor: pointer;
-}
-
 .btnActive {
   background: var(--acc-s);
   border-color: var(--acc);
@@ -102,16 +97,6 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 .addFilterButton {
   width: 100%;
   margin: 0 0 10px;
-}
-
-.btn:hover {
-  border-color: var(--acc);
-}
-
-.btnPrimary {
-  background: var(--acc);
-  border-color: var(--acc);
-  color: #fff;
 }
 
 .searchInput {
@@ -129,12 +114,6 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   display: inline-flex;
   gap: 8px;
   flex-wrap: wrap;
-}
-
-.btnDanger {
-  background: var(--bad);
-  border-color: var(--bad);
-  color: #fff;
 }
 
 .layout {
@@ -462,10 +441,12 @@ button[aria-pressed='true'].toolbarIconButton:focus {
   color: var(--mute);
 }
 
-.footerActions .btn {
+.footerActionButton {
   font-size: 12.5px;
   line-height: 18.125px;
   color: var(--mute);
+  border-color: var(--line);
+  background: var(--panel);
 }
 
 .footerPage {

@@ -442,15 +442,33 @@ test.describe('Typography parity', () => {
     await expect(cancelButton).toHaveCSS('padding-right', '12px');
     await expect(cancelButton).toHaveCSS('padding-bottom', '7px');
     await expect(cancelButton).toHaveCSS('padding-left', '12px');
-    await expect(cancelButton).toHaveCSS('border-radius', '6px');
+    await expect(cancelButton).toHaveCSS('border-radius', '4px');
 
     const applyButton = page.getByRole('button', { name: 'Apply' }).first();
     await expect(applyButton).toHaveCSS('padding-top', '7px');
     await expect(applyButton).toHaveCSS('padding-right', '12px');
     await expect(applyButton).toHaveCSS('padding-bottom', '7px');
     await expect(applyButton).toHaveCSS('padding-left', '12px');
-    await expect(applyButton).toHaveCSS('border-radius', '6px');
-    await expect(applyButton).toHaveCSS('background-color', 'rgb(11, 110, 138)');
+    await expect(applyButton).toHaveCSS('border-radius', '4px');
+    await expect(applyButton).toHaveCSS('background-color', 'rgb(0, 131, 143)');
     await expect(applyButton).toHaveCSS('color', 'rgb(255, 255, 255)');
+  });
+
+  test('matches the prototype button token contract', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Manage filters' }).click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+
+    const cancelButton = dialog.getByRole('button', { name: 'Cancel' }).first();
+    await expect(cancelButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
+    await expect(cancelButton).toHaveCSS('color', 'rgb(0, 124, 150)');
+    await expect(cancelButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(cancelButton).toHaveCSS('border-radius', '4px');
+
+    const primaryButton = dialog.getByRole('button', { name: 'Apply' }).first();
+    await expect(primaryButton).toHaveCSS('background-color', 'rgb(0, 131, 143)');
+    await expect(primaryButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
+    await expect(primaryButton).toHaveCSS('color', 'rgb(255, 255, 255)');
   });
 });

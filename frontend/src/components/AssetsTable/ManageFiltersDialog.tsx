@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FILTER_SCHEMA, type FilterEntity } from '../../filters/schema';
+import sharedButtonStyles from '../../styles/buttonStyles.module.css';
 import styles from './AssetsTable.module.css';
 
 const GROUP_ORDER = ['Default filters', 'General', 'Network (NAC)', 'Risk (NAC)', 'On this device (NAC)'] as const;
@@ -147,9 +148,9 @@ export function ManageFiltersDialog({
         </div>
 
         <div className={styles.popupActions}>
-          <button className={styles.btn} onClick={() => onOpenChange(false)} type="button">Cancel</button>
+          <button className={sharedButtonStyles.buttonSecondary} onClick={() => onOpenChange(false)} type="button">Cancel</button>
           <button
-            className={`${styles.btn} ${styles.btnPrimary}`}
+            className={sharedButtonStyles.buttonPrimary}
             onClick={() => {
               onApply(draft);
               onOpenChange(false);

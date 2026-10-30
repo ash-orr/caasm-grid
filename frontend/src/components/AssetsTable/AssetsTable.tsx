@@ -37,6 +37,7 @@ import {
 } from './sourceColumns';
 import { StatusPill } from '../StatusPill';
 import statusPillStyles from '../StatusPill/StatusPill.module.css';
+import sharedButtonStyles from '../../styles/buttonStyles.module.css';
 import styles from './AssetsTable.module.css';
 import { renderRiskScorePill, renderStatusCell } from './cellRenderers';
 import { getSourceFieldAgreementRows } from './sourceAgreement';
@@ -2517,7 +2518,7 @@ export function AssetsTable() {
           <button
             aria-label={showFilters ? `Hide filters${filterCount > 0 ? ` (${filterCount} active)` : ''}` : `Show filters${filterCount > 0 ? ` (${filterCount} active)` : ''}`}
             aria-pressed={showFilters}
-            className={`${styles.btn} ${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
+            className={`${styles.toolbarIconButton} ${showFilters ? styles.toolbarIconButtonActive : ''}`}
             onClick={() => setShowFilters((prev) => !prev)}
             type="button"
           >
@@ -2545,7 +2546,7 @@ export function AssetsTable() {
         <div className={styles.selectionActions}>
           {selectionActions.map((action) => (
             <button
-              className={`${styles.btn} ${action.danger ? styles.btnDanger : ''}`}
+              className={`${sharedButtonStyles.button} ${action.danger ? sharedButtonStyles.buttonDanger : sharedButtonStyles.buttonSecondary}`}
               key={action.label}
               onClick={() => runSelectionAction(action.label)}
               type="button"
@@ -2561,7 +2562,7 @@ export function AssetsTable() {
           <button
             aria-label="Show/hide columns"
             aria-pressed={columnPickerOpen}
-            className={`${styles.btn} ${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
+            className={`${styles.toolbarIconButton} ${columnPickerOpen ? styles.toolbarIconButtonActive : ''}`}
             onClick={openColumnPickerDirectly}
             ref={columnsButtonRef}
             type="button"
@@ -2577,7 +2578,7 @@ export function AssetsTable() {
           if (open) setColumnPickerOpen(false);
         }}>
           <DropdownMenu.Trigger asChild>
-            <button className={styles.btn} type="button">
+            <button className={sharedButtonStyles.buttonSecondary} type="button">
               Views
             </button>
           </DropdownMenu.Trigger>
@@ -2630,7 +2631,7 @@ export function AssetsTable() {
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <button className={`${styles.btn} ${styles.btnPrimary}`} type="button">
+            <button className={sharedButtonStyles.buttonPrimary} type="button">
               Export
             </button>
           </DropdownMenu.Trigger>
@@ -2705,7 +2706,7 @@ export function AssetsTable() {
           </div>
 
           <button
-            className={`${styles.btn} ${styles.addFilterButton}`}
+            className={`${sharedButtonStyles.buttonSecondary} ${styles.addFilterButton}`}
             onClick={openManageFilters}
             ref={manageFiltersButtonRef}
             type="button"
@@ -2840,7 +2841,7 @@ export function AssetsTable() {
                 </select>
               </label>
               <button
-                className={styles.btn}
+                className={`${styles.footerActionButton} ${sharedButtonStyles.buttonSecondary}`}
                 disabled={currentPage <= 0}
                 onClick={() => setPageByTab((prev) => ({ ...prev, [tab]: Math.max(0, prev[tab] - 1) }))}
                 type="button"
@@ -2849,7 +2850,7 @@ export function AssetsTable() {
               </button>
               <span className={styles.footerPage}>Page {currentPage + 1} of {totalPages}</span>
               <button
-                className={styles.btn}
+                className={`${styles.footerActionButton} ${sharedButtonStyles.buttonSecondary}`}
                 disabled={currentPage >= totalPages - 1}
                 onClick={() => setPageByTab((prev) => ({ ...prev, [tab]: Math.min(totalPages - 1, prev[tab] + 1) }))}
                 type="button"
@@ -2898,13 +2899,13 @@ export function AssetsTable() {
               value={saveViewName}
             />
             <div className={styles.dialogActions}>
-              <button className={styles.btn} onClick={() => setSaveViewDialogOpen(false)} type="button">Cancel</button>
+              <button className={sharedButtonStyles.buttonSecondary} onClick={() => setSaveViewDialogOpen(false)} type="button">Cancel</button>
               {activeSavedViewName ? (
-                <button className={styles.btn} onClick={() => handleSaveView('update')} type="button">
+                <button className={sharedButtonStyles.buttonSecondary} onClick={() => handleSaveView('update')} type="button">
                   Update "{activeSavedViewName}"
                 </button>
               ) : null}
-              <button className={styles.btn} disabled={!saveViewName.trim()} onClick={() => handleSaveView('saveAsNew')} type="button">
+              <button className={sharedButtonStyles.buttonPrimary} disabled={!saveViewName.trim()} onClick={() => handleSaveView('saveAsNew')} type="button">
                 Save as new
               </button>
             </div>
@@ -2921,8 +2922,8 @@ export function AssetsTable() {
               This removes the view for everyone in the organization, not just you, and cannot be undone.
             </p>
             <div className={styles.dialogActions}>
-              <button className={styles.btn} onClick={() => setRemoveViewDialogOpen(false)} type="button">Cancel</button>
-              <button className={`${styles.btn} ${styles.btnDanger}`} onClick={handleRemoveViewConfirmed} type="button">
+              <button className={sharedButtonStyles.buttonSecondary} onClick={() => setRemoveViewDialogOpen(false)} type="button">Cancel</button>
+              <button className={`${sharedButtonStyles.buttonPrimary} ${sharedButtonStyles.buttonDanger}`} onClick={handleRemoveViewConfirmed} type="button">
                 Remove view
               </button>
             </div>
@@ -3007,9 +3008,9 @@ export function AssetsTable() {
             </div>
 
             <div className={styles.popupActions}>
-              <button className={styles.btn} onClick={closeSeeMore} type="button">Cancel</button>
+              <button className={sharedButtonStyles.buttonSecondary} onClick={closeSeeMore} type="button">Cancel</button>
               <button
-                className={styles.btn}
+                className={sharedButtonStyles.buttonPrimary}
                 onClick={() => {
                   setChecklistValues(seeMoreOpenFor, seeMoreDraftValues);
                   closeSeeMore();

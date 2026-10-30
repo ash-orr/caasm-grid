@@ -1,0 +1,124 @@
+.button,
+.buttonSecondary,
+.buttonTertiary,
+.buttonDanger,
+.buttonPrimary {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 7px 12px;
+  border: 1px solid var(--b-bd);
+  border-radius: 4px;
+  background: var(--b-bg);
+  color: var(--b-tx);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.button:not(:disabled):hover,
+.buttonSecondary:not(:disabled):hover,
+.buttonTertiary:not(:disabled):hover {
+  background: var(--b-h);
+}
+
+.button:not(:disabled):active,
+.buttonSecondary:not(:disabled):active,
+.buttonTertiary:not(:disabled):active {
+  background: var(--b-p);
+}
+
+.buttonSecondary {
+  background: var(--b-bg);
+  border-color: var(--b-bd);
+  color: var(--b-tx);
+}
+
+.buttonSecondary:disabled,
+.button:disabled,
+.buttonDanger:disabled,
+.buttonTertiary:disabled {
+  cursor: not-allowed;
+  color: var(--mute);
+  border-color: var(--line);
+  background: var(--b-bg);
+}
+
+.buttonPrimary {
+  background: var(--b-pri);
+  border-color: var(--b-pri);
+  color: #fff;
+}
+
+.buttonPrimary:not(:disabled):hover {
+  background: var(--b-pri-h);
+  border-color: var(--b-pri-h);
+}
+
+.buttonPrimary:not(:disabled):active {
+  background: var(--b-pri-p);
+  border-color: var(--b-pri-p);
+}
+
+.buttonTertiary {
+  background: transparent;
+  border-color: transparent;
+  color: var(--b-tx);
+}
+
+.buttonTertiary:not(:disabled):hover {
+  background: var(--b-h);
+}
+
+.buttonTertiary:not(:disabled):active {
+  background: var(--b-p);
+}
+
+.buttonDanger {
+  background: var(--b-bg);
+  border-color: var(--b-red);
+  color: var(--b-red-tx);
+}
+
+.buttonDanger:not(:disabled):hover {
+  background: var(--b-red-hb);
+}
+
+.buttonDanger:not(:disabled):active {
+  background: var(--b-red-pb);
+}
+
+.buttonPrimary.buttonDanger,
+.buttonSecondary.buttonDanger,
+.buttonTertiary.buttonDanger {
+  background: var(--b-red);
+  border-color: var(--b-red);
+  color: #fff;
+}
+
+.buttonPrimary.buttonDanger:not(:disabled):hover,
+.buttonSecondary.buttonDanger:not(:disabled):hover,
+.buttonTertiary.buttonDanger:not(:disabled):hover {
+  background: var(--b-red-h);
+  border-color: var(--b-red-h);
+}
+
+.buttonPrimary.buttonDanger:not(:disabled):active,
+.buttonSecondary.buttonDanger:not(:disabled):active,
+.buttonTertiary.buttonDanger:not(:disabled):active {
+  background: var(--b-red-p);
+  border-color: var(--b-red-p);
+}
+
+.buttonTertiary:disabled {
+  border-color: transparent;
+  background: transparent;
+}
+
+.buttonPrimary:disabled,
+.buttonPrimary.buttonDanger:disabled {
+  background: var(--b-dis-bg);
+  border-color: var(--b-dis-bg);
+  color: var(--b-dis-tx);
+}
