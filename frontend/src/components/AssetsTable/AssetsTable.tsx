@@ -310,6 +310,20 @@ function displayValue(value: string | number | null | undefined): string {
   return String(value);
 }
 
+function formatEnrolledDate(isoDate: string | null | undefined): string {
+  if (!isoDate) return '—';
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function getRiskScoreStatusLabel(score: number | null): 'Block' | 'Restrict' | 'Allow' | null {
+  if (score == null) return null;
+  if (score >= 70) return 'Block';
+  if (score >= 40) return 'Restrict';
+  return 'Allow';
+}
+
 function formatCoverageGapsFromSourceCoverage(row: AccountRecord | DeviceRecord): string {
   const gaps = Object.entries(row.sourceCoverage)
     .filter((entry) => entry[1].status === 'Not present')
@@ -2238,7 +2252,7 @@ export function AssetsTable() {
                   <dt>AgentP last reported</dt><dd>{formatRelativeTime(deviceRecord.agentpLastReported)}</dd>
                   <dt>Last connected</dt><dd>{formatRelativeTime(deviceRecord.lastConnectedAt)}</dd>
                   <dt>Auth type</dt><dd>{displayValue(deviceRecord.authType)}</dd>
-                  <dt>Agent version</dt><dd>{displayValue(deviceRecord.agentVersion)}</dd>
+                  <dt>Agent version</dt><dd>{deviceRecord.agentVersion ? `${deviceRecord.agentVersion} — enrolled ${formatEnrolledDate(deviceRecord.enrolledAt)}` : '—'}</dd>
                 </dl>
               </div>
 
@@ -2253,7 +2267,11 @@ export function AssetsTable() {
                 <div className={styles.detailCard}>
                   <h3 className={styles.detailCardTitle}>Current risk score</h3>
                   <dl className={styles.detailKv}>
-                    <dt>Risk score</dt><dd>{renderRiskScorePill(deviceRecord.riskScore)}</dd>
+                    <dt>Risk score</dt><dd>
+                      {renderRiskScorePill(deviceRecord.riskScore)}
+                      {deviceRecord.riskScore != null && getRiskScoreStatusLabel(deviceRecord.riskScore) ? ` (${getRiskScoreStatusLabel(deviceRecord.riskScore)})` : ''}
+                    </dd>
+                    <dt>Risk policy</dt><dd><i>{displayValue(deviceRecord.riskPolicy)}</i></dd>
                     <dt>Violations</dt>
                     <dd>
                       {deviceRecord.riskViolations.length > 0 ? (
@@ -2262,6 +2280,7 @@ export function AssetsTable() {
                         </ul>
                       ) : 'None'}
                     </dd>
+                    <dt>Access policy</dt><dd>{displayValue(deviceRecord.accessPolicy)}</dd>
                   </dl>
                 </div>
               )}
@@ -2395,6 +2414,7 @@ export function AssetsTable() {
                       </div>
                       <div className={styles.detailAssociatedMeta}>
                         {`Risk score ${device.riskScore}`}
+                        {device.riskScore == null ? null : ' '}
                         {renderRiskScorePill(device.riskScore)}
                       </div>
                       <div className={styles.detailAssociatedMeta}>

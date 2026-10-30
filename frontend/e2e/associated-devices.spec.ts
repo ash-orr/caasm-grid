@@ -16,7 +16,7 @@ test('associated devices card matches the prototype for account detail items', a
   expect(firstItemBox).not.toBeNull();
   expect(Math.abs((firstItemBox?.height ?? 0) - 106.3)).toBeLessThanOrEqual(0.5);
 
-  const metaLine = firstItem.getByText('IoT/Printer · Last connected 14d ago', { exact: true });
+  const metaLine = firstItem.getByText(/^IoT\/Printer · Last connected \d+d ago$/, { exact: true });
   await expect(metaLine).toHaveCount(1);
   await expect(metaLine).toHaveCSS('color', 'rgb(93, 107, 120)');
   await expect(metaLine).toHaveCSS('font-size', '14px');
