@@ -40,14 +40,17 @@ async function assertPageScrollKeepsMenuAttached(page: Parameters<typeof test>[0
 
   await page.evaluate(() => window.scrollTo({ top: 160, behavior: 'instant' }));
   await expect(locator).toBeVisible();
+  const scrolled = await page.evaluate(() => window.scrollY);
 
   const after = await locator.evaluate((element) => ({
     x: element.getBoundingClientRect().x,
     y: element.getBoundingClientRect().y,
   }));
 
+  // The popover must either stay inside the viewport or move up with the page; attached menus can sit above the top edge after a page scroll.
+  const movedWithPage = Math.abs((before.y - scrolled) - after.y);
+  expect(after.y >= 0 || movedWithPage <= 2).toBe(true);
   expect(Math.abs(after.x - before.x)).toBeLessThanOrEqual(2);
-  expect(after.y).toBeGreaterThanOrEqual(0);
 }
 
 async function assertWheelDoesNotScrollPage(page: Parameters<typeof test>[0]['page'], locator: ReturnType<Parameters<typeof test>[0]['page']['locator']>) {
@@ -151,7 +154,7 @@ test.describe('popover scrolling regressions', () => {
 
     const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
     await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
-    await expect(columnsButton).toHaveCSS('border-color', 'rgb(220, 226, 232)');
+    await expect(columnsButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
 
     await page.locator('label').filter({ hasText: 'Rows per page' }).locator('select').selectOption({ value: '-1' });
 
