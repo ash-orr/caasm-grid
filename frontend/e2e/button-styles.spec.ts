@@ -1,16 +1,32 @@
 import { expect, test } from '@playwright/test';
 
-test('toolbar icon buttons use the secondary button border contract', async ({ page }) => {
+test('buttons match the 32px prototype height and padding contract', async ({ page }) => {
   await page.goto('/');
 
-  const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
-  await expect(columnsButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
-  await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
-  await expect(columnsButton).toHaveCSS('color', 'rgb(0, 124, 150)');
-  await columnsButton.hover();
-  await expect(columnsButton).toHaveCSS('background-color', 'rgb(242, 250, 251)');
-  await expect(columnsButton).toHaveCSS('height', '32px');
-  await expect(columnsButton).toHaveCSS('padding', '7px 9px');
+  const assert32pxButton = async (name: string, expectedPaddingX = '12px', expectedPaddingY = '0px') => {
+    const locator = page.getByRole('button', { name }).first();
+    await expect(locator).toBeVisible();
+    const box = await locator.boundingBox();
+    expect(box).not.toBeNull();
+    expect(Math.abs((box?.height ?? 0) - 32)).toBeLessThan(0.05);
+    await expect(locator).toHaveCSS('padding-top', expectedPaddingY);
+    await expect(locator).toHaveCSS('padding-bottom', expectedPaddingY);
+    await expect(locator).toHaveCSS('padding-left', expectedPaddingX);
+    await expect(locator).toHaveCSS('padding-right', expectedPaddingX);
+  };
+
+  await assert32pxButton('Views');
+  await assert32pxButton('Export');
+  await assert32pxButton('Show/hide columns', '9px', '0px');
+  await assert32pxButton('Hide filters', '9px', '0px');
+  await assert32pxButton('Manage filters');
+  await assert32pxButton('Prev');
+  await assert32pxButton('Next');
+
+  await page.locator('input[aria-label^="Select row"]').first().check();
+  await assert32pxButton('Block');
+  await assert32pxButton('Deactivate');
+  await assert32pxButton('Delete');
 });
 
 test.describe('Button styles', () => {

@@ -438,16 +438,16 @@ test.describe('Typography parity', () => {
     await expect(groupHeading).toHaveCSS('font-weight', '600');
 
     const cancelButton = page.getByRole('button', { name: 'Cancel' }).first();
-    await expect(cancelButton).toHaveCSS('padding-top', '7px');
+    await expect(cancelButton).toHaveCSS('padding-top', '0px');
     await expect(cancelButton).toHaveCSS('padding-right', '12px');
-    await expect(cancelButton).toHaveCSS('padding-bottom', '7px');
+    await expect(cancelButton).toHaveCSS('padding-bottom', '0px');
     await expect(cancelButton).toHaveCSS('padding-left', '12px');
     await expect(cancelButton).toHaveCSS('border-radius', '4px');
 
     const applyButton = page.getByRole('button', { name: 'Apply' }).first();
-    await expect(applyButton).toHaveCSS('padding-top', '7px');
+    await expect(applyButton).toHaveCSS('padding-top', '0px');
     await expect(applyButton).toHaveCSS('padding-right', '12px');
-    await expect(applyButton).toHaveCSS('padding-bottom', '7px');
+    await expect(applyButton).toHaveCSS('padding-bottom', '0px');
     await expect(applyButton).toHaveCSS('padding-left', '12px');
     await expect(applyButton).toHaveCSS('border-radius', '4px');
     await expect(applyButton).toHaveCSS('background-color', 'rgb(0, 131, 143)');
