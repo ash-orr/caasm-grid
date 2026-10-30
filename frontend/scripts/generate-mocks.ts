@@ -106,6 +106,7 @@ export interface DeviceRecord {
   browser: string[];
   browserExtensions: string[];
   agentVersion: string | null;
+  enrolledAt: string | null;
   agentpVersion: string | null;
   riskPolicy: string | null;
   accessPolicy: string | null;
@@ -528,6 +529,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       browser: ['Chrome 124'],
       browserExtensions: [],
       agentVersion: isUncovered ? null : (device.agent ?? '1.1.261'),
+      enrolledAt: isUncovered ? null : (device.enrolled ? new Date(device.enrolled).toISOString() : null),
       agentpVersion: isUncovered ? null : (device.agent ?? '1.1.261'),
       riskPolicy: device.policy ?? 'Corp_Laptop_Policy',
       accessPolicy: device.access ?? 'Onsite_Office_Policy',
@@ -648,6 +650,7 @@ export interface DeviceRecord {
   browser: string[];
   browserExtensions: string[];
   agentVersion: string | null;
+  enrolledAt: string | null;
   agentpVersion: string | null;
   riskPolicy: string | null;
   accessPolicy: string | null;
