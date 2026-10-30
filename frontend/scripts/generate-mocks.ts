@@ -74,6 +74,8 @@ export interface AccountRecord {
   authType: string | null;
   authRepo: AuthRepository;
   nasSite: string | null;
+  byAdmin: string | null;
+  byPolicy: string | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
@@ -89,6 +91,10 @@ export interface DeviceRecord {
   group: string | null;
   riskScore: number | null;
   status: 'Blocked' | 'Archived' | 'No issues' | null;
+  bAdmin: string | null;
+  bPolicy: string | null;
+  bRisk: number | null;
+  bAcct: boolean;
   lastConnectedAt: string | null;
   createdAt: string | null;
   coverageGaps: string[];
@@ -466,6 +472,8 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       nasSite: account.type === 'MAC'
         ? (location === 'Austin HQ' ? 'AUS-HQ-PRN' : location === 'Denver' ? 'DEN-IOT-01' : location === 'London' ? 'LON-IOT-01' : location === 'Singapore' ? 'SIN-IOT-01' : location === 'Remote – US' ? 'US-REMOTE-POOL' : 'FRA-IOT-01')
         : location === 'Austin HQ' ? 'AUS-HQ-01' : location === 'Denver' ? 'DEN-CORE-01' : location === 'London' ? 'LON-CORP-01' : location === 'Singapore' ? 'SIN-CORP-01' : location === 'Remote – US' ? 'US-REMOTE-POOL' : 'FRA-CORE-01',
+      byAdmin: account.byAdmin ?? null,
+      byPolicy: account.byPolicy ?? null,
       sourceCoverage: buildSourceCoverage(
         {
           EntraID: authRepo === 'EntraID' ? true : null,
@@ -512,6 +520,10 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       group: isUncovered ? null : device.group,
       riskScore: isUncovered ? null : device.score,
       status: isUncovered ? null : device.archived ? 'Archived' : device.blocked ? 'Blocked' : 'No issues',
+      bAdmin: device.bAdmin ?? null,
+      bPolicy: device.bPolicy ?? null,
+      bRisk: device.bRisk ?? null,
+      bAcct: Boolean(device.bAcct),
       lastConnectedAt: isUncovered ? null : new Date(nowMs - ((device.id * 17) % 29) * 60 * 60 * 1000).toISOString(),
       createdAt: new Date(nowMs - ((device.id * 11) % 320) * 24 * 60 * 60 * 1000).toISOString(),
       coverageGaps,
@@ -618,6 +630,8 @@ export interface AccountRecord {
   authType: string | null;
   authRepo: AuthRepository;
   nasSite: string | null;
+  byAdmin: string | null;
+  byPolicy: string | null;
   sourceCoverage: SourceCoverage;
   sourceFieldValues: Record<string, SourceFieldValue>;
 }
@@ -633,6 +647,10 @@ export interface DeviceRecord {
   group: string | null;
   riskScore: number | null;
   status: 'Blocked' | 'Archived' | 'No issues' | null;
+  bAdmin: string | null;
+  bPolicy: string | null;
+  bRisk: number | null;
+  bAcct: boolean;
   lastConnectedAt: string | null;
   createdAt: string | null;
   coverageGaps: string[];
