@@ -409,7 +409,7 @@ test.describe('Typography parity', () => {
     const prevButton = page.getByRole('button', { name: 'Prev' }).first();
     await expect(prevButton).toHaveCSS('font-size', '12.5px');
     await expect(prevButton).toHaveCSS('line-height', '18.125px');
-    await expect(prevButton).toHaveCSS('color', 'rgb(93, 107, 120)');
+    await expect(prevButton).toHaveCSS('color', 'rgb(163, 163, 163)');
 
     const rowsPerPageLabel = page.locator('label').filter({ hasText: /Rows per page/ }).first();
     const rowsPerPageLabelHeight = parseFloat(await rowsPerPageLabel.evaluate((element) => getComputedStyle(element).height));

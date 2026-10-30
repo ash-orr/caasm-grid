@@ -40,8 +40,8 @@
 .buttonDanger:disabled,
 .buttonTertiary:disabled {
   cursor: not-allowed;
-  color: var(--mute);
-  border-color: var(--line);
+  color: var(--b-dis-tx);
+  border-color: var(--b-dis-bg);
   background: var(--b-bg);
 }
 
@@ -81,37 +81,42 @@
   color: var(--b-red-tx);
 }
 
-.buttonDanger:not(:disabled):hover {
+.buttonTertiary.buttonDanger {
+  background: transparent;
+  border-color: transparent;
+  color: var(--b-red-tx);
+}
+
+.buttonDanger:not(:disabled):hover,
+.buttonSecondary.buttonDanger:not(:disabled):hover,
+.buttonTertiary.buttonDanger:not(:disabled):hover {
   background: var(--b-red-hb);
 }
 
-.buttonDanger:not(:disabled):active {
+.buttonDanger:not(:disabled):active,
+.buttonSecondary.buttonDanger:not(:disabled):active,
+.buttonTertiary.buttonDanger:not(:disabled):active {
   background: var(--b-red-pb);
 }
 
-.buttonPrimary.buttonDanger,
-.buttonSecondary.buttonDanger,
-.buttonTertiary.buttonDanger {
+.buttonPrimary.buttonDanger {
   background: var(--b-red);
   border-color: var(--b-red);
   color: #fff;
 }
 
-.buttonPrimary.buttonDanger:not(:disabled):hover,
-.buttonSecondary.buttonDanger:not(:disabled):hover,
-.buttonTertiary.buttonDanger:not(:disabled):hover {
+.buttonPrimary.buttonDanger:not(:disabled):hover {
   background: var(--b-red-h);
   border-color: var(--b-red-h);
 }
 
-.buttonPrimary.buttonDanger:not(:disabled):active,
-.buttonSecondary.buttonDanger:not(:disabled):active,
-.buttonTertiary.buttonDanger:not(:disabled):active {
+.buttonPrimary.buttonDanger:not(:disabled):active {
   background: var(--b-red-p);
   border-color: var(--b-red-p);
 }
 
-.buttonTertiary:disabled {
+.buttonTertiary:disabled,
+.buttonTertiary.buttonDanger:disabled {
   border-color: transparent;
   background: transparent;
 }
