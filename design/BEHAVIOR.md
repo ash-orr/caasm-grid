@@ -198,6 +198,18 @@ Coverage gaps by group: percentage and count of devices with gaps per group, sor
 - Dark mode: primary action buttons use #1D4954 (with white text), and link text uses #4fb8d4. Light mode is unchanged.
 - Grey-out style for disabled menu items: reduced opacity and a not-allowed cursor, with a hover tooltip instead of the browser default.
 
+## Button styling (Figma Button v2)
+The shared button contract follows the prototype in `design/prototype/caasm-console.html`.
+
+- Secondary buttons are the default style: outlined cyan border and text, with a very light cyan hover and pressed fill; disabled secondary buttons use the muted disabled token set.
+- Primary buttons use the solid teal background (`--b-pri`), with hover/pressed variants (`--b-pri-h`, `--b-pri-p`) and white text. Dark mode keeps the same layout but swaps to the dark teal values.
+- Tertiary buttons are transparent, borderless, and have no visible background unless hovered/pressed; disabled tertiary buttons remain transparent with the disabled token palette.
+- Destructive buttons use red text and red hover/pressed surfaces, or a solid red primary destructive button. Every delete action uses the destructive style.
+- Icon buttons keep the tighter padding `7px 9px`; text buttons stay at `7px 12px`.
+- The border radius is `4px` and the button heights remain the existing fixed heights from the prototype.
+- The button system does not adopt the Open Sans/28px small-size variant or the loading-state button pattern from the old design.
+- A tertiary destructive style is defined in the shared tokens and can exist, but it is intentionally unused in the current UI.
+
 ## Backend questions
 Add these to the original questions and assumptions:
 
