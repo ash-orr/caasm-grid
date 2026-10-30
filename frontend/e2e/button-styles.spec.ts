@@ -29,6 +29,17 @@ test('buttons match the 32px prototype height and padding contract', async ({ pa
   await assert32pxButton('Delete');
 });
 
+test('toolbar icon button uses the secondary border contract when idle and on hover', async ({ page }) => {
+  await page.goto('/');
+
+  const columnsButton = page.getByRole('button', { name: 'Show/hide columns' }).first();
+  await expect(columnsButton).toHaveCSS('border-color', 'rgb(0, 131, 143)');
+  await expect(columnsButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  await expect(columnsButton).toHaveCSS('color', 'rgb(0, 124, 150)');
+  await columnsButton.hover();
+  await expect(columnsButton).toHaveCSS('background-color', 'rgb(242, 250, 251)');
+});
+
 test.describe('Button styles', () => {
   test('matches the prototype button token contract in light mode', async ({ page }) => {
     await page.goto('/');

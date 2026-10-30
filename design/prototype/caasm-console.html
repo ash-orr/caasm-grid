@@ -65,7 +65,7 @@ tbody tr[style*='cursor:default']:hover{background:color-mix(in srgb,var(--mute)
 .hist i{width:100%;border-radius:3px 3px 0 0;display:block}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
 .toolbar input[type=search]{flex:1;min-width:180px;max-width:340px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
-.btn{padding:7px 12px;border:1px solid var(--b-bd);background:var(--b-bg);color:var(--b-tx);border-radius:4px;cursor:pointer}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border:1px solid var(--b-bd);background:var(--b-bg);color:var(--b-tx);border-radius:4px;cursor:pointer}
 .btn:not(:disabled):hover{background:var(--b-h)}.btn:not(:disabled):active{background:var(--b-p)}
 .btn.pri{background:var(--b-pri);border-color:var(--b-pri);color:#fff}
 .btn.pri:not(:disabled):hover{background:var(--b-pri-h);border-color:var(--b-pri-h)}.btn.pri:not(:disabled):active{background:var(--b-pri-p);border-color:var(--b-pri-p)}
@@ -76,7 +76,7 @@ tbody tr[style*='cursor:default']:hover{background:color-mix(in srgb,var(--mute)
 .btn.pri.dng:not(:disabled):hover{background:var(--b-red-h);border-color:var(--b-red-h)}.btn.pri.dng:not(:disabled):active{background:var(--b-red-p);border-color:var(--b-red-p)}
 .btn:disabled{cursor:not-allowed;color:var(--b-dis-tx);border-color:var(--b-dis-bg);background:var(--b-bg)}.btn.ter:disabled{border-color:transparent;background:transparent}
 .btn.pri:disabled{background:var(--b-dis-bg);border-color:var(--b-dis-bg);color:var(--b-dis-tx)}
-.btn.ibtn{padding:7px 9px}
+.btn.ibtn{padding:0 9px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .layout{display:flex;gap:12px;align-items:flex-start}
 .filters{width:230px;flex:none;padding:14px}
