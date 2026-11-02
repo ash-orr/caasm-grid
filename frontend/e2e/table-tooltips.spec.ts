@@ -92,6 +92,48 @@ test.describe('table cell tooltips', () => {
     await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
   });
 
+  test('Account tooltip matches the prototype layout and styling', async ({ page }) => {
+    const row = page.locator('tbody tr').filter({ hasText: 'drew@acme.com' }).first();
+    const trigger = row.locator('span').filter({ hasText: 'drew@acme.com' }).first();
+    await trigger.hover();
+
+    const tooltip = page.getByRole('tooltip').filter({ hasText: 'Account' }).first();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toHaveCSS('font-size', '12.5px');
+    await expect(tooltip).toHaveCSS('padding', '12px 14px');
+    await expect(tooltip).toHaveCSS('border-radius', '8px');
+    await expect(tooltip).toHaveCSS('border-color', 'rgb(220, 226, 232)');
+    await expect(tooltip).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(tooltip.locator('svg')).toHaveCount(0);
+
+    const label = tooltip.locator('span').filter({ hasText: 'Account' }).first();
+    await expect(label).toHaveCSS('color', 'rgb(93, 107, 120)');
+    await expect(tooltip).toContainText('Account');
+    await expect(tooltip).toContainText('Type');
+    await expect(tooltip).toContainText('Group');
+    await expect(tooltip).toContainText('Devices');
+    await expect(tooltip).toContainText('Exposure gap');
+    await expect(tooltip).not.toContainText(':');
+    await expect(tooltip.locator('strong')).toHaveCount(1);
+  });
+
+  test('Devices tooltip matches the prototype layout and styling', async ({ page }) => {
+    await page.getByRole('button', { name: 'Accounts' }).click();
+    const row = page.locator('tbody tr').filter({ hasText: 'drew@acme.com' }).first();
+    const trigger = row.locator('span').filter({ hasText: '5' }).first();
+    await trigger.hover();
+
+    const tooltip = page.getByRole('tooltip').first();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toContainText('Device');
+    await expect(tooltip).toContainText('Type');
+    await expect(tooltip).toContainText('Risk score');
+    await expect(tooltip).toContainText('Last connected');
+    await expect(tooltip).toContainText('Exposure gap');
+    await expect(tooltip.locator('text=+2 more')).toBeVisible();
+    await expect(tooltip.locator('strong')).toHaveCount(3);
+  });
+
   test('Accounts blocked status pill keeps exact text and styling inside the tooltip wrapper', async ({ page }) => {
     await page.getByRole('button', { name: 'Accounts' }).click();
     await page.locator('label').filter({ hasText: 'Rows per page' }).locator('select').selectOption({ value: '-1' });

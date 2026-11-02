@@ -948,21 +948,67 @@ button[aria-pressed='true'].toolbarIconButton:focus {
 
 .tooltipContent {
   z-index: 100;
-  max-width: min(32ch, 260px);
-  border-radius: 6px;
+  max-width: min(560px, calc(100vw - 16px));
   border: 1px solid var(--line);
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
-  padding: 6px 8px;
-  font-size: 12px;
+  padding: 12px 14px;
+  font-size: 12.5px;
   line-height: 1.4;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   white-space: normal;
   overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.prototypeTip {
+  display: grid;
+  gap: 0;
+}
+
+.accountGrid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px 16px;
+  white-space: nowrap;
+  align-items: center;
+}
+
+.tipLabel {
+  color: var(--mute);
+}
+
+.deviceGrid {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 7px 16px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.deviceHeader {
+  color: var(--mute);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.deviceMore {
+  margin-top: 8px;
+  color: var(--mute);
+}
+
+.blockedReasons {
+  display: grid;
+  gap: 4px;
+}
+
+.blockedReason {
+  display: block;
 }
 
 .tooltipArrow {
-  fill: var(--panel);
+  display: none;
 }
 
 .detailWarnIcon {

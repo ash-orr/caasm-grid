@@ -10,7 +10,7 @@ interface TooltipProps {
   side?: 'top' | 'right' | 'bottom' | 'left';
 }
 
-export function Tooltip({ children, content, disabled = false, open, side = 'top' }: TooltipProps) {
+export function Tooltip({ children, content, disabled = false, open, side = 'bottom' }: TooltipProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = open !== undefined;
   const effectiveOpen = isControlled ? open : internalOpen;
@@ -56,12 +56,12 @@ export function Tooltip({ children, content, disabled = false, open, side = 'top
           <TooltipPrimitive.Content
             side={side}
             sideOffset={6}
+            align="start"
             className={styles.tooltipContent}
             onMouseEnter={() => handleOpenChange(true)}
             onMouseLeave={() => handleOpenChange(false)}
           >
             {content}
-            <TooltipPrimitive.Arrow className={styles.tooltipArrow} width={10} height={5} />
           </TooltipPrimitive.Content>
         </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>

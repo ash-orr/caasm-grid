@@ -227,12 +227,19 @@ function renderAccountTooltip(accountName: string): ReactNode {
   const exposureGaps = account ? Object.entries(account.sourceCoverage).filter(([, entry]) => entry.status === 'Not present').map(([sourceName]) => sourceName) : [];
 
   return (
-    <div>
-      <div style={{ fontWeight: 600, marginBottom: '4px' }}>Account</div>
-      <div>Type: {accountType}</div>
-      <div>Group: {group}</div>
-      <div>Devices: {accountDevices.length}</div>
-      <div>Exposure gap: {exposureGaps.length > 0 ? exposureGaps.slice(0, 2).join(', ') + (exposureGaps.length > 2 ? ` +${exposureGaps.length - 2}` : '') : 'None'}</div>
+    <div className={styles.prototypeTip}>
+      <div className={styles.accountGrid}>
+        <span className={styles.tipLabel}>Account</span>
+        <strong>{accountName}</strong>
+        <span className={styles.tipLabel}>Type</span>
+        <span>{accountType}</span>
+        <span className={styles.tipLabel}>Group</span>
+        <span>{group}</span>
+        <span className={styles.tipLabel}>Devices</span>
+        <span>{accountDevices.length}</span>
+        <span className={styles.tipLabel}>Exposure gap</span>
+        <span>{exposureGaps.length > 0 ? exposureGaps.slice(0, 2).join(', ') + (exposureGaps.length > 2 ? ` +${exposureGaps.length - 2}` : '') : 'None'}</span>
+      </div>
     </div>
   );
 }
@@ -247,24 +254,24 @@ function renderAccountDeviceTooltip(accountName: string): ReactNode {
   const total = accountDevices.length;
 
   return (
-    <div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr 1fr 1.4fr 1.2fr', gap: '4px 8px', alignItems: 'center' }}>
-        <div style={{ fontWeight: 600 }}>Device</div>
-        <div style={{ fontWeight: 600 }}>Type</div>
-        <div style={{ fontWeight: 600 }}>Risk score</div>
-        <div style={{ fontWeight: 600 }}>Last connected</div>
-        <div style={{ fontWeight: 600 }}>Exposure gap</div>
+    <div className={styles.prototypeTip}>
+      <div className={styles.deviceGrid}>
+        <div className={styles.deviceHeader}>Device</div>
+        <div className={styles.deviceHeader}>Type</div>
+        <div className={styles.deviceHeader}>Risk score</div>
+        <div className={styles.deviceHeader}>Last connected</div>
+        <div className={styles.deviceHeader}>Exposure gap</div>
         {preview.map((device) => (
           <>
-            <div key={`${device.id}-name`}>{device.name}</div>
+            <div key={`${device.id}-name`}><strong>{device.name}</strong></div>
             <div key={`${device.id}-type`}>{device.type}</div>
-            <div key={`${device.id}-risk`}>{device.riskScore ?? '—'}</div>
+            <div key={`${device.id}-risk`}><span className={statusPillStyles.score}>{device.riskScore ?? '—'}</span></div>
             <div key={`${device.id}-connected`}>{formatRelativeTime(device.lastConnectedAt)}</div>
             <div key={`${device.id}-gaps`}>{device.coverageGaps.length ? device.coverageGaps.slice(0, 2).join(', ') + (device.coverageGaps.length > 2 ? ` +${device.coverageGaps.length - 2}` : '') : 'None'}</div>
           </>
         ))}
       </div>
-      {total > 3 ? <div style={{ marginTop: '4px' }}>+{total - 3} more</div> : null}
+      {total > 3 ? <div className={styles.deviceMore}>+{total - 3} more</div> : null}
     </div>
   );
 }
@@ -278,9 +285,9 @@ function renderAccountBlockedTooltip(account: AccountRecord | AccountFilterRow):
   if (reasons.length === 0) return undefined;
 
   return (
-    <div>
-      {reasons.map((reason, index) => (
-        <div key={reason} style={{ marginTop: index === 0 ? undefined : '4px' }}>{reason}</div>
+    <div className={styles.blockedReasons}>
+      {reasons.map((reason) => (
+        <span key={reason} className={styles.blockedReason}>{reason}</span>
       ))}
     </div>
   );
