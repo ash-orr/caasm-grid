@@ -1591,14 +1591,18 @@ export function AssetsTable() {
         label: 'Blocked',
         defaultVisible: true,
         render: (row) => {
-          const pill = row.blocked ? (
-            <Tooltip content={renderAccountBlockedTooltip(row)}>
-              <span className={`${statusPillStyles.pill} ${statusPillStyles.bad}`}>Blocked</span>
-            </Tooltip>
-          ) : (
-            <span data-testid="status-pill" className={`${statusPillStyles.pill} ${statusPillStyles.light}`}>Not blocked</span>
-          );
-          return pill;
+          const pillClassName = row.blocked ? `${statusPillStyles.pill} ${statusPillStyles.bad}` : `${statusPillStyles.pill} ${statusPillStyles.light}`;
+          const pillText = row.blocked ? 'Blocked' : 'Not blocked';
+
+          if (row.blocked) {
+            return (
+              <Tooltip content={renderAccountBlockedTooltip(row)}>
+                <span aria-label={pillText} data-testid="status-pill" className={pillClassName}>{pillText}</span>
+              </Tooltip>
+            );
+          }
+
+          return <span aria-label={pillText} data-testid="status-pill" className={pillClassName}>{pillText}</span>;
         },
         exportValue: (row) => (row.blocked ? 'Blocked' : 'Not blocked'),
       },

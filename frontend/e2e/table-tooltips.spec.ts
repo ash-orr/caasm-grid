@@ -92,6 +92,17 @@ test.describe('table cell tooltips', () => {
     await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
   });
 
+  test('Accounts blocked status pill keeps exact text and styling inside the tooltip wrapper', async ({ page }) => {
+    await page.getByRole('button', { name: 'Accounts' }).click();
+    await page.locator('label').filter({ hasText: 'Rows per page' }).locator('select').selectOption({ value: '-1' });
+
+    const blockedPill = page.locator('tbody [data-testid="status-pill"]').filter({ hasText: /^Blocked$/ }).first();
+    await expect(blockedPill).toHaveText('Blocked');
+    await expect(blockedPill).toHaveCSS('font-size', '12px');
+    await expect(blockedPill).toHaveCSS('padding', '1px 8px');
+    await expect(blockedPill).toHaveCSS('border-radius', '10px');
+  });
+
   test('a red Blocked pill in Accounts and in Devices shows "Blocked by Admin" or "Blocked by Policy" text matching the row\'s mock data, and a Not blocked pill shows no tooltip', async ({ page }) => {
     await page.getByRole('button', { name: 'Accounts' }).click();
 
