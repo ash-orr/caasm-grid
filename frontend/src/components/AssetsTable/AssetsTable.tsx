@@ -1535,7 +1535,7 @@ export function AssetsTable() {
       },
       { id: 'accountType', label: 'Account type', defaultVisible: true, render: (row) => row.accountType ?? '—', exportValue: (row) => row.accountType ?? '—' },
       { id: 'group', label: 'Group', defaultVisible: true, render: (row) => row.group ?? '—', exportValue: (row) => row.group ?? '—' },
-      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore), exportValue: (row) => row.riskScore == null ? '—' : `${row.riskScore}` },
+      { id: 'riskScore', label: 'Risk score', defaultVisible: true, render: (row) => renderRiskScorePill(row.riskScore, row.changes), exportValue: (row) => row.riskScore == null ? '—' : `${row.riskScore}` },
       { id: 'status', label: 'Status', defaultVisible: true, render: (row) => renderStatusCell(row.status, row), exportValue: (row) => row.status ?? '—' },
       { id: 'lastConnected', label: 'Last connected', defaultVisible: true, render: (row) => formatRelativeTime(row.lastConnectedAt), exportValue: (row) => row.lastConnectedAt ?? '—' },
       { id: 'createdTime', label: 'Created time', defaultVisible: true, render: (row) => formatRelativeTime(row.createdAt), exportValue: (row) => row.createdAt ?? '—' },

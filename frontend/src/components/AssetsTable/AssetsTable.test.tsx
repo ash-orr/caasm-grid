@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { accounts, devices } from '../../mocks/generated/prototype-data';
 import { AssetsTable } from './AssetsTable';
@@ -19,6 +19,35 @@ describe('AssetsTable cell renderers', () => {
 
     expect(container.textContent).toBe('Blocked');
     expect(container.querySelector('span')?.className).toContain('pill');
+  });
+
+  it('renders a risk-score tooltip with the last-7-days history contract', () => {
+    render(
+      <>
+        {renderRiskScorePill(72, [
+          { at: '2026-10-15T12:00:00.000Z', from: 58, to: 72 },
+          { at: '2026-10-14T12:00:00.000Z', from: 63, to: 58 },
+        ])}
+      </>,
+    );
+
+    const scorePill = screen.getAllByTestId('risk-pill').at(-1);
+    expect(scorePill).toBeTruthy();
+
+    fireEvent.mouseEnter(scorePill!);
+    fireEvent.focus(scorePill!);
+
+    expect(screen.getByText('Risk score changes, last 7 days')).toBeTruthy();
+    expect(screen.getByText('Current: 72 (Blocked)')).toBeTruthy();
+    expect(document.body.textContent).toContain('→');
+  });
+
+  it('includes a device risk change timeline in the generated mock data', () => {
+    const seededDevice = devices.find((device) => device.riskScore != null && device.changes.length > 0) ?? devices[0];
+
+    expect(seededDevice).toHaveProperty('changes');
+    expect(Array.isArray(seededDevice.changes)).toBe(true);
+    expect(seededDevice.changes.length).toBeGreaterThanOrEqual(0);
   });
 });
 

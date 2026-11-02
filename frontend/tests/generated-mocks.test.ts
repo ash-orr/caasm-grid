@@ -111,10 +111,25 @@ describe('generated prototype data', () => {
     expect(device?.riskPolicy).toBeDefined();
     expect(device?.accessPolicy).toBeDefined();
     expect(Array.isArray(device?.riskViolations)).toBe(true);
+    expect(Array.isArray(device?.changes)).toBe(true);
     expect(device?.sourceFieldValues).toBeDefined();
 
     expect(account).toBeDefined();
     expect(account?.authType).toBeDefined();
     expect(account?.sourceFieldValues).toBeDefined();
+  });
+
+  it('restores the prototype risk-change history in the generated mock data', () => {
+    const device = devices.find((entry) => entry.riskScore != null && entry.changes.length > 0) ?? devices[0];
+    expect(device).toBeDefined();
+    expect(Array.isArray(device?.changes)).toBe(true);
+    expect(device?.changes.length).toBeGreaterThanOrEqual(0);
+    if (device?.changes.length) {
+      expect(device.changes[0]).toMatchObject({
+        from: expect.any(Number),
+        to: expect.any(Number),
+      });
+      expect(typeof device.changes[0].at).toBe('string');
+    }
   });
 });

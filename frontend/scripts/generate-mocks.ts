@@ -90,6 +90,7 @@ export interface DeviceRecord {
   accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
   group: string | null;
   riskScore: number | null;
+  changes: Array<{ at: string; from: number; to: number }>;
   status: 'Blocked' | 'Archived' | 'No issues' | null;
   bAdmin: string | null;
   bPolicy: string | null;
@@ -508,6 +509,13 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
     const coverageGaps = Array.isArray(device.gaps)
       ? device.gaps.filter((gap) => !(gap === 'Portnox AgentP' && !isUncovered))
       : SOURCE_ORDER.filter((source) => sourceCoverage[source].status === 'Not present');
+    const changes = Array.isArray(device.changes)
+      ? device.changes.map((change: { at: Date | string; from: number; to: number }) => ({
+          at: new Date(change.at).toISOString(),
+          from: Number(change.from),
+          to: Number(change.to),
+        }))
+      : [];
 
     return {
       id: device.id,
@@ -519,6 +527,7 @@ export async function generatePrototypeData(input: { seed?: number; nowMs?: numb
       accountType: isUncovered ? null : device.acctType as DeviceRecord['accountType'],
       group: isUncovered ? null : device.group,
       riskScore: isUncovered ? null : device.score,
+      changes: isUncovered ? [] : changes,
       status: isUncovered ? null : device.archived ? 'Archived' : device.blocked ? 'Blocked' : 'No issues',
       bAdmin: device.bAdmin ?? null,
       bPolicy: device.bPolicy ?? null,
@@ -646,6 +655,7 @@ export interface DeviceRecord {
   accountType: 'LDAP' | 'Cloud' | 'MAC' | null;
   group: string | null;
   riskScore: number | null;
+  changes: Array<{ at: string; from: number; to: number }>;
   status: 'Blocked' | 'Archived' | 'No issues' | null;
   bAdmin: string | null;
   bPolicy: string | null;

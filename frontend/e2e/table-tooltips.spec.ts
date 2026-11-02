@@ -1,4 +1,12 @@
 import { expect, test } from '@playwright/test';
+import { devices } from '../src/mocks/generated/prototype-data';
+
+const riskCategory = (score: number | null): 'Access' | 'Alert' | 'Blocked' => {
+  if (score == null) return 'Access';
+  if (score >= 70) return 'Blocked';
+  if (score >= 40) return 'Alert';
+  return 'Access';
+};
 
 test.describe('table cell tooltips', () => {
   test.beforeEach(async ({ page }) => {
@@ -132,6 +140,105 @@ test.describe('table cell tooltips', () => {
     await expect(tooltip).toContainText('Exposure gap');
     await expect(tooltip.locator('text=+2 more')).toBeVisible();
     await expect(tooltip.locator('strong')).toHaveCount(3);
+  });
+
+  test('hovering a device risk score pill shows the heading and current category for that row', async ({ page }) => {
+    const rowName = 'MB-1119';
+    const device = devices.find((entry) => entry.name === rowName);
+    expect(device).toBeTruthy();
+    expect(device?.riskScore).not.toBeNull();
+
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('[data-testid="risk-pill"]').first();
+
+    await expect(trigger).toBeVisible();
+    await trigger.hover();
+
+    const tooltip = page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toContainText(`Current: ${device!.riskScore} (${riskCategory(device!.riskScore)})`);
+  });
+
+  test('a named row that has history shows the arrowed history lines in newest-first order with categories in parentheses', async ({ page }) => {
+    const rowName = 'MB-1119';
+    const device = devices.find((entry) => entry.name === rowName);
+    expect(device).toBeTruthy();
+    expect(device?.changes.length).toBeGreaterThan(1);
+
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('[data-testid="risk-pill"]').first();
+
+    await trigger.hover();
+    const tooltip = page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
+    const tooltipText = await tooltip.textContent();
+
+    expect(tooltipText).toContain('→');
+    expect(tooltipText).toContain(`Current: ${device!.riskScore} (${riskCategory(device!.riskScore)})`);
+
+    const [newest, previous] = device!.changes;
+    const newestLine = `${newest.from} (${riskCategory(newest.from)}) → ${newest.to} (${riskCategory(newest.to)})`;
+    const previousLine = `${previous.from} (${riskCategory(previous.from)}) → ${previous.to} (${riskCategory(previous.to)})`;
+
+    expect(tooltipText).toContain(newestLine);
+    expect(tooltipText).toContain(previousLine);
+    expect(tooltipText!.indexOf(newestLine)).toBeLessThan(tooltipText!.indexOf(previousLine));
+  });
+
+  test('a named row with no history shows only the empty-history message', async ({ page }) => {
+    const rowName = 'LT-1000';
+    const device = devices.find((entry) => entry.name === rowName);
+    expect(device).toBeTruthy();
+    expect(device?.changes.length).toBe(0);
+
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('[data-testid="risk-pill"]').first();
+
+    await trigger.hover();
+    const tooltip = page.getByRole('tooltip').filter({ hasText: 'No changes in the last 7 days' }).first();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toContainText('No changes in the last 7 days');
+    await expect(tooltip).not.toContainText('Current:');
+    await expect(tooltip).not.toContainText('→');
+  });
+
+  test('the risk tooltip heading has weight 600 and the current line uses the muted subtitle color', async ({ page }) => {
+    const rowName = 'MB-1119';
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('[data-testid="risk-pill"]').first();
+
+    await trigger.hover();
+    const tooltip = page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip.locator('div').first()).toHaveCSS('font-weight', '600');
+
+    const currentLine = tooltip.locator('div').filter({ hasText: /^Current:/ }).first();
+    await expect(currentLine).toHaveCSS('color', 'rgb(93, 107, 120)');
+  });
+
+  test('a device without a score has no tooltip', async ({ page }) => {
+    const rowName = 'SRV-1028';
+    const device = devices.find((entry) => entry.name === rowName);
+    expect(device).toBeTruthy();
+    expect(device?.riskScore).toBeNull();
+
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('td').filter({ hasText: '—' }).first();
+
+    await expect(trigger).toBeVisible();
+    await trigger.hover();
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
+  });
+
+  test('moving the mouse away hides the risk tooltip', async ({ page }) => {
+    const rowName = 'MB-1119';
+    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+    const trigger = row.locator('[data-testid="risk-pill"]').first();
+
+    await trigger.hover();
+    await expect(page.getByRole('tooltip')).toHaveCount(1);
+
+    await page.mouse.move(20, 20);
+    await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
   });
 
   test('Accounts blocked status pill keeps exact text and styling inside the tooltip wrapper', async ({ page }) => {

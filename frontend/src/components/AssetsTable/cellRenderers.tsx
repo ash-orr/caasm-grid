@@ -10,16 +10,64 @@ function riskBand(score: number | null): 'Access' | 'Alert' | 'Blocked' | null {
   return 'Access';
 }
 
-export function renderRiskScorePill(score: number | null): ReactNode {
+function formatRiskChangeTime(at: string | Date): string {
+  const value = typeof at === 'string' ? new Date(at) : at;
+  if (Number.isNaN(value.getTime())) return '—';
+
+  const diffHours = Math.max(0, Math.floor((Date.now() - value.getTime()) / (1000 * 60 * 60)));
+  if (diffHours < 1) return 'Just now';
+  if (diffHours < 24) return `${diffHours}h ago`;
+
+  const month = value.toLocaleDateString('en-US', { month: 'short' });
+  const day = value.getDate();
+  const time = value.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  return `${month} ${day} ${time}`;
+}
+
+function renderRiskHistoryTooltip(score: number | null, changes: Array<{ at: string | Date; from: number; to: number }> = []): ReactNode {
+  if (score == null) return undefined;
+
+  const band = riskBand(score);
+  const orderedChanges = [...changes].sort((left, right) => new Date(right.at).getTime() - new Date(left.at).getTime());
+
+  if (orderedChanges.length === 0) {
+    return (
+      <>
+        <div style={{ fontWeight: 600 }}>Risk score changes, last 7 days</div>
+        <div style={{ color: 'rgb(93, 107, 120)' }}>No changes in the last 7 days</div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div style={{ fontWeight: 600 }}>Risk score changes, last 7 days</div>
+      <div style={{ color: 'rgb(93, 107, 120)', margin: '2px 0 8px' }}>Current: {score} ({band})</div>
+      {orderedChanges.map((change, index) => (
+        <div key={`${change.at}-${change.from}-${change.to}-${index}`} style={index > 0 ? { marginTop: '4px' } : undefined}>
+          {formatRiskChangeTime(change.at)}: {change.from} ({riskBand(change.from)}) → {change.to} ({riskBand(change.to)})
+        </div>
+      ))}
+    </>
+  );
+}
+
+export function renderRiskScorePill(score: number | null, changes: Array<{ at: string | Date; from: number; to: number }> = []): ReactNode {
   if (score == null) return '—';
 
   const band = riskBand(score);
   const tone = band === 'Blocked' ? statusPillStyles.bad : band === 'Alert' ? statusPillStyles.warn : statusPillStyles.ok;
-  return (
+  const tooltipContent = renderRiskHistoryTooltip(score, changes);
+
+  const pill = (
     <span aria-label={`${score} ${band}`} data-testid="risk-pill" className={`${statusPillStyles.pill} ${statusPillStyles.score} ${tone}`}>
       {score}
     </span>
   );
+
+  if (!tooltipContent) return pill;
+
+  return <Tooltip content={tooltipContent}>{pill}</Tooltip>;
 }
 
 function renderBlockedStatusTooltip(device: DeviceRecord) {
