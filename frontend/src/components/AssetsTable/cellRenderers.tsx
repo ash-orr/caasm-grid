@@ -33,8 +33,8 @@ function renderRiskHistoryTooltip(score: number | null, changes: Array<{ at: str
   if (orderedChanges.length === 0) {
     return (
       <>
-        <div style={{ fontWeight: 600 }}>Risk score changes, last 7 days</div>
-        <div style={{ color: 'rgb(93, 107, 120)' }}>No changes in the last 7 days</div>
+        <div style={{ fontWeight: 600, color: 'rgb(20, 33, 43)' }}>No changes in the last 7 days</div>
+        <div style={{ color: 'rgb(93, 107, 120)', marginTop: '2px' }}>Current: {score} ({band})</div>
       </>
     );
   }

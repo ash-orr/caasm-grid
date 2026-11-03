@@ -142,21 +142,30 @@ test.describe('table cell tooltips', () => {
     await expect(tooltip.locator('strong')).toHaveCount(3);
   });
 
-  test('hovering a device risk score pill shows the heading and current category for that row', async ({ page }) => {
-    const rowName = 'MB-1119';
-    const device = devices.find((entry) => entry.name === rowName);
-    expect(device).toBeTruthy();
-    expect(device?.riskScore).not.toBeNull();
+  test('the current line is shown for rows with history and rows without history', async ({ page }) => {
+    for (const rowName of ['MB-1119', 'LT-1000']) {
+      const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
+      const trigger = row.locator('[data-testid="risk-pill"]').first();
 
-    const row = page.locator('tbody tr').filter({ hasText: rowName }).first();
-    const trigger = row.locator('[data-testid="risk-pill"]').first();
+      await expect(trigger).toBeVisible();
+      await trigger.hover();
 
-    await expect(trigger).toBeVisible();
-    await trigger.hover();
+      const scoreText = await trigger.textContent();
+      const score = Number(scoreText?.trim());
+      expect(Number.isFinite(score)).toBeTruthy();
 
-    const tooltip = page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
-    await expect(tooltip).toBeVisible();
-    await expect(tooltip).toContainText(`Current: ${device!.riskScore} (${riskCategory(device!.riskScore)})`);
+      const tooltip = rowName === 'LT-1000'
+        ? page.getByRole('tooltip').filter({ hasText: 'No changes in the last 7 days' }).first()
+        : page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
+
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toContainText(`Current: ${score} (${riskCategory(score)})`);
+      const currentLine = tooltip.locator('div').filter({ hasText: /^Current:/ }).first();
+      await expect(currentLine).toHaveCSS('color', 'rgb(93, 107, 120)');
+
+      await page.mouse.move(20, 20);
+      await expect(page.locator('[role="tooltip"]')).toHaveCount(0);
+    }
   });
 
   test('a named row that has history shows the arrowed history lines in newest-first order with categories in parentheses', async ({ page }) => {
@@ -184,7 +193,7 @@ test.describe('table cell tooltips', () => {
     expect(tooltipText!.indexOf(newestLine)).toBeLessThan(tooltipText!.indexOf(previousLine));
   });
 
-  test('a named row with no history shows only the empty-history message', async ({ page }) => {
+  test('a named row with no history shows only the empty-history message and current score', async ({ page }) => {
     const rowName = 'LT-1000';
     const device = devices.find((entry) => entry.name === rowName);
     expect(device).toBeTruthy();
@@ -195,10 +204,24 @@ test.describe('table cell tooltips', () => {
 
     await trigger.hover();
     const tooltip = page.getByRole('tooltip').filter({ hasText: 'No changes in the last 7 days' }).first();
-    await expect(tooltip).toBeVisible();
-    await expect(tooltip).toContainText('No changes in the last 7 days');
-    await expect(tooltip).not.toContainText('Current:');
-    await expect(tooltip).not.toContainText('→');
+    const tooltipText = await tooltip.textContent();
+
+    const scoreText = await trigger.textContent();
+    const score = Number(scoreText?.trim());
+    expect(Number.isFinite(score)).toBeTruthy();
+    const expectedCurrent = `Current: ${score} (${riskCategory(score)})`;
+
+    expect(tooltipText).toContain('No changes in the last 7 days');
+    expect(tooltipText).toContain(expectedCurrent);
+    expect(tooltipText).not.toContain('Risk score changes, last 7 days');
+
+    const emptyLine = tooltip.locator('div').filter({ hasText: /^No changes in the last 7 days$/ }).first();
+    await expect(emptyLine).toHaveCSS('font-weight', '600');
+    await expect(emptyLine).toHaveCSS('color', 'rgb(20, 33, 43)');
+
+    const currentLine = tooltip.locator('div').filter({ hasText: /^Current:/ }).first();
+    await expect(currentLine).toHaveCSS('color', 'rgb(93, 107, 120)');
+    await expect(currentLine).toHaveCSS('margin-top', '2px');
   });
 
   test('the risk tooltip heading has weight 600 and the current line uses the muted subtitle color', async ({ page }) => {
