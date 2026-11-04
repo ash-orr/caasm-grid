@@ -32,7 +32,7 @@ Coverage percentages use applicable assets only: Not applicable and Pending are 
 
 ## Risk
 Risk score categories: Access (under 40, no issues), Alert (40 to 69, the device can connect but the admin is alerted), Blocked (70 and over, blocked for high risk). (confirm thresholds)
-The risk score tooltip lists changes in the last 7 days, each as "time: old (category) → new (category)", or "No changes in the last 7 days".
+Risk score tooltips follow the prototype: a device with no score changes in the last 7 days shows only a bold "No changes in the last 7 days" line and the muted "Current: N (Category)" line. A device with changes shows the heading, the muted current line and the per-change rows, newest first.
 Violations use these ten categories only: Administrator privileges, Antivirus, Applications, Certificates, Geolocation, Peripheral devices, Rootkit, Running services, Windows registry, Generative AI.
 The access policy field shows a policy name, not "Block".
 Risk information appears only on the Devices side. The CAASM dashboard shows no risk data.
@@ -55,6 +55,23 @@ Column picker: a button at the far right of the header. It lists every column, w
 
 ## Selection checkbox column width (Devices and Accounts tables)
 The select-all / row checkbox column is a fixed 44px wide on both tables (Devices and Accounts), with 12px padding each side, so the distance from the checkbox to the first data column is the same on both. Sites is a placeholder and has no table yet.
+
+## Hover tooltips on table cells (Devices and Accounts tables)
+One shared tooltip for the whole app: panel background, 1px border (line color), 8px radius, soft shadow, padding 12px 14px, 12.5px text / 18.125px line height, max width 560px. No arrow. It appears 6px below the hovered item, left edge aligned to the item (kept 8px inside the screen), and flips above only when there is no room. It opens immediately on hover, ignores the pointer, and closes when the mouse leaves or the page scrolls.
+- Account cell (Devices table): the account name has a dotted underline (1px, muted). The tooltip is a two-column list with muted labels on the left and values on the right: Account (name in bold), Type, Group, Devices (count), Exposure gap (red text when there are gaps, "None" otherwise). A device with no account shows "—" with no underline or tooltip.
+- Devices count (Accounts table): the count has the same dotted underline when greater than 0 (0 shows plain, no tooltip). The tooltip is a five-column table with muted 11.5px / 600 headers: Device, Type, Risk score (the score pill), Last connected, Exposure gap. Up to 3 devices, sorted by risk score (highest first), then number of exposure gaps (most first), then name. More than 3 adds a muted "+N more" line below.
+- Blocked pill: hovering a red Blocked pill lists the reasons, one per line with the value in bold. Accounts: "Blocked by Admin: X", "Blocked by Policy: Y" (only those that apply). Devices: also "Blocked by Risk Score: Z" when a risk score triggered the block, and "Account blocked" when the account is blocked. "Not blocked" pills have no tooltip.
+- Risk score pill (Devices table): see "Risk score tooltip" below. Category names come from the score: 70 and above "Blocked", 40 to 69 "Alert", below 40 "Access".
+- Time in tooltips ("Last connected" and risk score changes): under 1 hour "Just now", under 24 hours "Nh ago", otherwise an absolute date such as "Oct 31 10:03 AM" (no year).
+- Backend data needed for these tooltips: per account, who blocked it (admin, policy); per device, who blocked it (admin, policy, risk score value, account blocked); per device, the list of risk score changes in the last 7 days (time, old score, new score).
+
+## Risk score tooltip
+- A device with no score changes in the last 7 days shows a two-line tooltip: bold "No changes in the last 7 days", then "Current: N (Category)" in the muted color.
+- A device with changes shows bold "Risk score changes, last 7 days", the muted "Current: N (Category)" line, then one line per change, newest first, in the form "Oct 31 10:03 AM: 89 (Blocked) → 98 (Blocked)".
+- A device with no score has no tooltip.
+
+## Backend contract: source data
+Raw lines and field agreement in the detail pages must only come from sources a record actually reports, in the record's source order. The mock data currently holds values for some sources a record does not report, so counts such as "8 sources" can differ from the prototype's 6; this is accepted for mocks and must be fixed by the real backend.
 
 ## Fields
 All of these are columns, hidden by default, available in the column picker. Defaults for existing columns are unchanged.
@@ -199,16 +216,11 @@ Coverage gaps by group: percentage and count of devices with gaps per group, sor
 - Grey-out style for disabled menu items: reduced opacity and a not-allowed cursor, with a hover tooltip instead of the browser default.
 
 ## Button styling (Figma Button v2)
-The shared button contract follows the prototype in `design/prototype/caasm-console.html`.
-
-- Secondary buttons are the default style: outlined cyan border and text, with a very light cyan hover and pressed fill; disabled secondary buttons use the muted disabled token set.
-- Primary buttons use the solid teal background (`--b-pri`), with hover/pressed variants (`--b-pri-h`, `--b-pri-p`) and white text. Dark mode keeps the same layout but swaps to the dark teal values.
-- Tertiary buttons are transparent, borderless, and have no visible background unless hovered/pressed; disabled tertiary buttons remain transparent with the disabled token palette.
-- Destructive buttons use red text and red hover/pressed surfaces, or a solid red primary destructive button. Every delete action uses the destructive style.
-- Icon buttons keep the tighter padding `7px 9px`; text buttons stay at `7px 12px`.
-- The border radius is `4px` and the button heights remain the existing fixed heights from the prototype.
-- The button system does not adopt the Open Sans/28px small-size variant or the loading-state button pattern from the old design.
-- A tertiary destructive style is defined in the shared tokens and can exist, but it is intentionally unused in the current UI.
+Source: Figma "Button v2". Adopted: colors, hover/pressed/disabled states, 4px radius, tertiary and destructive variants, and Figma's 32px height. Not adopted (decided with the product owner): Open Sans 600 (buttons keep the app font), Figma's 6px 8px padding (horizontal padding stays 12px, 9px on icon buttons), the 28px small size, and the loading state.
+- Colors: secondary border #00838F, text #007C96, hover background #F2FAFB, pressed #CFEEF1. Primary #00838F, hover #2399AD, pressed #0B6D76. Destructive #D3302F, hover #E74A49, pressed #CA0E0C; destructive text #CA0E0C, hover background #FEF0F0, pressed background #FFDCDC. Disabled: background #DEDEDE, text #A3A3A3, border #DEDEDE (no more reduced opacity). Dark theme (not in Figma): primary #1D4954, hover #266070, pressed #153640; secondary uses #4fb8d4; red text #ef6b5b, red fill #b33a2f. In the build these are the --b-* design tokens.
+- Variants: secondary (default), primary, tertiary (no border), and a destructive modifier that combines with all three (secondary destructive = white with red outline; primary destructive = solid red; tertiary destructive = red text, no border). Rule: any delete action uses the destructive style. Toolbar Delete = secondary destructive; "Remove view" and "Disconnect" confirmations = primary destructive.
+- States: hover and pressed apply only when the button is not disabled.
+- Height: every button is exactly 32px tall (toolbar, selection actions, pager, dialogs, settings). Text buttons have 12px horizontal padding and no vertical padding; icon buttons are 32px tall with 9px horizontal padding (38px wide). Prev/Next keep their smaller 12.5px font.
 
 ## Backend questions
 Add these to the original questions and assumptions:
