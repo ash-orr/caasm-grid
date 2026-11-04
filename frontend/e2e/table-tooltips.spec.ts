@@ -154,12 +154,16 @@ test.describe('table cell tooltips', () => {
       const score = Number(scoreText?.trim());
       expect(Number.isFinite(score)).toBeTruthy();
 
-      const tooltip = rowName === 'LT-1000'
-        ? page.getByRole('tooltip').filter({ hasText: 'No changes in the last 7 days' }).first()
-        : page.getByRole('tooltip').filter({ hasText: 'Risk score changes, last 7 days' }).first();
-
+      const tooltip = page.getByRole('tooltip').filter({ hasText: rowName === 'LT-1000' ? 'No changes in the last 7 days' : 'Risk score changes, last 7 days' }).first();
       await expect(tooltip).toBeVisible();
+      if (rowName === 'LT-1000') {
+        await expect(tooltip).toContainText('No changes in the last 7 days');
+        await expect(tooltip).not.toContainText('Risk score changes, last 7 days');
+      } else {
+        await expect(tooltip).toContainText('Risk score changes, last 7 days');
+      }
       await expect(tooltip).toContainText(`Current: ${score} (${riskCategory(score)})`);
+
       const currentLine = tooltip.locator('div').filter({ hasText: /^Current:/ }).first();
       await expect(currentLine).toHaveCSS('color', 'rgb(93, 107, 120)');
 
@@ -193,7 +197,7 @@ test.describe('table cell tooltips', () => {
     expect(tooltipText!.indexOf(newestLine)).toBeLessThan(tooltipText!.indexOf(previousLine));
   });
 
-  test('a named row with no history shows only the empty-history message and current score', async ({ page }) => {
+  test('a named row with no history shows exactly two lines: bold message and muted current score', async ({ page }) => {
     const rowName = 'LT-1000';
     const device = devices.find((entry) => entry.name === rowName);
     expect(device).toBeTruthy();
@@ -214,10 +218,11 @@ test.describe('table cell tooltips', () => {
     expect(tooltipText).toContain('No changes in the last 7 days');
     expect(tooltipText).toContain(expectedCurrent);
     expect(tooltipText).not.toContain('Risk score changes, last 7 days');
+    expect(tooltipText!.indexOf('No changes in the last 7 days')).toBeLessThan(tooltipText!.indexOf(expectedCurrent));
 
-    const emptyLine = tooltip.locator('div').filter({ hasText: /^No changes in the last 7 days$/ }).first();
-    await expect(emptyLine).toHaveCSS('font-weight', '600');
-    await expect(emptyLine).toHaveCSS('color', 'rgb(20, 33, 43)');
+    const heading = tooltip.locator('div').first();
+    await expect(heading).toHaveCSS('font-weight', '600');
+    await expect(heading).toHaveCSS('color', 'rgb(20, 33, 43)');
 
     const currentLine = tooltip.locator('div').filter({ hasText: /^Current:/ }).first();
     await expect(currentLine).toHaveCSS('color', 'rgb(93, 107, 120)');
